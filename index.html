@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>GeneralsArena | منصة البطولات - General Sahel TV</title>
+    <meta name="description" content="منصة إدارة بطولات جنرال زيرو أور - GeneralsArena. سجل، تبرع، وتابع النتائج مباشرة.">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0f172a; --bg-secondary: #1e293b; --bg-card: rgba(30,41,59,0.92);
+            --bg-input: #334155; --text-primary: #f1f5f9; --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8; --border-color: #334155; --primary: #f59e0b;
+            --primary-dark: #b45309; --primary-glow: rgba(245,158,11,0.25);
+            --success: #10b981; --danger: #ef4444; --warning: #f59e0b;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3); --shadow-md: 0 8px 25px rgba(0,0,0,0.4);
+            --shadow-lg: 0 15px 40px rgba(0,0,0,0.5); --radius-sm: 10px;
+            --radius-md: 18px; --radius-lg: 28px; --transition: all 0.3s ease;
+            --gradient-1: linear-gradient(135deg, #f59e0b, #b45309);
+        }
+        body.light-mode {
+            --bg-primary: #f8fafc; --bg-secondary: #ffffff; --bg-card: rgba(255,255,255,0.95);
+            --bg-input: #f1f5f9; --text-primary: #0f172a; --text-secondary: #334155;
+            --text-muted: #64748b; --border-color: #e2e8f0; --primary-glow: rgba(245,158,11,0.15);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05); --shadow-md: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        body.gold-mode {
+            --bg-primary: #1a1500; --bg-secondary: #2d2600; --bg-card: rgba(45,38,0,0.92);
+            --bg-input: #3d3500; --text-primary: #ffd700; --text-secondary: #ffed4a;
+            --text-muted: #b8941a; --border-color: #6b5500; --primary: #ffd700;
+            --primary-dark: #b8941a; --primary-glow: rgba(255,215,0,0.3);
+            --gradient-1: linear-gradient(135deg, #ffd700, #b8941a);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+        body { font-family:'Cairo',sans-serif; background:var(--bg-primary); color:var(--text-primary); transition:var(--transition); overflow-x:hidden; min-height:100vh; line-height:1.7; }
+        body::before { content:''; position:fixed; inset:0; background:radial-gradient(circle at 30% 40%,var(--primary-glow),transparent 50%),radial-gradient(circle at 70% 60%,rgba(245,158,11,0.06),transparent 50%); z-index:-2; pointer-events:none; }
+        ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:var(--bg-secondary); } ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:10px; }
+        header { position:sticky; top:0; z-index:100; background:var(--bg-secondary); border-bottom:1px solid var(--border-color); padding:14px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; backdrop-filter:blur(20px); }
+        .logo { display:flex; align-items:center; gap:10px; } .logo i { font-size:28px; color:var(--primary); } .logo h1 { font-size:1.4rem; font-weight:800; color:var(--primary); } .logo p { font-size:0.7rem; color:var(--text-muted); }
+        .nav-actions { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+        .icon-btn { background:var(--bg-primary); border:1px solid var(--border-color); width:42px; height:42px; border-radius:30px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:var(--transition); color:var(--text-primary); font-size:1rem; position:relative; }
+        .icon-btn:hover { background:var(--primary); color:white; }
+        .dropdown { position:relative; }
+        .dropdown-menu { position:absolute; top:50px; left:0; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:15px; min-width:280px; z-index:200; opacity:0; visibility:hidden; transition:var(--transition); box-shadow:var(--shadow-lg); backdrop-filter:blur(20px); }
+        .dropdown-menu.show { opacity:1; visibility:visible; }
+        .dropdown-menu h4 { color:var(--primary); font-size:0.8rem; margin:10px 0 5px; }
+        .dropdown-menu a, .dropdown-menu .dropdown-link { display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px; text-decoration:none; color:var(--text-secondary); font-size:0.85rem; transition:var(--transition); cursor:pointer; }
+        .dropdown-menu a:hover, .dropdown-menu .dropdown-link:hover { background:var(--primary-glow); color:var(--primary); }
+        .dropdown-menu .copy-btn-sm { background:var(--primary); color:white; border:none; padding:4px 10px; border-radius:12px; cursor:pointer; font-family:'Cairo'; font-size:0.7rem; }
+        .container { max-width:1200px; margin:0 auto; padding:20px; }
+        .section-title { font-size:1.6rem; font-weight:800; margin:30px 0 20px; display:flex; align-items:center; gap:10px; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:20px; }
+        .card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:25px; transition:var(--transition); box-shadow:var(--shadow-sm); position:relative; overflow:hidden; backdrop-filter:blur(10px); }
+        .card:hover { transform:translateY(-5px); border-color:var(--primary); box-shadow:var(--shadow-lg); }
+        .card.featured { border:2px solid var(--primary); }
+        .card h3 { font-size:1.3rem; font-weight:800; margin-bottom:10px; color:var(--primary); }
+        .card .info { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; font-size:0.85rem; color:var(--text-secondary); }
+        .badge { display:inline-flex; align-items:center; gap:4px; padding:4px 12px; border-radius:20px; font-size:0.75rem; font-weight:600; }
+        .badge-success { background:rgba(16,185,129,0.15); color:var(--success); }
+        .badge-warning { background:rgba(245,158,11,0.15); color:var(--warning); }
+        .badge-danger { background:rgba(239,68,68,0.15); color:var(--danger); }
+        .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:40px; font-weight:700; font-family:'Cairo'; cursor:pointer; transition:var(--transition); border:none; font-size:0.9rem; text-decoration:none; }
+        .btn-primary { background:var(--gradient-1); color:white; } .btn-primary:hover { background:var(--primary-dark); transform:translateY(-2px); }
+        .btn-outline { background:transparent; border:2px solid var(--border-color); color:var(--text-secondary); } .btn-outline:hover { border-color:var(--primary); color:var(--primary); }
+        .btn-sm { padding:8px 16px; font-size:0.8rem; }
+        .btn-danger { background:var(--danger); color:white; } .btn-danger:hover { background:#dc2626; }
+        .back-btn { background:var(--bg-input); border:1px solid var(--border-color); padding:10px 20px; border-radius:30px; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; gap:8px; color:var(--text-primary); transition:var(--transition); margin-bottom:20px; font-family:'Cairo'; }
+        .back-btn:hover { background:var(--primary); color:white; }
+        .hidden { display:none !important; }
+        .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--success); color:white; padding:12px 28px; border-radius:40px; font-weight:700; z-index:10000; opacity:0; transition:0.3s; pointer-events:none; font-size:0.85rem; box-shadow:var(--shadow-lg); }
+        .toast.show { opacity:1; transform:translateX(-50%) translateY(0); } .toast.error { background:var(--danger); }
+        .admin-panel { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:25px; margin:25px 0; backdrop-filter:blur(10px); }
+        .admin-panel input, .admin-panel textarea, .admin-panel select { width:100%; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:'Cairo'; margin-bottom:10px; outline:none; }
+        .admin-panel input:focus, .admin-panel textarea:focus { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-glow); }
+        .bracket-container { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px; margin:15px 0; overflow-x:auto; backdrop-filter:blur(10px); }
+        .bracket-tree { display:flex; align-items:center; justify-content:center; gap:20px; padding:20px; min-width:500px; direction:ltr; }
+        .bracket-col { display:flex; flex-direction:column; gap:20px; }
+        .bracket-box { background:var(--bg-input); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:12px; text-align:center; min-width:130px; }
+        .bracket-box.win { border-color:var(--primary); box-shadow:0 0 15px var(--primary-glow); }
+        .bracket-box .p { font-weight:700; margin:2px 0; }
+        .bracket-box .s { color:var(--primary); font-weight:800; }
+        .bracket-conn { min-width:30px; height:2px; background:var(--primary); }
+        .chat-container { margin:25px 0; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border-color); background:var(--bg-card); }
+        .chat-header { background:var(--bg-secondary); padding:12px 20px; font-weight:700; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border-color); }
+        .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:2000; display:flex; align-items:center; justify-content:center; }
+        .modal { background:var(--bg-card); border-radius:var(--radius-lg); padding:30px; max-width:450px; width:90%; border:1px solid var(--border-color); text-align:center; }
+        .modal h3 { margin-bottom:15px; color:var(--primary); }
+        .modal input { width:100%; padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:'Cairo'; margin-bottom:12px; outline:none; text-align:center; }
+        footer { text-align:center; padding:25px; border-top:1px solid var(--border-color); margin-top:40px; color:var(--text-muted); font-size:0.85rem; background:var(--bg-secondary); }
+        .hero { text-align:center; padding:30px 20px 20px; }
+        .hero h2 { font-size:2rem; font-weight:900; background:var(--gradient-1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .hero-stats { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; margin-top:15px; }
+        .stat-badge { background:var(--bg-card); border:1px solid var(--border-color); padding:10px 20px; border-radius:40px; font-size:0.9rem; font-weight:600; display:flex; align-items:center; gap:8px; box-shadow:var(--shadow-sm); }
+        .player-name-display { background:var(--bg-input); padding:6px 14px; border-radius:20px; font-weight:600; font-size:0.85rem; display:flex; align-items:center; gap:6px; color:var(--primary); }
+        @media (max-width:768px) { header { padding:12px 16px; } .logo h1 { font-size:1.1rem; } .grid { grid-template-columns:1fr; } .bracket-tree { min-width:350px; gap:10px; } .bracket-box { min-width:100px; padding:8px; } }
+    </style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- نافذة الاسم أول مرة -->
+<div class="modal-overlay" id="nameModal">
+    <div class="modal">
+        <h3>🎮 أدخل اسمك في اللعبة</h3>
+        <p style="color:var(--text-muted);margin-bottom:15px;">⚠️ لا يمكن تغييره لاحقاً!</p>
+        <input type="text" id="playerNameInput" placeholder="اكتب اسمك هنا...">
+        <button class="btn btn-primary" onclick="savePlayerName()" style="width:100%;">✅ تأكيد</button>
+    </div>
+</div>
+
+<header>
+    <div class="logo">
+        <i class="fas fa-trophy"></i>
+        <div><h1>⚔️ GeneralsArena</h1><p>منصة البطولات - General Sahel TV</p></div>
+    </div>
+    <div class="nav-actions">
+        <span class="player-name-display" id="playerNameDisplay"><i class="fas fa-user"></i> <span id="playerNameText">زائر</span></span>
+        <button class="icon-btn" id="themeToggleBtn" title="تغيير الثيم"><i class="fas fa-palette"></i></button>
+        <button class="icon-btn" id="homeBtn" title="الرئيسية"><i class="fas fa-home"></i></button>
+        <div class="dropdown">
+            <button class="icon-btn" id="menuDropdownBtn" title="القائمة"><i class="fas fa-bars"></i></button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <h4>💰 الدعم</h4>
+                <div class="dropdown-link" onclick="copyToClipboard('bc1qyamlrentlllxrlwrlp3jkapw6n8tna2llxta49','BTC')">₿ BTC <button class="copy-btn-sm">نسخ</button></div>
+                <div class="dropdown-link" onclick="copyToClipboard('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb5','ETH')">⟠ ETH <button class="copy-btn-sm">نسخ</button></div>
+                <a href="https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbFNxbkFScmRfeFlnekxfOU1lMHNiNTJkUVk5UXxBQ3Jtc0tsRUx2NmdjTUI2Z2I0bVMzemVjSFlOOTBCaG9TWWl3cXRQZUFmOUlYcjItZzZSb0Y4OTl0ZVN2SzBZbE9SQUhQQ0xJVFVXSzFyVkJ4SGZzbVRmbVV6N3M1WWd5U1N2RER2SVdmZDVKbEdpa0FmYUo5MA&q=https%3A%2F%2Fstreamelements.com%2Fsahel1%2Ftip" target="_blank">💖 دعم Sahel TV</a>
+                <h4>🌐 مواقعنا الأخرى</h4>
+                <a href="https://ahmdhlaq031-design.github.io/Developer-Hub/" target="_blank">🚀 Developer Hub</a>
+                <a href="https://ahmdhlaq031-design.github.io/Exam-hub/" target="_blank">🎓 ExamHub</a>
+                <a href="https://ahmdhlaq031-design.github.io/Smart-Free-tools-/" target="_blank">🛠️ الأدوات الذكية</a>
+                <a href="https://ahmdhlaq031-design.github.io/Gamerenger5/" target="_blank">🎮 مركز الألعاب</a>
+                <a href="https://ahmdhlaq031-design.github.io/Ev_Genaral_zero/" target="_blank">⚡ General Fix</a>
+                <a href="https://ahmdhlaq031-design.github.io/Seel/" target="_blank">🛒 المتجر</a>
+            </div>
+        </div>
+        <button class="icon-btn" id="chatToggleBtn" title="المحادثة"><i class="fas fa-comments"></i></button>
+    </div>
+</header>
+
+<main class="container">
+    <section id="homeSection">
+        <div class="hero">
+            <h2>🏆 معركة الجنرالات تبدأ هنا</h2>
+            <p>المنصة الرسمية لإدارة بطولات <strong>جنرال زيرو أور</strong> تحت إشراف <strong style="color:var(--primary);">General Sahel TV</strong></p>
+            <div class="hero-stats">
+                <span class="stat-badge"><i class="fas fa-trophy" style="color:var(--primary);"></i> <span id="totalTournaments">0</span> بطولة</span>
+                <span class="stat-badge"><i class="fas fa-users"></i> <span id="totalPlayers">0</span> لاعب</span>
+                <button class="btn btn-outline" onclick="showAdmin()"><i class="fas fa-user-shield"></i> لوحة التحكم</button>
+            </div>
+        </div>
+
+        <div class="section-title"><i class="fas fa-play-circle" style="color:var(--success);"></i> البطولات الجارية والقادمة</div>
+        <div class="grid" id="tournamentGrid">
+            <p style="color:var(--text-muted);text-align:center;width:100%;">لا توجد بطولات حالياً. انتظر إعلان Sahel TV عن البطولة القادمة!</p>
+        </div>
+
+        <div class="chat-container" id="chatSection">
+            <div class="chat-header"><i class="fas fa-comment-dots" style="color:var(--primary);"></i> المحادثة المباشرة - General Sahel TV Community</div>
+            <div id="tawktoContainer" style="min-height:450px;background:var(--bg-input);display:flex;align-items:center;justify-content:center;color:var(--text-muted);">جاري تحميل المحادثة...</div>
+        </div>
+    </section>
+
+    <section id="adminSection" class="hidden">
+        <button class="back-btn" onclick="goHome()">⬅️ العودة للرئيسية</button>
+        <div class="admin-panel">
+            <h3>🔐 لوحة تحكم المدير - General Sahel TV</h3>
+            <div id="adminLoginForm">
+                <input type="password" id="adminPasswordInput" placeholder="أدخل كلمة المرور">
+                <button class="btn btn-primary" onclick="adminLogin()">دخول</button>
+            </div>
+            <div id="adminDashboard" class="hidden">
+                <p style="color:var(--success);">✅ مرحباً Sahel TV!</p>
+                <h4>➕ إعلان عن بطولة جديدة</h4>
+                <input type="text" id="newName" placeholder="اسم البطولة">
+                <input type="date" id="newDate">
+                <input type="text" id="newPrize" placeholder="الجائزة (مثال: 200$)">
+                <select id="newSize"><option value="4">4 لاعبين</option><option value="8" selected>8 لاعبين</option><option value="16">16 لاعب</option><option value="32">32 لاعب</option><option value="64">64 لاعب</option></select>
+                <select id="newType"><option value="open">🔓 مفتوحة (للجميع)</option><option value="closed">🔒 مغلقة (لأشخاص محددين)</option></select>
+                <textarea id="newRules" placeholder="شروط وقوانين البطولة..." rows="4"></textarea>
+                <input type="url" id="newDonateLink" placeholder="رابط دعم البطولة (اختياري)">
+                <button class="btn btn-primary" onclick="addTournament()" style="width:100%;">📢 أعلن عن البطولة</button>
+                <h4 style="margin-top:25px;">📋 البطولات الحالية</h4>
+                <div id="adminList"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="detailSection" class="hidden">
+        <button class="back-btn" onclick="goHome()">⬅️ العودة للرئيسية</button>
+        <div id="detailContent"></div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 <strong style="color:var(--primary);">⚔️ GeneralsArena</strong> | General Sahel TV | General Fix Team</p>
+    <p style="font-size:0.75rem;">📧 ahmdhlaq031@gmail.com | 📱 0937318709</p>
+</footer>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69fb6672ad369b1c32e90424/1jnv0gdr6';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+<script>
+    const ADMIN_PASS = "0937318709Aa@";
+    const SHEET_URL = "https://docs.google.com/spreadsheets/d/109GUWJwx_dn9sqDzmEa652ObM62T_Iinojw_KDACLis/edit?usp=drivesdk";
+    let tournaments = JSON.parse(localStorage.getItem('ga_data') || '[]');
+    let currentTheme = localStorage.getItem('ga_theme') || 'dark';
+    let playerName = localStorage.getItem('ga_player_name') || '';
+
+    function toast(msg, err=false) { const t=document.getElementById('toast'); t.textContent=msg; t.classList.toggle('error',err); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
+    function copyToClipboard(text,name) { navigator.clipboard.writeText(text).then(()=>toast(`✅ تم نسخ ${name}`)); }
+    function save() { localStorage.setItem('ga_data', JSON.stringify(tournaments)); renderAll(); }
+
+    // ========== اسم اللاعب ==========
+    function savePlayerName() {
+        const name = document.getElementById('playerNameInput').value.trim();
+        if (!name) { toast('⚠️ أدخل اسماً صحيحاً', true); return; }
+        const allNames = getAllPlayerNames();
+        if (allNames.includes(name)) { toast('⚠️ هذا الاسم موجود بالفعل!', true); return; }
+        playerName = name;
+        localStorage.setItem('ga_player_name', name);
+        document.getElementById('nameModal').style.display = 'none';
+        document.getElementById('playerNameText').textContent = name;
+        toast(`✅ أهلاً بك يا ${name}!`);
+    }
+
+    function getAllPlayerNames() {
+        let names = [];
+        tournaments.forEach(t => { if (t.playersList) names = names.concat(t.playersList); });
+        return names;
+    }
+
+    function initPlayerName() {
+        if (playerName) {
+            document.getElementById('nameModal').style.display = 'none';
+            document.getElementById('playerNameText').textContent = playerName;
+        } else {
+            document.getElementById('nameModal').style.display = 'flex';
+        }
+    }
+
+    // ========== عرض البطولات ==========
+    function renderAll() { renderHome(); renderAdminList(); updateStats(); }
+    function updateStats() {
+        document.getElementById('totalTournaments').textContent = tournaments.length;
+        document.getElementById('totalPlayers').textContent = tournaments.reduce((s,t)=>s+(t.players||0),0);
+    }
+
+    function renderHome() {
+        const g = document.getElementById('tournamentGrid');
+        if (tournaments.length===0) { g.innerHTML='<p style="color:var(--text-muted);text-align:center;width:100%;">لا توجد بطولات حالياً.</p>'; return; }
+        g.innerHTML = tournaments.map((t,i)=>`
+            <div class="card ${t.status==='جارية'?'featured':''}">
+                <h3>🏆 ${t.name}</h3>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;">
+                    <span class="badge ${t.status==='جارية'?'badge-success':'badge-danger'}">${t.status==='جارية'?'🟢 جارية':'🔴 منتهية'}</span>
+                    <span class="badge badge-warning">👥 ${t.players||0}/${t.size}</span>
+                    <span class="badge ${t.type==='open'?'badge-success':'badge-warning'}">${t.type==='open'?'🔓 مفتوحة':'🔒 مغلقة'}</span>
+                </div>
+                <div class="info"><span><i class="fas fa-calendar"></i> ${t.date}</span><span><i class="fas fa-coins"></i> ${t.prize}</span></div>
+                <p style="margin:8px 0;font-size:0.85rem;color:var(--text-muted);">${(t.rules||'').substring(0,80)}...</p>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
+                    <button class="btn btn-primary" onclick="viewDetail(${i})">📋 التفاصيل</button>
+                    ${t.donateLink?`<a href="${t.donateLink}" target="_blank" class="btn btn-outline">💖 الدعم</a>`:''}
+                    ${t.status==='جارية' && t.type==='open' ? `<button class="btn btn-outline" onclick="joinTournament(${i})">✍️ تسجيل</button>` : ''}
+                </div>
+            </div>`).join('');
+    }
+
+    function joinTournament(idx) {
+        if (!playerName) { toast('⚠️ أدخل اسمك أولاً!', true); document.getElementById('nameModal').style.display='flex'; return; }
+        const t = tournaments[idx];
+        if (t.players >= t.size) { toast('⚠️ البطولة مكتملة!', true); return; }
+        if (!t.playersList) t.playersList = [];
+        if (t.playersList.includes(playerName)) { toast('⚠️ أنت مسجل بالفعل!', true); return; }
+        t.playersList.push(playerName);
+        t.players = t.playersList.length;
+        save();
+        toast(`✅ تم تسجيل "${playerName}"!`);
+    }
+
+    function viewDetail(idx) {
+        const t = tournaments[idx];
+        document.getElementById('homeSection').classList.add('hidden');
+        document.getElementById('adminSection').classList.add('hidden');
+        document.getElementById('detailSection').classList.remove('hidden');
+        let html = `
+            <div class="card featured" style="margin-bottom:20px;">
+                <h2>🏆 ${t.name}</h2>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;">
+                    <span class="badge ${t.status==='جارية'?'badge-success':'badge-danger'}">${t.status==='جارية'?'🟢 جارية':'🔴 منتهية'}</span>
+                    <span class="badge badge-warning">👥 ${t.players||0}/${t.size}</span>
+                    <span class="badge ${t.type==='open'?'badge-success':'badge-warning'}">${t.type==='open'?'🔓 مفتوحة':'🔒 مغلقة'}</span>
+                </div>
+                <div class="info" style="font-size:1rem;"><span><i class="fas fa-calendar"></i> ${t.date}</span><span><i class="fas fa-coins"></i> ${t.prize}</span></div>
+                <div style="margin:15px 0;padding:15px;background:var(--bg-input);border-radius:var(--radius-md);border:1px solid var(--border-color);">
+                    <h4 style="color:var(--warning);margin-bottom:8px;">📜 الشروط والقوانين</h4>
+                    <p style="white-space:pre-line;">${t.rules||'لا توجد شروط مضافة.'}</p>
+                </div>
+                ${t.donateLink?`<a href="${t.donateLink}" target="_blank" class="btn btn-primary" style="margin-top:10px;">💖 رابط دعم البطولة</a>`:''}
+            </div>`;
+        if (t.bracket && t.bracket.length > 0) {
+            html += `<div class="bracket-container"><h3 style="margin-bottom:15px;">🌳 شجرة البطولة</h3><div class="bracket-tree">`;
+            const cols = Math.ceil(t.size / 2);
+            for (let i = 0; i < t.bracket.length; i++) {
+                html += `<div class="bracket-col">`;
+                t.bracket[i].forEach(m => {
+                    html += `<div class="bracket-box ${m.winner?'win':''}"><div class="p">${m.p1||'---'}</div><div class="s">${m.s1??'-'} - ${m.s2??'-'}</div><div class="p">${m.p2||'---'}</div>${m.winner?`<div style="color:var(--primary);margin-top:3px;">🏆 ${m.winner}</div>`:''}</div>`;
+                });
+                html += `</div>`;
+                if (i < t.bracket.length - 1) html += '<div class="bracket-conn"></div>';
+            }
+            html += `</div></div>`;
+        }
+        document.getElementById('detailContent').innerHTML = html;
+    }
+
+    // ========== لوحة التحكم ==========
+    function showAdmin() { document.getElementById('homeSection').classList.add('hidden'); document.getElementById('detailSection').classList.add('hidden'); document.getElementById('adminSection').classList.remove('hidden'); }
+    function goHome() { document.getElementById('homeSection').classList.remove('hidden'); document.getElementById('adminSection').classList.add('hidden'); document.getElementById('detailSection').classList.add('hidden'); }
+
+    function adminLogin() {
+        if (document.getElementById('adminPasswordInput').value === ADMIN_PASS) {
+            document.getElementById('adminLoginForm').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            renderAll(); toast('🔓 مرحباً Sahel TV!');
+        } else { toast('❌ كلمة المرور غير صحيحة', true); }
+    }
+
+    function addTournament() {
+        const n = document.getElementById('newName').value, d = document.getElementById('newDate').value, p = document.getElementById('newPrize').value;
+        if (!n||!d||!p) { toast('⚠️ أكمل الحقول المطلوبة', true); return; }
+        const size = parseInt(document.getElementById('newSize').value);
+        const type = document.getElementById('newType').value;
+        // بناء شجرة فارغة
+        const bracket = [];
+        let mc = size / 2;
+        while (mc >= 1) {
+            bracket.push(Array(mc).fill(null).map(()=>({p1:'',p2:'',s1:undefined,s2:undefined,winner:''})));
+            mc = Math.floor(mc / 2);
+        }
+        tournaments.push({
+            name:n, date:d, prize:p, size, type,
+            players:0, playersList:[], bracket,
+            rules:document.getElementById('newRules').value,
+            donateLink:document.getElementById('newDonateLink').value,
+            status:'جارية', createdAt:new Date().toISOString()
+        });
+        ['newName','newDate','newPrize','newRules','newDonateLink'].forEach(id=>document.getElementById(id).value='');
+        document.getElementById('newSize').value='8'; document.getElementById('newType').value='open';
+        save(); toast('📢 تم إعلان البطولة!');
+    }
+
+    function deleteTournament(idx) { if(confirm('⚠️ حذف البطولة؟')) { tournaments.splice(idx,1); save(); toast('🗑️ تم الحذف'); } }
+
+    function addPlayerToBracket(tIdx) {
+        if (!playerName) { toast('⚠️ أدخل اسمك أولاً!', true); return; }
+        const t = tournaments[tIdx];
+        if (t.players >= t.size) { toast('⚠️ البطولة مكتملة!', true); return; }
+        if (t.playersList.includes(playerName)) { toast('⚠️ أنت مسجل بالفعل!', true); return; }
+        // إضافة اللاعب لأول خانة فاضية
+        for (let round of t.bracket) {
+            for (let m of round) {
+                if (!m.p1) { m.p1 = playerName; t.playersList.push(playerName); t.players++; save(); toast(`✅ تمت إضافتك!`); return; }
+                if (!m.p2) { m.p2 = playerName; t.playersList.push(playerName); t.players++; save(); toast(`✅ تمت إضافتك!`); return; }
+            }
+        }
+        toast('⚠️ البطولة مكتملة!', true);
+    }
+
+    function removePlayerFromBracket(tIdx, pName) {
+        const t = tournaments[tIdx];
+        for (let round of t.bracket) {
+            for (let m of round) {
+                if (m.p1 === pName) { m.p1 = ''; }
+                if (m.p2 === pName) { m.p2 = ''; }
+            }
+        }
+        t.playersList = t.playersList.filter(p => p !== pName);
+        t.players = t.playersList.length;
+        save();
+    }
+
+    function updateBracket(tIdx, roundIdx, matchIdx, field, value) {
+        tournaments[tIdx].bracket[roundIdx][matchIdx][field] = value;
+        save();
+    }
+
+    function renderAdminList() {
+        const l = document.getElementById('adminList');
+        if (tournaments.length===0) { l.innerHTML='<p style="color:var(--text-muted);">لا توجد بطولات.</p>'; return; }
+        l.innerHTML = tournaments.map((t,i)=>`
+            <div style="background:var(--bg-input);border-radius:var(--radius-sm);padding:12px;margin:8px 0;">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+                    <span>🏆 ${t.name} - ${t.date} | 👥 ${t.players}/${t.size} | ${t.type==='open'?'🔓':'🔒'}</span>
+                    <div style="display:flex;gap:6px;">
+                        <button class="btn btn-outline btn-sm" onclick="document.getElementById('bracketEditor_${i}').classList.toggle('hidden')">🌳 إدارة المخطط</button>
+                        <button class="btn btn-outline btn-sm" onclick="deleteTournament(${i})">🗑️</button>
+                    </div>
+                </div>
+                ${t.type==='closed' && t.players < t.size ? `
+                <div style="margin-top:8px;display:flex;gap:8px;">
+                    <input type="text" id="manualPlayer_${i}" placeholder="أدخل اسم اللاعب للإضافة" style="flex:1;">
+                    <button class="btn btn-primary btn-sm" onclick="addManualPlayer(${i})">➕ أضف</button>
+                </div>` : ''}
+                <div style="margin-top:6px;font-size:0.8rem;color:var(--text-muted);">المسجلون: ${(t.playersList||[]).join('، ')||'لا يوجد'}</div>
+                <div id="bracketEditor_${i}" class="hidden" style="background:var(--bg-card);padding:15px;border-radius:var(--radius-sm);margin-top:12px;">
+                    <h5 style="color:var(--primary);">🌳 تعديل المخطط</h5>
+                    ${t.bracket.map((round,ri)=>`
+                        <h6 style="color:var(--warning);margin:10px 0;">${ri===0?'الدور الأول':ri===t.bracket.length-1?'النهائي':ri===t.bracket.length-2?'نصف النهائي':'دور '+(ri+1)}</h6>
+                        ${round.map((m,mi)=>`
+                            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:4px 0;">
+                                <input value="${m.p1}" placeholder="لاعب 1" onchange="updateBracket(${i},${ri},${mi},'p1',this.value)" style="flex:1;min-width:80px;">
+                                <input type="number" value="${m.s1??''}" placeholder="ن" onchange="updateBracket(${i},${ri},${mi},'s1',parseInt(this.value)||0)" style="width:45px;">
+                                <span>-</span>
+                                <input type="number" value="${m.s2??''}" placeholder="ن" onchange="updateBracket(${i},${ri},${mi},'s2',parseInt(this.value)||0)" style="width:45px;">
+                                <input value="${m.p2}" placeholder="لاعب 2" onchange="updateBracket(${i},${ri},${mi},'p2',this.value)" style="flex:1;min-width:80px;">
+                                <input value="${m.winner}" placeholder="الفائز" onchange="updateBracket(${i},${ri},${mi},'winner',this.value)" style="flex:1;min-width:80px;">
+                            </div>
+                        `).join('')}
+                    `).join('')}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function addManualPlayer(tIdx) {
+        const input = document.getElementById('manualPlayer_'+tIdx);
+        const name = input.value.trim();
+        if (!name) { toast('⚠️ أدخل اسماً', true); return; }
+        const t = tournaments[tIdx];
+        if (t.players >= t.size) { toast('⚠️ البطولة مكتملة!', true); return; }
+        if (t.playersList.includes(name)) { toast('⚠️ اللاعب موجود بالفعل!', true); return; }
+        for (let round of t.bracket) {
+            for (let m of round) {
+                if (!m.p1) { m.p1 = name; t.playersList.push(name); t.players++; save(); input.value=''; toast(`✅ تمت إضافة ${name}`); return; }
+                if (!m.p2) { m.p2 = name; t.playersList.push(name); t.players++; save(); input.value=''; toast(`✅ تمت إضافة ${name}`); return; }
+            }
+        }
+        toast('⚠️ البطولة مكتملة!', true);
+    }
+
+    // ========== ثيمات ==========
+    function setTheme(th) { document.body.classList.remove('light-mode','gold-mode'); if(th==='light')document.body.classList.add('light-mode'); if(th==='gold')document.body.classList.add('gold-mode'); currentTheme=th; localStorage.setItem('ga_theme',th); }
+    document.getElementById('themeToggleBtn').addEventListener('click',()=>{ const n=currentTheme==='dark'?'light':currentTheme==='light'?'gold':'dark'; setTheme(n); toast(`🎨 ${n==='dark'?'داكن':n==='light'?'فاتح':'ذهبي'}`); });
+    document.getElementById('homeBtn').addEventListener('click',goHome);
+    document.getElementById('chatToggleBtn').addEventListener('click',()=>{goHome();setTimeout(()=>document.getElementById('chatSection').scrollIntoView({behavior:'smooth'}),300);});
+    document.getElementById('menuDropdownBtn').addEventListener('click',(e)=>{e.stopPropagation();document.getElementById('dropdownMenu').classList.toggle('show');});
+    document.addEventListener('click',()=>document.getElementById('dropdownMenu').classList.remove('show'));
+    document.addEventListener('DOMContentLoaded',()=>{setTheme(currentTheme);renderAll();initPlayerName();});
+</script>
+</body>
+</html>
