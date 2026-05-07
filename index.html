@@ -29,68 +29,107 @@
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Cairo',sans-serif; background:var(--bg-primary); color:var(--text-primary); transition:var(--transition); height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
-        header { flex-shrink:0; z-index:100; background:var(--bg-secondary); border-bottom:1px solid var(--border-color); padding:clamp(4px,1vw,8px) clamp(8px,2vw,16px); display:flex; align-items:center; justify-content:space-between; gap:clamp(4px,1vw,8px); backdrop-filter:blur(20px); }
+        header { flex-shrink:0; z-index:100; background:var(--bg-secondary); border-bottom:1px solid var(--border-color); padding:clamp(4px,1vw,8px) clamp(8px,2vw,16px); display:flex; align-items:center; justify-content:space-between; gap:8px; backdrop-filter:blur(20px); }
         .logo { display:flex; align-items:center; gap:6px; } .logo i { font-size:clamp(16px,3vw,22px); color:var(--primary); } .logo h1 { font-size:clamp(0.8rem,2vw,1.1rem); font-weight:800; color:var(--primary); }
-        .nav-actions { display:flex; gap:clamp(3px,0.8vw,6px); align-items:center; }
+        .nav-actions { display:flex; gap:6px; align-items:center; }
         .icon-btn { background:var(--bg-primary); border:1px solid var(--border-color); width:clamp(28px,5vw,36px); height:clamp(28px,5vw,36px); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:var(--transition); color:var(--text-primary); font-size:clamp(0.7rem,1.5vw,0.9rem); }
         .icon-btn:hover { background:var(--primary); color:white; }
-        .dropdown { position:relative; }
-        .dropdown-menu { position:fixed; top:clamp(50px,8vh,60px); left:50%; transform:translateX(-50%); background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(8px,1.5vw,12px); min-width:clamp(200px,50vw,280px); max-width:90vw; z-index:200; opacity:0; visibility:hidden; transition:var(--transition); box-shadow:var(--shadow-lg); backdrop-filter:blur(20px); max-height:60vh; overflow-y:auto; }
-        .dropdown-menu.show { opacity:1; visibility:visible; }
-        .dropdown-menu h4 { color:var(--primary); font-size:clamp(0.6rem,1.2vw,0.75rem); margin:clamp(4px,0.8vw,8px) 0; }
-        .dropdown-menu a { display:flex; align-items:center; gap:clamp(4px,0.8vw,8px); padding:clamp(6px,1vw,10px); border-radius:8px; text-decoration:none; color:var(--text-secondary); font-size:clamp(0.7rem,1.5vw,0.85rem); transition:var(--transition); cursor:pointer; }
-        .dropdown-menu a:hover { background:rgba(245,158,11,0.15); color:var(--primary); }
+        .icon-btn.active { background:var(--primary); color:white; }
+        .sidebar-right { position:fixed; top:0; right:-320px; width:clamp(260px,50vw,300px); height:100vh; background:var(--bg-card); border-left:1px solid var(--border-color); z-index:200; padding:80px 15px 30px; transition:right 0.35s cubic-bezier(0.2,0.9,0.4,1.1); box-shadow:var(--shadow-lg); backdrop-filter:blur(20px); overflow-y:auto; }
+        .sidebar-right.open { right:0; }
+        .sidebar-right h4 { color:var(--primary); font-size:0.75rem; margin:10px 0 5px; }
+        .sidebar-right a { display:flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px; text-decoration:none; color:var(--text-secondary); font-size:0.85rem; transition:var(--transition); cursor:pointer; margin-bottom:2px; }
+        .sidebar-right a:hover { background:rgba(245,158,11,0.15); color:var(--primary); }
+        .sidebar-left { position:fixed; top:0; left:-320px; width:clamp(260px,50vw,300px); height:100vh; background:var(--bg-card); border-right:1px solid var(--border-color); z-index:200; padding:80px 15px 30px; transition:left 0.35s cubic-bezier(0.2,0.9,0.4,1.1); box-shadow:var(--shadow-lg); backdrop-filter:blur(20px); overflow-y:auto; }
+        .sidebar-left.open { left:0; }
+        .sidebar-left h4 { color:var(--primary); font-size:0.75rem; margin:10px 0 5px; }
+        .sidebar-left a, .sidebar-left .dropdown-link { display:flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px; text-decoration:none; color:var(--text-secondary); font-size:0.85rem; transition:var(--transition); cursor:pointer; margin-bottom:2px; }
+        .sidebar-left a:hover, .sidebar-left .dropdown-link:hover { background:rgba(245,158,11,0.15); color:var(--primary); }
+        .overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:150; opacity:0; pointer-events:none; transition:0.3s; }
+        .overlay.active { opacity:1; pointer-events:auto; }
         .main-content { flex:1; display:flex; flex-direction:column; overflow:hidden; }
         .chat-section { flex:1; display:flex; flex-direction:column; width:100%; }
         .chat-header-bar { background:var(--bg-secondary); padding:clamp(6px,1vw,10px) clamp(10px,2vw,16px); font-weight:700; display:flex; align-items:center; gap:6px; border-bottom:1px solid var(--border-color); font-size:clamp(0.7rem,1.5vw,0.9rem); flex-shrink:0; }
         #tawktoContainer { flex:1; width:100%; min-height:0; }
         #tawktoContainer iframe { width:100% !important; height:100% !important; border:none !important; }
+        #jitsiContainer { flex:1; width:100%; min-height:0; }
+        #jitsiContainer iframe { width:100% !important; height:100% !important; border:none !important; }
+        .stream-container { position:relative; width:100%; padding-top:56.25%; margin:10px 0; border-radius:var(--radius-md); overflow:hidden; background:#000; }
+        .stream-container iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
         .hidden { display:none !important; }
-        .toast { position:fixed; bottom:clamp(15px,3vh,25px); left:50%; transform:translateX(-50%); background:var(--success); color:white; padding:clamp(8px,1.5vw,12px) clamp(16px,3vw,24px); border-radius:30px; font-weight:700; z-index:10000; opacity:0; transition:0.3s; pointer-events:none; font-size:clamp(0.7rem,1.2vw,0.85rem); }
+        .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--success); color:white; padding:10px 24px; border-radius:30px; font-weight:700; z-index:10000; opacity:0; transition:0.3s; pointer-events:none; font-size:0.8rem; }
         .toast.show { opacity:1; transform:translateX(-50%) translateY(0); } .toast.error { background:var(--danger); }
-        .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:2000; display:flex; align-items:center; justify-content:center; padding:clamp(10px,2vw,20px); }
-        .modal { background:var(--bg-card); border-radius:var(--radius-lg); padding:clamp(15px,3vw,25px); max-width:min(450px,95vw); width:100%; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); text-align:center; }
-        .modal h3 { margin-bottom:clamp(8px,1.5vw,12px); color:var(--primary); font-size:clamp(1rem,2vw,1.3rem); }
-        .modal input, .modal textarea { width:100%; padding:clamp(8px,1.5vw,12px); border-radius:10px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:'Cairo'; margin-bottom:clamp(6px,1vw,10px); outline:none; font-size:clamp(0.8rem,1.5vw,0.95rem); }
-        .btn { display:inline-flex; align-items:center; gap:6px; padding:clamp(7px,1.2vw,10px) clamp(14px,2.5vw,22px); border-radius:30px; font-weight:700; font-family:'Cairo'; cursor:pointer; transition:var(--transition); border:none; font-size:clamp(0.75rem,1.3vw,0.88rem); text-decoration:none; }
+        .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:2000; display:flex; align-items:center; justify-content:center; padding:20px; }
+        .modal { background:var(--bg-card); border-radius:var(--radius-lg); padding:20px; max-width:min(450px,95vw); width:100%; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); text-align:center; }
+        .modal h3 { margin-bottom:10px; color:var(--primary); font-size:1.1rem; }
+        .modal input, .modal textarea { width:100%; padding:10px; border-radius:10px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:'Cairo'; margin-bottom:8px; outline:none; font-size:0.9rem; }
+        .btn { display:inline-flex; align-items:center; gap:6px; padding:8px 18px; border-radius:30px; font-weight:700; font-family:'Cairo'; cursor:pointer; transition:var(--transition); border:none; font-size:0.85rem; text-decoration:none; }
         .btn-primary { background:var(--gradient-1); color:white; } .btn-primary:hover { background:var(--primary-dark); transform:translateY(-2px); }
         .btn-outline { background:transparent; border:2px solid var(--border-color); color:var(--text-secondary); } .btn-outline:hover { border-color:var(--primary); color:var(--primary); }
-        .btn-sm { padding:clamp(5px,0.8vw,7px) clamp(10px,1.5vw,14px); font-size:clamp(0.65rem,1.1vw,0.78rem); }
+        .btn-sm { padding:4px 10px; font-size:0.65rem; }
         .btn-danger { background:var(--danger); color:white; }
-        .back-btn { background:var(--bg-input); border:1px solid var(--border-color); padding:clamp(6px,1vw,9px) clamp(12px,2vw,16px); border-radius:25px; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; gap:6px; color:var(--text-primary); transition:var(--transition); margin-bottom:clamp(8px,1.5vw,15px); font-family:'Cairo'; font-size:clamp(0.75rem,1.3vw,0.85rem); }
+        .back-btn { background:var(--bg-input); border:1px solid var(--border-color); padding:8px 16px; border-radius:25px; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; gap:6px; color:var(--text-primary); transition:var(--transition); margin-bottom:15px; font-family:'Cairo'; font-size:0.85rem; }
         .back-btn:hover { background:var(--primary); color:white; }
-        .badge { display:inline-flex; align-items:center; gap:3px; padding:clamp(2px,0.4vw,4px) clamp(6px,1vw,10px); border-radius:15px; font-size:clamp(0.6rem,1vw,0.72rem); font-weight:600; }
+        .badge { display:inline-flex; align-items:center; gap:3px; padding:3px 8px; border-radius:15px; font-size:0.7rem; font-weight:600; }
         .badge-success { background:rgba(16,185,129,0.15); color:var(--success); }
         .badge-warning { background:rgba(245,158,11,0.15); color:var(--warning); }
         .badge-danger { background:rgba(239,68,68,0.15); color:var(--danger); }
-        .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px,100%), 1fr)); gap:clamp(8px,1.5vw,15px); }
-        .card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:clamp(12px,2vw,20px); transition:var(--transition); backdrop-filter:blur(10px); }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px,100%), 1fr)); gap:15px; }
+        .card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:20px; transition:var(--transition); backdrop-filter:blur(10px); }
         .card:hover { border-color:var(--primary); }
-        .card h3 { font-size:clamp(0.9rem,1.8vw,1.1rem); font-weight:800; margin-bottom:6px; color:var(--primary); }
-        .section-title { font-size:clamp(1rem,2vw,1.3rem); font-weight:800; margin:clamp(10px,2vw,20px) 0 clamp(8px,1.5vw,15px); }
-        .bracket-container { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:clamp(10px,1.5vw,18px); margin:10px 0; overflow-x:auto; backdrop-filter:blur(10px); -webkit-overflow-scrolling:touch; }
-        .bracket-tree { display:flex; align-items:center; justify-content:flex-start; gap:clamp(8px,1.5vw,15px); padding:clamp(10px,1.5vw,18px); min-width:max-content; direction:ltr; }
-        .bracket-col { display:flex; flex-direction:column; gap:clamp(8px,1.5vw,15px); }
-        .bracket-box { background:var(--bg-input); border:2px solid var(--border-color); border-radius:var(--radius-md); padding:clamp(6px,1vw,10px); text-align:center; min-width:clamp(80px,15vw,110px); font-size:clamp(0.7rem,1.2vw,0.85rem); }
+        .card h3 { font-size:1rem; font-weight:800; margin-bottom:6px; color:var(--primary); }
+        .section-title { font-size:1.2rem; font-weight:800; margin:15px 0 10px; }
+        .bracket-container { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:15px; margin:10px 0; overflow-x:auto; backdrop-filter:blur(10px); -webkit-overflow-scrolling:touch; }
+        .bracket-tree { display:flex; align-items:center; justify-content:flex-start; gap:10px; padding:15px; min-width:max-content; direction:ltr; }
+        .bracket-col { display:flex; flex-direction:column; gap:15px; }
+        .bracket-box { background:var(--bg-input); border:2px solid var(--border-color); border-radius:12px; padding:8px; text-align:center; min-width:90px; font-size:0.8rem; }
         .bracket-box.win { border-color:var(--primary); box-shadow:0 0 10px rgba(245,158,11,0.3); }
         .bracket-box .p { font-weight:700; margin:1px 0; }
         .bracket-box .s { color:var(--primary); font-weight:800; }
-        .bracket-conn { min-width:clamp(15px,3vw,25px); height:2px; background:var(--primary); flex-shrink:0; }
+        .bracket-conn { min-width:20px; height:2px; background:var(--primary); flex-shrink:0; }
         .wheel-container { text-align:center; }
         .wheel-container canvas { max-width:100%; height:auto; }
-        .admin-tabs { display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap; }
-        .admin-tab { padding:8px 16px; border-radius:20px; cursor:pointer; font-weight:600; font-size:0.85rem; background:var(--bg-input); border:1px solid var(--border-color); color:var(--text-secondary); transition:var(--transition); }
+        .admin-tabs { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+        .admin-tab { padding:6px 14px; border-radius:20px; cursor:pointer; font-weight:600; font-size:0.8rem; background:var(--bg-input); border:1px solid var(--border-color); color:var(--text-secondary); transition:var(--transition); }
         .admin-tab.active { background:var(--gradient-1); color:white; border-color:transparent; }
+        .user-row { display:flex; justify-content:space-between; align-items:center; padding:3px 10px; background:var(--bg-input); border-radius:6px; margin:2px 0; font-size:0.7rem; }
+        .user-row button { padding:2px 8px; font-size:0.6rem; border-radius:12px; }
+        .search-input { width:100%; padding:8px 12px; border-radius:20px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-primary); font-family:'Cairo'; margin-bottom:8px; outline:none; font-size:0.8rem; }
     </style>
 </head>
 <body>
 
 <div class="toast" id="toast"></div>
+<div class="overlay" id="overlay" onclick="closeAllSidebars()"></div>
+
+<div class="sidebar-right" id="sidebarRight">
+    <h4>📋 الأقسام</h4>
+    <a onclick="goHome()">🏠 الرئيسية</a>
+    <a onclick="showTournaments()">🏆 البطولات</a>
+    <a onclick="showMaps()">🗺️ الخرائط</a>
+    <a onclick="openMapModal()">📤 مشاركة خريطة</a>
+    <a onclick="showWheel()">🎡 قرعة</a>
+    <a onclick="showAdmin()">👑 لوحة التحكم</a>
+</div>
+
+<div class="sidebar-left" id="sidebarLeft">
+    <h4>💰 الدعم</h4>
+    <div class="dropdown-link" onclick="copyToClipboard('bc1qyamlrentlllxrlwrlp3jkapw6n8tna2llxta49','BTC')">₿ BTC</div>
+    <div class="dropdown-link" onclick="copyToClipboard('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb5','ETH')">⟠ ETH</div>
+    <a href="https://streamelements.com/sahel1/tip" target="_blank">💖 دعم Sahel TV</a>
+    <h4>🌐 مواقعنا</h4>
+    <a href="https://ahmdhlaq031-design.github.io/Developer-Hub/" target="_blank">🚀 Developer Hub</a>
+    <a href="https://ahmdhlaq031-design.github.io/Exam-hub/" target="_blank">🎓 ExamHub</a>
+    <a href="https://ahmdhlaq031-design.github.io/Smart-Free-tools-/" target="_blank">🛠️ الأدوات الذكية</a>
+    <a href="https://ahmdhlaq031-design.github.io/Gamerenger5/" target="_blank">🎮 مركز الألعاب</a>
+    <a href="https://ahmdhlaq031-design.github.io/Ev_Genaral_zero/" target="_blank">⚡ General Fix</a>
+    <a href="https://ahmdhlaq031-design.github.io/Seel/" target="_blank">🛒 المتجر</a>
+</div>
 
 <div class="modal-overlay" id="nameModal">
     <div class="modal">
         <h3>🎮 أدخل اسمك في اللعبة</h3>
-        <p style="color:var(--text-muted);margin-bottom:10px;font-size:clamp(0.7rem,1.2vw,0.85rem);">⚠️ لا يمكن تغييره لاحقاً!</p>
+        <p style="color:var(--text-muted);margin-bottom:8px;font-size:0.8rem;">⚠️ لا يمكن تغييره لاحقاً!</p>
         <input type="text" id="playerNameInput" placeholder="اكتب اسمك هنا...">
         <button class="btn btn-primary" onclick="savePlayerName()" style="width:100%;">✅ تأكيد</button>
     </div>
@@ -101,12 +140,8 @@
         <h3>📤 مشاركة خريطة جديدة</h3>
         <input type="text" id="mapNameInput" placeholder="اسم الخريطة">
         <input type="text" id="mapLinkInput" placeholder="رابط Google Drive">
-        <div style="font-size:0.75rem;color:var(--text-muted);text-align:right;margin:8px 0;background:var(--bg-input);padding:8px;border-radius:8px;">
-            📖 <strong>كيفية الحصول على الرابط:</strong><br>
-            1. ارفع ملف الخريطة إلى Google Drive<br>
-            2. اضغط بزر الفأرة الأيمن على الملف ← مشاركة<br>
-            3. اختر "أي شخص لديه الرابط"<br>
-            4. انسخ الرابط وألصقه هنا
+        <div style="font-size:0.7rem;color:var(--text-muted);text-align:right;margin:6px 0;background:var(--bg-input);padding:6px;border-radius:8px;">
+            📖 ارفع ملف الخريطة إلى Google Drive ← مشاركة ← "أي شخص لديه الرابط" ← انسخ الرابط وألصقه هنا
         </div>
         <button class="btn btn-primary" onclick="shareMap()" style="width:100%;">✅ مشاركة</button>
         <button class="btn btn-outline btn-sm" onclick="closeMapModal()" style="width:100%;margin-top:5px;">إلغاء</button>
@@ -114,47 +149,27 @@
 </div>
 
 <header>
+    <div style="display:flex;align-items:center;gap:6px;">
+        <button class="icon-btn" id="leftMenuBtn" style="font-size:1.2rem;">💰</button>
+    </div>
     <div class="logo">
         <i class="fas fa-trophy"></i>
         <div><h1>⚔️ GeneralsArena</h1></div>
     </div>
     <div class="nav-actions">
-        <span id="playerNameDisplay" style="font-size:0.8rem;color:var(--primary);font-weight:600;"></span>
+        <span id="playerNameDisplay" style="font-size:0.75rem;color:var(--primary);font-weight:600;"></span>
         <button class="icon-btn" id="themeToggleBtn">🌙</button>
-        <div class="dropdown">
-            <button class="icon-btn" id="supportDropdownBtn">💰🌐</button>
-            <div class="dropdown-menu" id="supportDropdown">
-                <h4>💰 الدعم</h4>
-                <a onclick="copyToClipboard('bc1qyamlrentlllxrlwrlp3jkapw6n8tna2llxta49','BTC')">₿ BTC</a>
-                <a onclick="copyToClipboard('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb5','ETH')">⟠ ETH</a>
-                <a href="https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbFNxbkFScmRfeFlnekxfOU1lMHNiNTJkUVk5UXxBQ3Jtc0tsRUx2NmdjTUI2Z2I0bVMzemVjSFlOOTBCaG9TWWl3cXRQZUFmOUlYcjItZzZSb0Y4OTl0ZVN2SzBZbE9SQUhQQ0xJVFVXSzFyVkJ4SGZzbVRmbVV6N3M1WWd5U1N2RER2SVdmZDVKbEdpa0FmYUo5MA&q=https%3A%2F%2Fstreamelements.com%2Fsahel1%2Ftip" target="_blank">💖 دعم Sahel TV</a>
-                <h4>🌐 مواقعنا</h4>
-                <a href="https://ahmdhlaq031-design.github.io/Developer-Hub/" target="_blank">🚀 Developer Hub</a>
-                <a href="https://ahmdhlaq031-design.github.io/Exam-hub/" target="_blank">🎓 ExamHub</a>
-                <a href="https://ahmdhlaq031-design.github.io/Smart-Free-tools-/" target="_blank">🛠️ الأدوات الذكية</a>
-                <a href="https://ahmdhlaq031-design.github.io/Gamerenger5/" target="_blank">🎮 مركز الألعاب</a>
-                <a href="https://ahmdhlaq031-design.github.io/Ev_Genaral_zero/" target="_blank">⚡ General Fix</a>
-                <a href="https://ahmdhlaq031-design.github.io/Seel/" target="_blank">🛒 المتجر</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="icon-btn" id="menuDropdownBtn">☰</button>
-            <div class="dropdown-menu" id="menuDropdown">
-                <a onclick="goHome()">🏠 الرئيسية</a>
-                <a onclick="showTournaments()">🏆 البطولات</a>
-                <a onclick="showMaps()">🗺️ الخرائط</a>
-                <a onclick="openMapModal()">📤 مشاركة خريطة</a>
-                <a onclick="showWheel()">🎡 قرعة</a>
-                <a onclick="showAdmin()">👑 لوحة التحكم</a>
-            </div>
-        </div>
+        <button class="icon-btn" id="chatModeBtn" title="المحادثة الكتابية">💬</button>
+        <button class="icon-btn" id="voiceModeBtn" title="المحادثة الصوتية">🎤</button>
+        <button class="icon-btn" id="rightMenuBtn" style="font-size:1.2rem;">☰</button>
     </div>
 </header>
 
 <div class="main-content">
     <section id="homeSection" class="chat-section">
-        <div class="chat-header-bar">💬 المحادثة المباشرة - General Sahel TV Community</div>
-        <div id="tawktoContainer"></div>
+        <div class="chat-header-bar" id="homeModeLabel">💬 المحادثة المباشرة - General Sahel TV Community</div>
+        <div id="tawktoContainer" style="flex:1; width:100%;"></div>
+        <div id="jitsiContainer" class="hidden" style="flex:1; width:100%;"></div>
     </section>
 
     <section id="adminSection" class="hidden" style="padding:15px;overflow-y:auto;">
@@ -169,6 +184,7 @@
                 <p style="color:var(--success);">✅ مرحباً Sahel TV!</p>
                 <div class="admin-tabs">
                     <button class="admin-tab active" onclick="switchAdminTab('tournaments')">🏆 البطولات</button>
+                    <button class="admin-tab" onclick="switchAdminTab('maps')">🗺️ الخرائط</button>
                     <button class="admin-tab" onclick="switchAdminTab('users')">👥 المستخدمين</button>
                 </div>
                 <div id="adminTabTournaments">
@@ -179,11 +195,17 @@
                     <select id="newType"><option value="open">🔓 مفتوحة</option><option value="closed">🔒 مغلقة</option></select><br>
                     <textarea id="newRules" placeholder="الشروط..." rows="2"></textarea><br>
                     <input type="url" id="newDonateLink" placeholder="رابط الدعم"><br>
+                    <input type="url" id="newStreamLink" placeholder="🔴 رابط البث المباشر (يوتيوب)"><br>
                     <button class="btn btn-primary" onclick="addTournament()" style="width:100%;">📢 أعلن</button>
                     <h4 style="margin-top:15px;">📋 البطولات</h4><div id="adminList"></div>
                 </div>
+                <div id="adminTabMaps" class="hidden">
+                    <h4>🗺️ جميع الخرائط</h4>
+                    <div id="adminMapsList"></div>
+                </div>
                 <div id="adminTabUsers" class="hidden">
                     <h4>👥 جميع المستخدمين</h4>
+                    <input type="text" class="search-input" id="userSearchInput" placeholder="🔍 بحث عن مستخدم..." oninput="renderUsersList()">
                     <div id="usersList"></div>
                 </div>
             </div>
@@ -241,9 +263,26 @@ s0.parentNode.insertBefore(s1,s0);
     let currentTheme = localStorage.getItem('ga_theme') || 'dark';
     let wheelNames = JSON.parse(localStorage.getItem('ga_wheel_names') || '[]');
     let wheelAngle = 0, wheelSpinning = false;
+    let chatMode = localStorage.getItem('ga_chat_mode') || 'text';
 
     function toast(msg, err=false) { const t=document.getElementById('toast'); t.textContent=msg; t.classList.toggle('error',err); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2000); }
     function copyToClipboard(text,name) { navigator.clipboard.writeText(text).then(()=>toast(`✅ تم نسخ ${name}`)); }
+
+    function extractYouTubeID(url) {
+        if (!url) return null;
+        const patterns = [
+            /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)/,
+            /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^?]+)/,
+            /(?:https?:\/\/)?(?:www\.)?youtube\.com\/live\/([^?]+)/,
+            /(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([^?]+)/
+        ];
+        for (const pattern of patterns) {
+            const match = url.match(pattern);
+            if (match) return match[1];
+        }
+        if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
+        return null;
+    }
 
     async function loadData() {
         try {
@@ -281,7 +320,7 @@ s0.parentNode.insertBefore(s1,s0);
         return [...new Set(names)];
     }
 
-    function renderAll() { renderTournamentGrid(); renderMapsGrid(); renderAdminList(); renderUsersList(); }
+    function renderAll() { renderTournamentGrid(); renderMapsGrid(); renderAdminList(); renderAdminMapsList(); renderUsersList(); }
 
     function renderTournamentGrid() {
         const grid=document.getElementById('tournamentGridFull'); if(!grid) return;
@@ -289,6 +328,7 @@ s0.parentNode.insertBefore(s1,s0);
         grid.innerHTML=tournaments.map((t,i)=>`
             <div class="card">
                 <h3>🏆 ${t.name}</h3>
+                ${t.streamLink ? '<span class="badge badge-danger">🔴 بث مباشر</span>' : ''}
                 <span class="badge ${t.status==='جارية'?'badge-success':'badge-danger'}">${t.status==='جارية'?'🟢':'🔴'}</span>
                 <span class="badge badge-warning">👥 ${t.players||0}/${t.size}</span>
                 <span class="badge">📅 ${t.date}</span>
@@ -306,7 +346,7 @@ s0.parentNode.insertBefore(s1,s0);
         grid.innerHTML=maps.map((m,i)=>`
             <div class="card">
                 <h3>🗺️ ${m.name}</h3>
-                <p style="font-size:0.8rem;color:var(--text-muted);">بواسطة: ${m.author} | ${m.date}</p>
+                <p style="font-size:0.75rem;color:var(--text-muted);">بواسطة: ${m.author} | ${m.date}</p>
                 <a href="${m.link}" target="_blank" class="btn btn-primary btn-sm">📥 تحميل</a>
             </div>`).join('');
     }
@@ -315,7 +355,7 @@ s0.parentNode.insertBefore(s1,s0);
         if(!playerName) { toast('⚠️ أدخل اسمك أولاً!',true); document.getElementById('nameModal').style.display='flex'; return; }
         const allNames = getAllPlayerNames();
         if (allNames.includes(playerName) && !tournaments[idx].playersList.includes(playerName)) {
-            toast('⚠️ هذا الاسم مستخدم بالفعل في بطولة أخرى!', true); return;
+            toast('⚠️ هذا الاسم مستخدم بالفعل!', true); return;
         }
         const t=tournaments[idx];
         if(t.players>=t.size) { toast('⚠️ البطولة مكتملة!',true); return; }
@@ -330,6 +370,12 @@ s0.parentNode.insertBefore(s1,s0);
         document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden'));
         document.getElementById('detailSection').classList.remove('hidden');
         let html=`<h2>🏆 ${t.name}</h2><p>👥 ${t.players||0}/${t.size} | 📅 ${t.date} | 💰 ${t.prize}</p><p>${t.rules||''}</p>`;
+        if (t.streamLink) {
+            const videoId = extractYouTubeID(t.streamLink);
+            if (videoId) {
+                html += `<h4>🔴 البث المباشر</h4><div class="stream-container"><iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe></div>`;
+            }
+        }
         if(t.bracket&&t.bracket.length>0) {
             html+=`<div class="bracket-container"><div class="bracket-tree">`;
             t.bracket.forEach((round,ri)=>{ round.forEach(m=>{ html+=`<div class="bracket-box ${m.winner?'win':''}"><div class="p">${m.p1||'---'}</div><div class="s">${m.s1??'-'} - ${m.s2??'-'}</div><div class="p">${m.p2||'---'}</div>${m.winner?`<div>🏆${m.winner}</div>`:''}</div>`; }); if(ri<t.bracket.length-1) html+='<div class="bracket-conn"></div>'; });
@@ -338,7 +384,7 @@ s0.parentNode.insertBefore(s1,s0);
         document.getElementById('detailContent').innerHTML=html;
     }
 
-    function openMapModal() { document.getElementById('mapModal').classList.remove('hidden'); document.getElementById('menuDropdown').classList.remove('show'); }
+    function openMapModal() { document.getElementById('mapModal').classList.remove('hidden'); closeAllSidebars(); }
     function closeMapModal() { document.getElementById('mapModal').classList.add('hidden'); }
     function shareMap() {
         const name=document.getElementById('mapNameInput').value.trim(), link=document.getElementById('mapLinkInput').value.trim();
@@ -349,38 +395,40 @@ s0.parentNode.insertBefore(s1,s0);
         toast('✅ تمت مشاركة الخريطة!');
     }
 
-    function goHome() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('homeSection').classList.remove('hidden'); }
-    function showTournaments() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('tournamentsSection').classList.remove('hidden'); document.getElementById('menuDropdown').classList.remove('show'); }
-    function showMaps() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('mapsSection').classList.remove('hidden'); document.getElementById('menuDropdown').classList.remove('show'); }
-    function showWheel() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('wheelSection').classList.remove('hidden'); document.getElementById('menuDropdown').classList.remove('show'); loadWheelNames(); drawWheel(); }
-    function showAdmin() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('adminSection').classList.remove('hidden'); document.getElementById('menuDropdown').classList.remove('show'); }
+    function goHome() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('homeSection').classList.remove('hidden'); closeAllSidebars(); }
+    function showTournaments() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('tournamentsSection').classList.remove('hidden'); closeAllSidebars(); }
+    function showMaps() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('mapsSection').classList.remove('hidden'); closeAllSidebars(); }
+    function showWheel() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('wheelSection').classList.remove('hidden'); closeAllSidebars(); loadWheelNames(); drawWheel(); }
+    function showAdmin() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('adminSection').classList.remove('hidden'); closeAllSidebars(); }
     function adminLogin() { if(document.getElementById('adminPasswordInput').value===ADMIN_PASS){document.getElementById('adminLoginForm').classList.add('hidden');document.getElementById('adminDashboard').classList.remove('hidden');renderAll();toast('🔓 مرحباً!');}else{toast('❌ خطأ',true);} }
-    function addTournament() { const n=document.getElementById('newName').value,d=document.getElementById('newDate').value,p=document.getElementById('newPrize').value; if(!n||!d||!p){toast('⚠️ أكمل الحقول',true);return;} const size=parseInt(document.getElementById('newSize').value),type=document.getElementById('newType').value,bracket=[]; let mc=size/2; while(mc>=1){bracket.push(Array(mc).fill(null).map(()=>({p1:'',p2:'',s1:undefined,s2:undefined,winner:''}))); mc=Math.floor(mc/2);} tournaments.push({name:n,date:d,prize:p,size,type,players:0,playersList:[],bracket,rules:document.getElementById('newRules').value,donateLink:document.getElementById('newDonateLink').value,status:'جارية',createdAt:new Date().toISOString()}); ['newName','newDate','newPrize','newRules','newDonateLink'].forEach(id=>document.getElementById(id).value=''); saveTournaments(); toast('📢 تم الإعلان!'); }
-    function deleteTournament(idx){if(confirm('⚠️ حذف البطولة؟')){tournaments.splice(idx,1);saveTournaments();toast('🗑️ تم حذف البطولة');}}
-    function deleteMap(idx){if(confirm('⚠️ حذف الخريطة؟')){maps.splice(idx,1);saveMaps();toast('🗑️ تم حذف الخريطة');}}
-    function deleteUser(userName){if(confirm(`⚠️ حذف المستخدم "${userName}"؟`)){tournaments.forEach(t=>{if(t.playersList)t.playersList=t.playersList.filter(p=>p!==userName); t.players=(t.playersList||[]).length;}); maps=maps.filter(m=>m.author!==userName); saveTournaments(); saveMaps(); toast(`🗑️ تم حذف "${userName}"`);}}
+    function addTournament() { const n=document.getElementById('newName').value,d=document.getElementById('newDate').value,p=document.getElementById('newPrize').value; if(!n||!d||!p){toast('⚠️ أكمل الحقول',true);return;} const size=parseInt(document.getElementById('newSize').value),type=document.getElementById('newType').value,bracket=[]; let mc=size/2; while(mc>=1){bracket.push(Array(mc).fill(null).map(()=>({p1:'',p2:'',s1:undefined,s2:undefined,winner:''}))); mc=Math.floor(mc/2);} tournaments.push({name:n,date:d,prize:p,size,type,players:0,playersList:[],bracket,rules:document.getElementById('newRules').value,donateLink:document.getElementById('newDonateLink').value,streamLink:document.getElementById('newStreamLink').value,status:'جارية',createdAt:new Date().toISOString()}); ['newName','newDate','newPrize','newRules','newDonateLink','newStreamLink'].forEach(id=>document.getElementById(id).value=''); saveTournaments(); toast('📢 تم الإعلان!'); }
+    function deleteTournament(idx){if(confirm('⚠️ حذف البطولة؟')){tournaments.splice(idx,1);saveTournaments();toast('🗑️ تم');}}
+    function deleteMap(idx){if(confirm('⚠️ حذف الخريطة؟')){maps.splice(idx,1);saveMaps();toast('🗑️ تم');}}
+    function deleteUser(userName){if(confirm(`⚠️ حذف "${userName}"؟`)){tournaments.forEach(t=>{if(t.playersList)t.playersList=t.playersList.filter(p=>p!==userName); t.players=(t.playersList||[]).length;}); maps=maps.filter(m=>m.author!==userName); saveTournaments(); saveMaps(); toast(`🗑️ تم حذف "${userName}"`);}}
     function updateBracket(ti,ri,mi,field,value){tournaments[ti].bracket[ri][mi][field]=value;saveTournaments();}
-    function switchAdminTab(tab) { document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active')); event.target.classList.add('active'); document.getElementById('adminTabTournaments').classList.toggle('hidden',tab!=='tournaments'); document.getElementById('adminTabUsers').classList.toggle('hidden',tab!=='users'); if(tab==='users') renderUsersList(); }
+    function switchAdminTab(tab) { document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active')); event.target.classList.add('active'); document.getElementById('adminTabTournaments').classList.toggle('hidden',tab!=='tournaments'); document.getElementById('adminTabMaps').classList.toggle('hidden',tab!=='maps'); document.getElementById('adminTabUsers').classList.toggle('hidden',tab!=='users'); if(tab==='maps') renderAdminMapsList(); if(tab==='users') renderUsersList(); }
 
     function renderAdminList() {
         const l=document.getElementById('adminList');
         if(tournaments.length===0) { l.innerHTML='<p style="color:var(--text-muted);">لا توجد بطولات.</p>'; return; }
-        l.innerHTML=tournaments.map((t,i)=>`<div style="background:var(--bg-input);border-radius:8px;padding:8px;margin:4px 0;"><span>🏆 ${t.name} | 👥 ${t.players}/${t.size}</span><button class="btn btn-outline btn-sm" onclick="document.getElementById('be_${i}').classList.toggle('hidden')">🌳</button><button class="btn btn-outline btn-sm" onclick="deleteTournament(${i})">🗑️</button><div id="be_${i}" class="hidden" style="margin-top:8px;">${t.bracket.map((r,ri)=>`<h6>${ri===0?'الأول':ri===t.bracket.length-1?'النهائي':ri===t.bracket.length-2?'نصف النهائي':'دور'+(ri+1)}</h6>${r.map((m,mi)=>`<div style="display:flex;gap:3px;"><input value="${m.p1}" onchange="updateBracket(${i},${ri},${mi},'p1',this.value)" style="flex:1;min-width:50px;"><input type="number" value="${m.s1??''}" onchange="updateBracket(${i},${ri},${mi},'s1',parseInt(this.value)||0)" style="width:35px;"><span>-</span><input type="number" value="${m.s2??''}" onchange="updateBracket(${i},${ri},${mi},'s2',parseInt(this.value)||0)" style="width:35px;"><input value="${m.p2}" onchange="updateBracket(${i},${ri},${mi},'p2',this.value)" style="flex:1;min-width:50px;"><input value="${m.winner}" placeholder="🏆" onchange="updateBracket(${i},${ri},${mi},'winner',this.value)" style="flex:1;min-width:50px;"></div>`).join('')}`).join('')}</div></div>`).join('');
+        l.innerHTML=tournaments.map((t,i)=>`<div style="background:var(--bg-input);border-radius:8px;padding:8px;margin:4px 0;"><span>🏆 ${t.name} | 👥 ${t.players}/${t.size} ${t.streamLink?'🔴':''}</span><button class="btn btn-outline btn-sm" onclick="document.getElementById('be_${i}').classList.toggle('hidden')">🌳</button><button class="btn btn-outline btn-sm" onclick="deleteTournament(${i})">🗑️</button><div id="be_${i}" class="hidden" style="margin-top:8px;">${t.bracket.map((r,ri)=>`<h6>${ri===0?'الأول':ri===t.bracket.length-1?'النهائي':ri===t.bracket.length-2?'نصف النهائي':'دور'+(ri+1)}</h6>${r.map((m,mi)=>`<div style="display:flex;gap:3px;"><input value="${m.p1}" onchange="updateBracket(${i},${ri},${mi},'p1',this.value)" style="flex:1;min-width:50px;"><input type="number" value="${m.s1??''}" onchange="updateBracket(${i},${ri},${mi},'s1',parseInt(this.value)||0)" style="width:35px;"><span>-</span><input type="number" value="${m.s2??''}" onchange="updateBracket(${i},${ri},${mi},'s2',parseInt(this.value)||0)" style="width:35px;"><input value="${m.p2}" onchange="updateBracket(${i},${ri},${mi},'p2',this.value)" style="flex:1;min-width:50px;"><input value="${m.winner}" placeholder="🏆" onchange="updateBracket(${i},${ri},${mi},'winner',this.value)" style="flex:1;min-width:50px;"></div>`).join('')}`).join('')}</div></div>`).join('');
+    }
+
+    function renderAdminMapsList() {
+        const l=document.getElementById('adminMapsList');
+        if(maps.length===0) { l.innerHTML='<p style="color:var(--text-muted);">لا توجد خرائط.</p>'; return; }
+        l.innerHTML=maps.map((m,i)=>`<div class="user-row"><span>🗺️ ${m.name} - ${m.author}</span><button class="btn btn-danger btn-sm" onclick="deleteMap(${i})">🗑️</button></div>`).join('');
     }
 
     function renderUsersList() {
         const l=document.getElementById('usersList');
         const allNames = getAllPlayerNames();
-        if (allNames.length === 0) { l.innerHTML='<p style="color:var(--text-muted);">لا يوجد مستخدمون بعد.</p>'; return; }
-        l.innerHTML = allNames.map(name => `
-            <div style="background:var(--bg-input);border-radius:8px;padding:8px;margin:4px 0;display:flex;justify-content:space-between;align-items:center;">
-                <span>👤 ${name}</span>
-                <button class="btn btn-danger btn-sm" onclick="deleteUser('${name}')">🗑️ حذف</button>
-            </div>
-        `).join('');
+        const searchTerm = (document.getElementById('userSearchInput')?.value || '').toLowerCase().trim();
+        const filtered = searchTerm ? allNames.filter(n => n.toLowerCase().includes(searchTerm)) : allNames;
+        if (filtered.length === 0) { l.innerHTML='<p style="color:var(--text-muted);font-size:0.75rem;">لا يوجد مستخدمون.</p>'; return; }
+        l.innerHTML = filtered.map(name => `<div class="user-row"><span>👤 ${name}</span><button class="btn btn-danger btn-sm" onclick="deleteUser('${name}')">🗑️</button></div>`).join('');
     }
 
-    // ========== أداة القرعة ==========
     function loadWheelNames() { const ta=document.getElementById('wheelNames'); if(ta) ta.value=wheelNames.join('\n'); }
     function saveWheelNames() { const ta=document.getElementById('wheelNames'); if(ta) { wheelNames=ta.value.split('\n').filter(n=>n.trim()); localStorage.setItem('ga_wheel_names',JSON.stringify(wheelNames)); } drawWheel(); }
     function drawWheel() {
@@ -427,11 +475,61 @@ s0.parentNode.insertBefore(s1,s0);
     function setTheme(th) { document.body.classList.remove('light-mode','gold-mode'); if(th==='light')document.body.classList.add('light-mode'); if(th==='gold')document.body.classList.add('gold-mode'); currentTheme=th; localStorage.setItem('ga_theme',th); }
     document.getElementById('themeToggleBtn').addEventListener('click',()=>{ const n=currentTheme==='dark'?'light':currentTheme==='light'?'gold':'dark'; setTheme(n); });
 
-    document.getElementById('menuDropdownBtn').addEventListener('click',(e)=>{ e.stopPropagation(); document.getElementById('menuDropdown').classList.toggle('show'); document.getElementById('supportDropdown').classList.remove('show'); });
-    document.getElementById('supportDropdownBtn').addEventListener('click',(e)=>{ e.stopPropagation(); document.getElementById('supportDropdown').classList.toggle('show'); document.getElementById('menuDropdown').classList.remove('show'); });
-    document.addEventListener('click',()=>{ document.getElementById('menuDropdown').classList.remove('show'); document.getElementById('supportDropdown').classList.remove('show'); });
+    function switchChatMode(mode) {
+        chatMode = mode;
+        localStorage.setItem('ga_chat_mode', mode);
+        const tawkContainer = document.getElementById('tawktoContainer');
+        const jitsiContainer = document.getElementById('jitsiContainer');
+        const chatBtn = document.getElementById('chatModeBtn');
+        const voiceBtn = document.getElementById('voiceModeBtn');
+        const modeLabel = document.getElementById('homeModeLabel');
 
-    document.addEventListener('DOMContentLoaded',()=>{ setTheme(currentTheme); loadData(); initPlayerName(); loadWheelNames(); drawWheel(); });
+        if (mode === 'voice') {
+            tawkContainer.classList.add('hidden');
+            jitsiContainer.classList.remove('hidden');
+            chatBtn.classList.remove('active');
+            voiceBtn.classList.add('active');
+            modeLabel.innerHTML = '🎤 المحادثة الصوتية - General Sahel TV Community';
+            if (!jitsiContainer.querySelector('iframe')) {
+                jitsiContainer.innerHTML = '<iframe src="https://meet.jit.si/GeneralsArena-SahelTV" allow="camera;microphone;fullscreen;display-capture" style="width:100%;height:100%;border:none;"></iframe>';
+            }
+        } else {
+            tawkContainer.classList.remove('hidden');
+            jitsiContainer.classList.add('hidden');
+            chatBtn.classList.add('active');
+            voiceBtn.classList.remove('active');
+            modeLabel.innerHTML = '💬 المحادثة المباشرة - General Sahel TV Community';
+        }
+    }
+
+    document.getElementById('chatModeBtn').addEventListener('click', () => switchChatMode('text'));
+    document.getElementById('voiceModeBtn').addEventListener('click', () => switchChatMode('voice'));
+
+    function openSidebar(side) {
+        closeAllSidebars();
+        if (side === 'right') { document.getElementById('sidebarRight').classList.add('open'); }
+        else { document.getElementById('sidebarLeft').classList.add('open'); }
+        document.getElementById('overlay').classList.add('active');
+    }
+    function closeAllSidebars() {
+        document.getElementById('sidebarRight').classList.remove('open');
+        document.getElementById('sidebarLeft').classList.remove('open');
+        document.getElementById('overlay').classList.remove('active');
+    }
+
+    document.getElementById('rightMenuBtn').addEventListener('click',()=>{ openSidebar('right'); });
+    document.getElementById('leftMenuBtn').addEventListener('click',()=>{ openSidebar('left'); });
+    document.getElementById('overlay').addEventListener('click',closeAllSidebars);
+
+    document.addEventListener('DOMContentLoaded',()=>{
+        setTheme(currentTheme);
+        loadData();
+        initPlayerName();
+        loadWheelNames();
+        drawWheel();
+        if (chatMode === 'voice') switchChatMode('voice');
+        else { document.getElementById('chatModeBtn').classList.add('active'); }
+    });
 </script>
 </body>
 </html>
