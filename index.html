@@ -90,6 +90,7 @@
         .bracket-box .s { color:var(--primary); font-weight:800; }
         .bracket-conn { min-width:clamp(15px,3vw,25px); height:2px; background:var(--primary); flex-shrink:0; }
         .help-text { font-size:clamp(0.6rem,1vw,0.75rem); color:var(--text-muted); text-align:right; background:var(--bg-input); padding:clamp(6px,1vw,10px); border-radius:8px; margin:6px 0; line-height:1.6; }
+        #tawktoContainer iframe { width:100% !important; height:100% !important; border:none !important; min-height:100% !important; }
     </style>
 </head>
 <body>
@@ -221,7 +222,8 @@ s0.parentNode.insertBefore(s1,s0);
 
 <script>
     const ADMIN_PASS = "0937318709Aa@";
-    const API_URL = "https://api.npoint.io/9442d028609e0e81ecf8";
+    const TOURNAMENTS_API = "https://api.npoint.io/9442d028609e0e81ecf8";
+    const MAPS_API = "https://api.npoint.io/c3cd5edb0be62c9b9d8a";
     let tournaments = [], maps = [];
     let currentTheme = localStorage.getItem('ga_theme') || 'dark';
     let playerName = localStorage.getItem('ga_player_name') || '';
@@ -231,25 +233,33 @@ s0.parentNode.insertBefore(s1,s0);
 
     async function loadData() {
         try {
-            const res = await fetch(API_URL, { cache: 'no-cache' });
-            if (!res.ok) throw new Error('Failed');
-            const data = await res.json();
-            tournaments = Array.isArray(data.tournaments) ? data.tournaments : [];
-            maps = Array.isArray(data.maps) ? data.maps : [];
+            const [tRes, mRes] = await Promise.all([
+                fetch(TOURNAMENTS_API, { cache: 'no-cache' }),
+                fetch(MAPS_API, { cache: 'no-cache' })
+            ]);
+            if (tRes.ok) { const d = await tRes.json(); tournaments = Array.isArray(d) ? d : (Array.isArray(d.tournaments) ? d.tournaments : []); }
+            else { tournaments = JSON.parse(localStorage.getItem('ga_tournaments')||'[]'); }
+            if (mRes.ok) { const d = await mRes.json(); maps = Array.isArray(d) ? d : (Array.isArray(d.maps) ? d.maps : []); }
+            else { maps = JSON.parse(localStorage.getItem('ga_maps')||'[]'); }
         } catch(e) {
             tournaments = JSON.parse(localStorage.getItem('ga_tournaments')||'[]');
             maps = JSON.parse(localStorage.getItem('ga_maps')||'[]');
         }
-        renderAll();
-    }
-
-    async function saveData() {
         localStorage.setItem('ga_tournaments', JSON.stringify(tournaments));
         localStorage.setItem('ga_maps', JSON.stringify(maps));
         renderAll();
-        try {
-            await fetch(API_URL, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({tournaments,maps}) });
-        } catch(e) { toast('⚠️ تعذر الحفظ على الخادم', true); }
+    }
+
+    async function saveTournaments() {
+        localStorage.setItem('ga_tournaments', JSON.stringify(tournaments));
+        renderAll();
+        try { await fetch(TOURNAMENTS_API, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(tournaments) }); } catch(e) { toast('⚠️ تعذر حفظ البطولات', true); }
+    }
+
+    async function saveMaps() {
+        localStorage.setItem('ga_maps', JSON.stringify(maps));
+        renderAll();
+        try { await fetch(MAPS_API, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(maps) }); } catch(e) { toast('⚠️ تعذر حفظ الخرائط', true); }
     }
 
     function renderAll() { renderTournamentGrid(); renderMapsGrid(); renderAdminList(); }
@@ -293,7 +303,7 @@ s0.parentNode.insertBefore(s1,s0);
         if ((t.playersList||[]).includes(playerName)) { toast('⚠️ مسجل بالفعل!',true); return; }
         if (!t.playersList) t.playersList=[];
         t.playersList.push(playerName); t.players = t.playersList.length;
-        saveData(); toast(`✅ تم تسجيل "${playerName}"!`);
+        saveTournaments(); toast(`✅ تم تسجيل "${playerName}"!`);
     }
 
     function viewDetail(idx) {
@@ -320,7 +330,7 @@ s0.parentNode.insertBefore(s1,s0);
         const link = document.getElementById('mapLinkInput').value.trim();
         if (!name || !link) { toast('⚠️ أدخل الاسم والرابط', true); return; }
         maps.push({ name, link, author: playerName||'زائر', date: new Date().toLocaleDateString('ar') });
-        saveData();
+        saveMaps();
         document.getElementById('mapModal').classList.add('hidden');
         document.getElementById('mapNameInput').value=''; document.getElementById('mapLinkInput').value='';
         toast('✅ تمت مشاركة الخريطة!');
@@ -331,9 +341,9 @@ s0.parentNode.insertBefore(s1,s0);
     function goHome() { document.querySelectorAll('.main-content > section').forEach(s=>s.classList.add('hidden')); document.getElementById('homeSection').classList.remove('hidden'); }
     function showAdmin() { document.querySelectorAll('.main-content > section').forEach(s=>s.classList.add('hidden')); document.getElementById('adminSection').classList.remove('hidden'); document.getElementById('menuDropdown').classList.remove('show'); }
     function adminLogin() { if(document.getElementById('adminPasswordInput').value===ADMIN_PASS){document.getElementById('adminLoginForm').classList.add('hidden');document.getElementById('adminDashboard').classList.remove('hidden');renderAll();toast('🔓 مرحباً!');}else{toast('❌ خطأ',true);} }
-    function addTournament() { const n=document.getElementById('newName').value, d=document.getElementById('newDate').value, p=document.getElementById('newPrize').value; if(!n||!d||!p){toast('⚠️ أكمل الحقول',true);return;} const size=parseInt(document.getElementById('newSize').value),type=document.getElementById('newType').value, bracket=[]; let mc=size/2; while(mc>=1){bracket.push(Array(mc).fill(null).map(()=>({p1:'',p2:'',s1:undefined,s2:undefined,winner:''}))); mc=Math.floor(mc/2);} tournaments.push({name:n,date:d,prize:p,size,type,players:0,playersList:[],bracket,rules:document.getElementById('newRules').value,donateLink:document.getElementById('newDonateLink').value,status:'جارية',createdAt:new Date().toISOString()}); ['newName','newDate','newPrize','newRules','newDonateLink'].forEach(id=>document.getElementById(id).value=''); saveData(); toast('📢 تم الإعلان!'); }
-    function deleteTournament(idx){if(confirm('⚠️ حذف؟')){tournaments.splice(idx,1);saveData();toast('🗑️ تم');}}
-    function updateBracket(ti,ri,mi,field,value){tournaments[ti].bracket[ri][mi][field]=value;saveData();}
+    function addTournament() { const n=document.getElementById('newName').value, d=document.getElementById('newDate').value, p=document.getElementById('newPrize').value; if(!n||!d||!p){toast('⚠️ أكمل الحقول',true);return;} const size=parseInt(document.getElementById('newSize').value),type=document.getElementById('newType').value, bracket=[]; let mc=size/2; while(mc>=1){bracket.push(Array(mc).fill(null).map(()=>({p1:'',p2:'',s1:undefined,s2:undefined,winner:''}))); mc=Math.floor(mc/2);} tournaments.push({name:n,date:d,prize:p,size,type,players:0,playersList:[],bracket,rules:document.getElementById('newRules').value,donateLink:document.getElementById('newDonateLink').value,status:'جارية',createdAt:new Date().toISOString()}); ['newName','newDate','newPrize','newRules','newDonateLink'].forEach(id=>document.getElementById(id).value=''); saveTournaments(); toast('📢 تم الإعلان!'); }
+    function deleteTournament(idx){if(confirm('⚠️ حذف؟')){tournaments.splice(idx,1);saveTournaments();toast('🗑️ تم');}}
+    function updateBracket(ti,ri,mi,field,value){tournaments[ti].bracket[ri][mi][field]=value;saveTournaments();}
     function renderAdminList(){const l=document.getElementById('adminList');if(tournaments.length===0){l.innerHTML='<p style="color:var(--text-muted);">لا توجد بطولات.</p>';return;}l.innerHTML=tournaments.map((t,i)=>`<div style="background:var(--bg-input);border-radius:var(--radius-sm);padding:clamp(6px,1vw,10px);margin:4px 0;"><div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:clamp(0.7rem,1.2vw,0.85rem);">🏆 ${t.name} | 👥 ${t.players}/${t.size}</span><div><button class="btn btn-outline btn-sm" onclick="document.getElementById('be_${i}').classList.toggle('hidden')">🌳</button><button class="btn btn-outline btn-sm" onclick="deleteTournament(${i})">🗑️</button></div></div><div style="font-size:clamp(0.6rem,1vw,0.75rem);color:var(--text-muted);">${(t.playersList||[]).join('، ')||'لا أحد'}</div><div id="be_${i}" class="hidden" style="background:var(--bg-card);padding:clamp(8px,1.5vw,12px);border-radius:var(--radius-sm);margin-top:6px;">${t.bracket.map((r,ri)=>`<h6 style="color:var(--warning);font-size:clamp(0.7rem,1.2vw,0.8rem);">${ri===0?'الأول':ri===t.bracket.length-1?'النهائي':ri===t.bracket.length-2?'نصف النهائي':'دور'+(ri+1)}</h6>${r.map((m,mi)=>`<div style="display:flex;gap:3px;align-items:center;flex-wrap:wrap;margin:2px 0;"><input value="${m.p1}" placeholder="1" onchange="updateBracket(${i},${ri},${mi},'p1',this.value)" style="flex:1;min-width:50px;padding:clamp(3px,0.5vw,5px);font-size:clamp(0.65rem,1vw,0.8rem);"><input type="number" value="${m.s1??''}" placeholder="ن" onchange="updateBracket(${i},${ri},${mi},'s1',parseInt(this.value)||0)" style="width:clamp(28px,5vw,40px);padding:clamp(3px,0.5vw,5px);font-size:clamp(0.65rem,1vw,0.8rem);"><span>-</span><input type="number" value="${m.s2??''}" placeholder="ن" onchange="updateBracket(${i},${ri},${mi},'s2',parseInt(this.value)||0)" style="width:clamp(28px,5vw,40px);padding:clamp(3px,0.5vw,5px);font-size:clamp(0.65rem,1vw,0.8rem);"><input value="${m.p2}" placeholder="2" onchange="updateBracket(${i},${ri},${mi},'p2',this.value)" style="flex:1;min-width:50px;padding:clamp(3px,0.5vw,5px);font-size:clamp(0.65rem,1vw,0.8rem);"><input value="${m.winner}" placeholder="🏆" onchange="updateBracket(${i},${ri},${mi},'winner',this.value)" style="flex:1;min-width:50px;padding:clamp(3px,0.5vw,5px);font-size:clamp(0.65rem,1vw,0.8rem);"></div>`).join('')}`).join('')}</div></div>`).join('');}
 
     function savePlayerName() { const n=document.getElementById('playerNameInput').value.trim(); if(!n){toast('⚠️ أدخل اسماً',true);return;} playerName=n; localStorage.setItem('ga_player_name',n); document.getElementById('nameModal').style.display='none'; document.getElementById('playerNameText').textContent=n; toast(`✅ أهلاً ${n}!`); }
