@@ -7,6 +7,27 @@
     <title>GeneralsArena | منصة البطولات - General Sahel TV</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js">
+    </script><script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWVpvFaDOciv5nQKnzbjQepGW7_KS9Mmg",
+            authDomain: "chat-94c01.firebaseapp.com",
+            projectId: "chat-94c01",
+            storageBucket: "chat-94c01.firebasestorage.app",
+            messagingSenderId: "111489148507",
+            appId: "1:111489148507:web:75ea87f96e0f44e56e817e"
+        };
+        
+        // تهيئة Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        console.log('✅ Firebase متصل!');
+    </script>
+    
     <style>
         :root {
             --bg-primary: #0a0f1a;
@@ -140,11 +161,7 @@
             letter-spacing: 0.05em;
         }
 
-        .nav-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+        .nav-actions { display: flex; gap: 8px; align-items: center; }
 
         .icon-btn {
             background: var(--bg-card);
@@ -174,8 +191,7 @@
 
         .icon-btn:active { transform: translateY(0); }
 
-        .sidebar-right,
-        .sidebar-left {
+        .sidebar-right, .sidebar-left {
             position: fixed;
             top: 0;
             width: 320px;
@@ -207,8 +223,7 @@
 
         .sidebar-left.open { left: 0; }
 
-        .sidebar-right h4,
-        .sidebar-left h4 {
+        .sidebar-right h4, .sidebar-left h4 {
             color: var(--primary);
             font-size: 0.7rem;
             font-weight: 700;
@@ -219,10 +234,7 @@
             opacity: 0.8;
         }
 
-        .sidebar-right a,
-        .sidebar-right .menu-item,
-        .sidebar-left a,
-        .sidebar-left .menu-item {
+        .sidebar-right a, .sidebar-right .menu-item, .sidebar-left a, .sidebar-left .menu-item {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -238,19 +250,13 @@
             position: relative;
         }
 
-        .sidebar-right a:hover,
-        .sidebar-right .menu-item:hover,
-        .sidebar-left a:hover,
-        .sidebar-left .menu-item:hover {
+        .sidebar-right a:hover, .sidebar-right .menu-item:hover, .sidebar-left a:hover, .sidebar-left .menu-item:hover {
             background: rgba(240, 185, 11, 0.1);
             color: var(--primary);
             padding-right: 24px;
         }
 
-        .sidebar-right a i,
-        .sidebar-right .menu-item i,
-        .sidebar-left a i,
-        .sidebar-left .menu-item i {
+        .sidebar-right a i, .sidebar-right .menu-item i, .sidebar-left a i, .sidebar-left .menu-item i {
             width: 20px;
             text-align: center;
             font-size: 0.9rem;
@@ -267,27 +273,11 @@
             backdrop-filter: blur(4px);
         }
 
-        .overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .overlay.active { opacity: 1; pointer-events: auto; }
 
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            background: var(--bg-primary);
-        }
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-primary); }
 
-        .chat-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .chat-section { flex: 1; display: flex; flex-direction: column; width: 100%; max-width: 1400px; margin: 0 auto; }
 
         .chat-header-bar {
             background: var(--gradient-2);
@@ -304,7 +294,6 @@
             margin: 0 12px;
         }
 
-        /* Chat Styles */
         .chat-messages-container {
             flex: 1;
             overflow-y: auto;
@@ -349,17 +338,8 @@
             opacity: 0.8;
         }
 
-        .message-bubble .msg-text {
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .message-bubble .msg-time {
-            font-size: 0.65rem;
-            opacity: 0.6;
-            margin-top: 4px;
-            text-align: left;
-        }
+        .message-bubble .msg-text { font-size: 0.9rem; line-height: 1.5; }
+        .message-bubble .msg-time { font-size: 0.65rem; opacity: 0.6; margin-top: 4px; text-align: left; }
 
         .chat-input-area {
             display: flex;
@@ -383,16 +363,9 @@
             font-size: 0.9rem;
         }
 
-        .chat-input-area input:focus {
-            border-color: var(--primary);
-        }
+        .chat-input-area input:focus { border-color: var(--primary); }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            padding: 8px 0;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; padding: 8px 0; }
 
         .card {
             background: var(--bg-card);
@@ -418,30 +391,12 @@
             transition: var(--transition);
         }
 
-        .card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
+        .card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
         .card:hover::before { opacity: 1; }
 
-        .card h3 {
-            font-size: 1rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-            color: var(--primary);
-        }
+        .card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--primary); }
 
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 900;
-            margin: 20px 0 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        .section-title { font-size: 1.4rem; font-weight: 900; margin: 20px 0 16px; display: flex; align-items: center; gap: 10px; }
         .section-title i { color: var(--primary); font-size: 1.3rem; }
 
         .badge {
@@ -497,52 +452,15 @@
             white-space: nowrap;
         }
 
-        .btn-primary {
-            background: var(--gradient-1);
-            color: #000;
-            box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(240, 185, 11, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
+        .btn-primary { background: var(--gradient-1); color: #000; box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(240, 185, 11, 0.4); }
+        .btn-outline { background: transparent; border: 2px solid var(--border-color); color: var(--text-secondary); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
         .btn-sm { padding: 6px 14px; font-size: 0.75rem; border-radius: 30px; }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-            box-shadow: 0 4px 15px rgba(246, 70, 93, 0.3);
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(246, 70, 93, 0.4);
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: white;
-            box-shadow: 0 4px 15px rgba(14, 203, 129, 0.3);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(14, 203, 129, 0.4);
-        }
+        .btn-danger { background: var(--danger); color: white; box-shadow: 0 4px 15px rgba(246, 70, 93, 0.3); }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(246, 70, 93, 0.4); }
+        .btn-success { background: var(--success); color: white; box-shadow: 0 4px 15px rgba(14, 203, 129, 0.3); }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(14, 203, 129, 0.4); }
 
         .back-btn {
             background: var(--bg-card);
@@ -563,12 +481,7 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .back-btn:hover {
-            background: var(--primary);
-            color: #000;
-            transform: translateX(-4px);
-            box-shadow: var(--shadow-md);
-        }
+        .back-btn:hover { background: var(--primary); color: #000; transform: translateX(-4px); box-shadow: var(--shadow-md); }
 
         .modal-overlay {
             position: fixed;
@@ -596,16 +509,9 @@
             backdrop-filter: var(--backdrop-blur);
         }
 
-        .modal h3 {
-            margin-bottom: 16px;
-            color: var(--primary);
-            font-size: 1.2rem;
-            font-weight: 800;
-        }
+        .modal h3 { margin-bottom: 16px; color: var(--primary); font-size: 1.2rem; font-weight: 800; }
 
-        .modal input,
-        .modal textarea,
-        .modal select {
+        .modal input, .modal textarea, .modal select {
             width: 100%;
             padding: 12px 16px;
             border-radius: var(--radius-sm);
@@ -619,9 +525,7 @@
             transition: var(--transition);
         }
 
-        .modal input:focus,
-        .modal textarea:focus,
-        .modal select:focus {
+        .modal input:focus, .modal textarea:focus, .modal select:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1);
         }
@@ -711,12 +615,7 @@
 
         .hidden { display: none !important; }
 
-        .admin-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
+        .admin-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 
         .admin-tab {
             padding: 8px 18px;
@@ -766,10 +665,7 @@
             transition: var(--transition);
         }
 
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1);
-        }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1); }
 
         .profile-card {
             background: var(--bg-card);
@@ -811,26 +707,10 @@
 
         .profile-stat:hover { border-color: var(--primary); }
 
-        .wheel-container {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
+        .wheel-container { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+        .wheel-container canvas { max-width: 100%; height: auto; border-radius: 50%; box-shadow: var(--shadow-xl); }
 
-        .wheel-container canvas {
-            max-width: 100%;
-            height: auto;
-            border-radius: 50%;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .voice-rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-        }
+        .voice-rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
 
         .voice-room-card {
             background: var(--bg-card);
@@ -842,53 +722,15 @@
             backdrop-filter: blur(20px);
         }
 
-        .voice-room-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
+        .voice-room-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .voice-room-icon { font-size: 3rem; margin-bottom: 12px; }
+        .voice-room-card h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 8px; }
+        .room-info { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 16px; line-height: 1.5; }
 
-        .voice-room-icon {
-            font-size: 3rem;
-            margin-bottom: 12px;
-        }
+        #jitsiWrapper { border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--border-color); }
 
-        .voice-room-card h3 {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .room-info {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            margin-bottom: 16px;
-            line-height: 1.5;
-        }
-
-        #jitsiWrapper {
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid var(--border-color);
-        }
-
-        .online-indicator {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.7rem;
-            color: var(--success);
-            margin-bottom: 10px;
-        }
-
-        .online-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--success);
-            animation: pulse 2s infinite;
-        }
+        .online-indicator { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: var(--success); margin-bottom: 10px; }
+        .online-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); animation: pulse 2s infinite; }
 
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr; gap: 12px; }
@@ -990,9 +832,7 @@
     </div>
     
     <a href="#" onclick="switchToTextChat()" class="logo">
-        <div class="logo-icon">
-            <i class="fas fa-chess-king"></i>
-        </div>
+        <div class="logo-icon"><i class="fas fa-chess-king"></i></div>
         <div class="logo-text">
             <h1>GeneralsArena</h1>
             <span>GENERAL SAHEL TV</span>
@@ -1006,11 +846,10 @@
 </header>
 
 <div class="main-content">
-    <!-- المحادثة الكتابية -->
     <section id="textChatSection" class="chat-section">
         <div class="chat-header-bar">
             <i class="fas fa-comments" style="color:var(--primary);"></i>
-            المحادثة الكتابية - General Sahel TV Community
+            المحادثة الكتابية - GeneralsArena
             <span class="online-indicator" style="margin-right:auto;">
                 <span class="online-dot"></span> مباشر
             </span>
@@ -1018,8 +857,7 @@
         <div class="chat-messages-container" id="chatMessagesContainer">
             <div style="text-align:center;color:var(--text-muted);padding:40px;">
                 <div style="font-size:3rem;margin-bottom:10px;">💬</div>
-                <p>لا توجد رسائل بعد</p>
-                <p style="font-size:0.8rem;">كن أول من يتحدث!</p>
+                <p>جارٍ تحميل المحادثة...</p>
             </div>
         </div>
         <div class="chat-input-area">
@@ -1030,7 +868,6 @@
         </div>
     </section>
 
-    <!-- المحادثة الصوتية -->
     <section id="voiceChatSection" class="hidden" style="padding:15px;overflow-y:auto;height:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-microphone"></i> الغرف الصوتية</div>
@@ -1039,17 +876,12 @@
         <div id="activeVoiceRoom" class="hidden" style="margin-top:20px;">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:10px;">
                 <span style="color:var(--success);font-weight:700;">🟢 متصل الآن: <span id="activeRoomName"></span></span>
-                <button class="btn btn-danger btn-sm" onclick="leaveVoiceRoom()">
-                    <i class="fas fa-phone-slash"></i> مغادرة الغرفة
-                </button>
+                <button class="btn btn-danger btn-sm" onclick="leaveVoiceRoom()"><i class="fas fa-phone-slash"></i> مغادرة</button>
             </div>
-            <div id="jitsiWrapper">
-                <div id="jitsiContainer" style="width:100%;height:60vh;min-height:400px;background:#000;border-radius:16px;"></div>
-            </div>
+            <div id="jitsiWrapper"><div id="jitsiContainer" style="width:100%;height:60vh;min-height:400px;background:#000;border-radius:16px;"></div></div>
         </div>
     </section>
 
-    <!-- باقي الأقسام -->
     <section id="liveStreamSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-broadcast-tower"></i> البث المباشر</div>
@@ -1083,85 +915,53 @@
                 <div id="adminTabTournaments">
                     <h4 style="margin:12px 0 8px;color:var(--primary);">➕ بطولة جديدة</h4>
                     <input type="text" id="newName" placeholder="اسم البطولة"><br>
-                    <div style="display:flex;gap:8px;">
-                        <input type="date" id="newDate" style="flex:1;">
-                        <input type="text" id="newPrize" placeholder="الجائزة" style="flex:1;">
-                    </div>
-                    <div style="display:flex;gap:8px;">
-                        <select id="newSize"><option value="4">4 لاعبين</option><option value="8" selected>8</option><option value="16">16</option><option value="32">32</option><option value="64">64</option></select>
-                        <select id="newType"><option value="open">🔓 مفتوحة</option><option value="closed">🔒 مغلقة</option></select>
-                    </div>
+                    <div style="display:flex;gap:8px;"><input type="date" id="newDate" style="flex:1;"><input type="text" id="newPrize" placeholder="الجائزة" style="flex:1;"></div>
+                    <div style="display:flex;gap:8px;"><select id="newSize"><option value="4">4</option><option value="8" selected>8</option><option value="16">16</option><option value="32">32</option><option value="64">64</option></select><select id="newType"><option value="open">🔓 مفتوحة</option><option value="closed">🔒 مغلقة</option></select></div>
                     <textarea id="newRules" placeholder="الشروط..." rows="2"></textarea>
-                    <input type="url" id="newDonateLink" placeholder="رابط الدعم">
-                    <input type="url" id="newStreamLink" placeholder="🔴 رابط البث المباشر (يوتيوب)">
+                    <input type="url" id="newDonateLink" placeholder="رابط الدعم"><input type="url" id="newStreamLink" placeholder="🔴 رابط البث">
                     <button class="btn btn-primary" onclick="addTournament()" style="width:100%;">📢 أعلن</button>
-                    <h4 style="margin:16px 0 8px;color:var(--primary);">📋 البطولات</h4>
-                    <div id="adminList"></div>
+                    <h4 style="margin:16px 0 8px;color:var(--primary);">📋 البطولات</h4><div id="adminList"></div>
                 </div>
-                <div id="adminTabMaps" class="hidden">
-                    <h4 style="margin:12px 0 8px;color:var(--primary);">🗺️ جميع الخرائط</h4>
-                    <div id="adminMapsList"></div>
-                </div>
-                <div id="adminTabGameFiles" class="hidden">
-                    <h4 style="margin:12px 0 8px;color:var(--primary);">📦 جميع ملفات اللعبة</h4>
-                    <div id="adminGameFilesList"></div>
-                </div>
+                <div id="adminTabMaps" class="hidden"><h4 style="margin:12px 0 8px;color:var(--primary);">🗺️ الخرائط</h4><div id="adminMapsList"></div></div>
+                <div id="adminTabGameFiles" class="hidden"><h4 style="margin:12px 0 8px;color:var(--primary);">📦 ملفات اللعبة</h4><div id="adminGameFilesList"></div></div>
                 <div id="adminTabStream" class="hidden">
-                    <h4 style="margin:12px 0 8px;color:var(--primary);">🔴 إدارة البث المباشر</h4>
-                    <input type="url" id="liveStreamUrlInput" placeholder="رابط البث المباشر (يوتيوب)">
-                    <input type="text" id="liveStreamTitleInput" placeholder="عنوان البث">
-                    <button class="btn btn-primary" onclick="setLiveStream()" style="width:100%;">💾 حفظ البث</button>
-                    <button class="btn btn-danger" onclick="removeLiveStream()" style="width:100%;margin-top:8px;">🗑️ إزالة البث</button>
+                    <h4 style="margin:12px 0 8px;color:var(--primary);">🔴 إدارة البث</h4>
+                    <input type="url" id="liveStreamUrlInput" placeholder="رابط البث"><input type="text" id="liveStreamTitleInput" placeholder="عنوان">
+                    <button class="btn btn-primary" onclick="setLiveStream()" style="width:100%;">💾 حفظ</button>
+                    <button class="btn btn-danger" onclick="removeLiveStream()" style="width:100%;margin-top:8px;">🗑️ إزالة</button>
                 </div>
-                <div id="adminTabUsers" class="hidden">
-                    <h4 style="margin:12px 0 8px;color:var(--primary);">👥 جميع المستخدمين</h4>
-                    <input type="text" class="search-input" id="userSearchInput" placeholder="🔍 بحث عن مستخدم..." oninput="renderUsersList()">
-                    <div id="usersList"></div>
-                </div>
+                <div id="adminTabUsers" class="hidden"><h4 style="margin:12px 0 8px;color:var(--primary);">👥 المستخدمين</h4><input type="text" class="search-input" id="userSearchInput" placeholder="🔍 بحث..." oninput="renderUsersList()"><div id="usersList"></div></div>
             </div>
         </div>
     </section>
 
     <section id="tournamentsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-trophy"></i> جميع البطولات</div>
-        <div class="grid" id="tournamentGridFull"></div>
+        <div class="section-title"><i class="fas fa-trophy"></i> البطولات</div><div class="grid" id="tournamentGridFull"></div>
     </section>
-
     <section id="mapsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-map"></i> جميع الخرائط</div>
-        <div class="grid" id="mapsGrid"></div>
+        <div class="section-title"><i class="fas fa-map"></i> الخرائط</div><div class="grid" id="mapsGrid"></div>
     </section>
-
     <section id="gameFilesSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-box"></i> جميع ملفات اللعبة</div>
-        <div class="grid" id="gameFilesGrid"></div>
+        <div class="section-title"><i class="fas fa-box"></i> ملفات اللعبة</div><div class="grid" id="gameFilesGrid"></div>
     </section>
-
     <section id="wheelSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-dharmachakra"></i> القرعة الدائرية</div>
+        <div class="section-title"><i class="fas fa-dharmachakra"></i> القرعة</div>
         <div class="card wheel-container">
-            <textarea id="wheelNames" placeholder="أدخل الأسماء (كل اسم في سطر)" rows="4" style="width:100%;margin-bottom:12px;"></textarea>
+            <textarea id="wheelNames" placeholder="الأسماء..." rows="4" style="width:100%;margin-bottom:12px;"></textarea>
             <canvas id="wheelCanvas" width="400" height="400" style="max-width:100%;"></canvas>
             <div id="wheelResult" style="font-size:1.3rem;font-weight:800;color:var(--primary);margin:12px 0;"></div>
-            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-                <button class="btn btn-primary" onclick="spinWheel()"><i class="fas fa-play"></i> تدوير</button>
-                <button class="btn btn-danger" onclick="clearWheel()"><i class="fas fa-trash"></i> مسح</button>
-            </div>
+            <div style="display:flex;gap:12px;justify-content:center;"><button class="btn btn-primary" onclick="spinWheel()">🎲 تدوير</button><button class="btn btn-danger" onclick="clearWheel()">🗑️ مسح</button></div>
         </div>
     </section>
-
     <section id="profileSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div id="profileContent"></div>
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button><div id="profileContent"></div>
     </section>
-
     <section id="detailSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="showTournaments()">⬅️</button>
-        <div id="detailContent"></div>
+        <button class="back-btn" onclick="showTournaments()">⬅️</button><div id="detailContent"></div>
     </section>
 </div>
 <script>
@@ -1171,207 +971,219 @@
     const MAPS_API = "https://api.npoint.io/c3cd5edb0be62c9b9d8a";
     const GAMEFILES_API = "https://api.npoint.io/1234567890abcdef";
     
-    // نظام الحاويات المتعددة للمحادثة
-    const CHAT_CONTAINERS = [
-        "https://api.npoint.io/27bf06704cf94063837e",  // الحاوية 1
-        "https://api.npoint.io/029627d542b5814d9476",  // الحاوية 2
-        "https://api.npoint.io/0c2770e7d123f96a48ad"   // الحاوية 3
-    ];
-    const MAX_TOTAL_MESSAGES = 500;
-    
-    // ==================== STATE ====================
-    let tournaments = [], maps = [], gameFiles = [];
+    // ==================== STATE VARIABLES ====================
+    let tournaments = [];
+    let maps = [];
+    let gameFiles = [];
     let playerName = localStorage.getItem('ga_player_name') || '';
     let currentTheme = localStorage.getItem('ga_theme') || 'dark';
     let wheelNames = JSON.parse(localStorage.getItem('ga_wheel_names') || '[]');
-    let wheelAngle = 0, wheelSpinning = false;
+    let wheelAngle = 0;
+    let wheelSpinning = false;
     let chatMode = localStorage.getItem('ga_chat_mode') || 'text';
     let isAdmin = localStorage.getItem('ga_is_admin') === 'true';
     let liveStream = JSON.parse(localStorage.getItem('ga_live_stream') || 'null');
     let chatMessages = [];
     
-    // Voice Rooms
-    let voiceRooms = JSON.parse(localStorage.getItem('ga_voice_rooms') || JSON.stringify([
-        { id: 'GeneralsArena-Main', name: 'الغرفة الرئيسية', description: 'الغرفة الصوتية الرئيسية - تواصل مع كل اللاعبين', icon: '🎤' },
-        { id: 'GeneralsArena-Gaming', name: 'غرفة الألعاب', description: 'نقاشات الألعاب والاستراتيجيات', icon: '🎮' },
-        { id: 'GeneralsArena-Social', name: 'الغرفة الاجتماعية', description: 'تعارف ودردشة حرة بين اللاعبين', icon: '💬' },
-        { id: 'GeneralsArena-Tournaments', name: 'غرفة البطولات', description: 'تنسيق وإدارة البطولات مباشرة', icon: '🏆' }
-    ]));
+    // Voice Rooms Data
+    let voiceRooms = [
+        { 
+            id: 'GeneralsArena-Main', 
+            name: 'الغرفة الرئيسية', 
+            description: 'الغرفة الصوتية الرئيسية - تواصل مع كل اللاعبين', 
+            icon: '🎤' 
+        },
+        { 
+            id: 'GeneralsArena-Gaming', 
+            name: 'غرفة الألعاب', 
+            description: 'نقاشات الألعاب والاستراتيجيات', 
+            icon: '🎮' 
+        },
+        { 
+            id: 'GeneralsArena-Social', 
+            name: 'الغرفة الاجتماعية', 
+            description: 'تعارف ودردشة حرة بين اللاعبين', 
+            icon: '💬' 
+        },
+        { 
+            id: 'GeneralsArena-Tournaments', 
+            name: 'غرفة البطولات', 
+            description: 'تنسيق وإدارة البطولات مباشرة', 
+            icon: '🏆' 
+        }
+    ];
     let currentVoiceRoom = null;
-    // ==================== CHAT SYSTEM (معدل) ====================
-    
-    // تحميل كل الرسائل
-    async function loadAllChatMessages() {
-    chatMessages = [];
-    
-    for (const container of CHAT_CONTAINERS) {
-    try {
-    const response = await fetch(container + '?t=' + Date.now());
-    if (response.ok) {
-    const data = await response.json();
-    if (Array.isArray(data)) {
-    chatMessages = chatMessages.concat(data);
-    }
-    }
-    } catch (e) {
-    console.log('فشل تحميل حاوية');
-    }
+
+    // ==================== UTILITY FUNCTIONS ====================
+    function toast(msg, err) {
+        if (err === undefined) err = false;
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.toggle('error', err);
+        t.classList.add('show');
+        setTimeout(function() {
+            t.classList.remove('show');
+        }, 2000);
     }
     
-    // ترتيب حسب الوقت
-    chatMessages.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
-    
-    // إزالة التكرار
-    chatMessages = chatMessages.filter((msg, i, arr) => 
-    i === arr.findIndex(m => m.timestamp === msg.timestamp && m.name === msg.name)
-    );
-    
-    // نحتفظ بآخر 500 رسالة
-    if (chatMessages.length > MAX_TOTAL_MESSAGES) {
-    chatMessages = chatMessages.slice(-MAX_TOTAL_MESSAGES);
-    }
-    
-    displayChatMessages();
-    }
-    
-    // عرض الرسائل في الواجهة
-    function displayChatMessages() {
-    const container = document.getElementById('chatMessagesContainer');
-    if (!container) return;
-    
-    if (chatMessages.length === 0) {
-    container.innerHTML = `
-    <div style="text-align:center;color:var(--text-muted);padding:40px;">
-    <div style="font-size:3rem;margin-bottom:10px;">💬</div>
-    <p>لا توجد رسائل بعد</p>
-    <p style="font-size:0.8rem;">كن أول من يتحدث!</p>
-    </div>`;
-    return;
-    }
-    
-    container.innerHTML = chatMessages.map(msg => {
-    const isMine = msg.name === playerName;
-    return `
-    <div class="message-bubble ${isMine ? 'mine' : 'other'}">
-    <div class="msg-name">👤 ${msg.name || 'زائر'}</div>
-    <div class="msg-text">${msg.text}</div>
-    <div class="msg-time">${msg.time || ''}</div>
-    </div>
-    `;
-    }).join('');
-    
-    container.scrollTop = container.scrollHeight;
-    }
-    
-    // إرسال رسالة جديدة
-    async function sendChatMessage() {
-    const input = document.getElementById('chatInput');
-    const text = input.value.trim();
-    
-    if (!text) return;
-    
-    // إذا ماكان عنده اسم، يطلعه نافذة تسجيل الاسم
-    if (!playerName) {
-    document.getElementById('nameModal').style.display = 'flex';
-    toast('⚠️ أدخل اسمك أولاً', true);
-    return;
-    }
-    
-    const newMessage = {
-    name: playerName,  // استخدم الاسم المخزن
-    text: text,
-    time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
-    timestamp: Date.now()
-    };
-    
-    // أضف الرسالة للقائمة
-    chatMessages.push(newMessage);
-    
-    // حفظ في الحاويات
-    await saveChatMessagesToContainers();
-    
-    // مسح حقل الإدخال
-    input.value = '';
-    
-    // عرض فوري للرسالة
-    displayChatMessages();
-    }
-    
-    // حفظ موزع على الحاويات
-    async function saveChatMessagesToContainers() {
-    if (chatMessages.length > MAX_TOTAL_MESSAGES) {
-    chatMessages = chatMessages.slice(-MAX_TOTAL_MESSAGES);
-    }
-    
-    const totalContainers = CHAT_CONTAINERS.length;
-    const messagesPerContainer = Math.ceil(chatMessages.length / totalContainers);
-    
-    for (let i = 0; i < totalContainers; i++) {
-    const start = i * messagesPerContainer;
-    const end = Math.min(start + messagesPerContainer, chatMessages.length);
-    const containerMessages = chatMessages.slice(start, end);
-    
-    if (containerMessages.length > 0) {
-    try {
-    await fetch(CHAT_CONTAINERS[i], {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(containerMessages)
-    });
-    console.log(`✅ تم حفظ ${containerMessages.length} رسالة في الحاوية ${i + 1}`);
-    } catch (e) {
-    console.log(`❌ فشل حفظ في الحاوية ${i + 1}`);
-    }
-    }
-    }
-    
-    // حفظ احتياطي محلي
-    localStorage.setItem('ga_chat_backup', JSON.stringify(chatMessages.slice(-100)));
-    console.log(`📦 المجموع: ${chatMessages.length} رسالة`);
-    }
-    
-    // عرض اسم المستخدم في شريط الترحيب (اختياري)
-    function updateChatHeader() {
-    const header = document.querySelector('.chat-header-bar');
-    if (header && playerName) {
-    header.innerHTML = `
-    <i class="fas fa-comments" style="color:var(--primary);"></i>
-    المحادثة الكتابية - أهلاً ${playerName} 👋
-    <span class="online-indicator" style="margin-right:auto;">
-    <span class="online-dot"></span> مباشر
-    </span>
-    `;
-    }
+    function copyToClipboard(text, name) {
+        navigator.clipboard.writeText(text).then(function() {
+            toast('✅ تم نسخ ' + name);
+        });
     }
 
-    // ==================== VOICE CHAT ====================
-    function renderVoiceRooms() {
-        const grid = document.getElementById('voiceRoomsGrid');
-        if (!grid) return;
+    function extractYouTubeID(url) {
+        if (!url) {
+            return null;
+        }
+        var patterns = [
+            /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)/,
+            /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^?]+)/,
+            /(?:https?:\/\/)?(?:www\.)?youtube\.com\/live\/([^?]+)/,
+            /(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([^?]+)/
+        ];
+        for (var i = 0; i < patterns.length; i++) {
+            var match = url.match(patterns[i]);
+            if (match) {
+                return match[1];
+            }
+        }
+        if (/^[a-zA-Z0-9_-]{11}$/.test(url)) {
+            return url;
+        }
+        return null;
+    }
+
+    // ==================== FIREBASE CHAT SYSTEM ====================
+    var messagesRef = db.collection("messages");
+    
+    function listenForMessages() {
+        messagesRef
+            .orderBy("timestamp", "desc")
+            .limit(500)
+            .onSnapshot(function(snapshot) {
+                chatMessages = [];
+                snapshot.forEach(function(doc) {
+                    chatMessages.push(doc.data());
+                });
+                chatMessages.reverse();
+                displayChatMessages();
+            }, function(error) {
+                console.error("خطأ في تحميل الرسائل:", error);
+            });
+    }
+
+    function displayChatMessages() {
+        var container = document.getElementById('chatMessagesContainer');
+        if (!container) {
+            return;
+        }
+
+        if (chatMessages.length === 0) {
+            container.innerHTML = '' +
+                '<div style="text-align:center;color:var(--text-muted);padding:40px;">' +
+                    '<div style="font-size:3rem;margin-bottom:10px;">💬</div>' +
+                    '<p>لا توجد رسائل بعد</p>' +
+                    '<p style="font-size:0.8rem;">كن أول من يتحدث!</p>' +
+                '</div>';
+            return;
+        }
+
+        var html = '';
+        for (var i = 0; i < chatMessages.length; i++) {
+            var msg = chatMessages[i];
+            var isMine = (msg.name === playerName);
+            
+            if (isMine) {
+                html += '' +
+                    '<div class="message-bubble mine">' +
+                        '<div class="msg-text">' + msg.text + '</div>' +
+                        '<div class="msg-time">' + (msg.time || '') + '</div>' +
+                    '</div>';
+            } else {
+                html += '' +
+                    '<div class="message-bubble other">' +
+                        '<div class="msg-name">👤 ' + (msg.name || 'زائر') + '</div>' +
+                        '<div class="msg-text">' + msg.text + '</div>' +
+                        '<div class="msg-time">' + (msg.time || '') + '</div>' +
+                    '</div>';
+            }
+        }
         
-        grid.innerHTML = voiceRooms.map((room, i) => `
-            <div class="voice-room-card">
-                <div class="voice-room-icon">${room.icon}</div>
-                <h3>${room.name}</h3>
-                <p class="room-info">${room.description}</p>
-                <button class="btn btn-success" onclick="joinVoiceRoom('${room.id}', '${room.name}')">
-                    <i class="fas fa-phone"></i> انضمام للغرفة
-                </button>
-            </div>
-        `).join('');
+        container.innerHTML = html;
+        container.scrollTop = container.scrollHeight;
+    }
+
+    async function sendChatMessage() {
+        var input = document.getElementById('chatInput');
+        var text = input.value.trim();
+        
+        if (!text) {
+            return;
+        }
+        
+        if (!playerName) {
+            document.getElementById('nameModal').style.display = 'flex';
+            toast('⚠️ أدخل اسمك أولاً', true);
+            return;
+        }
+
+        try {
+            await messagesRef.add({
+                name: playerName,
+                text: text,
+                time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            console.log('✅ تم إرسال الرسالة');
+        } catch (error) {
+            console.error('❌ فشل الإرسال:', error);
+            toast('❌ فشل إرسال الرسالة', true);
+        }
+
+        input.value = '';
+    }
+
+    // ==================== VOICE CHAT FUNCTIONS ====================
+    function renderVoiceRooms() {
+        var grid = document.getElementById('voiceRoomsGrid');
+        if (!grid) {
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < voiceRooms.length; i++) {
+            var room = voiceRooms[i];
+            html += '' +
+                '<div class="voice-room-card">' +
+                    '<div class="voice-room-icon">' + room.icon + '</div>' +
+                    '<h3>' + room.name + '</h3>' +
+                    '<p class="room-info">' + room.description + '</p>' +
+                    '<button class="btn btn-success" onclick="joinVoiceRoom(\'' + room.id + '\', \'' + room.name + '\')">' +
+                        '<i class="fas fa-phone"></i> انضمام للغرفة' +
+                    '</button>' +
+                '</div>';
+        }
+        
+        grid.innerHTML = html;
     }
 
     function joinVoiceRoom(roomId, roomName) {
         currentVoiceRoom = { id: roomId, name: roomName };
+        
         document.getElementById('activeVoiceRoom').classList.remove('hidden');
         document.getElementById('activeRoomName').textContent = roomName;
         
-        const jitsiContainer = document.getElementById('jitsiContainer');
+        var jitsiContainer = document.getElementById('jitsiContainer');
         jitsiContainer.innerHTML = '';
         
-        const jitsiUrl = `https://meet.jit.si/${roomId}#userInfo.displayName=${encodeURIComponent(playerName || 'زائر')}&config.startWithAudioMuted=false&config.startWithVideoMuted=true&config.prejoinPageEnabled=false`;
+        var jitsiUrl = 'https://meet.jit.si/' + roomId;
+        jitsiUrl += '#userInfo.displayName=' + encodeURIComponent(playerName || 'زائر');
+        jitsiUrl += '&config.startWithAudioMuted=false';
+        jitsiUrl += '&config.startWithVideoMuted=true';
+        jitsiUrl += '&config.prejoinPageEnabled=false';
         
-        const iframe = document.createElement('iframe');
+        var iframe = document.createElement('iframe');
         iframe.src = jitsiUrl;
         iframe.allow = 'camera; microphone; fullscreen; display-capture; autoplay';
         iframe.style.width = '100%';
@@ -1379,7 +1191,7 @@
         iframe.style.border = 'none';
         jitsiContainer.appendChild(iframe);
         
-        toast(`🎤 تم الانضمام إلى ${roomName}`);
+        toast('🎤 تم الانضمام إلى ' + roomName);
     }
 
     function leaveVoiceRoom() {
@@ -1393,7 +1205,10 @@
         chatMode = 'voice';
         localStorage.setItem('ga_chat_mode', 'voice');
         
-        document.querySelectorAll('.main-content>section').forEach(s => s.classList.add('hidden'));
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
         document.getElementById('voiceChatSection').classList.remove('hidden');
         
         document.getElementById('voiceChatMenuBtn').style.color = 'var(--primary)';
@@ -1404,169 +1219,316 @@
     }
 
     function switchToTextChat() {
-        if (currentVoiceRoom) leaveVoiceRoom();
+        if (currentVoiceRoom) {
+            leaveVoiceRoom();
+        }
         
         chatMode = 'text';
         localStorage.setItem('ga_chat_mode', 'text');
         
-        document.querySelectorAll('.main-content>section').forEach(s => s.classList.add('hidden'));
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
         document.getElementById('textChatSection').classList.remove('hidden');
         
         document.getElementById('textChatMenuBtn').style.color = 'var(--primary)';
         document.getElementById('voiceChatMenuBtn').style.color = '';
         
-        loadAllChatMessages();
         closeAllSidebars();
     }
 
-    // ==================== TOURNAMENTS ====================
+    // ==================== DATA LOADING FUNCTIONS ====================
     async function loadData() {
         try {
-            const [tRes, mRes, gRes] = await Promise.all([
-                fetch(TOURNAMENTS_API,{cache:'no-cache'}), 
-                fetch(MAPS_API,{cache:'no-cache'}),
-                fetch(GAMEFILES_API,{cache:'no-cache'})
-            ]);
-            if(tRes.ok) { const d=await tRes.json(); tournaments=Array.isArray(d)?d:[]; }
-            else tournaments=JSON.parse(localStorage.getItem('ga_tournaments')||'[]');
-            if(mRes.ok) { const d=await mRes.json(); maps=Array.isArray(d)?d:[]; }
-            else maps=JSON.parse(localStorage.getItem('ga_maps')||'[]');
-            if(gRes.ok) { const d=await gRes.json(); gameFiles=Array.isArray(d)?d:[]; }
-            else gameFiles=JSON.parse(localStorage.getItem('ga_gameFiles')||'[]');
-        } catch(e) {
-            tournaments=JSON.parse(localStorage.getItem('ga_tournaments')||'[]');
-            maps=JSON.parse(localStorage.getItem('ga_maps')||'[]');
-            gameFiles=JSON.parse(localStorage.getItem('ga_gameFiles')||'[]');
+            var tRes = await fetch(TOURNAMENTS_API, { cache: 'no-cache' });
+            var mRes = await fetch(MAPS_API, { cache: 'no-cache' });
+            var gRes = await fetch(GAMEFILES_API, { cache: 'no-cache' });
+            
+            if (tRes.ok) {
+                var tData = await tRes.json();
+                tournaments = Array.isArray(tData) ? tData : [];
+            } else {
+                tournaments = JSON.parse(localStorage.getItem('ga_tournaments') || '[]');
+            }
+            
+            if (mRes.ok) {
+                var mData = await mRes.json();
+                maps = Array.isArray(mData) ? mData : [];
+            } else {
+                maps = JSON.parse(localStorage.getItem('ga_maps') || '[]');
+            }
+            
+            if (gRes.ok) {
+                var gData = await gRes.json();
+                gameFiles = Array.isArray(gData) ? gData : [];
+            } else {
+                gameFiles = JSON.parse(localStorage.getItem('ga_gameFiles') || '[]');
+            }
+        } catch (error) {
+            tournaments = JSON.parse(localStorage.getItem('ga_tournaments') || '[]');
+            maps = JSON.parse(localStorage.getItem('ga_maps') || '[]');
+            gameFiles = JSON.parse(localStorage.getItem('ga_gameFiles') || '[]');
         }
-        localStorage.setItem('ga_tournaments',JSON.stringify(tournaments));
-        localStorage.setItem('ga_maps',JSON.stringify(maps));
-        localStorage.setItem('ga_gameFiles',JSON.stringify(gameFiles));
+        
+        localStorage.setItem('ga_tournaments', JSON.stringify(tournaments));
+        localStorage.setItem('ga_maps', JSON.stringify(maps));
+        localStorage.setItem('ga_gameFiles', JSON.stringify(gameFiles));
+        
         renderAll();
     }
 
     async function saveTournaments() {
-        localStorage.setItem('ga_tournaments',JSON.stringify(tournaments));
-        try { await fetch(TOURNAMENTS_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(tournaments)}); } catch(e) {}
+        localStorage.setItem('ga_tournaments', JSON.stringify(tournaments));
+        try {
+            await fetch(TOURNAMENTS_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(tournaments)
+            });
+        } catch (error) {
+            console.log('حفظ محلي فقط');
+        }
         renderAll();
     }
 
     async function saveMaps() {
-        localStorage.setItem('ga_maps',JSON.stringify(maps));
-        try { await fetch(MAPS_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(maps)}); } catch(e) {}
+        localStorage.setItem('ga_maps', JSON.stringify(maps));
+        try {
+            await fetch(MAPS_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(maps)
+            });
+        } catch (error) {
+            console.log('حفظ محلي فقط');
+        }
         renderAll();
     }
 
     async function saveGameFiles() {
-        localStorage.setItem('ga_gameFiles',JSON.stringify(gameFiles));
-        try { await fetch(GAMEFILES_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(gameFiles)}); } catch(e) {}
+        localStorage.setItem('ga_gameFiles', JSON.stringify(gameFiles));
+        try {
+            await fetch(GAMEFILES_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(gameFiles)
+            });
+        } catch (error) {
+            console.log('حفظ محلي فقط');
+        }
         renderAll();
     }
 
     function getAllPlayerNames() {
-        let names = [];
-        tournaments.forEach(t => { if (t.playersList) names = names.concat(t.playersList); });
-        maps.forEach(m => { if (m.author) names.push(m.author); });
-        gameFiles.forEach(g => { if (g.author) names.push(g.author); });
-        if (playerName) names.push(playerName);
-        return [...new Set(names)];
+        var names = [];
+        
+        for (var i = 0; i < tournaments.length; i++) {
+            var t = tournaments[i];
+            if (t.playersList) {
+                for (var j = 0; j < t.playersList.length; j++) {
+                    names.push(t.playersList[j]);
+                }
+            }
+        }
+        
+        for (var i = 0; i < maps.length; i++) {
+            if (maps[i].author) {
+                names.push(maps[i].author);
+            }
+        }
+        
+        for (var i = 0; i < gameFiles.length; i++) {
+            if (gameFiles[i].author) {
+                names.push(gameFiles[i].author);
+            }
+        }
+        
+        if (playerName) {
+            names.push(playerName);
+        }
+        
+        var uniqueNames = [];
+        for (var i = 0; i < names.length; i++) {
+            if (uniqueNames.indexOf(names[i]) === -1) {
+                uniqueNames.push(names[i]);
+            }
+        }
+        
+        return uniqueNames;
     }
 
-    function renderAll() { 
-        renderTournamentGrid(); 
-        renderMapsGrid(); 
+    function renderAll() {
+        renderTournamentGrid();
+        renderMapsGrid();
         renderGameFilesGrid();
         renderLiveStreamContent();
         renderVoiceRooms();
-        renderAdminList(); 
-        renderAdminMapsList(); 
+        renderAdminList();
+        renderAdminMapsList();
         renderAdminGameFilesList();
-        renderUsersList(); 
+        renderUsersList();
     }
 
+    // ==================== RENDER FUNCTIONS ====================
     function renderTournamentGrid() {
-        const grid=document.getElementById('tournamentGridFull'); if(!grid) return;
-        if(tournaments.length===0) { grid.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد بطولات حالياً</p>'; return; }
-        grid.innerHTML=tournaments.map((t,i)=>`
-            <div class="card">
-                <h3>🏆 ${t.name}</h3>
-                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
-                    ${t.streamLink ? '<span class="badge badge-danger">🔴 بث مباشر</span>' : ''}
-                    <span class="badge ${t.status==='جارية'?'badge-success':'badge-danger'}">${t.status==='جارية'?'🟢 جارية':'🔴 منتهية'}</span>
-                    <span class="badge badge-warning">👥 ${t.players||0}/${t.size}</span>
-                </div>
-                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
-                    <span class="badge badge-info">📅 ${t.date}</span>
-                    <span class="badge badge-warning">💰 ${t.prize}</span>
-                </div>
-                <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                    <button class="btn btn-primary btn-sm" onclick="viewDetail(${i})"><i class="fas fa-eye"></i> تفاصيل</button>
-                    ${t.status==='جارية'&&t.type==='open'?`<button class="btn btn-outline btn-sm" onclick="joinTournament(${i})"><i class="fas fa-sign-in-alt"></i> تسجيل</button>`:''}
-                </div>
-            </div>`).join('');
+        var grid = document.getElementById('tournamentGridFull');
+        if (!grid) {
+            return;
+        }
+        
+        if (tournaments.length === 0) {
+            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد بطولات حالياً</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < tournaments.length; i++) {
+            var t = tournaments[i];
+            html += '<div class="card">';
+            html += '<h3>🏆 ' + t.name + '</h3>';
+            html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">';
+            
+            if (t.streamLink) {
+                html += '<span class="badge badge-danger">🔴 بث مباشر</span>';
+            }
+            
+            var statusClass = t.status === 'جارية' ? 'badge-success' : 'badge-danger';
+            var statusText = t.status === 'جارية' ? '🟢 جارية' : '🔴 منتهية';
+            html += '<span class="badge ' + statusClass + '">' + statusText + '</span>';
+            html += '<span class="badge badge-warning">👥 ' + (t.players || 0) + '/' + t.size + '</span>';
+            html += '</div>';
+            
+            html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">';
+            html += '<span class="badge badge-info">📅 ' + t.date + '</span>';
+            html += '<span class="badge badge-warning">💰 ' + t.prize + '</span>';
+            html += '</div>';
+            
+            html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+            html += '<button class="btn btn-primary btn-sm" onclick="viewDetail(' + i + ')"><i class="fas fa-eye"></i> تفاصيل</button>';
+            
+            if (t.status === 'جارية' && t.type === 'open') {
+                html += '<button class="btn btn-outline btn-sm" onclick="joinTournament(' + i + ')"><i class="fas fa-sign-in-alt"></i> تسجيل</button>';
+            }
+            
+            html += '</div></div>';
+        }
+        
+        grid.innerHTML = html;
     }
 
     function renderMapsGrid() {
-        const grid=document.getElementById('mapsGrid'); if(!grid) return;
-        if(maps.length===0) { grid.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد خرائط بعد</p>'; return; }
-        grid.innerHTML=maps.map((m,i)=>`
-            <div class="card">
-                <h3>🗺️ ${m.name}</h3>
-                <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">بواسطة: <strong>${m.author}</strong> | 📅 ${m.date}</p>
-                <a href="${m.link}" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>
-            </div>`).join('');
+        var grid = document.getElementById('mapsGrid');
+        if (!grid) {
+            return;
+        }
+        
+        if (maps.length === 0) {
+            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد خرائط بعد</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < maps.length; i++) {
+            var m = maps[i];
+            html += '<div class="card">';
+            html += '<h3>🗺️ ' + m.name + '</h3>';
+            html += '<p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">بواسطة: <strong>' + m.author + '</strong> | 📅 ' + m.date + '</p>';
+            html += '<a href="' + m.link + '" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>';
+            html += '</div>';
+        }
+        
+        grid.innerHTML = html;
     }
 
     function renderGameFilesGrid() {
-        const grid=document.getElementById('gameFilesGrid'); if(!grid) return;
-        if(gameFiles.length===0) { grid.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد ملفات لعبة بعد</p>'; return; }
-        const typeLabels = {patch:'🔧 باتش', fix:'🛠️ إصلاح', mod:'🎨 مود', tool:'🔧 أداة', other:'📄 آخر'};
-        const typeBadges = {patch:'badge-warning', fix:'badge-danger', mod:'badge-success', tool:'badge-info', other:'badge'};
-        grid.innerHTML=gameFiles.map((g,i)=>`
-            <div class="card">
-                <h3>📦 ${g.name}</h3>
-                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
-                    <span class="badge ${typeBadges[g.type] || 'badge'}">${typeLabels[g.type] || g.type}</span>
-                </div>
-                <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">بواسطة: <strong>${g.author}</strong> | 📅 ${g.date}</p>
-                <a href="${g.link}" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>
-            </div>`).join('');
+        var grid = document.getElementById('gameFilesGrid');
+        if (!grid) {
+            return;
+        }
+        
+        if (gameFiles.length === 0) {
+            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد ملفات لعبة بعد</p>';
+            return;
+        }
+        
+        var typeLabels = { patch: '🔧 باتش', fix: '🛠️ إصلاح', mod: '🎨 مود', tool: '🔧 أداة', other: '📄 آخر' };
+        
+        var html = '';
+        for (var i = 0; i < gameFiles.length; i++) {
+            var g = gameFiles[i];
+            html += '<div class="card">';
+            html += '<h3>📦 ' + g.name + '</h3>';
+            html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">';
+            html += '<span class="badge">' + (typeLabels[g.type] || g.type) + '</span>';
+            html += '</div>';
+            html += '<p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">بواسطة: <strong>' + g.author + '</strong> | 📅 ' + g.date + '</p>';
+            html += '<a href="' + g.link + '" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>';
+            html += '</div>';
+        }
+        
+        grid.innerHTML = html;
     }
 
     function renderLiveStreamContent() {
-        const container = document.getElementById('liveStreamContent');
-        if (!container) return;
-        if (!liveStream || !liveStream.url) {
-            container.innerHTML = `
-                <div class="card" style="text-align:center;padding:60px 20px;">
-                    <div style="font-size:3rem;margin-bottom:16px;">📡</div>
-                    <p style="color:var(--text-muted);font-size:1.1rem;">لا يوجد بث مباشر حالياً</p>
-                    <p style="color:var(--text-muted);font-size:0.8rem;margin-top:8px;">سيظهر البث هنا عند إضافته من قبل المدير</p>
-                </div>`;
+        var container = document.getElementById('liveStreamContent');
+        if (!container) {
             return;
         }
-        const videoId = extractYouTubeID(liveStream.url);
+        
+        if (!liveStream || !liveStream.url) {
+            container.innerHTML = '' +
+                '<div class="card" style="text-align:center;padding:60px 20px;">' +
+                    '<div style="font-size:3rem;margin-bottom:16px;">📡</div>' +
+                    '<p style="color:var(--text-muted);font-size:1.1rem;">لا يوجد بث مباشر حالياً</p>' +
+                    '<p style="color:var(--text-muted);font-size:0.8rem;margin-top:8px;">سيظهر البث هنا عند إضافته من قبل المدير</p>' +
+                '</div>';
+            return;
+        }
+        
+        var videoId = extractYouTubeID(liveStream.url);
         if (!videoId) {
             container.innerHTML = '<p style="color:var(--danger);text-align:center;">رابط البث غير صالح</p>';
             return;
         }
-        container.innerHTML = `
-            <div style="margin-bottom:16px;">
-                <span class="live-badge">🔴 بث مباشر الآن${liveStream.title ? ' - ' + liveStream.title : ''}</span>
-            </div>
-            <div class="stream-container">
-                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-        `;
+        
+        var title = liveStream.title ? ' - ' + liveStream.title : '';
+        container.innerHTML = '' +
+            '<div style="margin-bottom:16px;">' +
+                '<span class="live-badge">🔴 بث مباشر الآن' + title + '</span>' +
+            '</div>' +
+            '<div class="stream-container">' +
+                '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>' +
+            '</div>';
     }
 
     function setLiveStream() {
-        if (!isAdmin) { toast('🔒 للمدير فقط', true); return; }
-        const url = document.getElementById('liveStreamUrlInput').value.trim();
-        const title = document.getElementById('liveStreamTitleInput').value.trim();
-        if (!url) { toast('⚠️ أدخل رابط البث', true); return; }
-        const videoId = extractYouTubeID(url);
-        if (!videoId) { toast('⚠️ رابط يوتيوب غير صالح', true); return; }
-        liveStream = { url, title, videoId, setAt: new Date().toISOString() };
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        var url = document.getElementById('liveStreamUrlInput').value.trim();
+        var title = document.getElementById('liveStreamTitleInput').value.trim();
+        
+        if (!url) {
+            toast('⚠️ أدخل رابط البث', true);
+            return;
+        }
+        
+        var videoId = extractYouTubeID(url);
+        if (!videoId) {
+            toast('⚠️ رابط يوتيوب غير صالح', true);
+            return;
+        }
+        
+        liveStream = {
+            url: url,
+            title: title,
+            videoId: videoId,
+            setAt: new Date().toISOString()
+        };
+        
         localStorage.setItem('ga_live_stream', JSON.stringify(liveStream));
         document.getElementById('liveStreamUrlInput').value = '';
         document.getElementById('liveStreamTitleInput').value = '';
@@ -1575,8 +1537,15 @@
     }
 
     function removeLiveStream() {
-        if (!isAdmin) { toast('🔒 للمدير فقط', true); return; }
-        if (!confirm('⚠️ إزالة البث المباشر؟')) return;
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        if (!confirm('⚠️ إزالة البث المباشر؟')) {
+            return;
+        }
+        
         liveStream = null;
         localStorage.removeItem('ga_live_stream');
         renderLiveStreamContent();
@@ -1584,155 +1553,248 @@
     }
 
     function showLiveStream() {
-        document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden'));
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
         document.getElementById('liveStreamSection').classList.remove('hidden');
         renderLiveStreamContent();
         closeAllSidebars();
     }
 
     function joinTournament(idx) {
-        if(!playerName) { toast('⚠️ أدخل اسمك أولاً',true); document.getElementById('nameModal').style.display='flex'; return; }
-        const allNames = getAllPlayerNames();
-        if (allNames.includes(playerName) && !tournaments[idx].playersList.includes(playerName)) {
-            toast('⚠️ هذا الاسم مستخدم بالفعل', true); return;
+        if (!playerName) {
+            toast('⚠️ أدخل اسمك أولاً', true);
+            document.getElementById('nameModal').style.display = 'flex';
+            return;
         }
-        const t=tournaments[idx];
-        if(t.players>=t.size) { toast('⚠️ البطولة مكتملة',true); return; }
-        if((t.playersList||[]).includes(playerName)) { toast('⚠️ مسجل بالفعل',true); return; }
-        if(!t.playersList) t.playersList=[];
-        t.playersList.push(playerName); t.players=t.playersList.length;
-        saveTournaments(); toast(`✅ تم تسجيل "${playerName}"`);
+        
+        var t = tournaments[idx];
+        
+        if (t.players >= t.size) {
+            toast('⚠️ البطولة مكتملة', true);
+            return;
+        }
+        
+        if (!t.playersList) {
+            t.playersList = [];
+        }
+        
+        if (t.playersList.indexOf(playerName) !== -1) {
+            toast('⚠️ مسجل بالفعل', true);
+            return;
+        }
+        
+        t.playersList.push(playerName);
+        t.players = t.playersList.length;
+        saveTournaments();
+        toast('✅ تم تسجيل "' + playerName + '"');
     }
 
     function viewDetail(idx) {
-        const t=tournaments[idx];
-        document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden'));
+        var t = tournaments[idx];
+        
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
         document.getElementById('detailSection').classList.remove('hidden');
-        let html=`<h2 style="font-size:1.5rem;font-weight:900;margin-bottom:12px;">🏆 ${t.name}</h2>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
-                <span class="badge badge-info">👥 ${t.players||0}/${t.size}</span>
-                <span class="badge badge-warning">📅 ${t.date}</span>
-                <span class="badge badge-warning">💰 ${t.prize}</span>
-                <span class="badge ${t.status==='جارية'?'badge-success':'badge-danger'}">${t.status==='جارية'?'🟢 جارية':'🔴 منتهية'}</span>
-            </div>
-            ${t.rules?`<div class="card" style="margin-bottom:16px;"><h4 style="margin-bottom:8px;">📋 الشروط</h4><p style="color:var(--text-secondary);">${t.rules}</p></div>`:''}`;
+        
+        var html = '';
+        html += '<h2 style="font-size:1.5rem;font-weight:900;margin-bottom:12px;">🏆 ' + t.name + '</h2>';
+        html += '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">';
+        html += '<span class="badge badge-info">👥 ' + (t.players || 0) + '/' + t.size + '</span>';
+        html += '<span class="badge badge-warning">📅 ' + t.date + '</span>';
+        html += '<span class="badge badge-warning">💰 ' + t.prize + '</span>';
+        
+        var statusClass = t.status === 'جارية' ? 'badge-success' : 'badge-danger';
+        var statusText = t.status === 'جارية' ? '🟢 جارية' : '🔴 منتهية';
+        html += '<span class="badge ' + statusClass + '">' + statusText + '</span>';
+        html += '</div>';
+        
+        if (t.rules) {
+            html += '<div class="card" style="margin-bottom:16px;">';
+            html += '<h4 style="margin-bottom:8px;">📋 الشروط</h4>';
+            html += '<p style="color:var(--text-secondary);">' + t.rules + '</p>';
+            html += '</div>';
+        }
         
         if (t.streamLink) {
-            const videoId = extractYouTubeID(t.streamLink);
+            var videoId = extractYouTubeID(t.streamLink);
             if (videoId) {
-                html += `<h4 style="margin:16px 0 8px;">🔴 البث المباشر</h4><div class="stream-container"><iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe></div>`;
+                html += '<h4 style="margin:16px 0 8px;">🔴 البث المباشر</h4>';
+                html += '<div class="stream-container"><iframe src="https://www.youtube.com/embed/' + videoId + '" allowfullscreen></iframe></div>';
             }
         }
-        if(t.bracket&&t.bracket.length>0) {
-            html+=`<h4 style="margin:16px 0 8px;">🌳 شجرة البطولة</h4><div class="bracket-container"><div class="bracket-tree">`;
-            t.bracket.forEach((round,ri)=>{ 
-                round.forEach(m=>{ 
-                    html+=`<div class="bracket-box ${m.winner?'win':''}">
-                        <div class="p">${m.p1||'---'}</div>
-                        <div class="s">${m.s1??'-'} - ${m.s2??'-'}</div>
-                        <div class="p">${m.p2||'---'}</div>
-                        ${m.winner?`<div style="margin-top:6px;">🏆 ${m.winner}</div>`:''}
-                    </div>`; 
-                }); 
-                if(ri<t.bracket.length-1) html+='<div class="bracket-conn"></div>'; 
-            });
-            html+=`</div></div>`;
-        }
-        document.getElementById('detailContent').innerHTML=html;
+        
+        document.getElementById('detailContent').innerHTML = html;
     }
 
     function showProfile() {
-        if(!playerName) { toast('⚠️ أدخل اسمك أولاً',true); document.getElementById('nameModal').style.display='flex'; return; }
-        document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden'));
+        if (!playerName) {
+            toast('⚠️ أدخل اسمك أولاً', true);
+            document.getElementById('nameModal').style.display = 'flex';
+            return;
+        }
+        
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
         document.getElementById('profileSection').classList.remove('hidden');
         closeAllSidebars();
         
-        const myTournaments = tournaments.filter(t => t.playersList && t.playersList.includes(playerName));
-        const myMaps = maps.filter(m => m.author === playerName);
-        const myGameFiles = gameFiles.filter(g => g.author === playerName);
-        
-        let html = `
-            <div class="profile-card">
-                <div class="profile-avatar">👤</div>
-                <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:20px;">${playerName}</h2>
-                <div class="profile-stat"><span>🏆 البطولات المشارك فيها</span><span style="font-weight:800;color:var(--primary);">${myTournaments.length}</span></div>
-                <div class="profile-stat"><span>🗺️ الخرائط المرفوعة</span><span style="font-weight:800;color:var(--primary);">${myMaps.length}</span></div>
-                <div class="profile-stat"><span>📦 ملفات اللعبة المرفوعة</span><span style="font-weight:800;color:var(--primary);">${myGameFiles.length}</span></div>
-            </div>
-        `;
-        
-        if (myTournaments.length > 0) {
-            html += `<div class="section-title">🏆 بطولاتي</div>`;
-            html += myTournaments.map(t => `
-                <div class="card" style="margin:8px 0;">
-                    <h3>🏆 ${t.name}</h3>
-                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                        <span class="badge badge-info">📅 ${t.date}</span>
-                        <span class="badge badge-warning">💰 ${t.prize}</span>
-                        <span class="badge ${t.status==='جارية'?'badge-success':'badge-danger'}">${t.status}</span>
-                    </div>
-                </div>
-            `).join('');
+        var myTournaments = [];
+        for (var i = 0; i < tournaments.length; i++) {
+            var t = tournaments[i];
+            if (t.playersList && t.playersList.indexOf(playerName) !== -1) {
+                myTournaments.push(t);
+            }
         }
         
-        if (myMaps.length > 0) {
-            html += `<div class="section-title">🗺️ خرائطي</div>`;
-            html += myMaps.map(m => `
-                <div class="card" style="margin:8px 0;">
-                    <h3>🗺️ ${m.name}</h3>
-                    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px;">📅 ${m.date}</p>
-                    <a href="${m.link}" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>
-                </div>
-            `).join('');
+        var myMaps = [];
+        for (var i = 0; i < maps.length; i++) {
+            if (maps[i].author === playerName) {
+                myMaps.push(maps[i]);
+            }
         }
         
-        if (myGameFiles.length > 0) {
-            html += `<div class="section-title">📦 ملفات لعبتي</div>`;
-            const typeLabels = {patch:'🔧 باتش', fix:'🛠️ إصلاح', mod:'🎨 مود', tool:'🔧 أداة', other:'📄 آخر'};
-            html += myGameFiles.map(g => `
-                <div class="card" style="margin:8px 0;">
-                    <h3>📦 ${g.name}</h3>
-                    <span class="badge">${typeLabels[g.type] || g.type}</span>
-                    <p style="font-size:0.8rem;color:var(--text-muted);margin:8px 0;">📅 ${g.date}</p>
-                    <a href="${g.link}" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>
-                </div>
-            `).join('');
+        var myGameFiles = [];
+        for (var i = 0; i < gameFiles.length; i++) {
+            if (gameFiles[i].author === playerName) {
+                myGameFiles.push(gameFiles[i]);
+            }
         }
+        
+        var html = '';
+        html += '<div class="profile-card">';
+        html += '<div class="profile-avatar">👤</div>';
+        html += '<h2 style="font-size:1.4rem;font-weight:900;margin-bottom:20px;">' + playerName + '</h2>';
+        html += '<div class="profile-stat"><span>🏆 البطولات المشارك فيها</span><span style="font-weight:800;color:var(--primary);">' + myTournaments.length + '</span></div>';
+        html += '<div class="profile-stat"><span>🗺️ الخرائط المرفوعة</span><span style="font-weight:800;color:var(--primary);">' + myMaps.length + '</span></div>';
+        html += '<div class="profile-stat"><span>📦 ملفات اللعبة المرفوعة</span><span style="font-weight:800;color:var(--primary);">' + myGameFiles.length + '</span></div>';
+        html += '</div>';
         
         document.getElementById('profileContent').innerHTML = html;
     }
 
-    function openMapModal() { document.getElementById('mapModal').classList.remove('hidden'); closeAllSidebars(); }
-    function closeMapModal() { document.getElementById('mapModal').classList.add('hidden'); }
+    // ==================== MODAL FUNCTIONS ====================
+    function openMapModal() {
+        document.getElementById('mapModal').classList.remove('hidden');
+        closeAllSidebars();
+    }
+    
+    function closeMapModal() {
+        document.getElementById('mapModal').classList.add('hidden');
+    }
+    
     function shareMap() {
-        const name=document.getElementById('mapNameInput').value.trim(), link=document.getElementById('mapLinkInput').value.trim();
-        if(!name||!link) { toast('⚠️ أدخل الاسم والرابط',true); return; }
-        maps.push({name,link,author:playerName||'زائر',date:new Date().toLocaleDateString('ar')});
-        saveMaps(); closeMapModal();
-        document.getElementById('mapNameInput').value=''; document.getElementById('mapLinkInput').value='';
+        var name = document.getElementById('mapNameInput').value.trim();
+        var link = document.getElementById('mapLinkInput').value.trim();
+        
+        if (!name || !link) {
+            toast('⚠️ أدخل الاسم والرابط', true);
+            return;
+        }
+        
+        maps.push({
+            name: name,
+            link: link,
+            author: playerName || 'زائر',
+            date: new Date().toLocaleDateString('ar')
+        });
+        
+        saveMaps();
+        closeMapModal();
+        document.getElementById('mapNameInput').value = '';
+        document.getElementById('mapLinkInput').value = '';
         toast('✅ تمت مشاركة الخريطة');
     }
 
-    function openGameFileModal() { document.getElementById('gameFileModal').classList.remove('hidden'); closeAllSidebars(); }
-    function closeGameFileModal() { document.getElementById('gameFileModal').classList.add('hidden'); }
+    function openGameFileModal() {
+        document.getElementById('gameFileModal').classList.remove('hidden');
+        closeAllSidebars();
+    }
+    
+    function closeGameFileModal() {
+        document.getElementById('gameFileModal').classList.add('hidden');
+    }
+    
     function shareGameFile() {
-        const name=document.getElementById('gameFileNameInput').value.trim();
-        const link=document.getElementById('gameFileLinkInput').value.trim();
-        const type=document.getElementById('gameFileTypeInput').value;
-        if(!name||!link) { toast('⚠️ أدخل الاسم والرابط',true); return; }
-        gameFiles.push({name,link,type,author:playerName||'زائر',date:new Date().toLocaleDateString('ar')});
-        saveGameFiles(); closeGameFileModal();
-        document.getElementById('gameFileNameInput').value=''; 
-        document.getElementById('gameFileLinkInput').value='';
+        var name = document.getElementById('gameFileNameInput').value.trim();
+        var link = document.getElementById('gameFileLinkInput').value.trim();
+        var type = document.getElementById('gameFileTypeInput').value;
+        
+        if (!name || !link) {
+            toast('⚠️ أدخل الاسم والرابط', true);
+            return;
+        }
+        
+        gameFiles.push({
+            name: name,
+            link: link,
+            type: type,
+            author: playerName || 'زائر',
+            date: new Date().toLocaleDateString('ar')
+        });
+        
+        saveGameFiles();
+        closeGameFileModal();
+        document.getElementById('gameFileNameInput').value = '';
+        document.getElementById('gameFileLinkInput').value = '';
         toast('✅ تمت مشاركة ملف اللعبة');
     }
 
-    function showTournaments() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('tournamentsSection').classList.remove('hidden'); closeAllSidebars(); }
-    function showMaps() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('mapsSection').classList.remove('hidden'); closeAllSidebars(); }
-    function showGameFiles() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('gameFilesSection').classList.remove('hidden'); closeAllSidebars(); }
-    function showWheel() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('wheelSection').classList.remove('hidden'); closeAllSidebars(); loadWheelNames(); drawWheel(); }
-    function showAdmin() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('adminSection').classList.remove('hidden'); closeAllSidebars(); checkAdminStatus(); }
+    // ==================== NAVIGATION FUNCTIONS ====================
+    function showTournaments() {
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
+        document.getElementById('tournamentsSection').classList.remove('hidden');
+        closeAllSidebars();
+    }
     
+    function showMaps() {
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
+        document.getElementById('mapsSection').classList.remove('hidden');
+        closeAllSidebars();
+    }
+    
+    function showGameFiles() {
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
+        document.getElementById('gameFilesSection').classList.remove('hidden');
+        closeAllSidebars();
+    }
+    
+    function showWheel() {
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
+        document.getElementById('wheelSection').classList.remove('hidden');
+        closeAllSidebars();
+        loadWheelNames();
+        drawWheel();
+    }
+    
+    function showAdmin() {
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
+        document.getElementById('adminSection').classList.remove('hidden');
+        closeAllSidebars();
+        checkAdminStatus();
+    }
+
+    // ==================== ADMIN FUNCTIONS ====================
     function checkAdminStatus() {
         if (isAdmin) {
             document.getElementById('adminLoginForm').classList.add('hidden');
@@ -1744,13 +1806,15 @@
         }
     }
     
-    function adminLogin() { 
-        if(document.getElementById('adminPasswordInput').value===ADMIN_PASS){
+    function adminLogin() {
+        var passwordInput = document.getElementById('adminPasswordInput');
+        
+        if (passwordInput.value === ADMIN_PASS) {
             isAdmin = true;
             localStorage.setItem('ga_is_admin', 'true');
             document.getElementById('adminLoginForm').classList.add('hidden');
             document.getElementById('adminDashboard').classList.remove('hidden');
-            document.getElementById('adminPasswordInput').value = '';
+            passwordInput.value = '';
             renderAll();
             toast('🔓 مرحباً Sahel TV!');
         } else {
@@ -1766,192 +1830,450 @@
         toast('👋 تم تسجيل الخروج');
     }
     
-    function addTournament() { 
-        if (!isAdmin) { toast('🔒 للمدير فقط', true); return; }
-        const n=document.getElementById('newName').value,d=document.getElementById('newDate').value,p=document.getElementById('newPrize').value; 
-        if(!n||!d||!p){toast('⚠️ أكمل الحقول',true);return;} 
-        const size=parseInt(document.getElementById('newSize').value),type=document.getElementById('newType').value,bracket=[]; 
-        let mc=size/2; 
-        while(mc>=1){
-            bracket.push(Array(mc).fill(null).map(()=>({p1:'',p2:'',s1:undefined,s2:undefined,winner:''}))); 
-            mc=Math.floor(mc/2);
-        } 
+    function addTournament() {
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        var name = document.getElementById('newName').value;
+        var date = document.getElementById('newDate').value;
+        var prize = document.getElementById('newPrize').value;
+        
+        if (!name || !date || !prize) {
+            toast('⚠️ أكمل الحقول', true);
+            return;
+        }
+        
+        var size = parseInt(document.getElementById('newSize').value);
+        var type = document.getElementById('newType').value;
+        
         tournaments.push({
-            name:n,date:d,prize:p,size,type,players:0,playersList:[],
-            bracket,rules:document.getElementById('newRules').value,
-            donateLink:document.getElementById('newDonateLink').value,
-            streamLink:document.getElementById('newStreamLink').value,
-            status:'جارية',createdAt:new Date().toISOString()
-        }); 
-        ['newName','newDate','newPrize','newRules','newDonateLink','newStreamLink'].forEach(id=>document.getElementById(id).value=''); 
-        saveTournaments(); 
-        toast('📢 تم الإعلان عن البطولة'); 
+            name: name,
+            date: date,
+            prize: prize,
+            size: size,
+            type: type,
+            players: 0,
+            playersList: [],
+            bracket: [],
+            rules: document.getElementById('newRules').value,
+            donateLink: document.getElementById('newDonateLink').value,
+            streamLink: document.getElementById('newStreamLink').value,
+            status: 'جارية',
+            createdAt: new Date().toISOString()
+        });
+        
+        document.getElementById('newName').value = '';
+        document.getElementById('newDate').value = '';
+        document.getElementById('newPrize').value = '';
+        document.getElementById('newRules').value = '';
+        document.getElementById('newDonateLink').value = '';
+        document.getElementById('newStreamLink').value = '';
+        
+        saveTournaments();
+        toast('📢 تم الإعلان عن البطولة');
     }
     
-    function deleteTournament(idx){
-        if (!isAdmin) { toast('🔒 للمدير فقط', true); return; }
-        if(confirm('⚠️ حذف البطولة؟')){tournaments.splice(idx,1);saveTournaments();toast('🗑️ تم الحذف');}
-    }
-    
-    function deleteMap(idx){
-        if (!isAdmin) { toast('🔒 للمدير فقط', true); return; }
-        if(confirm('⚠️ حذف الخريطة؟')){maps.splice(idx,1);saveMaps();toast('🗑️ تم الحذف');}
-    }
-    
-    function deleteGameFile(idx){
-        if (!isAdmin) { toast('🔒 للمدير فقط', true); return; }
-        if(confirm('⚠️ حذف ملف اللعبة؟')){gameFiles.splice(idx,1);saveGameFiles();toast('🗑️ تم الحذف');}
-    }
-    
-    function deleteUser(userName){
-        if (!isAdmin) { toast('🔒 للمدير فقط', true); return; }
-        if(confirm(`⚠️ حذف "${userName}"؟`)){
-            tournaments.forEach(t=>{if(t.playersList)t.playersList=t.playersList.filter(p=>p!==userName); t.players=(t.playersList||[]).length;});
-            maps=maps.filter(m=>m.author!==userName);
-            gameFiles=gameFiles.filter(g=>g.author!==userName);
-            saveTournaments(); saveMaps(); saveGameFiles();
-            toast(`🗑️ تم حذف "${userName}"`);
+    function deleteTournament(idx) {
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        if (confirm('⚠️ حذف البطولة؟')) {
+            tournaments.splice(idx, 1);
+            saveTournaments();
+            toast('🗑️ تم الحذف');
         }
     }
     
-    function updateBracket(ti,ri,mi,field,value){tournaments[ti].bracket[ri][mi][field]=value;saveTournaments();}
+    function deleteMap(idx) {
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        if (confirm('⚠️ حذف الخريطة؟')) {
+            maps.splice(idx, 1);
+            saveMaps();
+            toast('🗑️ تم الحذف');
+        }
+    }
     
-    function switchAdminTab(tab) { 
-        document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active')); 
-        event.target.classList.add('active'); 
-        document.getElementById('adminTabTournaments').classList.toggle('hidden',tab!=='tournaments'); 
-        document.getElementById('adminTabMaps').classList.toggle('hidden',tab!=='maps'); 
-        document.getElementById('adminTabGameFiles').classList.toggle('hidden',tab!=='gameFiles'); 
-        document.getElementById('adminTabStream').classList.toggle('hidden',tab!=='stream'); 
-        document.getElementById('adminTabUsers').classList.toggle('hidden',tab!=='users'); 
-        if(tab==='maps') renderAdminMapsList(); 
-        if(tab==='gameFiles') renderAdminGameFilesList(); 
-        if(tab==='users') renderUsersList();
-        if(tab==='stream') {
-            if (liveStream) {
-                document.getElementById('liveStreamUrlInput').value = liveStream.url || '';
-                document.getElementById('liveStreamTitleInput').value = liveStream.title || '';
+    function deleteGameFile(idx) {
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        if (confirm('⚠️ حذف ملف اللعبة؟')) {
+            gameFiles.splice(idx, 1);
+            saveGameFiles();
+            toast('🗑️ تم الحذف');
+        }
+    }
+    
+    function deleteUser(userName) {
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        if (confirm('⚠️ حذف "' + userName + '"؟')) {
+            for (var i = 0; i < tournaments.length; i++) {
+                var t = tournaments[i];
+                if (t.playersList) {
+                    t.playersList = t.playersList.filter(function(p) {
+                        return p !== userName;
+                    });
+                    t.players = t.playersList.length;
+                }
             }
+            
+            maps = maps.filter(function(m) {
+                return m.author !== userName;
+            });
+            
+            gameFiles = gameFiles.filter(function(g) {
+                return g.author !== userName;
+            });
+            
+            saveTournaments();
+            saveMaps();
+            saveGameFiles();
+            toast('🗑️ تم حذف "' + userName + '"');
         }
+    }
+    
+    function switchAdminTab(tab) {
+        var tabs = document.querySelectorAll('.admin-tab');
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove('active');
+        }
+        event.target.classList.add('active');
+        
+        document.getElementById('adminTabTournaments').classList.toggle('hidden', tab !== 'tournaments');
+        document.getElementById('adminTabMaps').classList.toggle('hidden', tab !== 'maps');
+        document.getElementById('adminTabGameFiles').classList.toggle('hidden', tab !== 'gameFiles');
+        document.getElementById('adminTabStream').classList.toggle('hidden', tab !== 'stream');
+        document.getElementById('adminTabUsers').classList.toggle('hidden', tab !== 'users');
+        
+        if (tab === 'maps') renderAdminMapsList();
+        if (tab === 'gameFiles') renderAdminGameFilesList();
+        if (tab === 'users') renderUsersList();
     }
 
     function renderAdminList() {
-        const l=document.getElementById('adminList');
-        if(tournaments.length===0) { l.innerHTML='<p style="color:var(--text-muted);">لا توجد بطولات.</p>'; return; }
-        l.innerHTML=tournaments.map((t,i)=>`<div style="background:var(--bg-input);border-radius:var(--radius-sm);padding:12px;margin:6px 0;border:1px solid var(--border-color);">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-                <span style="font-weight:600;">🏆 ${t.name} | 👥 ${t.players}/${t.size} ${t.streamLink?'🔴':''}</span>
-                <div style="display:flex;gap:6px;">
-                    <button class="btn btn-outline btn-sm" onclick="document.getElementById('be_${i}').classList.toggle('hidden')">🌳 الشجرة</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteTournament(${i})">🗑️</button>
-                </div>
-            </div>
-            <div id="be_${i}" class="hidden" style="margin-top:12px;">
-                ${t.bracket.map((r,ri)=>`<h6 style="color:var(--primary);margin:8px 0 4px;">${ri===0?'الدور الأول':ri===t.bracket.length-1?'النهائي':ri===t.bracket.length-2?'نصف النهائي':'دور '+(ri+1)}</h6>${r.map((m,mi)=>`<div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;"><input value="${m.p1}" onchange="updateBracket(${i},${ri},${mi},'p1',this.value)" style="flex:1;min-width:60px;padding:6px;border-radius:6px;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);"><input type="number" value="${m.s1??''}" onchange="updateBracket(${i},${ri},${mi},'s1',parseInt(this.value)||0)" style="width:40px;padding:6px;border-radius:6px;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);"><span style="font-weight:700;">-</span><input type="number" value="${m.s2??''}" onchange="updateBracket(${i},${ri},${mi},'s2',parseInt(this.value)||0)" style="width:40px;padding:6px;border-radius:6px;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);"><input value="${m.p2}" onchange="updateBracket(${i},${ri},${mi},'p2',this.value)" style="flex:1;min-width:60px;padding:6px;border-radius:6px;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);"><input value="${m.winner}" placeholder="🏆 الفائز" onchange="updateBracket(${i},${ri},${mi},'winner',this.value)" style="flex:1;min-width:60px;padding:6px;border-radius:6px;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);"></div>`).join('')}`).join('')}
-            </div>
-        </div>`).join('');
+        var list = document.getElementById('adminList');
+        
+        if (tournaments.length === 0) {
+            list.innerHTML = '<p style="color:var(--text-muted);">لا توجد بطولات.</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < tournaments.length; i++) {
+            var t = tournaments[i];
+            html += '<div style="background:var(--bg-input);border-radius:8px;padding:8px;margin:4px 0;">';
+            html += '<span>🏆 ' + t.name + ' | 👥 ' + t.players + '/' + t.size + '</span>';
+            html += '<button class="btn btn-danger btn-sm" onclick="deleteTournament(' + i + ')">🗑️</button>';
+            html += '</div>';
+        }
+        
+        list.innerHTML = html;
     }
 
     function renderAdminMapsList() {
-        const l=document.getElementById('adminMapsList');
-        if(maps.length===0) { l.innerHTML='<p style="color:var(--text-muted);">لا توجد خرائط.</p>'; return; }
-        l.innerHTML=maps.map((m,i)=>`<div class="user-row"><span>🗺️ ${m.name} - ${m.author}</span><button class="btn btn-danger btn-sm" onclick="deleteMap(${i})">🗑️</button></div>`).join('');
+        var list = document.getElementById('adminMapsList');
+        
+        if (maps.length === 0) {
+            list.innerHTML = '<p style="color:var(--text-muted);">لا توجد خرائط.</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < maps.length; i++) {
+            var m = maps[i];
+            html += '<div class="user-row">';
+            html += '<span>🗺️ ' + m.name + ' - ' + m.author + '</span>';
+            html += '<button class="btn btn-danger btn-sm" onclick="deleteMap(' + i + ')">🗑️</button>';
+            html += '</div>';
+        }
+        
+        list.innerHTML = html;
     }
 
     function renderAdminGameFilesList() {
-        const l=document.getElementById('adminGameFilesList');
-        if(gameFiles.length===0) { l.innerHTML='<p style="color:var(--text-muted);">لا توجد ملفات لعبة.</p>'; return; }
-        const typeLabels = {patch:'🔧 باتش', fix:'🛠️ إصلاح', mod:'🎨 مود', tool:'🔧 أداة', other:'📄 آخر'};
-        l.innerHTML=gameFiles.map((g,i)=>`<div class="user-row"><span>📦 ${g.name} (${typeLabels[g.type]||g.type}) - ${g.author}</span><button class="btn btn-danger btn-sm" onclick="deleteGameFile(${i})">🗑️</button></div>`).join('');
+        var list = document.getElementById('adminGameFilesList');
+        
+        if (gameFiles.length === 0) {
+            list.innerHTML = '<p style="color:var(--text-muted);">لا توجد ملفات لعبة.</p>';
+            return;
+        }
+        
+        var typeLabels = { patch: '🔧 باتش', fix: '🛠️ إصلاح', mod: '🎨 مود', tool: '🔧 أداة', other: '📄 آخر' };
+        
+        var html = '';
+        for (var i = 0; i < gameFiles.length; i++) {
+            var g = gameFiles[i];
+            html += '<div class="user-row">';
+            html += '<span>📦 ' + g.name + ' (' + (typeLabels[g.type] || g.type) + ') - ' + g.author + '</span>';
+            html += '<button class="btn btn-danger btn-sm" onclick="deleteGameFile(' + i + ')">🗑️</button>';
+            html += '</div>';
+        }
+        
+        list.innerHTML = html;
     }
 
     function renderUsersList() {
-        const l=document.getElementById('usersList');
-        const allNames = getAllPlayerNames();
-        const searchTerm = (document.getElementById('userSearchInput')?.value || '').toLowerCase().trim();
-        const filtered = searchTerm ? allNames.filter(n => n.toLowerCase().includes(searchTerm)) : allNames;
-        if (filtered.length === 0) { l.innerHTML='<p style="color:var(--text-muted);font-size:0.8rem;">لا يوجد مستخدمون.</p>'; return; }
-        l.innerHTML = filtered.map(name => `<div class="user-row"><span>👤 ${name}</span><button class="btn btn-danger btn-sm" onclick="deleteUser('${name}')">🗑️</button></div>`).join('');
-    }
-
-    function loadWheelNames() { const ta=document.getElementById('wheelNames'); if(ta) ta.value=wheelNames.join('\n'); }
-    function saveWheelNames() { const ta=document.getElementById('wheelNames'); if(ta) { wheelNames=ta.value.split('\n').filter(n=>n.trim()); localStorage.setItem('ga_wheel_names',JSON.stringify(wheelNames)); } drawWheel(); }
-    function drawWheel() {
-        const canvas=document.getElementById('wheelCanvas'); if(!canvas) return;
-        const ctx=canvas.getContext('2d'), w=canvas.width, h=canvas.height, cx=w/2, cy=h/2, r=Math.min(cx,cy)-10;
-        ctx.clearRect(0,0,w,h);
-        if(wheelNames.length===0) { ctx.fillStyle='var(--text-muted)'; ctx.font='16px Tajawal'; ctx.textAlign='center'; ctx.fillText('أدخل أسماء لبدء القرعة',cx,cy); return; }
-        const colors=['#f0b90b','#f6465d','#0ecb81','#3b82f6','#8b5cf6','#ec4899','#06b6d4','#f97316','#6366f1','#14b8a6','#e11d48','#a855f7'];
-        const slice=2*Math.PI/wheelNames.length;
-        wheelNames.forEach((name,i)=>{
-            ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,slice*i+wheelAngle,slice*(i+1)+wheelAngle); ctx.closePath();
-            ctx.fillStyle=colors[i%colors.length]; ctx.fill(); ctx.strokeStyle='var(--bg-primary)'; ctx.lineWidth=3; ctx.stroke();
-            ctx.save(); ctx.translate(cx,cy); ctx.rotate(slice*i+slice/2+wheelAngle); ctx.textAlign='center'; ctx.fillStyle='white';
-            ctx.font='bold 15px Tajawal'; ctx.fillText(name,r*0.65,5); ctx.restore();
-        });
-    }
-    function spinWheel() {
-        const ta=document.getElementById('wheelNames'); if(ta) { wheelNames=ta.value.split('\n').filter(n=>n.trim()); localStorage.setItem('ga_wheel_names',JSON.stringify(wheelNames)); }
-        if(wheelNames.length===0) { toast('⚠️ أدخل أسماء أولاً',true); return; }
-        if(wheelSpinning) return; wheelSpinning=true;
-        const result=document.getElementById('wheelResult'); result.textContent='🎲 جاري الدوران...';
-        const spins=5+Math.random()*5, duration=3000, start=wheelAngle, target=start+spins*2*Math.PI, startTime=performance.now();
-        function animate(now) {
-            const elapsed=now-startTime, progress=Math.min(elapsed/duration,1), ease=1-Math.pow(1-progress,3);
-            wheelAngle=start+(target-start)*ease; drawWheel();
-            if(progress<1) { requestAnimationFrame(animate); }
-            else { wheelAngle=target%(2*Math.PI); const slice=2*Math.PI/wheelNames.length, pointerAngle=(2*Math.PI-wheelAngle)%(2*Math.PI), winnerIndex=Math.floor(pointerAngle/slice)%wheelNames.length; result.textContent=`🏆 الفائز: ${wheelNames[winnerIndex]} 🏆`; wheelSpinning=false; }
+        var list = document.getElementById('usersList');
+        var allNames = getAllPlayerNames();
+        var searchTerm = (document.getElementById('userSearchInput')?.value || '').toLowerCase().trim();
+        
+        var filtered;
+        if (searchTerm) {
+            filtered = [];
+            for (var i = 0; i < allNames.length; i++) {
+                if (allNames[i].toLowerCase().indexOf(searchTerm) !== -1) {
+                    filtered.push(allNames[i]);
+                }
+            }
+        } else {
+            filtered = allNames;
         }
-        requestAnimationFrame(animate);
-        setTimeout(()=>{ if(wheelSpinning) { wheelSpinning=false; wheelAngle=target%(2*Math.PI); drawWheel(); } }, duration+500);
+        
+        if (filtered.length === 0) {
+            list.innerHTML = '<p style="color:var(--text-muted);font-size:0.8rem;">لا يوجد مستخدمون.</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < filtered.length; i++) {
+            var name = filtered[i];
+            html += '<div class="user-row">';
+            html += '<span>👤 ' + name + '</span>';
+            html += '<button class="btn btn-danger btn-sm" onclick="deleteUser(\'' + name + '\')">🗑️</button>';
+            html += '</div>';
+        }
+        
+        list.innerHTML = html;
     }
-    function clearWheel() { wheelNames=[]; localStorage.setItem('ga_wheel_names','[]'); document.getElementById('wheelNames').value=''; document.getElementById('wheelResult').textContent=''; drawWheel(); toast('🗑️ تم مسح القرعة'); }
-    document.getElementById('wheelNames')?.addEventListener('input',saveWheelNames);
 
-    function savePlayerName() {
-        const n=document.getElementById('playerNameInput').value.trim(); if(!n) return;
-        const allNames = getAllPlayerNames();
-        if (allNames.includes(n)) { toast('⚠️ هذا الاسم مستخدم بالفعل', true); return; }
-        playerName=n; localStorage.setItem('ga_player_name',n); document.getElementById('nameModal').style.display='none';
-        document.getElementById('profileMenuBtn').style.display='flex';
-        toast(`✅ أهلاً ${n}!`);
+    // ==================== WHEEL FUNCTIONS ====================
+    function loadWheelNames() {
+        var textarea = document.getElementById('wheelNames');
+        if (textarea) {
+            textarea.value = wheelNames.join('\n');
+        }
     }
     
-    function initPlayerName() { 
-        if(playerName){ 
-            document.getElementById('nameModal').style.display='none'; 
-            document.getElementById('profileMenuBtn').style.display='flex';
-        } else { 
-            document.getElementById('nameModal').style.display='flex'; 
-            document.getElementById('profileMenuBtn').style.display='none';
-        } 
+    function saveWheelNames() {
+        var textarea = document.getElementById('wheelNames');
+        if (textarea) {
+            wheelNames = textarea.value.split('\n').filter(function(n) {
+                return n.trim();
+            });
+            localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames));
+        }
+        drawWheel();
+    }
+    
+    function drawWheel() {
+        var canvas = document.getElementById('wheelCanvas');
+        if (!canvas) {
+            return;
+        }
+        
+        var ctx = canvas.getContext('2d');
+        var w = canvas.width;
+        var h = canvas.height;
+        var cx = w / 2;
+        var cy = h / 2;
+        var r = Math.min(cx, cy) - 10;
+        
+        ctx.clearRect(0, 0, w, h);
+        
+        if (wheelNames.length === 0) {
+            ctx.fillStyle = 'var(--text-muted)';
+            ctx.font = '16px Tajawal';
+            ctx.textAlign = 'center';
+            ctx.fillText('أدخل أسماء لبدء القرعة', cx, cy);
+            return;
+        }
+        
+        var colors = ['#f0b90b', '#f6465d', '#0ecb81', '#3b82f6', '#8b5cf6', '#ec4899', '#06b6d4', '#f97316', '#6366f1', '#14b8a6', '#e11d48', '#a855f7'];
+        var slice = 2 * Math.PI / wheelNames.length;
+        
+        for (var i = 0; i < wheelNames.length; i++) {
+            var name = wheelNames[i];
+            
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, r, slice * i + wheelAngle, slice * (i + 1) + wheelAngle);
+            ctx.closePath();
+            
+            ctx.fillStyle = colors[i % colors.length];
+            ctx.fill();
+            ctx.strokeStyle = 'var(--bg-primary)';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(slice * i + slice / 2 + wheelAngle);
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 15px Tajawal';
+            ctx.fillText(name, r * 0.65, 5);
+            ctx.restore();
+        }
+    }
+    
+    function spinWheel() {
+        var textarea = document.getElementById('wheelNames');
+        if (textarea) {
+            wheelNames = textarea.value.split('\n').filter(function(n) {
+                return n.trim();
+            });
+            localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames));
+        }
+        
+        if (wheelNames.length === 0) {
+            toast('⚠️ أدخل أسماء أولاً', true);
+            return;
+        }
+        
+        if (wheelSpinning) {
+            return;
+        }
+        
+        wheelSpinning = true;
+        var result = document.getElementById('wheelResult');
+        result.textContent = '🎲 جاري الدوران...';
+        
+        var spins = 5 + Math.random() * 5;
+        var duration = 3000;
+        var start = wheelAngle;
+        var target = start + spins * 2 * Math.PI;
+        var startTime = performance.now();
+        
+        function animate(now) {
+            var elapsed = now - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            var ease = 1 - Math.pow(1 - progress, 3);
+            
+            wheelAngle = start + (target - start) * ease;
+            drawWheel();
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                wheelAngle = target % (2 * Math.PI);
+                var slice = 2 * Math.PI / wheelNames.length;
+                var pointerAngle = (2 * Math.PI - wheelAngle) % (2 * Math.PI);
+                var winnerIndex = Math.floor(pointerAngle / slice) % wheelNames.length;
+                
+                result.textContent = '🏆 الفائز: ' + wheelNames[winnerIndex] + ' 🏆';
+                wheelSpinning = false;
+            }
+        }
+        
+        requestAnimationFrame(animate);
+    }
+    
+    function clearWheel() {
+        wheelNames = [];
+        localStorage.setItem('ga_wheel_names', '[]');
+        document.getElementById('wheelNames').value = '';
+        document.getElementById('wheelResult').textContent = '';
+        drawWheel();
+        toast('🗑️ تم مسح القرعة');
+    }
+    
+    document.getElementById('wheelNames')?.addEventListener('input', saveWheelNames);
+
+    // ==================== PLAYER NAME ====================
+    function savePlayerName() {
+        var name = document.getElementById('playerNameInput').value.trim();
+        
+        if (!name) {
+            return;
+        }
+        
+        var allNames = getAllPlayerNames();
+        if (allNames.indexOf(name) !== -1) {
+            toast('⚠️ هذا الاسم مستخدم بالفعل', true);
+            return;
+        }
+        
+        playerName = name;
+        localStorage.setItem('ga_player_name', name);
+        document.getElementById('nameModal').style.display = 'none';
+        document.getElementById('profileMenuBtn').style.display = 'flex';
+        toast('✅ أهلاً ' + name + '!');
+    }
+    
+    function initPlayerName() {
+        if (playerName) {
+            document.getElementById('nameModal').style.display = 'none';
+            document.getElementById('profileMenuBtn').style.display = 'flex';
+        } else {
+            document.getElementById('nameModal').style.display = 'flex';
+            document.getElementById('profileMenuBtn').style.display = 'none';
+        }
     }
 
-    function setTheme(th) { 
-        document.body.classList.remove('light-mode','gold-mode'); 
-        if(th==='light') document.body.classList.add('light-mode'); 
-        if(th==='gold') document.body.classList.add('gold-mode'); 
-        currentTheme=th; 
-        localStorage.setItem('ga_theme',th); 
+    // ==================== THEME ====================
+    function setTheme(th) {
+        document.body.classList.remove('light-mode', 'gold-mode');
+        
+        if (th === 'light') {
+            document.body.classList.add('light-mode');
+        }
+        if (th === 'gold') {
+            document.body.classList.add('gold-mode');
+        }
+        
+        currentTheme = th;
+        localStorage.setItem('ga_theme', th);
         updateThemeIcon();
     }
     
     function updateThemeIcon() {
-        const icon = document.querySelector('#themeToggleBtn i');
-        if (currentTheme === 'dark') icon.className = 'fas fa-moon';
-        else if (currentTheme === 'light') icon.className = 'fas fa-sun';
-        else icon.className = 'fas fa-crown';
+        var icon = document.querySelector('#themeToggleBtn i');
+        
+        if (currentTheme === 'dark') {
+            icon.className = 'fas fa-moon';
+        } else if (currentTheme === 'light') {
+            icon.className = 'fas fa-sun';
+        } else {
+            icon.className = 'fas fa-crown';
+        }
     }
     
-    document.getElementById('themeToggleBtn').addEventListener('click',()=>{ 
-        const n = currentTheme==='dark'?'light':currentTheme==='light'?'gold':'dark'; 
-        setTheme(n); 
+    document.getElementById('themeToggleBtn').addEventListener('click', function() {
+        var nextTheme;
+        if (currentTheme === 'dark') {
+            nextTheme = 'light';
+        } else if (currentTheme === 'light') {
+            nextTheme = 'gold';
+        } else {
+            nextTheme = 'dark';
+        }
+        setTheme(nextTheme);
     });
 
+    // ==================== SIDEBAR ====================
     function openSidebar(side) {
         closeAllSidebars();
-        if (side === 'right') { document.getElementById('sidebarRight').classList.add('open'); }
-        else { document.getElementById('sidebarLeft').classList.add('open'); }
+        
+        if (side === 'right') {
+            document.getElementById('sidebarRight').classList.add('open');
+        } else {
+            document.getElementById('sidebarLeft').classList.add('open');
+        }
+        
         document.getElementById('overlay').classList.add('active');
     }
     
@@ -1961,12 +2283,18 @@
         document.getElementById('overlay').classList.remove('active');
     }
 
-    document.getElementById('rightMenuBtn').addEventListener('click',()=>{ openSidebar('right'); });
-    document.getElementById('leftMenuBtn').addEventListener('click',()=>{ openSidebar('left'); });
-    document.getElementById('overlay').addEventListener('click',closeAllSidebars);
+    document.getElementById('rightMenuBtn').addEventListener('click', function() {
+        openSidebar('right');
+    });
+    
+    document.getElementById('leftMenuBtn').addEventListener('click', function() {
+        openSidebar('left');
+    });
+    
+    document.getElementById('overlay').addEventListener('click', closeAllSidebars);
 
-    // ==================== INIT ====================
-    document.addEventListener('DOMContentLoaded',()=>{
+    // ==================== INITIALIZATION ====================
+    document.addEventListener('DOMContentLoaded', function() {
         setTheme(currentTheme);
         updateThemeIcon();
         loadData();
@@ -1976,6 +2304,7 @@
         checkAdminStatus();
         renderLiveStreamContent();
         renderVoiceRooms();
+        listenForMessages();
         
         if (chatMode === 'voice') {
             switchToVoiceChat();
@@ -1983,9 +2312,8 @@
             switchToTextChat();
         }
         
-        loadAllChatMessages();
-        setInterval(loadAllChatMessages, 3000);
+        console.log('✅ GeneralsArena جاهز!');
+        console.log('✅ Firebase شغال');
+        console.log('✅ المحادثة في الوقت الحقيقي');
     });
 </script>
-</body>
-</html>
