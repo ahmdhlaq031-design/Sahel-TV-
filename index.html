@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Firebase SDK (Compat) -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <script>
@@ -22,7 +21,6 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
-        console.log('✅ Firebase متصل!');
     </script>
     
     <style>
@@ -69,7 +67,6 @@
             --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
             --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
             --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
-            --gradient-2: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
         }
 
         body.gold-mode {
@@ -84,8 +81,6 @@
             --primary: #ffd700;
             --primary-dark: #cca800;
             --primary-light: #ffe44d;
-            --gradient-1: linear-gradient(135deg, #ffd700 0%, #cca800 100%);
-            --gradient-2: linear-gradient(135deg, #1a1400 0%, #2d2400 100%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -103,7 +98,7 @@
             line-height: 1.6;
         }
 
-        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
@@ -113,7 +108,7 @@
             z-index: 100;
             background: var(--bg-secondary);
             border-bottom: 1px solid var(--border-color);
-            padding: 10px 20px;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -123,16 +118,14 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; }
-
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
         .logo-icon {
-            width: 42px; height: 42px; border-radius: var(--radius-sm);
+            width: 44px; height: 44px; border-radius: var(--radius-sm);
             background: var(--gradient-1); display: flex; align-items: center; justify-content: center;
-            font-size: 20px; color: #000; box-shadow: 0 4px 12px rgba(240, 185, 11, 0.3);
+            font-size: 22px; color: #000; box-shadow: 0 4px 15px rgba(240, 185, 11, 0.35);
         }
-
-        .logo-text h1 { font-size: 1.1rem; font-weight: 900; color: var(--primary); line-height: 1.2; }
-        .logo-text span { font-size: 0.65rem; color: var(--text-muted); font-weight: 500; letter-spacing: 0.05em; }
+        .logo-text h1 { font-size: 1.15rem; font-weight: 900; color: var(--primary); line-height: 1.2; }
+        .logo-text span { font-size: 0.65rem; color: var(--text-muted); font-weight: 500; letter-spacing: 0.08em; }
 
         .nav-actions { display: flex; gap: 8px; align-items: center; }
 
@@ -143,18 +136,15 @@
             transition: var(--transition); color: var(--text-secondary);
             font-size: 1rem; text-decoration: none; backdrop-filter: var(--backdrop-blur);
         }
-
         .icon-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(240, 185, 11, 0.3); }
-        .icon-btn:active { transform: translateY(0); }
 
         .sidebar-right, .sidebar-left {
             position: fixed; top: 0; width: 320px; height: 100vh;
             background: var(--bg-card); z-index: 200; padding: 90px 20px 30px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: var(--shadow-xl); backdrop-filter: var(--backdrop-blur);
-            -webkit-backdrop-filter: var(--backdrop-blur); overflow-y: auto; border: 1px solid var(--border-color);
+            overflow-y: auto; border: 1px solid var(--border-color);
         }
-
         .sidebar-right { right: -340px; border-left: 1px solid var(--border-color); border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
         .sidebar-right.open { right: 0; }
         .sidebar-left { left: -340px; border-right: 1px solid var(--border-color); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
@@ -162,25 +152,19 @@
 
         .sidebar-right h4, .sidebar-left h4 {
             color: var(--primary); font-size: 0.7rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.1em; margin: 20px 0 8px; padding: 0 12px; opacity: 0.8;
+            text-transform: uppercase; letter-spacing: 0.12em; margin: 20px 0 10px;
+            padding: 0 12px; opacity: 0.85;
         }
-
         .sidebar-right a, .sidebar-right .menu-item, .sidebar-left a, .sidebar-left .menu-item {
             display: flex; align-items: center; gap: 12px; padding: 12px 16px;
             border-radius: var(--radius-sm); text-decoration: none; color: var(--text-secondary);
             font-size: 0.9rem; font-weight: 500; transition: var(--transition); cursor: pointer; margin-bottom: 4px;
         }
-
         .sidebar-right a:hover, .sidebar-right .menu-item:hover, .sidebar-left a:hover, .sidebar-left .menu-item:hover {
-            background: rgba(240, 185, 11, 0.1); color: var(--primary); padding-right: 24px;
+            background: rgba(240, 185, 11, 0.12); color: var(--primary); padding-right: 24px;
         }
 
-        .sidebar-right a i, .sidebar-right .menu-item i, .sidebar-left a i, .sidebar-left .menu-item i { width: 20px; text-align: center; font-size: 0.9rem; }
-
-        .overlay {
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); z-index: 150;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease; backdrop-filter: blur(4px);
-        }
+        .overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); z-index: 150; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; backdrop-filter: blur(4px); }
         .overlay.active { opacity: 1; pointer-events: auto; }
 
         .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-primary); }
@@ -203,22 +187,16 @@
         .message-bubble { max-width: 75%; padding: 12px 16px; border-radius: 18px; position: relative; word-wrap: break-word; }
         .message-bubble.mine { align-self: flex-end; background: var(--gradient-1); color: #000; border-bottom-left-radius: 5px; }
         .message-bubble.other { align-self: flex-start; background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-primary); border-bottom-right-radius: 5px; }
-
-        .message-bubble .msg-name {
-            font-size: 0.7rem; font-weight: 700; margin-bottom: 4px; opacity: 0.8;
-            cursor: pointer; text-decoration: underline; color: var(--primary);
-        }
-        .message-bubble .msg-name:hover { opacity: 1; }
-
+        .message-bubble .msg-name { font-size: 0.7rem; font-weight: 700; margin-bottom: 4px; opacity: 0.85; cursor: pointer; color: var(--primary); }
+        .message-bubble .msg-name:hover { opacity: 1; text-decoration: underline; }
         .message-bubble .msg-text { font-size: 0.9rem; line-height: 1.5; }
         .message-bubble .msg-time { font-size: 0.65rem; opacity: 0.6; margin-top: 4px; text-align: left; }
 
         .user-actions-popup {
             position: fixed; background: var(--bg-card); border: 1px solid var(--primary);
             border-radius: var(--radius-sm); padding: 8px; z-index: 3000;
-            box-shadow: var(--shadow-xl); backdrop-filter: blur(20px); display: none;
+            box-shadow: var(--shadow-xl); backdrop-filter: blur(20px); display: none; min-width: 150px;
         }
-        .user-actions-popup button { display: block; width: 100%; margin: 3px 0; }
 
         .chat-input-area {
             display: flex; gap: 10px; padding: 12px; background: var(--bg-secondary);
@@ -250,10 +228,10 @@
             display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
             border-radius: 50px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em;
         }
-        .badge-success { background: rgba(14, 203, 129, 0.1); color: var(--success); border: 1px solid rgba(14, 203, 129, 0.2); }
-        .badge-warning { background: rgba(240, 185, 11, 0.1); color: var(--warning); border: 1px solid rgba(240, 185, 11, 0.2); }
-        .badge-danger { background: rgba(246, 70, 93, 0.1); color: var(--danger); border: 1px solid rgba(246, 70, 93, 0.2); }
-        .badge-info { background: rgba(59, 130, 246, 0.1); color: var(--info); border: 1px solid rgba(59, 130, 246, 0.2); }
+        .badge-success { background: rgba(14, 203, 129, 0.12); color: var(--success); border: 1px solid rgba(14, 203, 129, 0.25); }
+        .badge-warning { background: rgba(240, 185, 11, 0.12); color: var(--warning); border: 1px solid rgba(240, 185, 11, 0.25); }
+        .badge-danger { background: rgba(246, 70, 93, 0.12); color: var(--danger); border: 1px solid rgba(246, 70, 93, 0.25); }
+        .badge-info { background: rgba(59, 130, 246, 0.12); color: var(--info); border: 1px solid rgba(59, 130, 246, 0.25); }
 
         .live-badge {
             display: inline-flex; align-items: center; gap: 6px; background: var(--danger);
@@ -277,6 +255,8 @@
         .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(246, 70, 93, 0.4); }
         .btn-success { background: var(--success); color: white; box-shadow: 0 4px 15px rgba(14, 203, 129, 0.3); }
         .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(14, 203, 129, 0.4); }
+        .btn-info { background: var(--info); color: white; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
+        .btn-info:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4); }
 
         .back-btn {
             background: var(--bg-card); border: 1px solid var(--border-color);
@@ -311,21 +291,6 @@
         }
         .stream-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        .bracket-container {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-md); padding: 20px; margin: 16px 0;
-            overflow-x: auto; backdrop-filter: var(--backdrop-blur); box-shadow: var(--shadow-sm);
-        }
-        .bracket-tree { display: flex; align-items: center; justify-content: flex-start; gap: 16px; padding: 16px; min-width: max-content; direction: ltr; }
-        .bracket-box {
-            background: var(--bg-input); border: 2px solid var(--border-color);
-            border-radius: var(--radius-sm); padding: 12px; text-align: center; min-width: 110px; font-size: 0.8rem; transition: var(--transition);
-        }
-        .bracket-box.win { border-color: var(--primary); box-shadow: 0 0 20px rgba(240, 185, 11, 0.3); background: rgba(240, 185, 11, 0.05); }
-        .bracket-box .p { font-weight: 700; margin: 2px 0; }
-        .bracket-box .s { color: var(--primary); font-weight: 800; font-size: 0.9rem; }
-        .bracket-conn { min-width: 24px; height: 2px; background: var(--primary); flex-shrink: 0; }
-
         .toast {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
             background: var(--success); color: white; padding: 12px 28px; border-radius: 50px;
@@ -337,26 +302,70 @@
 
         .hidden { display: none !important; }
 
-        .admin-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-        .admin-tab {
-            padding: 8px 18px; border-radius: 50px; cursor: pointer; font-weight: 600;
-            font-size: 0.8rem; background: var(--bg-input); border: 1px solid var(--border-color);
-            color: var(--text-secondary); transition: var(--transition);
+        /* Admin Panel Styles */
+        .admin-container { max-width: 1000px; margin: 0 auto; }
+        .admin-header {
+            display: flex; align-items: center; gap: 15px; margin-bottom: 20px;
+            padding: 20px; background: var(--bg-card); border-radius: var(--radius-md);
+            border: 1px solid var(--border-color); backdrop-filter: var(--backdrop-blur);
         }
-        .admin-tab.active { background: var(--gradient-1); color: #000; border-color: transparent; box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3); }
+        .admin-avatar {
+            width: 60px; height: 60px; border-radius: 50%; background: var(--gradient-1);
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #000;
+        }
+        .admin-stats {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px;
+        }
+        .stat-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 20px; text-align: center;
+            backdrop-filter: var(--backdrop-blur); transition: var(--transition);
+        }
+        .stat-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .stat-card .stat-icon { font-size: 2rem; margin-bottom: 8px; }
+        .stat-card .stat-value { font-size: 1.5rem; font-weight: 900; color: var(--primary); }
+        .stat-card .stat-label { font-size: 0.75rem; color: var(--text-muted); }
+
+        .admin-tabs {
+            display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+            background: var(--bg-card); padding: 8px; border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+        .admin-tab {
+            padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600;
+            font-size: 0.8rem; background: transparent; border: none;
+            color: var(--text-secondary); transition: var(--transition); white-space: nowrap;
+        }
+        .admin-tab:hover { background: rgba(240, 185, 11, 0.1); color: var(--primary); }
+        .admin-tab.active { background: var(--gradient-1); color: #000; font-weight: 700; }
+
+        .admin-panel {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 24px; backdrop-filter: var(--backdrop-blur);
+        }
+        .admin-panel h4 { color: var(--primary); margin-bottom: 15px; font-size: 1rem; }
+        .admin-panel input, .admin-panel textarea, .admin-panel select {
+            width: 100%; padding: 10px 14px; border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color); background: var(--bg-input);
+            color: var(--text-primary); font-family: 'Tajawal', 'Cairo', sans-serif;
+            margin-bottom: 10px; outline: none; font-size: 0.85rem;
+        }
+        .admin-panel input:focus, .admin-panel textarea:focus, .admin-panel select:focus {
+            border-color: var(--primary);
+        }
 
         .user-row {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 16px; background: var(--bg-input); border-radius: var(--radius-sm);
-            margin: 4px 0; font-size: 0.8rem; border: 1px solid transparent; transition: var(--transition);
+            padding: 12px 16px; background: var(--bg-input); border-radius: var(--radius-sm);
+            margin: 6px 0; font-size: 0.85rem; border: 1px solid transparent; transition: var(--transition);
         }
-        .user-row:hover { border-color: var(--border-color); }
+        .user-row:hover { border-color: var(--border-color); background: var(--bg-card); }
 
         .search-input {
             width: 100%; padding: 12px 18px; border-radius: 50px; border: 1px solid var(--border-color);
             background: var(--bg-input); color: var(--text-primary);
-            font-family: 'Tajawal', 'Cairo', sans-serif; margin-bottom: 12px; outline: none;
-            font-size: 0.85rem; transition: var(--transition);
+            font-family: 'Tajawal', 'Cairo', sans-serif; margin-bottom: 15px; outline: none;
+            font-size: 0.9rem; transition: var(--transition);
         }
         .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1); }
 
@@ -379,12 +388,12 @@
 
         .wheel-container { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative; }
         .wheel-container canvas { max-width: 100%; height: auto; border-radius: 50%; box-shadow: var(--shadow-xl); }
-        .wheel-arrow {
-            position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-            font-size: 2rem; color: var(--danger); z-index: 10;
-            text-shadow: 0 0 10px rgba(246,70,93,0.5); animation: arrowPulse 1s infinite;
+        .wheel-pointer {
+            position: absolute; top: 2px; left: 50%; transform: translateX(-50%);
+            font-size: 2.5rem; z-index: 10; filter: drop-shadow(0 0 10px rgba(246,70,93,0.8));
+            animation: pointerBounce 1.5s infinite;
         }
-        @keyframes arrowPulse { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(5px)} }
+        @keyframes pointerBounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(4px)} }
 
         .voice-rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
         .voice-room-card {
@@ -398,23 +407,20 @@
 
         #jitsiWrapper { border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--border-color); }
 
-        .online-indicator { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: var(--success); margin-bottom: 10px; }
+        .online-indicator { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: var(--success); }
         .online-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); animation: pulse 2s infinite; }
 
         .private-chat-row {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 10px; background: var(--bg-input); border-radius: 8px; margin: 4px 0; cursor: pointer;
+            padding: 14px 16px; background: var(--bg-input); border-radius: 12px;
+            margin: 6px 0; cursor: pointer; border: 1px solid transparent; transition: 0.2s;
         }
-        .private-chat-row:hover { background: rgba(240,185,11,0.1); }
-        .private-chat-row .last-message { font-size: 0.7rem; color: var(--text-muted); }
-        .unread-badge {
-            background: var(--danger); color: white; border-radius: 50%;
-            width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center;
-            font-size: 0.6rem; font-weight: 700;
-        }
+        .private-chat-row:hover { border-color: var(--primary); background: rgba(240,185,11,0.08); }
+        .private-chat-row .last-message { font-size: 0.75rem; color: var(--text-muted); margin-top: 3px; }
 
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr; gap: 12px; }
+            .admin-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
             .voice-rooms-grid { grid-template-columns: 1fr; gap: 12px; }
             .sidebar-right, .sidebar-left { width: 280px; }
             .card { padding: 18px; }
@@ -433,24 +439,24 @@
 
 <!-- القائمة الجانبية اليمنى -->
 <div class="sidebar-right" id="sidebarRight">
-    <h4>القائمة الرئيسية</h4>
-    <a onclick="switchToTextChat()" class="menu-item" id="textChatMenuBtn"><i class="fas fa-comments"></i> 💬 المحادثة العامة</a>
-    <a onclick="showPrivateChatsList()" class="menu-item"><i class="fas fa-envelope"></i> 📩 محادثاتي</a>
-    <a onclick="switchToVoiceChat()" class="menu-item" id="voiceChatMenuBtn"><i class="fas fa-microphone"></i> 🎤 المحادثة الصوتية</a>
-    <a onclick="showTournaments()" class="menu-item"><i class="fas fa-trophy"></i> البطولات</a>
-    <a onclick="showMaps()" class="menu-item"><i class="fas fa-map"></i> الخرائط</a>
-    <a onclick="showWheel()" class="menu-item"><i class="fas fa-dharmachakra"></i> القرعة</a>
-    <a onclick="showGameFiles()" class="menu-item"><i class="fas fa-box"></i> ملفات اللعبة</a>
+    <h4>📋 القائمة الرئيسية</h4>
+    <a onclick="switchToTextChat()" class="menu-item" id="textChatMenuBtn"><i class="fas fa-comments"></i>  المحادثة العامة</a>
+    <a onclick="showPrivateChatsList()" class="menu-item"><i class="fas fa-envelope"></i>  محادثاتي</a>
+    <a onclick="switchToVoiceChat()" class="menu-item" id="voiceChatMenuBtn"><i class="fas fa-microphone"></i>  المحادثة الصوتية</a>
+    <a onclick="showTournaments()" class="menu-item"><i class="fas fa-trophy"></i>  البطولات</a>
+    <a onclick="showMaps()" class="menu-item"><i class="fas fa-map"></i>  الخرائط</a>
+    <a onclick="showWheel()" class="menu-item"><i class="fas fa-dharmachakra"></i>  القرعة</a>
+    <a onclick="showGameFiles()" class="menu-item"><i class="fas fa-box"></i>  ملفات اللعبة</a>
     
-    <h4>إدارة المنصة</h4>
+    <h4> إدارة المنصة</h4>
     <a onclick="showAdmin()" class="menu-item"><i class="fas fa-crown"></i> لوحة التحكم</a>
-    <a onclick="showLiveStream()" class="menu-item"><i class="fas fa-broadcast-tower"></i> البث المباشر</a>
-    <a onclick="showProfile()" class="menu-item" id="profileMenuBtn"><i class="fas fa-user"></i> ملفي الشخصي</a>
+    <a onclick="showLiveStream()" class="menu-item"><i class="fas fa-broadcast-tower"></i>  البث المباشر</a>
+    <a onclick="showProfile()" class="menu-item" id="profileMenuBtn"><i class="fas fa-user"></i>  ملفي الشخصي</a>
 </div>
 
 <!-- القائمة الجانبية اليسرى -->
 <div class="sidebar-left" id="sidebarLeft">
-    <h4>مواقعنا</h4>
+    <h4>🌐 مواقعنا</h4>
     <a href="https://ahmdhlaq031-design.github.io/Developer-Hub/" target="_blank"><i class="fas fa-code"></i> Developer Hub</a>
     <a href="https://ahmdhlaq031-design.github.io/Exam-hub/" target="_blank"><i class="fas fa-graduation-cap"></i> ExamHub</a>
     <a href="https://ahmdhlaq031-design.github.io/Smart-Free-tools-/" target="_blank"><i class="fas fa-tools"></i> الأدوات الذكية</a>
@@ -458,7 +464,7 @@
     <a href="https://ahmdhlaq031-design.github.io/Ev_Genaral_zero/" target="_blank"><i class="fas fa-bolt"></i> General Fix</a>
     <a href="https://ahmdhlaq031-design.github.io/Seel/" target="_blank"><i class="fas fa-shopping-cart"></i> المتجر</a>
     
-    <h4>الدعم</h4>
+    <h4>💰 الدعم</h4>
     <a onclick="copyToClipboard('bc1qyamlrentlllxrlwrlp3jkapw6n8tna2llxta49','BTC')" class="menu-item"><i class="fab fa-bitcoin"></i> BTC</a>
     <a onclick="copyToClipboard('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb5','ETH')" class="menu-item"><i class="fab fa-ethereum"></i> ETH</a>
     <a href="https://streamelements.com/sahel1/tip" target="_blank"><i class="fas fa-heart"></i> دعم Sahel TV</a>
@@ -468,11 +474,12 @@
 <div class="modal-overlay" id="nameModal">
     <div class="modal">
         <div style="font-size:3rem;margin-bottom:10px;">🎮</div>
-        <h3>أدخل اسمك في اللعبة</h3>
-        <p style="color:var(--text-muted);margin-bottom:16px;font-size:0.85rem;">⚠️ لا يمكن تغييره لاحقاً!</p>
+        <h3>اختر اسمك في اللعبة</h3>
+        <p style="color:var(--text-muted);margin-bottom:12px;font-size:0.85rem;">⚠️ لا يمكن استخدام اسم لاعب آخر</p>
         <input type="text" id="playerNameInput" placeholder="اكتب اسمك هنا...">
-        <p style="color:var(--primary);font-size:0.8rem;margin-bottom:8px;">🎫 الـ ID الخاص بك سيتم إنشاؤه تلقائياً</p>
-        <button class="btn btn-primary" onclick="savePlayerName()" style="width:100%;">تأكيد</button>
+        <p id="nameError" style="color:var(--danger);font-size:0.8rem;margin-bottom:8px;display:none;"></p>
+        <p style="color:var(--primary);font-size:0.8rem;margin-bottom:8px;">🎫 سيتم إنشاء ID خاص بك تلقائياً</p>
+        <button class="btn btn-primary" onclick="savePlayerName()" style="width:100%;">✅ تأكيد</button>
     </div>
 </div>
 
@@ -491,7 +498,7 @@
 <!-- نافذة المحادثة الخاصة -->
 <div class="modal-overlay hidden" id="privateChatModal">
     <div class="modal" style="max-width:600px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
             <h3 style="margin:0;">💬 محادثة مع <span id="privateChatTargetName"></span></h3>
             <button class="btn btn-outline btn-sm" onclick="closePrivateChat()">✕</button>
         </div>
@@ -507,18 +514,22 @@
     </div>
 </div>
 
-<!-- قائمة المحادثات الخاصة -->
-<section id="privateChatsListSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
-    <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-    <div class="section-title"><i class="fas fa-envelope"></i> محادثاتي الخاصة</div>
-    <div style="display:flex;gap:10px;margin-bottom:15px;">
-        <button class="btn btn-primary" onclick="openSearchPlayerModal()"><i class="fas fa-search"></i> بدء محادثة جديدة</button>
+<header>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <button class="icon-btn" id="leftMenuBtn"><i class="fas fa-link"></i></button>
     </div>
-    <div id="privateChatsList"></div>
-</section>
+    <a href="#" onclick="switchToTextChat()" class="logo">
+        <div class="logo-icon"><i class="fas fa-chess-king"></i></div>
+        <div class="logo-text"><h1>GeneralsArena</h1><span>GENERAL SAHEL TV</span></div>
+    </a>
+    <div class="nav-actions">
+        <button class="icon-btn" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+        <button class="icon-btn" id="rightMenuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+</header>
 
-<!-- باقي الأقسام -->
 <div class="main-content">
+    <!-- المحادثة العامة -->
     <section id="textChatSection" class="chat-section">
         <div class="chat-header-bar">
             <i class="fas fa-comments" style="color:var(--primary);"></i>
@@ -538,110 +549,207 @@
         </div>
     </section>
 
+    <!-- قائمة المحادثات الخاصة -->
+    <section id="privateChatsListSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
+        <div class="section-title"><i class="fas fa-envelope"></i> محادثاتي الخاصة</div>
+        <button class="btn btn-primary" onclick="openSearchPlayerModal()" style="margin-bottom:15px;">
+            <i class="fas fa-search"></i> بدء محادثة جديدة
+        </button>
+        <div id="privateChatsList"></div>
+    </section>
+
+    <!-- المحادثة الصوتية -->
     <section id="voiceChatSection" class="hidden" style="padding:15px;overflow-y:auto;height:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-microphone"></i> الغرف الصوتية</div>
-        <p style="color:var(--text-muted);margin-bottom:15px;">اختر غرفة وانضم للمحادثة الصوتية 🎮</p>
+        <p style="color:var(--text-muted);margin-bottom:15px;">اختر غرفة وانضم للمحادثة الصوتية مع اللاعبين الآخرين 🎮</p>
         <div class="voice-rooms-grid" id="voiceRoomsGrid"></div>
         <div id="activeVoiceRoom" class="hidden" style="margin-top:20px;">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-                <span style="color:var(--success);">🟢 متصل: <span id="activeRoomName"></span></span>
-                <button class="btn btn-danger btn-sm" onclick="leaveVoiceRoom()">مغادرة</button>
+                <span style="color:var(--success);font-weight:700;">🟢 متصل الآن: <span id="activeRoomName"></span></span>
+                <button class="btn btn-danger btn-sm" onclick="leaveVoiceRoom()"><i class="fas fa-phone-slash"></i> مغادرة</button>
             </div>
             <div id="jitsiWrapper"><div id="jitsiContainer" style="width:100%;height:60vh;min-height:400px;background:#000;border-radius:16px;"></div></div>
         </div>
     </section>
 
-    <section id="liveStreamSection" class="hidden" style="padding:20px;overflow-y:auto;">
+    <!-- البث المباشر -->
+    <section id="liveStreamSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-broadcast-tower"></i> البث المباشر</div>
         <div id="liveStreamContent"></div>
     </section>
 
-    <section id="adminSection" class="hidden" style="padding:20px;overflow-y:auto;">
+    <!-- لوحة تحكم المدير -->
+    <section id="adminSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1000px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="card">
-            <h3>👑 لوحة تحكم المدير</h3>
-            <div id="adminLoginForm">
-                <input type="password" id="adminPasswordInput" placeholder="كلمة المرور">
-                <button class="btn btn-primary" onclick="adminLogin()" style="width:100%;">دخول</button>
+        
+        <div class="admin-container">
+            <!-- نموذج تسجيل الدخول -->
+            <div id="adminLoginForm" class="card" style="text-align:center;">
+                <div style="font-size:3rem;margin-bottom:10px;">👑</div>
+                <h3>لوحة تحكم المدير</h3>
+                <p style="color:var(--text-muted);margin-bottom:15px;">أدخل كلمة المرور للمتابعة</p>
+                <input type="password" id="adminPasswordInput" placeholder="كلمة المرور" style="max-width:300px;margin:0 auto 12px;">
+                <button class="btn btn-primary" onclick="adminLogin()" style="width:100%;max-width:300px;">🔓 دخول</button>
             </div>
+            
+            <!-- لوحة التحكم -->
             <div id="adminDashboard" class="hidden">
-                <p style="color:var(--success);">✅ مرحباً!</p>
+                <!-- رأس لوحة التحكم -->
+                <div class="admin-header">
+                    <div class="admin-avatar">👑</div>
+                    <div>
+                        <h2 style="color:var(--primary);margin:0;">مرحباً Sahel TV!</h2>
+                        <p style="color:var(--text-muted);font-size:0.85rem;">المدير العام للمنصة</p>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="logoutAdmin()" style="margin-right:auto;">🚪 تسجيل خروج</button>
+                </div>
+                
+                <!-- بطاقات الإحصائيات -->
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-value" id="statUsers">0</div>
+                        <div class="stat-label">مستخدم مسجل</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value" id="statTournaments">0</div>
+                        <div class="stat-label">بطولة</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🗺️</div>
+                        <div class="stat-value" id="statMaps">0</div>
+                        <div class="stat-label">خريطة</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-value" id="statFiles">0</div>
+                        <div class="stat-label">ملف لعبة</div>
+                    </div>
+                </div>
+                
+                <!-- تبويبات الإدارة -->
                 <div class="admin-tabs">
-                    <button class="admin-tab active" onclick="switchAdminTab('tournaments')">البطولات</button>
-                    <button class="admin-tab" onclick="switchAdminTab('maps')">الخرائط</button>
-                    <button class="admin-tab" onclick="switchAdminTab('gameFiles')">ملفات</button>
-                    <button class="admin-tab" onclick="switchAdminTab('stream')">البث</button>
-                    <button class="admin-tab" onclick="switchAdminTab('users')">المستخدمين</button>
+                    <button class="admin-tab active" onclick="switchAdminTab('tournaments')"><i class="fas fa-trophy"></i> البطولات</button>
+                    <button class="admin-tab" onclick="switchAdminTab('maps')"><i class="fas fa-map"></i> الخرائط</button>
+                    <button class="admin-tab" onclick="switchAdminTab('gameFiles')"><i class="fas fa-box"></i> ملفات اللعبة</button>
+                    <button class="admin-tab" onclick="switchAdminTab('stream')"><i class="fas fa-broadcast-tower"></i> البث المباشر</button>
+                    <button class="admin-tab" onclick="switchAdminTab('users')"><i class="fas fa-users"></i> المستخدمين</button>
                 </div>
-                <div id="adminTabTournaments">
-                    <h4>بطولة جديدة</h4>
-                    <input type="text" id="newName" placeholder="الاسم"><br>
-                    <input type="date" id="newDate"><input type="text" id="newPrize" placeholder="الجائزة"><br>
-                    <select id="newSize"><option value="4">4</option><option value="8" selected>8</option></select>
-                    <select id="newType"><option value="open">مفتوحة</option><option value="closed">مغلقة</option></select><br>
-                    <textarea id="newRules" placeholder="الشروط..."></textarea>
-                    <button class="btn btn-primary" onclick="addTournament()">أعلن</button>
-                    <h4>البطولات</h4><div id="adminList"></div>
-                </div>
-                <div id="adminTabMaps" class="hidden"><h4>الخرائط</h4><div id="adminMapsList"></div></div>
-                <div id="adminTabGameFiles" class="hidden"><h4>ملفات اللعبة</h4><div id="adminGameFilesList"></div></div>
-                <div id="adminTabStream" class="hidden">
-                    <h4>إدارة البث</h4>
-                    <input type="url" id="liveStreamUrlInput" placeholder="رابط البث"><input type="text" id="liveStreamTitleInput" placeholder="عنوان">
-                    <button class="btn btn-primary" onclick="setLiveStream()">حفظ</button>
-                </div>
-                <div id="adminTabUsers" class="hidden">
-                    <h4>المستخدمين</h4>
-                    <input type="text" class="search-input" id="userSearchInput" placeholder="بحث..." oninput="renderUsersList()">
-                    <div id="usersList"></div>
+                
+                <!-- محتوى التبويبات -->
+                <div class="admin-panel">
+                    <!-- تبويب البطولات -->
+                    <div id="adminTabTournaments">
+                        <h4>➕ إنشاء بطولة جديدة</h4>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                            <input type="text" id="newName" placeholder="اسم البطولة">
+                            <input type="text" id="newPrize" placeholder="الجائزة">
+                            <input type="date" id="newDate">
+                            <select id="newSize">
+                                <option value="4">4 لاعبين</option>
+                                <option value="8" selected>8 لاعبين</option>
+                                <option value="16">16 لاعب</option>
+                                <option value="32">32 لاعب</option>
+                                <option value="64">64 لاعب</option>
+                            </select>
+                        </div>
+                        <select id="newType" style="margin-top:10px;">
+                            <option value="open">🔓 مفتوحة - أي لاعب يقدر يسجل</option>
+                            <option value="closed">🔒 مغلقة - بدعوة فقط</option>
+                        </select>
+                        <textarea id="newRules" placeholder="شروط وأحكام البطولة..." rows="3" style="margin-top:10px;"></textarea>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+                            <input type="url" id="newDonateLink" placeholder="رابط الدعم (اختياري)">
+                            <input type="url" id="newStreamLink" placeholder="🔴 رابط البث المباشر (اختياري)">
+                        </div>
+                        <button class="btn btn-primary" onclick="addTournament()" style="width:100%;margin-top:10px;">
+                            <i class="fas fa-bullhorn"></i> إعلان عن البطولة
+                        </button>
+                        
+                        <h4 style="margin-top:20px;">📋 البطولات الحالية</h4>
+                        <div id="adminList"></div>
+                    </div>
+                    
+                    <!-- تبويب الخرائط -->
+                    <div id="adminTabMaps" class="hidden">
+                        <h4>🗺️ جميع الخرائط</h4>
+                        <div id="adminMapsList"></div>
+                    </div>
+                    
+                    <!-- تبويب ملفات اللعبة -->
+                    <div id="adminTabGameFiles" class="hidden">
+                        <h4>📦 جميع ملفات اللعبة</h4>
+                        <div id="adminGameFilesList"></div>
+                    </div>
+                    
+                    <!-- تبويب البث المباشر -->
+                    <div id="adminTabStream" class="hidden">
+                        <h4>🔴 إدارة البث المباشر</h4>
+                        <input type="url" id="liveStreamUrlInput" placeholder="رابط البث المباشر (يوتيوب)">
+                        <input type="text" id="liveStreamTitleInput" placeholder="عنوان البث">
+                        <div style="display:flex;gap:10px;margin-top:10px;">
+                            <button class="btn btn-primary" onclick="setLiveStream()" style="flex:1;">💾 حفظ البث</button>
+                            <button class="btn btn-danger" onclick="removeLiveStream()" style="flex:1;">🗑️ إزالة البث</button>
+                        </div>
+                    </div>
+                    
+                    <!-- تبويب المستخدمين -->
+                    <div id="adminTabUsers" class="hidden">
+                        <h4>👥 جميع المستخدمين</h4>
+                        <input type="text" class="search-input" id="userSearchInput" placeholder="🔍 بحث عن مستخدم بالاسم أو ID..." oninput="renderUsersList()">
+                        <div id="usersList"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="tournamentsSection" class="hidden" style="padding:20px;overflow-y:auto;">
+    <!-- باقي الأقسام -->
+    <section id="tournamentsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-trophy"></i> البطولات</div>
+        <div class="section-title"><i class="fas fa-trophy"></i> جميع البطولات</div>
         <div class="grid" id="tournamentGridFull"></div>
     </section>
 
-    <section id="mapsSection" class="hidden" style="padding:20px;overflow-y:auto;">
+    <section id="mapsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-map"></i> الخرائط</div>
         <button class="btn btn-primary" onclick="openMapModal()" style="margin-bottom:15px;"><i class="fas fa-upload"></i> مشاركة خريطة جديدة</button>
         <div class="grid" id="mapsGrid"></div>
     </section>
 
-    <section id="gameFilesSection" class="hidden" style="padding:20px;overflow-y:auto;">
+    <section id="gameFilesSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-box"></i> ملفات اللعبة</div>
         <button class="btn btn-primary" onclick="openGameFileModal()" style="margin-bottom:15px;"><i class="fas fa-file-upload"></i> مشاركة ملف جديد</button>
         <div class="grid" id="gameFilesGrid"></div>
     </section>
 
-    <section id="wheelSection" class="hidden" style="padding:20px;overflow-y:auto;">
+    <section id="wheelSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-dharmachakra"></i> القرعة الدائرية</div>
-        <div class="card wheel-container" style="position:relative;">
-            <div class="wheel-arrow" id="wheelArrow">▼</div>
-            <textarea id="wheelNames" placeholder="الأسماء..." rows="4" style="width:100%;margin-bottom:12px;"></textarea>
+        <div class="card wheel-container">
+            <div class="wheel-pointer">🔻</div>
+            <textarea id="wheelNames" placeholder="الأسماء (كل اسم في سطر)..." rows="4" style="width:100%;margin-bottom:12px;"></textarea>
             <canvas id="wheelCanvas" width="400" height="400" style="max-width:100%;"></canvas>
             <div id="wheelResult" style="font-size:1.3rem;font-weight:800;color:var(--primary);margin:12px 0;"></div>
-            <div style="display:flex;gap:12px;">
-                <button class="btn btn-primary" onclick="spinWheel()">🎲 تدوير</button>
-                <button class="btn btn-danger" onclick="clearWheel()">🗑️ مسح</button>
+            <div style="display:flex;gap:12px;justify-content:center;">
+                <button class="btn btn-primary" onclick="spinWheel()"><i class="fas fa-play"></i> تدوير</button>
+                <button class="btn btn-danger" onclick="clearWheel()"><i class="fas fa-trash"></i> مسح</button>
             </div>
         </div>
     </section>
 
-    <section id="profileSection" class="hidden" style="padding:20px;overflow-y:auto;">
+    <section id="profileSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div id="profileContent"></div>
     </section>
 
-    <section id="detailSection" class="hidden" style="padding:20px;overflow-y:auto;">
+    <section id="detailSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="showTournaments()">⬅️</button>
         <div id="detailContent"></div>
     </section>
@@ -652,14 +760,13 @@
     const TOURNAMENTS_API = "https://api.npoint.io/9442d028609e0e81ecf8";
     const MAPS_API = "https://api.npoint.io/c3cd5edb0be62c9b9d8a";
     const GAMEFILES_API = "https://api.npoint.io/1234567890abcdef";
-    const USERS_DB = "https://api.npoint.io/27bf06704cf94063837e"; // لتخزين معرفات المستخدمين
     
     // ==================== STATE VARIABLES ====================
     let tournaments = [];
     let maps = [];
     let gameFiles = [];
     let playerName = localStorage.getItem('ga_player_name') || '';
-    let playerId = localStorage.getItem('ga_player_id') || '';
+    let playerId = parseInt(localStorage.getItem('ga_player_id')) || 0;
     let currentTheme = localStorage.getItem('ga_theme') || 'dark';
     let wheelNames = JSON.parse(localStorage.getItem('ga_wheel_names') || '[]');
     let wheelAngle = 0;
@@ -669,7 +776,7 @@
     let liveStream = JSON.parse(localStorage.getItem('ga_live_stream') || 'null');
     let chatMessages = [];
     let registeredUsers = [];
-    let nextId = 10000;
+    let nextId = parseInt(localStorage.getItem('ga_next_id')) || 10000;
     
     // Private Chat
     let privateChats = JSON.parse(localStorage.getItem('ga_private_chats') || '{}');
@@ -717,19 +824,15 @@
         return null;
     }
 
-    // ==================== USER REGISTRATION SYSTEM ====================
-    async function loadRegisteredUsers() {
-        try {
-            var response = await fetch(USERS_DB + '?t=' + Date.now());
-            if (response.ok) {
-                var data = await response.json();
-                registeredUsers = Array.isArray(data) ? data : [];
-            }
-        } catch (e) {
-            registeredUsers = JSON.parse(localStorage.getItem('ga_registered_users') || '[]');
+    // ==================== USER REGISTRATION WITH UNIQUE ID ====================
+    function loadRegisteredUsers() {
+        var stored = localStorage.getItem('ga_registered_users');
+        if (stored) {
+            registeredUsers = JSON.parse(stored);
+        } else {
+            registeredUsers = [];
         }
         
-        // Calculate next ID
         if (registeredUsers.length > 0) {
             var maxId = 9999;
             for (var i = 0; i < registeredUsers.length; i++) {
@@ -741,24 +844,19 @@
         } else {
             nextId = 10000;
         }
+        
+        localStorage.setItem('ga_next_id', String(nextId));
     }
 
-    async function saveRegisteredUsers() {
+    function saveRegisteredUsers() {
         localStorage.setItem('ga_registered_users', JSON.stringify(registeredUsers));
-        try {
-            await fetch(USERS_DB, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(registeredUsers)
-            });
-        } catch (e) {
-            console.log('حفظ محلي فقط للمستخدمين');
-        }
+        localStorage.setItem('ga_next_id', String(nextId));
     }
 
     function getUserById(id) {
+        var numId = parseInt(id);
         for (var i = 0; i < registeredUsers.length; i++) {
-            if (registeredUsers[i].id === id) {
+            if (registeredUsers[i].id === numId) {
                 return registeredUsers[i];
             }
         }
@@ -766,31 +864,44 @@
     }
 
     function getUserByName(name) {
+        var lowerName = name.toLowerCase().trim();
         for (var i = 0; i < registeredUsers.length; i++) {
-            if (registeredUsers[i].name.toLowerCase() === name.toLowerCase()) {
+            if (registeredUsers[i].name.toLowerCase().trim() === lowerName) {
                 return registeredUsers[i];
             }
         }
         return null;
     }
 
+    function isNameTakenByOther(name) {
+        var lowerName = name.toLowerCase().trim();
+        for (var i = 0; i < registeredUsers.length; i++) {
+            if (registeredUsers[i].name.toLowerCase().trim() === lowerName) {
+                // إذا كان اللاعب الحالي هو نفسه صاحب الاسم
+                if (playerId && registeredUsers[i].id === playerId) {
+                    return null; // هذا نفسه
+                }
+                return registeredUsers[i]; // لاعب آخر
+            }
+        }
+        return null;
+    }
+
     function registerPlayer(name) {
-        // Check if name already exists
-        var existing = getUserByName(name);
+        var existing = isNameTakenByOther(name);
         if (existing) {
-            return existing;
+            return null; // الاسم مستخدم
         }
         
-        // Create new user
+        var newId = nextId;
         var newUser = {
-            id: nextId,
-            name: name,
+            id: newId,
+            name: name.trim(),
             registeredAt: new Date().toISOString()
         };
         
         registeredUsers.push(newUser);
-        nextId++;
-        
+        nextId = newId + 1;
         saveRegisteredUsers();
         return newUser;
     }
@@ -812,8 +923,6 @@
                 });
                 chatMessages.reverse();
                 displayChatMessages();
-            }, function(error) {
-                console.error("خطأ:", error);
             });
     }
 
@@ -829,18 +938,22 @@
         var html = '';
         for (var i = 0; i < chatMessages.length; i++) {
             var msg = chatMessages[i];
-            var isMine = (msg.name === playerName);
+            var isMine = (msg.userId === String(playerId)) || (msg.name === playerName);
             var user = getUserByName(msg.name);
             var displayName = msg.name || 'زائر';
+            var displayId = '';
+            
             if (user) {
-                displayName = user.name + ' #' + user.id;
+                displayId = ' #' + user.id;
+            } else if (msg.userId) {
+                displayId = ' #' + msg.userId;
             }
             
             if (isMine) {
                 html += '<div class="message-bubble mine"><div class="msg-text">' + msg.text + '</div><div class="msg-time">' + (msg.time || '') + '</div></div>';
             } else {
                 html += '<div class="message-bubble other">';
-                html += '<div class="msg-name" onclick="showUserActions(\'' + displayName + '\', event)" title="اضغط للمراسلة">👤 ' + displayName + '</div>';
+                html += '<div class="msg-name" onclick="showUserActions(\'' + displayName + '\', \'' + displayId.replace(' #', '') + '\', event)">👤 ' + displayName + '<span style="color:var(--primary);font-size:0.65rem;">' + displayId + '</span></div>';
                 html += '<div class="msg-text">' + msg.text + '</div>';
                 html += '<div class="msg-time">' + (msg.time || '') + '</div>';
                 html += '</div>';
@@ -851,24 +964,23 @@
         container.scrollTop = container.scrollHeight;
     }
 
-    function showUserActions(targetName, event) {
+    function showUserActions(targetName, targetId, event) {
         event.stopPropagation();
-        
-        // Strip ID from name if present
-        var actualName = targetName.split(' #')[0];
-        
+        var actualName = targetName.trim();
         if (actualName === playerName) return;
         
         var popup = document.getElementById('userActionsPopup');
         popup.innerHTML = '' +
-            '<button class="btn btn-primary btn-sm" onclick="startPrivateChatByName(\'' + actualName + '\')"><i class="fas fa-comment"></i> مراسلة</button>' +
+            '<button class="btn btn-primary btn-sm" onclick="startPrivateChatByName(\'' + actualName.replace(/'/g, "\\'") + '\', \'' + targetId + '\')"><i class="fas fa-comment"></i> مراسلة</button>' +
             '<button class="btn btn-outline btn-sm" onclick="closeUserActions()">إلغاء</button>';
         
         popup.style.display = 'block';
-        popup.style.left = (event.clientX - 100) + 'px';
-        popup.style.top = (event.clientY - 50) + 'px';
+        popup.style.left = Math.min(event.clientX - 100, window.innerWidth - 250) + 'px';
+        popup.style.top = Math.min(event.clientY - 50, window.innerHeight - 150) + 'px';
         
-        document.addEventListener('click', closeUserActions, { once: true });
+        setTimeout(function() {
+            document.addEventListener('click', closeUserActions, { once: true });
+        }, 100);
     }
 
     function closeUserActions() {
@@ -888,7 +1000,7 @@
         try {
             await messagesRef.add({
                 name: playerName,
-                userId: playerId,
+                userId: String(playerId),
                 text: text,
                 time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
@@ -900,18 +1012,24 @@
     }
 
     // ==================== PRIVATE CHAT SYSTEM ====================
-    function startPrivateChatByName(targetName) {
+    function startPrivateChatByName(targetName, targetId) {
         closeUserActions();
         if (!playerName) {
             document.getElementById('nameModal').style.display = 'flex';
             return;
         }
         if (targetName === playerName) {
-            toast('⚠️ ما تقدر تحكي مع نفسك', true);
+            toast('⚠️ لا يمكنك مراسلة نفسك', true);
             return;
         }
         
-        var targetUser = getUserByName(targetName);
+        var targetUser;
+        if (targetId) {
+            targetUser = getUserById(targetId);
+        }
+        if (!targetUser) {
+            targetUser = getUserByName(targetName);
+        }
         if (!targetUser) {
             toast('⚠️ المستخدم غير موجود', true);
             return;
@@ -921,7 +1039,10 @@
     }
 
     function startPrivateChat(targetUser) {
-        var chatId = [playerId, String(targetUser.id)].sort().join('_');
+        var myId = String(playerId);
+        var theirId = String(targetUser.id);
+        var chatId = [myId, theirId].sort().join('_');
+        
         activePrivateChat = {
             chatId: chatId,
             targetId: targetUser.id,
@@ -931,7 +1052,6 @@
         document.getElementById('privateChatTargetName').textContent = targetUser.name + ' #' + targetUser.id;
         document.getElementById('privateChatModal').classList.remove('hidden');
         
-        // Add to private chats list
         if (!privateChats[chatId]) {
             privateChats[chatId] = {
                 targetName: targetUser.name,
@@ -966,19 +1086,20 @@
         var msgs = privateMessages[activePrivateChat.chatId] || [];
         
         if (msgs.length === 0) {
-            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);">لا توجد رسائل. ابدأ المحادثة!</p>';
+            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:30px;">لا توجد رسائل. ابدأ المحادثة!</p>';
             return;
         }
         
         var html = '';
         for (var i = 0; i < msgs.length; i++) {
             var msg = msgs[i];
-            var isMine = msg.fromId === playerId;
-            html += '<div class="message-bubble ' + (isMine ? 'mine' : 'other') + '">';
-            html += '<div class="msg-name">' + msg.fromName + '</div>';
-            html += '<div class="msg-text">' + msg.text + '</div>';
-            html += '<div class="msg-time">' + (msg.time || '') + '</div>';
-            html += '</div>';
+            var isMine = (String(msg.fromId) === String(playerId));
+            
+            if (isMine) {
+                html += '<div class="message-bubble mine"><div class="msg-text">' + msg.text + '</div><div class="msg-time">' + (msg.time || '') + '</div></div>';
+            } else {
+                html += '<div class="message-bubble other"><div class="msg-name">👤 ' + msg.fromName + '</div><div class="msg-text">' + msg.text + '</div><div class="msg-time">' + (msg.time || '') + '</div></div>';
+            }
         }
         
         container.innerHTML = html;
@@ -995,23 +1116,21 @@
         try {
             await privateMessagesRef.add({
                 chatId: activePrivateChat.chatId,
-                fromId: playerId,
+                fromId: String(playerId),
                 fromName: playerName,
-                toId: activePrivateChat.targetId,
+                toId: String(activePrivateChat.targetId),
                 toName: activePrivateChat.targetName,
                 text: text,
                 time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
             
-            // Update last message
             var chatId = activePrivateChat.chatId;
             if (privateChats[chatId]) {
                 privateChats[chatId].lastMessage = text;
                 privateChats[chatId].timestamp = Date.now();
                 localStorage.setItem('ga_private_chats', JSON.stringify(privateChats));
             }
-            
         } catch (error) {
             toast('❌ فشل الإرسال', true);
         }
@@ -1041,11 +1160,10 @@
         var chatIds = Object.keys(privateChats);
         
         if (chatIds.length === 0) {
-            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px;">لا توجد محادثات خاصة. ابحث عن لاعب لبدء محادثة!</p>';
+            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px;">لا توجد محادثات خاصة</p>';
             return;
         }
         
-        // Sort by timestamp
         chatIds.sort(function(a, b) {
             return (privateChats[b].timestamp || 0) - (privateChats[a].timestamp || 0);
         });
@@ -1054,37 +1172,19 @@
         for (var i = 0; i < chatIds.length; i++) {
             var chatId = chatIds[i];
             var chat = privateChats[chatId];
-            var targetUser = getUserById(chat.targetId);
-            var displayName = chat.targetName;
-            if (targetUser) {
-                displayName = targetUser.name + ' #' + targetUser.id;
-            }
-            
-            html += '' +
-                '<div class="private-chat-row" onclick="openExistingPrivateChat(\'' + chatId + '\', ' + chat.targetId + ', \'' + chat.targetName + '\')">' +
-                    '<div><strong>' + displayName + '</strong><div class="last-message">' + (chat.lastMessage || 'اضغط للدردشة') + '</div></div>' +
-                    '<i class="fas fa-chevron-left"></i>' +
-                '</div>';
+            html += '<div class="private-chat-row" onclick="openExistingPrivateChat(\'' + chatId + '\', ' + chat.targetId + ', \'' + chat.targetName.replace(/'/g, "\\'") + '\')">' +
+                '<div><strong>' + chat.targetName + ' #' + chat.targetId + '</strong><div class="last-message">' + (chat.lastMessage || 'اضغط للدردشة') + '</div></div>' +
+                '<i class="fas fa-chevron-left"></i></div>';
         }
         
         container.innerHTML = html;
     }
 
     function openExistingPrivateChat(chatId, targetId, targetName) {
-        var targetUser = getUserById(targetId);
-        if (!targetUser) {
-            targetUser = { id: targetId, name: targetName };
-        }
-        
-        activePrivateChat = {
-            chatId: chatId,
-            targetId: targetUser.id,
-            targetName: targetUser.name
-        };
-        
-        document.getElementById('privateChatTargetName').textContent = targetUser.name + ' #' + targetUser.id;
+        activePrivateChat = { chatId: chatId, targetId: targetId, targetName: targetName };
+        document.getElementById('privateChatTargetName').textContent = targetName + ' #' + targetId;
         document.getElementById('privateChatModal').classList.remove('hidden');
-        
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         listenForPrivateMessages(chatId);
     }
 
@@ -1100,7 +1200,6 @@
         document.getElementById('searchPlayerModal').classList.add('hidden');
     }
 
-    // Search input handler
     document.addEventListener('DOMContentLoaded', function() {
         var searchInput = document.getElementById('searchPlayerInput');
         if (searchInput) {
@@ -1108,39 +1207,27 @@
                 var query = this.value.trim().toLowerCase();
                 var resultsContainer = document.getElementById('searchResults');
                 
-                if (!query) {
-                    resultsContainer.innerHTML = '';
-                    return;
-                }
+                if (!query) { resultsContainer.innerHTML = ''; return; }
                 
                 var results = [];
                 
-                // Search by ID
                 if (!isNaN(query)) {
-                    var id = parseInt(query);
-                    var user = getUserById(id);
-                    if (user && user.name !== playerName) {
-                        results.push(user);
-                    }
+                    var user = getUserById(parseInt(query));
+                    if (user && user.name !== playerName) results.push(user);
                 }
                 
-                // Search by name
                 for (var i = 0; i < registeredUsers.length; i++) {
                     var user = registeredUsers[i];
                     if (user.name.toLowerCase().indexOf(query) !== -1 && user.name !== playerName) {
-                        // Avoid duplicates
-                        var alreadyAdded = false;
+                        var found = false;
                         for (var j = 0; j < results.length; j++) {
-                            if (results[j].id === user.id) {
-                                alreadyAdded = true;
-                                break;
-                            }
+                            if (results[j].id === user.id) { found = true; break; }
                         }
-                        if (!alreadyAdded) {
-                            results.push(user);
-                        }
+                        if (!found) results.push(user);
                     }
                 }
+                
+                results = results.slice(0, 20);
                 
                 if (results.length === 0) {
                     resultsContainer.innerHTML = '<p style="color:var(--text-muted);padding:10px;">لا توجد نتائج</p>';
@@ -1150,12 +1237,10 @@
                 var html = '';
                 for (var k = 0; k < results.length; k++) {
                     var u = results[k];
-                    html += '<div class="user-row" style="cursor:pointer;margin:4px 0;" onclick="selectSearchResult(' + u.id + ')">';
-                    html += '<span>👤 ' + u.name + ' <span style="color:var(--primary);">#' + u.id + '</span></span>';
-                    html += '<button class="btn btn-primary btn-sm">💬 مراسلة</button>';
-                    html += '</div>';
+                    html += '<div class="user-row" style="cursor:pointer;margin:4px 0;" onclick="selectSearchResult(' + u.id + ')">' +
+                        '<span>👤 ' + u.name + ' <span style="color:var(--primary);">#' + u.id + '</span></span>' +
+                        '<button class="btn btn-primary btn-sm">💬 مراسلة</button></div>';
                 }
-                
                 resultsContainer.innerHTML = html;
             });
         }
@@ -1164,7 +1249,6 @@
     function selectSearchResult(userId) {
         var user = getUserById(userId);
         if (!user) return;
-        
         closeSearchPlayerModal();
         startPrivateChat(user);
     }
@@ -1173,7 +1257,6 @@
     function renderVoiceRooms() {
         var grid = document.getElementById('voiceRoomsGrid');
         if (!grid) return;
-        
         var html = '';
         for (var i = 0; i < voiceRooms.length; i++) {
             var room = voiceRooms[i];
@@ -1186,13 +1269,13 @@
         currentVoiceRoom = { id: roomId, name: roomName };
         document.getElementById('activeVoiceRoom').classList.remove('hidden');
         document.getElementById('activeRoomName').textContent = roomName;
-        var jitsiContainer = document.getElementById('jitsiContainer');
-        jitsiContainer.innerHTML = '';
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://meet.jit.si/' + roomId + '#config.startWithAudioMuted=false&config.startWithVideoMuted=true&config.prejoinPageEnabled=false';
-        iframe.allow = 'camera;microphone;fullscreen';
-        iframe.style.width = '100%'; iframe.style.height = '100%'; iframe.style.border = 'none';
-        jitsiContainer.appendChild(iframe);
+        var c = document.getElementById('jitsiContainer');
+        c.innerHTML = '';
+        var ifr = document.createElement('iframe');
+        ifr.src = 'https://meet.jit.si/' + roomId + '#config.startWithAudioMuted=false&config.startWithVideoMuted=true&config.prejoinPageEnabled=false';
+        ifr.allow = 'camera;microphone;fullscreen';
+        ifr.style.width = '100%'; ifr.style.height = '100%'; ifr.style.border = 'none';
+        c.appendChild(ifr);
         toast('🎤 انضممت إلى ' + roomName);
     }
 
@@ -1229,7 +1312,7 @@
         closeAllSidebars();
     }
 
-    // ==================== TOURNAMENTS ====================
+    // ==================== TOURNAMENTS DATA ====================
     async function loadData() {
         try {
             var tRes = await fetch(TOURNAMENTS_API, { cache: 'no-cache' });
@@ -1274,14 +1357,6 @@
         renderAll();
     }
 
-    function getAllPlayerNames() {
-        var names = [];
-        for (var i = 0; i < registeredUsers.length; i++) {
-            names.push(registeredUsers[i].name);
-        }
-        return names;
-    }
-
     function renderAll() {
         renderTournamentGrid();
         renderMapsGrid();
@@ -1293,6 +1368,19 @@
         renderAdminGameFilesList();
         renderUsersList();
         renderPrivateChatsList();
+        updateAdminStats();
+    }
+
+    function updateAdminStats() {
+        var statUsers = document.getElementById('statUsers');
+        var statTournaments = document.getElementById('statTournaments');
+        var statMaps = document.getElementById('statMaps');
+        var statFiles = document.getElementById('statFiles');
+        
+        if (statUsers) statUsers.textContent = registeredUsers.length;
+        if (statTournaments) statTournaments.textContent = tournaments.length;
+        if (statMaps) statMaps.textContent = maps.length;
+        if (statFiles) statFiles.textContent = gameFiles.length;
     }
 
     function renderTournamentGrid() {
@@ -1346,7 +1434,7 @@
         var html = '';
         for (var i = 0; i < gameFiles.length; i++) {
             var g = gameFiles[i];
-            html += '<div class="card"><h3>📦 ' + g.name + '</h3><span class="badge">' + (tl[g.type] || g.type) + '</span><p style="font-size:0.8rem;color:var(--text-muted);">' + g.author + ' | ' + g.date + '</p><a href="' + g.link + '" target="_blank" class="btn btn-primary btn-sm">📥 تحميل</a></div>';
+            html += '<div class="card"><h3>📦 ' + g.name + '</h3><span class="badge">' + (tl[g.type] || g.type) + '</span><p style="font-size:0.8rem;">' + g.author + ' | ' + g.date + '</p><a href="' + g.link + '" target="_blank" class="btn btn-primary btn-sm">📥 تحميل</a></div>';
         }
         grid.innerHTML = html;
     }
@@ -1367,11 +1455,11 @@
         if (!isAdmin) return;
         var u = document.getElementById('liveStreamUrlInput').value.trim();
         var t = document.getElementById('liveStreamTitleInput').value.trim();
-        if (!u) { toast('⚠️ رابط', true); return; }
+        if (!u) { toast('⚠️ أدخل رابط البث', true); return; }
         liveStream = { url: u, title: t };
         localStorage.setItem('ga_live_stream', JSON.stringify(liveStream));
         renderLiveStreamContent();
-        toast('✅ تم');
+        toast('✅ تم حفظ البث');
     }
 
     function removeLiveStream() {
@@ -1379,7 +1467,7 @@
         liveStream = null;
         localStorage.removeItem('ga_live_stream');
         renderLiveStreamContent();
-        toast('🗑️ تم');
+        toast('🗑️ تم إزالة البث');
     }
 
     function showLiveStream() {
@@ -1392,15 +1480,15 @@
     }
 
     function joinTournament(idx) {
-        if (!playerName) { toast('⚠️ اسمك', true); document.getElementById('nameModal').style.display = 'flex'; return; }
+        if (!playerName) { toast('⚠️ أدخل اسمك', true); document.getElementById('nameModal').style.display = 'flex'; return; }
         var t = tournaments[idx];
-        if (t.players >= t.size) { toast('⚠️ مكتملة', true); return; }
+        if (t.players >= t.size) { toast('⚠️ البطولة مكتملة', true); return; }
         if (!t.playersList) t.playersList = [];
-        if (t.playersList.indexOf(playerName) !== -1) { toast('⚠️ مسجل', true); return; }
+        if (t.playersList.indexOf(playerName) !== -1) { toast('⚠️ مسجل بالفعل', true); return; }
         t.playersList.push(playerName);
         t.players = t.playersList.length;
         saveTournaments();
-        toast('✅ ' + playerName);
+        toast('✅ تم تسجيل ' + playerName);
     }
 
     function viewDetail(idx) {
@@ -1418,7 +1506,7 @@
     }
 
     function showProfile() {
-        if (!playerName) { toast('⚠️ اسمك', true); document.getElementById('nameModal').style.display = 'flex'; return; }
+        if (!playerName) { toast('⚠️ أدخل اسمك', true); document.getElementById('nameModal').style.display = 'flex'; return; }
         var sections = document.querySelectorAll('.main-content>section');
         for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
         document.getElementById('privateChatsListSection').classList.add('hidden');
@@ -1430,7 +1518,7 @@
         
         var html = '<div class="profile-card"><div class="profile-avatar">👤</div>';
         html += '<h2>' + playerName + ' <span style="color:var(--primary);font-size:1rem;">#' + userId + '</span></h2>';
-        html += '<p style="color:var(--text-muted);">🎫 ID: ' + userId + '</p>';
+        html += '<p style="color:var(--text-muted);font-size:1.2rem;">🎫 ID: <strong style="color:var(--primary);">' + userId + '</strong></p>';
         html += '</div>';
         document.getElementById('profileContent').innerHTML = html;
     }
@@ -1440,12 +1528,12 @@
     function shareMap() {
         var n = document.getElementById('mapNameInput').value.trim();
         var l = document.getElementById('mapLinkInput').value.trim();
-        if (!n || !l) { toast('⚠️ أكمل', true); return; }
+        if (!n || !l) { toast('⚠️ أكمل الحقول', true); return; }
         maps.push({ name: n, link: l, author: playerName || 'زائر', date: new Date().toLocaleDateString('ar') });
         saveMaps(); closeMapModal();
         document.getElementById('mapNameInput').value = '';
         document.getElementById('mapLinkInput').value = '';
-        toast('✅ تم');
+        toast('✅ تمت المشاركة');
     }
 
     function openGameFileModal() { document.getElementById('gameFileModal').classList.remove('hidden'); closeAllSidebars(); }
@@ -1454,12 +1542,12 @@
         var n = document.getElementById('gameFileNameInput').value.trim();
         var l = document.getElementById('gameFileLinkInput').value.trim();
         var t = document.getElementById('gameFileTypeInput').value;
-        if (!n || !l) { toast('⚠️ أكمل', true); return; }
+        if (!n || !l) { toast('⚠️ أكمل الحقول', true); return; }
         gameFiles.push({ name: n, link: l, type: t, author: playerName || 'زائر', date: new Date().toLocaleDateString('ar') });
         saveGameFiles(); closeGameFileModal();
         document.getElementById('gameFileNameInput').value = '';
         document.getElementById('gameFileLinkInput').value = '';
-        toast('✅ تم');
+        toast('✅ تمت المشاركة');
     }
 
     function showTournaments() {
@@ -1523,9 +1611,9 @@
             document.getElementById('adminLoginForm').classList.add('hidden');
             document.getElementById('adminDashboard').classList.remove('hidden');
             renderAll();
-            toast('🔓 مرحباً!');
+            toast('🔓 مرحباً Sahel TV!');
         } else {
-            toast('❌ خطأ', true);
+            toast('❌ كلمة مرور خاطئة', true);
         }
     }
 
@@ -1534,7 +1622,7 @@
         localStorage.removeItem('ga_is_admin');
         document.getElementById('adminLoginForm').classList.remove('hidden');
         document.getElementById('adminDashboard').classList.add('hidden');
-        toast('👋 تم');
+        toast('👋 تم تسجيل الخروج');
     }
 
     function addTournament() {
@@ -1542,33 +1630,38 @@
         var n = document.getElementById('newName').value;
         var d = document.getElementById('newDate').value;
         var p = document.getElementById('newPrize').value;
-        if (!n || !d || !p) { toast('⚠️ أكمل', true); return; }
+        if (!n || !d || !p) { toast('⚠️ أكمل الحقول', true); return; }
         tournaments.push({
             name: n, date: d, prize: p,
             size: parseInt(document.getElementById('newSize').value),
             type: document.getElementById('newType').value,
             players: 0, playersList: [],
             rules: document.getElementById('newRules').value,
+            donateLink: document.getElementById('newDonateLink').value,
             streamLink: document.getElementById('newStreamLink').value,
             status: 'جارية'
         });
+        document.getElementById('newName').value = '';
+        document.getElementById('newDate').value = '';
+        document.getElementById('newPrize').value = '';
+        document.getElementById('newRules').value = '';
+        document.getElementById('newDonateLink').value = '';
+        document.getElementById('newStreamLink').value = '';
         saveTournaments();
-        toast('📢 تم');
+        toast('📢 تم الإعلان عن البطولة');
     }
 
-    function deleteTournament(idx) { if (!isAdmin) return; if (confirm('حذف؟')) { tournaments.splice(idx, 1); saveTournaments(); toast('🗑️ تم'); } }
-    function deleteMap(idx) { if (!isAdmin) return; if (confirm('حذف؟')) { maps.splice(idx, 1); saveMaps(); toast('🗑️ تم'); } }
-    function deleteGameFile(idx) { if (!isAdmin) return; if (confirm('حذف؟')) { gameFiles.splice(idx, 1); saveGameFiles(); toast('🗑️ تم'); } }
+    function deleteTournament(idx) { if (!isAdmin) return; if (confirm('حذف البطولة؟')) { tournaments.splice(idx, 1); saveTournaments(); toast('🗑️ تم'); } }
+    function deleteMap(idx) { if (!isAdmin) return; if (confirm('حذف الخريطة؟')) { maps.splice(idx, 1); saveMaps(); toast('🗑️ تم'); } }
+    function deleteGameFile(idx) { if (!isAdmin) return; if (confirm('حذف الملف؟')) { gameFiles.splice(idx, 1); saveGameFiles(); toast('🗑️ تم'); } }
     function deleteUser(userName) {
         if (!isAdmin) return;
-        if (confirm('حذف ' + userName + '؟')) {
+        if (confirm('حذف المستخدم ' + userName + '؟')) {
             for (var i = 0; i < registeredUsers.length; i++) {
-                if (registeredUsers[i].name === userName) {
-                    registeredUsers.splice(i, 1);
-                    break;
-                }
+                if (registeredUsers[i].name === userName) { registeredUsers.splice(i, 1); break; }
             }
             saveRegisteredUsers();
+            renderAll();
             toast('🗑️ تم حذف ' + userName);
         }
     }
@@ -1582,34 +1675,38 @@
         document.getElementById('adminTabGameFiles').classList.toggle('hidden', tab !== 'gameFiles');
         document.getElementById('adminTabStream').classList.toggle('hidden', tab !== 'stream');
         document.getElementById('adminTabUsers').classList.toggle('hidden', tab !== 'users');
+        if (tab === 'maps') renderAdminMapsList();
+        if (tab === 'gameFiles') renderAdminGameFilesList();
+        if (tab === 'users') renderUsersList();
     }
 
     function renderAdminList() {
         var l = document.getElementById('adminList');
-        if (!tournaments.length) { l.innerHTML = '<p>لا يوجد</p>'; return; }
+        if (!tournaments.length) { l.innerHTML = '<p style="color:var(--text-muted);">لا توجد بطولات</p>'; return; }
         var html = '';
         for (var i = 0; i < tournaments.length; i++) {
-            html += '<div class="user-row"><span>🏆 ' + tournaments[i].name + '</span><button class="btn btn-danger btn-sm" onclick="deleteTournament(' + i + ')">🗑️</button></div>';
+            html += '<div class="user-row"><span>🏆 ' + tournaments[i].name + ' | 👥 ' + (tournaments[i].players || 0) + '/' + tournaments[i].size + '</span><button class="btn btn-danger btn-sm" onclick="deleteTournament(' + i + ')">🗑️</button></div>';
         }
         l.innerHTML = html;
     }
 
     function renderAdminMapsList() {
         var l = document.getElementById('adminMapsList');
-        if (!maps.length) { l.innerHTML = '<p>لا يوجد</p>'; return; }
+        if (!maps.length) { l.innerHTML = '<p style="color:var(--text-muted);">لا توجد خرائط</p>'; return; }
         var html = '';
         for (var i = 0; i < maps.length; i++) {
-            html += '<div class="user-row"><span>🗺️ ' + maps[i].name + '</span><button class="btn btn-danger btn-sm" onclick="deleteMap(' + i + ')">🗑️</button></div>';
+            html += '<div class="user-row"><span>🗺️ ' + maps[i].name + ' - ' + maps[i].author + '</span><button class="btn btn-danger btn-sm" onclick="deleteMap(' + i + ')">🗑️</button></div>';
         }
         l.innerHTML = html;
     }
 
     function renderAdminGameFilesList() {
         var l = document.getElementById('adminGameFilesList');
-        if (!gameFiles.length) { l.innerHTML = '<p>لا يوجد</p>'; return; }
+        if (!gameFiles.length) { l.innerHTML = '<p style="color:var(--text-muted);">لا توجد ملفات</p>'; return; }
+        var tl = { patch: '🔧 باتش', fix: '🛠️ إصلاح', mod: '🎨 مود', tool: '🔧 أداة', other: '📄 آخر' };
         var html = '';
         for (var i = 0; i < gameFiles.length; i++) {
-            html += '<div class="user-row"><span>📦 ' + gameFiles[i].name + '</span><button class="btn btn-danger btn-sm" onclick="deleteGameFile(' + i + ')">🗑️</button></div>';
+            html += '<div class="user-row"><span>📦 ' + gameFiles[i].name + ' (' + (tl[gameFiles[i].type] || gameFiles[i].type) + ') - ' + gameFiles[i].author + '</span><button class="btn btn-danger btn-sm" onclick="deleteGameFile(' + i + ')">🗑️</button></div>';
         }
         l.innerHTML = html;
     }
@@ -1624,10 +1721,10 @@
                 filtered.push(u);
             }
         }
-        if (!filtered.length) { l.innerHTML = '<p>لا يوجد</p>'; return; }
+        if (!filtered.length) { l.innerHTML = '<p style="color:var(--text-muted);">لا يوجد مستخدمون</p>'; return; }
         var html = '';
         for (var i = 0; i < filtered.length; i++) {
-            html += '<div class="user-row"><span>👤 ' + filtered[i].name + ' <span style="color:var(--primary);">#' + filtered[i].id + '</span></span><button class="btn btn-danger btn-sm" onclick="deleteUser(\'' + filtered[i].name + '\')">🗑️</button></div>';
+            html += '<div class="user-row"><span>👤 ' + filtered[i].name + ' <span style="color:var(--primary);">#' + filtered[i].id + '</span></span><button class="btn btn-danger btn-sm" onclick="deleteUser(\'' + filtered[i].name.replace(/'/g, "\\'") + '\')">🗑️</button></div>';
         }
         l.innerHTML = html;
     }
@@ -1636,10 +1733,7 @@
     function loadWheelNames() { var t = document.getElementById('wheelNames'); if (t) t.value = wheelNames.join('\n'); }
     function saveWheelNames() {
         var t = document.getElementById('wheelNames');
-        if (t) {
-            wheelNames = t.value.split('\n').filter(function(n) { return n.trim(); });
-            localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames));
-        }
+        if (t) { wheelNames = t.value.split('\n').filter(function(n) { return n.trim(); }); localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames)); }
         drawWheel();
     }
 
@@ -1647,7 +1741,7 @@
         var canvas = document.getElementById('wheelCanvas');
         if (!canvas) return;
         var ctx = canvas.getContext('2d');
-        var w = canvas.width, h = canvas.height, cx = w / 2, cy = h / 2, r = Math.min(cx, cy) - 25;
+        var w = canvas.width, h = canvas.height, cx = w / 2, cy = h / 2, r = Math.min(cx, cy) - 30;
         ctx.clearRect(0, 0, w, h);
         
         if (wheelNames.length === 0) {
@@ -1667,66 +1761,74 @@
             ctx.arc(cx, cy, r, slice * i + wheelAngle, slice * (i + 1) + wheelAngle);
             ctx.fillStyle = colors[i % colors.length];
             ctx.fill();
-            ctx.strokeStyle = 'var(--bg-primary)';
+            ctx.strokeStyle = 'var(--bg-secondary)';
             ctx.lineWidth = 3;
             ctx.stroke();
             ctx.save();
             ctx.translate(cx, cy);
             ctx.rotate(slice * i + slice / 2 + wheelAngle);
             ctx.textAlign = 'center';
-            ctx.fillStyle = 'white';
+            ctx.fillStyle = '#000';
             ctx.font = 'bold 14px Tajawal';
             ctx.fillText(wheelNames[i], r * 0.65, 5);
             ctx.restore();
         }
         
-        // Draw center circle
         ctx.beginPath();
-        ctx.arc(cx, cy, 15, 0, 2 * Math.PI);
-        ctx.fillStyle = 'var(--bg-secondary)';
+        ctx.arc(cx, cy, 18, 0, 2 * Math.PI);
+        ctx.fillStyle = 'var(--bg-card)';
         ctx.fill();
         ctx.strokeStyle = 'var(--primary)';
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 3;
         ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
+        ctx.fillStyle = 'var(--primary)';
+        ctx.fill();
     }
 
     function spinWheel() {
         var t = document.getElementById('wheelNames');
-        if (t) {
-            wheelNames = t.value.split('\n').filter(function(n) { return n.trim(); });
-            localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames));
-        }
-        if (!wheelNames.length) { toast('⚠️ أسماء', true); return; }
+        if (t) { wheelNames = t.value.split('\n').filter(function(n) { return n.trim(); }); localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames)); }
+        if (!wheelNames.length) { toast('⚠️ أدخل أسماء', true); return; }
         if (wheelSpinning) return;
         wheelSpinning = true;
         
         var res = document.getElementById('wheelResult');
         res.textContent = '🎲 جاري الدوران...';
         
-        var spins = 5 + Math.random() * 5;
-        var dur = 3000;
-        var start = wheelAngle;
-        var target = start + spins * 2 * Math.PI;
-        var st = performance.now();
+        var extraSpins = 3 + Math.floor(Math.random() * 4);
+        var randomSlice = Math.floor(Math.random() * wheelNames.length);
+        var sliceAngle = 2 * Math.PI / wheelNames.length;
+        var targetAngle = 2 * Math.PI * extraSpins + (wheelNames.length - randomSlice) * sliceAngle + sliceAngle / 2;
         
-        function anim(now) {
-            var el = now - st;
-            var prog = Math.min(el / dur, 1);
-            var ease = 1 - Math.pow(1 - prog, 3);
-            wheelAngle = start + (target - start) * ease;
+        var duration = 4000;
+        var startAngle = wheelAngle;
+        var startTime = null;
+        
+        function animate(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var elapsed = timestamp - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            var easeOut = 1 - Math.pow(1 - progress, 3);
+            
+            wheelAngle = startAngle + targetAngle * easeOut;
             drawWheel();
-            if (prog < 1) {
-                requestAnimationFrame(anim);
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
             } else {
-                wheelAngle = target % (2 * Math.PI);
-                var slice = 2 * Math.PI / wheelNames.length;
-                var pa = (2 * Math.PI - wheelAngle) % (2 * Math.PI);
-                var wi = Math.floor(pa / slice) % wheelNames.length;
-                res.textContent = '🏆 الفائز: ' + wheelNames[wi] + ' 🏆';
+                wheelAngle = wheelAngle % (2 * Math.PI);
+                var pointerAngle = (2 * Math.PI - (wheelAngle % (2 * Math.PI))) % (2 * Math.PI);
+                var winnerIndex = Math.floor(pointerAngle / sliceAngle) % wheelNames.length;
+                res.textContent = '🏆 الفائز: ' + wheelNames[winnerIndex] + ' 🏆';
                 wheelSpinning = false;
+                toast('🎉 الفائز: ' + wheelNames[winnerIndex] + '!');
             }
         }
-        requestAnimationFrame(anim);
+        
+        requestAnimationFrame(animate);
     }
 
     function clearWheel() {
@@ -1735,57 +1837,100 @@
         document.getElementById('wheelNames').value = '';
         document.getElementById('wheelResult').textContent = '';
         drawWheel();
-        toast('🗑️ تم');
+        toast('🗑️ تم مسح القرعة');
     }
     document.getElementById('wheelNames')?.addEventListener('input', saveWheelNames);
 
     // ==================== PLAYER NAME ====================
     function savePlayerName() {
         var name = document.getElementById('playerNameInput').value.trim();
-        if (!name) return;
+        var errorEl = document.getElementById('nameError');
         
-        // Check if name already registered
-        var existing = getUserByName(name);
-        if (existing && existing.name !== playerName) {
-            toast('⚠️ هذا الاسم مستخدم بالفعل', true);
+        if (!name) {
+            errorEl.textContent = '⚠️ الرجاء إدخال اسم';
+            errorEl.style.display = 'block';
             return;
         }
         
-        var user;
-        if (playerId && playerName) {
-            // Update existing user
-            user = getUserById(parseInt(playerId));
-            if (user) {
-                user.name = name;
-                saveRegisteredUsers();
-            }
-        } else {
-            // Register new user
-            user = registerPlayer(name);
-            playerId = String(user.id);
-            localStorage.setItem('ga_player_id', playerId);
+        if (name.length < 2) {
+            errorEl.textContent = '⚠️ الاسم يجب أن يكون حرفين على الأقل';
+            errorEl.style.display = 'block';
+            return;
         }
         
-        playerName = name;
-        localStorage.setItem('ga_player_name', name);
+        if (name.length > 20) {
+            errorEl.textContent = '⚠️ الاسم يجب أن لا يتجاوز 20 حرف';
+            errorEl.style.display = 'block';
+            return;
+        }
+        
+        // تحميل المستخدمين المسجلين
+        loadRegisteredUsers();
+        
+        // التحقق إذا كان الاسم مستخدم من لاعب آخر
+        var takenByOther = isNameTakenByOther(name);
+        
+        if (takenByOther) {
+            // الاسم مستخدم من لاعب آخر
+            errorEl.textContent = '❌ هذا الاسم مستخدم بالفعل من لاعب آخر! الرجاء اختيار اسم مختلف';
+            errorEl.style.display = 'block';
+            document.getElementById('playerNameInput').value = '';
+            document.getElementById('playerNameInput').focus();
+            toast('⚠️ هذا الاسم مستخدم بالفعل! اختر اسماً آخر', true);
+            return;
+        }
+        
+        // إذا كان اللاعب الحالي له اسم سابق
+        if (playerName && playerId) {
+            var currentUser = getUserById(playerId);
+            if (currentUser && currentUser.name === playerName) {
+                // تحديث الاسم
+                currentUser.name = name;
+                saveRegisteredUsers();
+            }
+        }
+        
+        // تسجيل لاعب جديد
+        var user = registerPlayer(name);
+        if (!user) {
+            errorEl.textContent = '❌ فشل التسجيل. جرب مرة أخرى';
+            errorEl.style.display = 'block';
+            return;
+        }
+        
+        playerName = user.name;
+        playerId = user.id;
+        
+        localStorage.setItem('ga_player_name', playerName);
+        localStorage.setItem('ga_player_id', String(playerId));
+        
         document.getElementById('nameModal').style.display = 'none';
         document.getElementById('profileMenuBtn').style.display = 'flex';
-        toast('✅ أهلاً ' + name + '! 🎫 ID: #' + playerId);
+        errorEl.style.display = 'none';
+        
+        toast('✅ أهلاً ' + playerName + '! 🎫 ID: #' + playerId);
     }
 
     function initPlayerName() {
-        if (playerName) {
-            document.getElementById('nameModal').style.display = 'none';
-            document.getElementById('profileMenuBtn').style.display = 'flex';
-            // Ensure user is registered
-            var user = getUserByName(playerName);
-            if (!user) {
-                user = registerPlayer(playerName);
-                playerId = String(user.id);
-                localStorage.setItem('ga_player_id', playerId);
-            } else if (!playerId) {
-                playerId = String(user.id);
-                localStorage.setItem('ga_player_id', playerId);
+        loadRegisteredUsers();
+        
+        if (playerName && playerId) {
+            var user = getUserById(playerId);
+            
+            if (user && user.name === playerName) {
+                // اللاعب معروف وصحيح
+                document.getElementById('nameModal').style.display = 'none';
+                document.getElementById('profileMenuBtn').style.display = 'flex';
+            } else if (user && user.name !== playerName) {
+                // تم تغيير الاسم
+                playerName = user.name;
+                localStorage.setItem('ga_player_name', playerName);
+                document.getElementById('nameModal').style.display = 'none';
+                document.getElementById('profileMenuBtn').style.display = 'flex';
+            } else {
+                // ID غير موجود - إعادة تسجيل
+                document.getElementById('nameModal').style.display = 'flex';
+                document.getElementById('profileMenuBtn').style.display = 'none';
             }
         } else {
             document.getElementById('nameModal').style.display = 'flex';
@@ -1837,36 +1982,26 @@
     document.addEventListener('DOMContentLoaded', function() {
         setTheme(currentTheme);
         updateThemeIcon();
+        loadRegisteredUsers();
+        initPlayerName();
+        loadData();
+        loadWheelNames();
+        drawWheel();
+        checkAdminStatus();
+        renderLiveStreamContent();
+        renderVoiceRooms();
+        listenForMessages();
         
-        // Load data
-        loadRegisteredUsers().then(function() {
-            loadData();
-            initPlayerName();
-            
-            // Set player ID if exists
-            if (playerName && !playerId) {
-                var user = getUserByName(playerName);
-                if (user) {
-                    playerId = String(user.id);
-                    localStorage.setItem('ga_player_id', playerId);
-                }
-            }
-            
-            loadWheelNames();
-            drawWheel();
-            checkAdminStatus();
-            renderLiveStreamContent();
-            renderVoiceRooms();
-            listenForMessages();
-            
-            if (chatMode === 'voice') {
-                switchToVoiceChat();
-            } else {
-                switchToTextChat();
-            }
-            
-            console.log('✅ GeneralsArena جاهز! 🎫 نظام ID شغال');
-        });
+        if (chatMode === 'voice') {
+            switchToVoiceChat();
+        } else {
+            switchToTextChat();
+        }
+        
+        console.log('✅ GeneralsArena جاهز!');
+        console.log('👤 اللاعب: ' + (playerName || 'غير مسجل') + ' #' + playerId);
+        console.log('📋 المستخدمين: ' + registeredUsers.length);
+        console.log('🆔 Next ID: ' + nextId);
     });
 </script>
 </body>
