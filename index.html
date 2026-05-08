@@ -9,10 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Firebase SDK (Compat) -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js">
-    </script><script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <script>
-        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyAWVpvFaDOciv5nQKnzbjQepGW7_KS9Mmg",
             authDomain: "chat-94c01.firebaseapp.com",
@@ -21,8 +20,6 @@
             messagingSenderId: "111489148507",
             appId: "1:111489148507:web:75ea87f96e0f44e56e817e"
         };
-        
-        // تهيئة Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
         console.log('✅ Firebase متصل!');
@@ -126,153 +123,64 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            cursor: pointer;
-        }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; }
 
         .logo-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: var(--radius-sm);
-            background: var(--gradient-1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #000;
-            box-shadow: 0 4px 12px rgba(240, 185, 11, 0.3);
+            width: 42px; height: 42px; border-radius: var(--radius-sm);
+            background: var(--gradient-1); display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: #000; box-shadow: 0 4px 12px rgba(240, 185, 11, 0.3);
         }
 
-        .logo-text h1 {
-            font-size: 1.1rem;
-            font-weight: 900;
-            color: var(--primary);
-            line-height: 1.2;
-        }
-
-        .logo-text span {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            letter-spacing: 0.05em;
-        }
+        .logo-text h1 { font-size: 1.1rem; font-weight: 900; color: var(--primary); line-height: 1.2; }
+        .logo-text span { font-size: 0.65rem; color: var(--text-muted); font-weight: 500; letter-spacing: 0.05em; }
 
         .nav-actions { display: flex; gap: 8px; align-items: center; }
 
         .icon-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            color: var(--text-secondary);
-            font-size: 1rem;
-            text-decoration: none;
-            position: relative;
-            backdrop-filter: var(--backdrop-blur);
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            width: 40px; height: 40px; border-radius: var(--radius-sm);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: var(--transition); color: var(--text-secondary);
+            font-size: 1rem; text-decoration: none; backdrop-filter: var(--backdrop-blur);
         }
 
-        .icon-btn:hover {
-            background: var(--primary);
-            color: #000;
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(240, 185, 11, 0.3);
-        }
-
+        .icon-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(240, 185, 11, 0.3); }
         .icon-btn:active { transform: translateY(0); }
 
         .sidebar-right, .sidebar-left {
-            position: fixed;
-            top: 0;
-            width: 320px;
-            height: 100vh;
-            background: var(--bg-card);
-            z-index: 200;
-            padding: 90px 20px 30px;
+            position: fixed; top: 0; width: 320px; height: 100vh;
+            background: var(--bg-card); z-index: 200; padding: 90px 20px 30px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--shadow-xl);
-            backdrop-filter: var(--backdrop-blur);
-            -webkit-backdrop-filter: var(--backdrop-blur);
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-xl); backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur); overflow-y: auto; border: 1px solid var(--border-color);
         }
 
-        .sidebar-right {
-            right: -340px;
-            border-left: 1px solid var(--border-color);
-            border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-        }
-
+        .sidebar-right { right: -340px; border-left: 1px solid var(--border-color); border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
         .sidebar-right.open { right: 0; }
-
-        .sidebar-left {
-            left: -340px;
-            border-right: 1px solid var(--border-color);
-            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-        }
-
+        .sidebar-left { left: -340px; border-right: 1px solid var(--border-color); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
         .sidebar-left.open { left: 0; }
 
         .sidebar-right h4, .sidebar-left h4 {
-            color: var(--primary);
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin: 20px 0 8px;
-            padding: 0 12px;
-            opacity: 0.8;
+            color: var(--primary); font-size: 0.7rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; margin: 20px 0 8px; padding: 0 12px; opacity: 0.8;
         }
 
         .sidebar-right a, .sidebar-right .menu-item, .sidebar-left a, .sidebar-left .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: var(--transition);
-            cursor: pointer;
-            margin-bottom: 4px;
-            position: relative;
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            border-radius: var(--radius-sm); text-decoration: none; color: var(--text-secondary);
+            font-size: 0.9rem; font-weight: 500; transition: var(--transition); cursor: pointer; margin-bottom: 4px;
         }
 
         .sidebar-right a:hover, .sidebar-right .menu-item:hover, .sidebar-left a:hover, .sidebar-left .menu-item:hover {
-            background: rgba(240, 185, 11, 0.1);
-            color: var(--primary);
-            padding-right: 24px;
+            background: rgba(240, 185, 11, 0.1); color: var(--primary); padding-right: 24px;
         }
 
-        .sidebar-right a i, .sidebar-right .menu-item i, .sidebar-left a i, .sidebar-left .menu-item i {
-            width: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
+        .sidebar-right a i, .sidebar-right .menu-item i, .sidebar-left a i, .sidebar-left .menu-item i { width: 20px; text-align: center; font-size: 0.9rem; }
 
         .overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 150;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            backdrop-filter: blur(4px);
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); z-index: 150;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease; backdrop-filter: blur(4px);
         }
-
         .overlay.active { opacity: 1; pointer-events: auto; }
 
         .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-primary); }
@@ -280,178 +188,86 @@
         .chat-section { flex: 1; display: flex; flex-direction: column; width: 100%; max-width: 1400px; margin: 0 auto; }
 
         .chat-header-bar {
-            background: var(--gradient-2);
-            padding: 14px 24px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-sm);
-            border-radius: 0 0 var(--radius-md) var(--radius-md);
-            margin: 0 12px;
+            background: var(--gradient-2); padding: 14px 24px; font-weight: 700;
+            display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem; flex-shrink: 0; box-shadow: var(--shadow-sm);
+            border-radius: 0 0 var(--radius-md) var(--radius-md); margin: 0 12px;
         }
 
         .chat-messages-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-            background: var(--bg-card);
-            margin: 8px 12px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-            backdrop-filter: var(--backdrop-blur);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            flex: 1; overflow-y: auto; padding: 16px; background: var(--bg-card);
+            margin: 8px 12px; border-radius: var(--radius-md); border: 1px solid var(--border-color);
+            backdrop-filter: var(--backdrop-blur); display: flex; flex-direction: column; gap: 10px;
         }
 
-        .message-bubble {
-            max-width: 75%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            position: relative;
-            word-wrap: break-word;
-        }
-
-        .message-bubble.mine {
-            align-self: flex-end;
-            background: var(--gradient-1);
-            color: #000;
-            border-bottom-left-radius: 5px;
-        }
-
-        .message-bubble.other {
-            align-self: flex-start;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            border-bottom-right-radius: 5px;
-        }
+        .message-bubble { max-width: 75%; padding: 12px 16px; border-radius: 18px; position: relative; word-wrap: break-word; }
+        .message-bubble.mine { align-self: flex-end; background: var(--gradient-1); color: #000; border-bottom-left-radius: 5px; }
+        .message-bubble.other { align-self: flex-start; background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-primary); border-bottom-right-radius: 5px; }
 
         .message-bubble .msg-name {
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-            opacity: 0.8;
+            font-size: 0.7rem; font-weight: 700; margin-bottom: 4px; opacity: 0.8;
+            cursor: pointer; text-decoration: underline; color: var(--primary);
         }
+        .message-bubble .msg-name:hover { opacity: 1; }
 
         .message-bubble .msg-text { font-size: 0.9rem; line-height: 1.5; }
         .message-bubble .msg-time { font-size: 0.65rem; opacity: 0.6; margin-top: 4px; text-align: left; }
 
+        .user-actions-popup {
+            position: fixed; background: var(--bg-card); border: 1px solid var(--primary);
+            border-radius: var(--radius-sm); padding: 8px; z-index: 3000;
+            box-shadow: var(--shadow-xl); backdrop-filter: blur(20px); display: none;
+        }
+        .user-actions-popup button { display: block; width: 100%; margin: 3px 0; }
+
         .chat-input-area {
-            display: flex;
-            gap: 10px;
-            padding: 12px;
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            margin: 0 12px 8px;
-            border-radius: var(--radius-md);
+            display: flex; gap: 10px; padding: 12px; background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color); margin: 0 12px 8px; border-radius: var(--radius-md);
         }
-
         .chat-input-area input {
-            flex: 1;
-            padding: 12px 18px;
-            border-radius: 25px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-input);
-            color: var(--text-primary);
-            font-family: 'Tajawal', 'Cairo', sans-serif;
-            outline: none;
-            font-size: 0.9rem;
+            flex: 1; padding: 12px 18px; border-radius: 25px; border: 1px solid var(--border-color);
+            background: var(--bg-input); color: var(--text-primary);
+            font-family: 'Tajawal', 'Cairo', sans-serif; outline: none; font-size: 0.9rem;
         }
-
         .chat-input-area input:focus { border-color: var(--primary); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; padding: 8px 0; }
 
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 24px;
-            transition: var(--transition);
-            backdrop-filter: var(--backdrop-blur);
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            overflow: hidden;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 24px; transition: var(--transition);
+            backdrop-filter: var(--backdrop-blur); box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
         }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-1);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-1); opacity: 0; transition: var(--transition); }
         .card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
         .card:hover::before { opacity: 1; }
-
         .card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--primary); }
 
         .section-title { font-size: 1.4rem; font-weight: 900; margin: 20px 0 16px; display: flex; align-items: center; gap: 10px; }
         .section-title i { color: var(--primary); font-size: 1.3rem; }
 
         .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
+            display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
+            border-radius: 50px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em;
         }
-
         .badge-success { background: rgba(14, 203, 129, 0.1); color: var(--success); border: 1px solid rgba(14, 203, 129, 0.2); }
         .badge-warning { background: rgba(240, 185, 11, 0.1); color: var(--warning); border: 1px solid rgba(240, 185, 11, 0.2); }
         .badge-danger { background: rgba(246, 70, 93, 0.1); color: var(--danger); border: 1px solid rgba(246, 70, 93, 0.2); }
         .badge-info { background: rgba(59, 130, 246, 0.1); color: var(--info); border: 1px solid rgba(59, 130, 246, 0.2); }
 
         .live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--danger);
-            color: white;
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            animation: pulse 2s infinite;
-            box-shadow: 0 4px 15px rgba(246, 70, 93, 0.4);
+            display: inline-flex; align-items: center; gap: 6px; background: var(--danger);
+            color: white; padding: 8px 18px; border-radius: 50px; font-size: 0.8rem;
+            font-weight: 700; animation: pulse 2s infinite; box-shadow: 0 4px 15px rgba(246, 70, 93, 0.4);
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.85; transform: scale(1.02); }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.02); } }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 22px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-family: 'Tajawal', 'Cairo', sans-serif;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            font-size: 0.85rem;
-            text-decoration: none;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 10px 22px; border-radius: 50px; font-weight: 700;
+            font-family: 'Tajawal', 'Cairo', sans-serif; cursor: pointer; transition: var(--transition);
+            border: none; font-size: 0.85rem; text-decoration: none; letter-spacing: 0.02em; white-space: nowrap;
         }
-
         .btn-primary { background: var(--gradient-1); color: #000; box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(240, 185, 11, 0.4); }
         .btn-outline { background: transparent; border: 2px solid var(--border-color); color: var(--text-secondary); }
@@ -463,265 +279,118 @@
         .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(14, 203, 129, 0.4); }
 
         .back-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            transition: var(--transition);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            backdrop-filter: var(--backdrop-blur);
-            box-shadow: var(--shadow-sm);
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            font-weight: 600; display: inline-flex; align-items: center; justify-content: center;
+            color: var(--text-primary); transition: var(--transition); margin-bottom: 20px;
+            font-size: 1.3rem; backdrop-filter: var(--backdrop-blur); box-shadow: var(--shadow-sm);
         }
-
         .back-btn:hover { background: var(--primary); color: #000; transform: translateX(-4px); box-shadow: var(--shadow-md); }
 
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(8px);
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); z-index: 2000;
+            display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(8px);
         }
-
         .modal {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            max-width: min(480px, 95vw);
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            box-shadow: var(--shadow-xl);
-            backdrop-filter: var(--backdrop-blur);
+            background: var(--bg-card); border-radius: var(--radius-lg); padding: 32px;
+            max-width: min(480px, 95vw); width: 100%; max-height: 85vh; overflow-y: auto;
+            border: 1px solid var(--border-color); text-align: center; box-shadow: var(--shadow-xl); backdrop-filter: var(--backdrop-blur);
         }
-
         .modal h3 { margin-bottom: 16px; color: var(--primary); font-size: 1.2rem; font-weight: 800; }
-
         .modal input, .modal textarea, .modal select {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            background: var(--bg-input);
-            color: var(--text-primary);
-            font-family: 'Tajawal', 'Cairo', sans-serif;
-            margin-bottom: 12px;
-            outline: none;
-            font-size: 0.9rem;
-            transition: var(--transition);
+            width: 100%; padding: 12px 16px; border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color); background: var(--bg-input);
+            color: var(--text-primary); font-family: 'Tajawal', 'Cairo', sans-serif;
+            margin-bottom: 12px; outline: none; font-size: 0.9rem; transition: var(--transition);
         }
-
-        .modal input:focus, .modal textarea:focus, .modal select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1);
-        }
+        .modal input:focus, .modal textarea:focus, .modal select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1); }
 
         .stream-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            background: #000;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
+            position: relative; width: 100%; padding-top: 56.25%; border-radius: var(--radius-md);
+            overflow: hidden; background: #000; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color);
         }
-
-        .stream-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        .stream-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
         .bracket-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            margin: 16px 0;
-            overflow-x: auto;
-            backdrop-filter: var(--backdrop-blur);
-            box-shadow: var(--shadow-sm);
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 20px; margin: 16px 0;
+            overflow-x: auto; backdrop-filter: var(--backdrop-blur); box-shadow: var(--shadow-sm);
         }
-
-        .bracket-tree {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 16px;
-            padding: 16px;
-            min-width: max-content;
-            direction: ltr;
-        }
-
+        .bracket-tree { display: flex; align-items: center; justify-content: flex-start; gap: 16px; padding: 16px; min-width: max-content; direction: ltr; }
         .bracket-box {
-            background: var(--bg-input);
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            padding: 12px;
-            text-align: center;
-            min-width: 110px;
-            font-size: 0.8rem;
-            transition: var(--transition);
+            background: var(--bg-input); border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm); padding: 12px; text-align: center; min-width: 110px; font-size: 0.8rem; transition: var(--transition);
         }
-
-        .bracket-box.win {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(240, 185, 11, 0.3);
-            background: rgba(240, 185, 11, 0.05);
-        }
-
+        .bracket-box.win { border-color: var(--primary); box-shadow: 0 0 20px rgba(240, 185, 11, 0.3); background: rgba(240, 185, 11, 0.05); }
         .bracket-box .p { font-weight: 700; margin: 2px 0; }
         .bracket-box .s { color: var(--primary); font-weight: 800; font-size: 0.9rem; }
         .bracket-conn { min-width: 24px; height: 2px; background: var(--primary); flex-shrink: 0; }
 
         .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: var(--success);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 700;
-            z-index: 10000;
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-            font-size: 0.85rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
+            background: var(--success); color: white; padding: 12px 28px; border-radius: 50px;
+            font-weight: 700; z-index: 10000; opacity: 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none; font-size: 0.85rem; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
-
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast.error { background: var(--danger); }
 
         .hidden { display: none !important; }
 
         .admin-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-
         .admin-tab {
-            padding: 8px 18px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.8rem;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            transition: var(--transition);
+            padding: 8px 18px; border-radius: 50px; cursor: pointer; font-weight: 600;
+            font-size: 0.8rem; background: var(--bg-input); border: 1px solid var(--border-color);
+            color: var(--text-secondary); transition: var(--transition);
         }
-
-        .admin-tab.active {
-            background: var(--gradient-1);
-            color: #000;
-            border-color: transparent;
-            box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3);
-        }
+        .admin-tab.active { background: var(--gradient-1); color: #000; border-color: transparent; box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3); }
 
         .user-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 16px;
-            background: var(--bg-input);
-            border-radius: var(--radius-sm);
-            margin: 4px 0;
-            font-size: 0.8rem;
-            border: 1px solid transparent;
-            transition: var(--transition);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 16px; background: var(--bg-input); border-radius: var(--radius-sm);
+            margin: 4px 0; font-size: 0.8rem; border: 1px solid transparent; transition: var(--transition);
         }
-
         .user-row:hover { border-color: var(--border-color); }
 
         .search-input {
-            width: 100%;
-            padding: 12px 18px;
-            border-radius: 50px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-input);
-            color: var(--text-primary);
-            font-family: 'Tajawal', 'Cairo', sans-serif;
-            margin-bottom: 12px;
-            outline: none;
-            font-size: 0.85rem;
-            transition: var(--transition);
+            width: 100%; padding: 12px 18px; border-radius: 50px; border: 1px solid var(--border-color);
+            background: var(--bg-input); color: var(--text-primary);
+            font-family: 'Tajawal', 'Cairo', sans-serif; margin-bottom: 12px; outline: none;
+            font-size: 0.85rem; transition: var(--transition);
         }
-
         .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1); }
 
         .profile-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            text-align: center;
-            backdrop-filter: var(--backdrop-blur);
-            box-shadow: var(--shadow-md);
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg); padding: 32px; text-align: center;
+            backdrop-filter: var(--backdrop-blur); box-shadow: var(--shadow-md);
         }
-
         .profile-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--gradient-1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: #000;
-            margin: 0 auto 16px;
-            box-shadow: 0 8px 25px rgba(240, 185, 11, 0.3);
+            width: 80px; height: 80px; border-radius: 50%; background: var(--gradient-1);
+            display: flex; align-items: center; justify-content: center; font-size: 2rem;
+            color: #000; margin: 0 auto 16px; box-shadow: 0 8px 25px rgba(240, 185, 11, 0.3);
         }
-
         .profile-stat {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 18px;
-            background: var(--bg-input);
-            border-radius: var(--radius-sm);
-            margin: 6px 0;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 18px; background: var(--bg-input); border-radius: var(--radius-sm);
+            margin: 6px 0; font-size: 0.9rem; font-weight: 500; border: 1px solid var(--border-color); transition: var(--transition);
         }
-
         .profile-stat:hover { border-color: var(--primary); }
 
-        .wheel-container { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+        .wheel-container { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative; }
         .wheel-container canvas { max-width: 100%; height: auto; border-radius: 50%; box-shadow: var(--shadow-xl); }
+        .wheel-arrow {
+            position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+            font-size: 2rem; color: var(--danger); z-index: 10;
+            text-shadow: 0 0 10px rgba(246,70,93,0.5); animation: arrowPulse 1s infinite;
+        }
+        @keyframes arrowPulse { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(5px)} }
 
         .voice-rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-
         .voice-room-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            transition: 0.3s;
-            backdrop-filter: blur(20px);
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 25px; text-align: center; transition: 0.3s; backdrop-filter: blur(20px);
         }
-
         .voice-room-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
         .voice-room-icon { font-size: 3rem; margin-bottom: 12px; }
         .voice-room-card h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 8px; }
@@ -731,6 +400,18 @@
 
         .online-indicator { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: var(--success); margin-bottom: 10px; }
         .online-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); animation: pulse 2s infinite; }
+
+        .private-chat-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px; background: var(--bg-input); border-radius: 8px; margin: 4px 0; cursor: pointer;
+        }
+        .private-chat-row:hover { background: rgba(240,185,11,0.1); }
+        .private-chat-row .last-message { font-size: 0.7rem; color: var(--text-muted); }
+        .unread-badge {
+            background: var(--danger); color: white; border-radius: 50%;
+            width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.6rem; font-weight: 700;
+        }
 
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr; gap: 12px; }
@@ -748,17 +429,18 @@
 
 <div class="toast" id="toast"></div>
 <div class="overlay" id="overlay" onclick="closeAllSidebars()"></div>
+<div class="user-actions-popup" id="userActionsPopup"></div>
 
+<!-- القائمة الجانبية اليمنى -->
 <div class="sidebar-right" id="sidebarRight">
     <h4>القائمة الرئيسية</h4>
-    <a onclick="switchToTextChat()" class="menu-item" id="textChatMenuBtn"><i class="fas fa-comments"></i> 💬 المحادثة الكتابية</a>
+    <a onclick="switchToTextChat()" class="menu-item" id="textChatMenuBtn"><i class="fas fa-comments"></i> 💬 المحادثة العامة</a>
+    <a onclick="showPrivateChatsList()" class="menu-item"><i class="fas fa-envelope"></i> 📩 محادثاتي</a>
     <a onclick="switchToVoiceChat()" class="menu-item" id="voiceChatMenuBtn"><i class="fas fa-microphone"></i> 🎤 المحادثة الصوتية</a>
     <a onclick="showTournaments()" class="menu-item"><i class="fas fa-trophy"></i> البطولات</a>
     <a onclick="showMaps()" class="menu-item"><i class="fas fa-map"></i> الخرائط</a>
-    <a onclick="openMapModal()" class="menu-item"><i class="fas fa-upload"></i> مشاركة خريطة</a>
     <a onclick="showWheel()" class="menu-item"><i class="fas fa-dharmachakra"></i> القرعة</a>
     <a onclick="showGameFiles()" class="menu-item"><i class="fas fa-box"></i> ملفات اللعبة</a>
-    <a onclick="openGameFileModal()" class="menu-item"><i class="fas fa-file-upload"></i> مشاركة ملف لعبة</a>
     
     <h4>إدارة المنصة</h4>
     <a onclick="showAdmin()" class="menu-item"><i class="fas fa-crown"></i> لوحة التحكم</a>
@@ -766,6 +448,7 @@
     <a onclick="showProfile()" class="menu-item" id="profileMenuBtn"><i class="fas fa-user"></i> ملفي الشخصي</a>
 </div>
 
+<!-- القائمة الجانبية اليسرى -->
 <div class="sidebar-left" id="sidebarLeft">
     <h4>مواقعنا</h4>
     <a href="https://ahmdhlaq031-design.github.io/Developer-Hub/" target="_blank"><i class="fas fa-code"></i> Developer Hub</a>
@@ -781,87 +464,74 @@
     <a href="https://streamelements.com/sahel1/tip" target="_blank"><i class="fas fa-heart"></i> دعم Sahel TV</a>
 </div>
 
+<!-- نافذة اسم المستخدم -->
 <div class="modal-overlay" id="nameModal">
     <div class="modal">
         <div style="font-size:3rem;margin-bottom:10px;">🎮</div>
         <h3>أدخل اسمك في اللعبة</h3>
         <p style="color:var(--text-muted);margin-bottom:16px;font-size:0.85rem;">⚠️ لا يمكن تغييره لاحقاً!</p>
         <input type="text" id="playerNameInput" placeholder="اكتب اسمك هنا...">
+        <p style="color:var(--primary);font-size:0.8rem;margin-bottom:8px;">🎫 الـ ID الخاص بك سيتم إنشاؤه تلقائياً</p>
         <button class="btn btn-primary" onclick="savePlayerName()" style="width:100%;">تأكيد</button>
     </div>
 </div>
 
-<div class="modal-overlay hidden" id="mapModal">
+<!-- نافذة البحث عن لاعب -->
+<div class="modal-overlay hidden" id="searchPlayerModal">
     <div class="modal">
-        <div style="font-size:2.5rem;margin-bottom:10px;">🗺️</div>
-        <h3>مشاركة خريطة جديدة</h3>
-        <input type="text" id="mapNameInput" placeholder="اسم الخريطة">
-        <input type="text" id="mapLinkInput" placeholder="رابط Google Drive">
-        <div style="font-size:0.75rem;color:var(--text-muted);text-align:right;margin:8px 0;background:var(--bg-input);padding:12px;border-radius:var(--radius-sm);line-height:1.8;">
-            📖 ارفع ملف الخريطة إلى Google Drive ← مشاركة ← "أي شخص لديه الرابط" ← انسخ الرابط وألصقه هنا
-        </div>
-        <button class="btn btn-primary" onclick="shareMap()" style="width:100%;">مشاركة</button>
-        <button class="btn btn-outline btn-sm" onclick="closeMapModal()" style="width:100%;margin-top:8px;">إلغاء</button>
+        <div style="font-size:2.5rem;margin-bottom:10px;">🔍</div>
+        <h3>بحث عن لاعب</h3>
+        <p style="color:var(--text-muted);margin-bottom:12px;">ابحث بـ ID أو الاسم للدردشة الخاصة</p>
+        <input type="text" id="searchPlayerInput" placeholder="أدخل ID أو اسم اللاعب...">
+        <div id="searchResults" style="text-align:right;max-height:200px;overflow-y:auto;"></div>
+        <button class="btn btn-outline btn-sm" onclick="closeSearchPlayerModal()" style="width:100%;margin-top:8px;">إلغاء</button>
     </div>
 </div>
 
-<div class="modal-overlay hidden" id="gameFileModal">
-    <div class="modal">
-        <div style="font-size:2.5rem;margin-bottom:10px;">📦</div>
-        <h3>مشاركة ملف لعبة جديد</h3>
-        <input type="text" id="gameFileNameInput" placeholder="اسم الملف">
-        <input type="text" id="gameFileLinkInput" placeholder="رابط الملف">
-        <select id="gameFileTypeInput">
-            <option value="patch">🔧 باتش</option>
-            <option value="fix">🛠️ ملف إصلاح</option>
-            <option value="mod">🎨 مود</option>
-            <option value="tool">🔧 أداة</option>
-            <option value="other">📄 آخر</option>
-        </select>
-        <div style="font-size:0.75rem;color:var(--text-muted);text-align:right;margin:8px 0;background:var(--bg-input);padding:12px;border-radius:var(--radius-sm);line-height:1.8;">
-            📖 ارفع الملف إلى Google Drive ← مشاركة ← "أي شخص لديه الرابط" ← انسخ الرابط وألصقه هنا
+<!-- نافذة المحادثة الخاصة -->
+<div class="modal-overlay hidden" id="privateChatModal">
+    <div class="modal" style="max-width:600px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <h3 style="margin:0;">💬 محادثة مع <span id="privateChatTargetName"></span></h3>
+            <button class="btn btn-outline btn-sm" onclick="closePrivateChat()">✕</button>
         </div>
-        <button class="btn btn-primary" onclick="shareGameFile()" style="width:100%;">مشاركة</button>
-        <button class="btn btn-outline btn-sm" onclick="closeGameFileModal()" style="width:100%;margin-top:8px;">إلغاء</button>
+        <div class="chat-messages-container" id="privateChatMessagesContainer" style="max-height:300px;min-height:200px;margin:0 0 10px 0;">
+            <p style="text-align:center;color:var(--text-muted);">لا توجد رسائل</p>
+        </div>
+        <div class="chat-input-area" style="margin:0;">
+            <input type="text" id="privateChatInput" placeholder="اكتب رسالة خاصة..." onkeypress="if(event.key==='Enter')sendPrivateMessage()">
+            <button class="btn btn-primary" onclick="sendPrivateMessage()" style="border-radius:50%;width:45px;height:45px;padding:0;">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
     </div>
 </div>
 
-<header>
-    <div style="display:flex;align-items:center;gap:10px;">
-        <button class="icon-btn" id="leftMenuBtn"><i class="fas fa-link"></i></button>
+<!-- قائمة المحادثات الخاصة -->
+<section id="privateChatsListSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
+    <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
+    <div class="section-title"><i class="fas fa-envelope"></i> محادثاتي الخاصة</div>
+    <div style="display:flex;gap:10px;margin-bottom:15px;">
+        <button class="btn btn-primary" onclick="openSearchPlayerModal()"><i class="fas fa-search"></i> بدء محادثة جديدة</button>
     </div>
-    
-    <a href="#" onclick="switchToTextChat()" class="logo">
-        <div class="logo-icon"><i class="fas fa-chess-king"></i></div>
-        <div class="logo-text">
-            <h1>GeneralsArena</h1>
-            <span>GENERAL SAHEL TV</span>
-        </div>
-    </a>
-    
-    <div class="nav-actions">
-        <button class="icon-btn" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
-        <button class="icon-btn" id="rightMenuBtn"><i class="fas fa-bars"></i></button>
-    </div>
-</header>
+    <div id="privateChatsList"></div>
+</section>
 
+<!-- باقي الأقسام -->
 <div class="main-content">
     <section id="textChatSection" class="chat-section">
         <div class="chat-header-bar">
             <i class="fas fa-comments" style="color:var(--primary);"></i>
-            المحادثة الكتابية - GeneralsArena
-            <span class="online-indicator" style="margin-right:auto;">
-                <span class="online-dot"></span> مباشر
-            </span>
+            المحادثة العامة - GeneralsArena
+            <span class="online-indicator" style="margin-right:auto;"><span class="online-dot"></span> مباشر</span>
         </div>
         <div class="chat-messages-container" id="chatMessagesContainer">
             <div style="text-align:center;color:var(--text-muted);padding:40px;">
-                <div style="font-size:3rem;margin-bottom:10px;">💬</div>
-                <p>جارٍ تحميل المحادثة...</p>
+                <div style="font-size:3rem;">💬</div><p>جارٍ تحميل المحادثة...</p>
             </div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="اكتب رسالتك هنا..." onkeypress="if(event.key==='Enter')sendChatMessage()">
+            <input type="text" id="chatInput" placeholder="اكتب رسالتك..." onkeypress="if(event.key==='Enter')sendChatMessage()">
             <button class="btn btn-primary" onclick="sendChatMessage()" style="border-radius:50%;width:45px;height:45px;padding:0;">
                 <i class="fas fa-paper-plane"></i>
             </button>
@@ -871,97 +541,109 @@
     <section id="voiceChatSection" class="hidden" style="padding:15px;overflow-y:auto;height:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-microphone"></i> الغرف الصوتية</div>
-        <p style="color:var(--text-muted);margin-bottom:15px;">اختر غرفة وانضم للمحادثة الصوتية مع اللاعبين الآخرين 🎮</p>
+        <p style="color:var(--text-muted);margin-bottom:15px;">اختر غرفة وانضم للمحادثة الصوتية 🎮</p>
         <div class="voice-rooms-grid" id="voiceRoomsGrid"></div>
         <div id="activeVoiceRoom" class="hidden" style="margin-top:20px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:10px;">
-                <span style="color:var(--success);font-weight:700;">🟢 متصل الآن: <span id="activeRoomName"></span></span>
-                <button class="btn btn-danger btn-sm" onclick="leaveVoiceRoom()"><i class="fas fa-phone-slash"></i> مغادرة</button>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                <span style="color:var(--success);">🟢 متصل: <span id="activeRoomName"></span></span>
+                <button class="btn btn-danger btn-sm" onclick="leaveVoiceRoom()">مغادرة</button>
             </div>
             <div id="jitsiWrapper"><div id="jitsiContainer" style="width:100%;height:60vh;min-height:400px;background:#000;border-radius:16px;"></div></div>
         </div>
     </section>
 
-    <section id="liveStreamSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
+    <section id="liveStreamSection" class="hidden" style="padding:20px;overflow-y:auto;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-broadcast-tower"></i> البث المباشر</div>
         <div id="liveStreamContent"></div>
     </section>
 
-    <section id="adminSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:900px;margin:0 auto;width:100%;">
+    <section id="adminSection" class="hidden" style="padding:20px;overflow-y:auto;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="card">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-                <div style="font-size:2rem;">👑</div>
-                <h3 style="margin:0;">لوحة تحكم المدير</h3>
-            </div>
+            <h3>👑 لوحة تحكم المدير</h3>
             <div id="adminLoginForm">
                 <input type="password" id="adminPasswordInput" placeholder="كلمة المرور">
                 <button class="btn btn-primary" onclick="adminLogin()" style="width:100%;">دخول</button>
-                <button class="btn btn-outline btn-sm" onclick="logoutAdmin()" style="width:100%;margin-top:8px;">تسجيل خروج</button>
             </div>
             <div id="adminDashboard" class="hidden">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-                    <span style="color:var(--success);font-weight:700;">✅ مرحباً Sahel TV!</span>
-                    <button class="btn btn-outline btn-sm" onclick="logoutAdmin()">تسجيل خروج</button>
-                </div>
+                <p style="color:var(--success);">✅ مرحباً!</p>
                 <div class="admin-tabs">
-                    <button class="admin-tab active" onclick="switchAdminTab('tournaments')"><i class="fas fa-trophy"></i> البطولات</button>
-                    <button class="admin-tab" onclick="switchAdminTab('maps')"><i class="fas fa-map"></i> الخرائط</button>
-                    <button class="admin-tab" onclick="switchAdminTab('gameFiles')"><i class="fas fa-box"></i> ملفات اللعبة</button>
-                    <button class="admin-tab" onclick="switchAdminTab('stream')"><i class="fas fa-broadcast-tower"></i> البث المباشر</button>
-                    <button class="admin-tab" onclick="switchAdminTab('users')"><i class="fas fa-users"></i> المستخدمين</button>
+                    <button class="admin-tab active" onclick="switchAdminTab('tournaments')">البطولات</button>
+                    <button class="admin-tab" onclick="switchAdminTab('maps')">الخرائط</button>
+                    <button class="admin-tab" onclick="switchAdminTab('gameFiles')">ملفات</button>
+                    <button class="admin-tab" onclick="switchAdminTab('stream')">البث</button>
+                    <button class="admin-tab" onclick="switchAdminTab('users')">المستخدمين</button>
                 </div>
                 <div id="adminTabTournaments">
-                    <h4 style="margin:12px 0 8px;color:var(--primary);">➕ بطولة جديدة</h4>
-                    <input type="text" id="newName" placeholder="اسم البطولة"><br>
-                    <div style="display:flex;gap:8px;"><input type="date" id="newDate" style="flex:1;"><input type="text" id="newPrize" placeholder="الجائزة" style="flex:1;"></div>
-                    <div style="display:flex;gap:8px;"><select id="newSize"><option value="4">4</option><option value="8" selected>8</option><option value="16">16</option><option value="32">32</option><option value="64">64</option></select><select id="newType"><option value="open">🔓 مفتوحة</option><option value="closed">🔒 مغلقة</option></select></div>
-                    <textarea id="newRules" placeholder="الشروط..." rows="2"></textarea>
-                    <input type="url" id="newDonateLink" placeholder="رابط الدعم"><input type="url" id="newStreamLink" placeholder="🔴 رابط البث">
-                    <button class="btn btn-primary" onclick="addTournament()" style="width:100%;">📢 أعلن</button>
-                    <h4 style="margin:16px 0 8px;color:var(--primary);">📋 البطولات</h4><div id="adminList"></div>
+                    <h4>بطولة جديدة</h4>
+                    <input type="text" id="newName" placeholder="الاسم"><br>
+                    <input type="date" id="newDate"><input type="text" id="newPrize" placeholder="الجائزة"><br>
+                    <select id="newSize"><option value="4">4</option><option value="8" selected>8</option></select>
+                    <select id="newType"><option value="open">مفتوحة</option><option value="closed">مغلقة</option></select><br>
+                    <textarea id="newRules" placeholder="الشروط..."></textarea>
+                    <button class="btn btn-primary" onclick="addTournament()">أعلن</button>
+                    <h4>البطولات</h4><div id="adminList"></div>
                 </div>
-                <div id="adminTabMaps" class="hidden"><h4 style="margin:12px 0 8px;color:var(--primary);">🗺️ الخرائط</h4><div id="adminMapsList"></div></div>
-                <div id="adminTabGameFiles" class="hidden"><h4 style="margin:12px 0 8px;color:var(--primary);">📦 ملفات اللعبة</h4><div id="adminGameFilesList"></div></div>
+                <div id="adminTabMaps" class="hidden"><h4>الخرائط</h4><div id="adminMapsList"></div></div>
+                <div id="adminTabGameFiles" class="hidden"><h4>ملفات اللعبة</h4><div id="adminGameFilesList"></div></div>
                 <div id="adminTabStream" class="hidden">
-                    <h4 style="margin:12px 0 8px;color:var(--primary);">🔴 إدارة البث</h4>
+                    <h4>إدارة البث</h4>
                     <input type="url" id="liveStreamUrlInput" placeholder="رابط البث"><input type="text" id="liveStreamTitleInput" placeholder="عنوان">
-                    <button class="btn btn-primary" onclick="setLiveStream()" style="width:100%;">💾 حفظ</button>
-                    <button class="btn btn-danger" onclick="removeLiveStream()" style="width:100%;margin-top:8px;">🗑️ إزالة</button>
+                    <button class="btn btn-primary" onclick="setLiveStream()">حفظ</button>
                 </div>
-                <div id="adminTabUsers" class="hidden"><h4 style="margin:12px 0 8px;color:var(--primary);">👥 المستخدمين</h4><input type="text" class="search-input" id="userSearchInput" placeholder="🔍 بحث..." oninput="renderUsersList()"><div id="usersList"></div></div>
+                <div id="adminTabUsers" class="hidden">
+                    <h4>المستخدمين</h4>
+                    <input type="text" class="search-input" id="userSearchInput" placeholder="بحث..." oninput="renderUsersList()">
+                    <div id="usersList"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="tournamentsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
+    <section id="tournamentsSection" class="hidden" style="padding:20px;overflow-y:auto;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-trophy"></i> البطولات</div><div class="grid" id="tournamentGridFull"></div>
+        <div class="section-title"><i class="fas fa-trophy"></i> البطولات</div>
+        <div class="grid" id="tournamentGridFull"></div>
     </section>
-    <section id="mapsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
+
+    <section id="mapsSection" class="hidden" style="padding:20px;overflow-y:auto;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-map"></i> الخرائط</div><div class="grid" id="mapsGrid"></div>
+        <div class="section-title"><i class="fas fa-map"></i> الخرائط</div>
+        <button class="btn btn-primary" onclick="openMapModal()" style="margin-bottom:15px;"><i class="fas fa-upload"></i> مشاركة خريطة جديدة</button>
+        <div class="grid" id="mapsGrid"></div>
     </section>
-    <section id="gameFilesSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
+
+    <section id="gameFilesSection" class="hidden" style="padding:20px;overflow-y:auto;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-box"></i> ملفات اللعبة</div><div class="grid" id="gameFilesGrid"></div>
+        <div class="section-title"><i class="fas fa-box"></i> ملفات اللعبة</div>
+        <button class="btn btn-primary" onclick="openGameFileModal()" style="margin-bottom:15px;"><i class="fas fa-file-upload"></i> مشاركة ملف جديد</button>
+        <div class="grid" id="gameFilesGrid"></div>
     </section>
-    <section id="wheelSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
+
+    <section id="wheelSection" class="hidden" style="padding:20px;overflow-y:auto;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-dharmachakra"></i> القرعة</div>
-        <div class="card wheel-container">
+        <div class="section-title"><i class="fas fa-dharmachakra"></i> القرعة الدائرية</div>
+        <div class="card wheel-container" style="position:relative;">
+            <div class="wheel-arrow" id="wheelArrow">▼</div>
             <textarea id="wheelNames" placeholder="الأسماء..." rows="4" style="width:100%;margin-bottom:12px;"></textarea>
             <canvas id="wheelCanvas" width="400" height="400" style="max-width:100%;"></canvas>
             <div id="wheelResult" style="font-size:1.3rem;font-weight:800;color:var(--primary);margin:12px 0;"></div>
-            <div style="display:flex;gap:12px;justify-content:center;"><button class="btn btn-primary" onclick="spinWheel()">🎲 تدوير</button><button class="btn btn-danger" onclick="clearWheel()">🗑️ مسح</button></div>
+            <div style="display:flex;gap:12px;">
+                <button class="btn btn-primary" onclick="spinWheel()">🎲 تدوير</button>
+                <button class="btn btn-danger" onclick="clearWheel()">🗑️ مسح</button>
+            </div>
         </div>
     </section>
-    <section id="profileSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="switchToTextChat()">⬅️</button><div id="profileContent"></div>
+
+    <section id="profileSection" class="hidden" style="padding:20px;overflow-y:auto;">
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
+        <div id="profileContent"></div>
     </section>
-    <section id="detailSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="showTournaments()">⬅️</button><div id="detailContent"></div>
+
+    <section id="detailSection" class="hidden" style="padding:20px;overflow-y:auto;">
+        <button class="back-btn" onclick="showTournaments()">⬅️</button>
+        <div id="detailContent"></div>
     </section>
 </div>
 <script>
@@ -970,12 +652,14 @@
     const TOURNAMENTS_API = "https://api.npoint.io/9442d028609e0e81ecf8";
     const MAPS_API = "https://api.npoint.io/c3cd5edb0be62c9b9d8a";
     const GAMEFILES_API = "https://api.npoint.io/1234567890abcdef";
+    const USERS_DB = "https://api.npoint.io/27bf06704cf94063837e"; // لتخزين معرفات المستخدمين
     
     // ==================== STATE VARIABLES ====================
     let tournaments = [];
     let maps = [];
     let gameFiles = [];
     let playerName = localStorage.getItem('ga_player_name') || '';
+    let playerId = localStorage.getItem('ga_player_id') || '';
     let currentTheme = localStorage.getItem('ga_theme') || 'dark';
     let wheelNames = JSON.parse(localStorage.getItem('ga_wheel_names') || '[]');
     let wheelAngle = 0;
@@ -984,33 +668,20 @@
     let isAdmin = localStorage.getItem('ga_is_admin') === 'true';
     let liveStream = JSON.parse(localStorage.getItem('ga_live_stream') || 'null');
     let chatMessages = [];
+    let registeredUsers = [];
+    let nextId = 10000;
     
-    // Voice Rooms Data
+    // Private Chat
+    let privateChats = JSON.parse(localStorage.getItem('ga_private_chats') || '{}');
+    let activePrivateChat = null;
+    let privateMessages = {};
+    
+    // Voice Rooms
     let voiceRooms = [
-        { 
-            id: 'GeneralsArena-Main', 
-            name: 'الغرفة الرئيسية', 
-            description: 'الغرفة الصوتية الرئيسية - تواصل مع كل اللاعبين', 
-            icon: '🎤' 
-        },
-        { 
-            id: 'GeneralsArena-Gaming', 
-            name: 'غرفة الألعاب', 
-            description: 'نقاشات الألعاب والاستراتيجيات', 
-            icon: '🎮' 
-        },
-        { 
-            id: 'GeneralsArena-Social', 
-            name: 'الغرفة الاجتماعية', 
-            description: 'تعارف ودردشة حرة بين اللاعبين', 
-            icon: '💬' 
-        },
-        { 
-            id: 'GeneralsArena-Tournaments', 
-            name: 'غرفة البطولات', 
-            description: 'تنسيق وإدارة البطولات مباشرة', 
-            icon: '🏆' 
-        }
+        { id: 'GeneralsArena-Main', name: 'الغرفة الرئيسية', description: 'الغرفة الصوتية الرئيسية - تواصل مع كل اللاعبين', icon: '🎤' },
+        { id: 'GeneralsArena-Gaming', name: 'غرفة الألعاب', description: 'نقاشات الألعاب والاستراتيجيات', icon: '🎮' },
+        { id: 'GeneralsArena-Social', name: 'الغرفة الاجتماعية', description: 'تعارف ودردشة حرة بين اللاعبين', icon: '💬' },
+        { id: 'GeneralsArena-Tournaments', name: 'غرفة البطولات', description: 'تنسيق وإدارة البطولات مباشرة', icon: '🏆' }
     ];
     let currentVoiceRoom = null;
 
@@ -1021,9 +692,7 @@
         t.textContent = msg;
         t.classList.toggle('error', err);
         t.classList.add('show');
-        setTimeout(function() {
-            t.classList.remove('show');
-        }, 2000);
+        setTimeout(function() { t.classList.remove('show'); }, 2000);
     }
     
     function copyToClipboard(text, name) {
@@ -1033,9 +702,7 @@
     }
 
     function extractYouTubeID(url) {
-        if (!url) {
-            return null;
-        }
+        if (!url) return null;
         var patterns = [
             /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)/,
             /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^?]+)/,
@@ -1044,18 +711,93 @@
         ];
         for (var i = 0; i < patterns.length; i++) {
             var match = url.match(patterns[i]);
-            if (match) {
-                return match[1];
-            }
+            if (match) return match[1];
         }
-        if (/^[a-zA-Z0-9_-]{11}$/.test(url)) {
-            return url;
+        if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
+        return null;
+    }
+
+    // ==================== USER REGISTRATION SYSTEM ====================
+    async function loadRegisteredUsers() {
+        try {
+            var response = await fetch(USERS_DB + '?t=' + Date.now());
+            if (response.ok) {
+                var data = await response.json();
+                registeredUsers = Array.isArray(data) ? data : [];
+            }
+        } catch (e) {
+            registeredUsers = JSON.parse(localStorage.getItem('ga_registered_users') || '[]');
+        }
+        
+        // Calculate next ID
+        if (registeredUsers.length > 0) {
+            var maxId = 9999;
+            for (var i = 0; i < registeredUsers.length; i++) {
+                if (registeredUsers[i].id > maxId) {
+                    maxId = registeredUsers[i].id;
+                }
+            }
+            nextId = maxId + 1;
+        } else {
+            nextId = 10000;
+        }
+    }
+
+    async function saveRegisteredUsers() {
+        localStorage.setItem('ga_registered_users', JSON.stringify(registeredUsers));
+        try {
+            await fetch(USERS_DB, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(registeredUsers)
+            });
+        } catch (e) {
+            console.log('حفظ محلي فقط للمستخدمين');
+        }
+    }
+
+    function getUserById(id) {
+        for (var i = 0; i < registeredUsers.length; i++) {
+            if (registeredUsers[i].id === id) {
+                return registeredUsers[i];
+            }
         }
         return null;
     }
 
+    function getUserByName(name) {
+        for (var i = 0; i < registeredUsers.length; i++) {
+            if (registeredUsers[i].name.toLowerCase() === name.toLowerCase()) {
+                return registeredUsers[i];
+            }
+        }
+        return null;
+    }
+
+    function registerPlayer(name) {
+        // Check if name already exists
+        var existing = getUserByName(name);
+        if (existing) {
+            return existing;
+        }
+        
+        // Create new user
+        var newUser = {
+            id: nextId,
+            name: name,
+            registeredAt: new Date().toISOString()
+        };
+        
+        registeredUsers.push(newUser);
+        nextId++;
+        
+        saveRegisteredUsers();
+        return newUser;
+    }
+
     // ==================== FIREBASE CHAT SYSTEM ====================
     var messagesRef = db.collection("messages");
+    var privateMessagesRef = db.collection("private_messages");
     
     function listenForMessages() {
         messagesRef
@@ -1064,28 +806,23 @@
             .onSnapshot(function(snapshot) {
                 chatMessages = [];
                 snapshot.forEach(function(doc) {
-                    chatMessages.push(doc.data());
+                    var data = doc.data();
+                    data._id = doc.id;
+                    chatMessages.push(data);
                 });
                 chatMessages.reverse();
                 displayChatMessages();
             }, function(error) {
-                console.error("خطأ في تحميل الرسائل:", error);
+                console.error("خطأ:", error);
             });
     }
 
     function displayChatMessages() {
         var container = document.getElementById('chatMessagesContainer');
-        if (!container) {
-            return;
-        }
+        if (!container) return;
 
         if (chatMessages.length === 0) {
-            container.innerHTML = '' +
-                '<div style="text-align:center;color:var(--text-muted);padding:40px;">' +
-                    '<div style="font-size:3rem;margin-bottom:10px;">💬</div>' +
-                    '<p>لا توجد رسائل بعد</p>' +
-                    '<p style="font-size:0.8rem;">كن أول من يتحدث!</p>' +
-                '</div>';
+            container.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:40px;"><div style="font-size:3rem;">💬</div><p>لا توجد رسائل</p></div>';
             return;
         }
 
@@ -1093,20 +830,20 @@
         for (var i = 0; i < chatMessages.length; i++) {
             var msg = chatMessages[i];
             var isMine = (msg.name === playerName);
+            var user = getUserByName(msg.name);
+            var displayName = msg.name || 'زائر';
+            if (user) {
+                displayName = user.name + ' #' + user.id;
+            }
             
             if (isMine) {
-                html += '' +
-                    '<div class="message-bubble mine">' +
-                        '<div class="msg-text">' + msg.text + '</div>' +
-                        '<div class="msg-time">' + (msg.time || '') + '</div>' +
-                    '</div>';
+                html += '<div class="message-bubble mine"><div class="msg-text">' + msg.text + '</div><div class="msg-time">' + (msg.time || '') + '</div></div>';
             } else {
-                html += '' +
-                    '<div class="message-bubble other">' +
-                        '<div class="msg-name">👤 ' + (msg.name || 'زائر') + '</div>' +
-                        '<div class="msg-text">' + msg.text + '</div>' +
-                        '<div class="msg-time">' + (msg.time || '') + '</div>' +
-                    '</div>';
+                html += '<div class="message-bubble other">';
+                html += '<div class="msg-name" onclick="showUserActions(\'' + displayName + '\', event)" title="اضغط للمراسلة">👤 ' + displayName + '</div>';
+                html += '<div class="msg-text">' + msg.text + '</div>';
+                html += '<div class="msg-time">' + (msg.time || '') + '</div>';
+                html += '</div>';
             }
         }
         
@@ -1114,14 +851,34 @@
         container.scrollTop = container.scrollHeight;
     }
 
+    function showUserActions(targetName, event) {
+        event.stopPropagation();
+        
+        // Strip ID from name if present
+        var actualName = targetName.split(' #')[0];
+        
+        if (actualName === playerName) return;
+        
+        var popup = document.getElementById('userActionsPopup');
+        popup.innerHTML = '' +
+            '<button class="btn btn-primary btn-sm" onclick="startPrivateChatByName(\'' + actualName + '\')"><i class="fas fa-comment"></i> مراسلة</button>' +
+            '<button class="btn btn-outline btn-sm" onclick="closeUserActions()">إلغاء</button>';
+        
+        popup.style.display = 'block';
+        popup.style.left = (event.clientX - 100) + 'px';
+        popup.style.top = (event.clientY - 50) + 'px';
+        
+        document.addEventListener('click', closeUserActions, { once: true });
+    }
+
+    function closeUserActions() {
+        document.getElementById('userActionsPopup').style.display = 'none';
+    }
+
     async function sendChatMessage() {
         var input = document.getElementById('chatInput');
         var text = input.value.trim();
-        
-        if (!text) {
-            return;
-        }
-        
+        if (!text) return;
         if (!playerName) {
             document.getElementById('nameModal').style.display = 'flex';
             toast('⚠️ أدخل اسمك أولاً', true);
@@ -1131,141 +888,363 @@
         try {
             await messagesRef.add({
                 name: playerName,
+                userId: playerId,
                 text: text,
                 time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
-            console.log('✅ تم إرسال الرسالة');
         } catch (error) {
-            console.error('❌ فشل الإرسال:', error);
-            toast('❌ فشل إرسال الرسالة', true);
+            toast('❌ فشل الإرسال', true);
         }
-
         input.value = '';
     }
 
-    // ==================== VOICE CHAT FUNCTIONS ====================
-    function renderVoiceRooms() {
-        var grid = document.getElementById('voiceRoomsGrid');
-        if (!grid) {
+    // ==================== PRIVATE CHAT SYSTEM ====================
+    function startPrivateChatByName(targetName) {
+        closeUserActions();
+        if (!playerName) {
+            document.getElementById('nameModal').style.display = 'flex';
+            return;
+        }
+        if (targetName === playerName) {
+            toast('⚠️ ما تقدر تحكي مع نفسك', true);
+            return;
+        }
+        
+        var targetUser = getUserByName(targetName);
+        if (!targetUser) {
+            toast('⚠️ المستخدم غير موجود', true);
+            return;
+        }
+        
+        startPrivateChat(targetUser);
+    }
+
+    function startPrivateChat(targetUser) {
+        var chatId = [playerId, String(targetUser.id)].sort().join('_');
+        activePrivateChat = {
+            chatId: chatId,
+            targetId: targetUser.id,
+            targetName: targetUser.name
+        };
+        
+        document.getElementById('privateChatTargetName').textContent = targetUser.name + ' #' + targetUser.id;
+        document.getElementById('privateChatModal').classList.remove('hidden');
+        
+        // Add to private chats list
+        if (!privateChats[chatId]) {
+            privateChats[chatId] = {
+                targetName: targetUser.name,
+                targetId: targetUser.id,
+                lastMessage: '',
+                timestamp: Date.now()
+            };
+            localStorage.setItem('ga_private_chats', JSON.stringify(privateChats));
+        }
+        
+        listenForPrivateMessages(chatId);
+    }
+
+    function listenForPrivateMessages(chatId) {
+        privateMessagesRef
+            .where('chatId', '==', chatId)
+            .orderBy('timestamp', 'asc')
+            .onSnapshot(function(snapshot) {
+                var msgs = [];
+                snapshot.forEach(function(doc) {
+                    msgs.push(doc.data());
+                });
+                privateMessages[chatId] = msgs;
+                displayPrivateMessages();
+            });
+    }
+
+    function displayPrivateMessages() {
+        var container = document.getElementById('privateChatMessagesContainer');
+        if (!container || !activePrivateChat) return;
+        
+        var msgs = privateMessages[activePrivateChat.chatId] || [];
+        
+        if (msgs.length === 0) {
+            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);">لا توجد رسائل. ابدأ المحادثة!</p>';
             return;
         }
         
         var html = '';
-        for (var i = 0; i < voiceRooms.length; i++) {
-            var room = voiceRooms[i];
+        for (var i = 0; i < msgs.length; i++) {
+            var msg = msgs[i];
+            var isMine = msg.fromId === playerId;
+            html += '<div class="message-bubble ' + (isMine ? 'mine' : 'other') + '">';
+            html += '<div class="msg-name">' + msg.fromName + '</div>';
+            html += '<div class="msg-text">' + msg.text + '</div>';
+            html += '<div class="msg-time">' + (msg.time || '') + '</div>';
+            html += '</div>';
+        }
+        
+        container.innerHTML = html;
+        container.scrollTop = container.scrollHeight;
+    }
+
+    async function sendPrivateMessage() {
+        if (!activePrivateChat) return;
+        
+        var input = document.getElementById('privateChatInput');
+        var text = input.value.trim();
+        if (!text) return;
+        
+        try {
+            await privateMessagesRef.add({
+                chatId: activePrivateChat.chatId,
+                fromId: playerId,
+                fromName: playerName,
+                toId: activePrivateChat.targetId,
+                toName: activePrivateChat.targetName,
+                text: text,
+                time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            // Update last message
+            var chatId = activePrivateChat.chatId;
+            if (privateChats[chatId]) {
+                privateChats[chatId].lastMessage = text;
+                privateChats[chatId].timestamp = Date.now();
+                localStorage.setItem('ga_private_chats', JSON.stringify(privateChats));
+            }
+            
+        } catch (error) {
+            toast('❌ فشل الإرسال', true);
+        }
+        
+        input.value = '';
+    }
+
+    function closePrivateChat() {
+        activePrivateChat = null;
+        document.getElementById('privateChatModal').classList.add('hidden');
+    }
+
+    function showPrivateChatsList() {
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
+        document.getElementById('privateChatsListSection').classList.remove('hidden');
+        renderPrivateChatsList();
+        closeAllSidebars();
+    }
+
+    function renderPrivateChatsList() {
+        var container = document.getElementById('privateChatsList');
+        if (!container) return;
+        
+        var chatIds = Object.keys(privateChats);
+        
+        if (chatIds.length === 0) {
+            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px;">لا توجد محادثات خاصة. ابحث عن لاعب لبدء محادثة!</p>';
+            return;
+        }
+        
+        // Sort by timestamp
+        chatIds.sort(function(a, b) {
+            return (privateChats[b].timestamp || 0) - (privateChats[a].timestamp || 0);
+        });
+        
+        var html = '';
+        for (var i = 0; i < chatIds.length; i++) {
+            var chatId = chatIds[i];
+            var chat = privateChats[chatId];
+            var targetUser = getUserById(chat.targetId);
+            var displayName = chat.targetName;
+            if (targetUser) {
+                displayName = targetUser.name + ' #' + targetUser.id;
+            }
+            
             html += '' +
-                '<div class="voice-room-card">' +
-                    '<div class="voice-room-icon">' + room.icon + '</div>' +
-                    '<h3>' + room.name + '</h3>' +
-                    '<p class="room-info">' + room.description + '</p>' +
-                    '<button class="btn btn-success" onclick="joinVoiceRoom(\'' + room.id + '\', \'' + room.name + '\')">' +
-                        '<i class="fas fa-phone"></i> انضمام للغرفة' +
-                    '</button>' +
+                '<div class="private-chat-row" onclick="openExistingPrivateChat(\'' + chatId + '\', ' + chat.targetId + ', \'' + chat.targetName + '\')">' +
+                    '<div><strong>' + displayName + '</strong><div class="last-message">' + (chat.lastMessage || 'اضغط للدردشة') + '</div></div>' +
+                    '<i class="fas fa-chevron-left"></i>' +
                 '</div>';
         }
         
+        container.innerHTML = html;
+    }
+
+    function openExistingPrivateChat(chatId, targetId, targetName) {
+        var targetUser = getUserById(targetId);
+        if (!targetUser) {
+            targetUser = { id: targetId, name: targetName };
+        }
+        
+        activePrivateChat = {
+            chatId: chatId,
+            targetId: targetUser.id,
+            targetName: targetUser.name
+        };
+        
+        document.getElementById('privateChatTargetName').textContent = targetUser.name + ' #' + targetUser.id;
+        document.getElementById('privateChatModal').classList.remove('hidden');
+        
+        listenForPrivateMessages(chatId);
+    }
+
+    // ==================== SEARCH PLAYER ====================
+    function openSearchPlayerModal() {
+        document.getElementById('searchPlayerModal').classList.remove('hidden');
+        document.getElementById('searchPlayerInput').value = '';
+        document.getElementById('searchResults').innerHTML = '';
+        document.getElementById('searchPlayerInput').focus();
+    }
+
+    function closeSearchPlayerModal() {
+        document.getElementById('searchPlayerModal').classList.add('hidden');
+    }
+
+    // Search input handler
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchInput = document.getElementById('searchPlayerInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                var query = this.value.trim().toLowerCase();
+                var resultsContainer = document.getElementById('searchResults');
+                
+                if (!query) {
+                    resultsContainer.innerHTML = '';
+                    return;
+                }
+                
+                var results = [];
+                
+                // Search by ID
+                if (!isNaN(query)) {
+                    var id = parseInt(query);
+                    var user = getUserById(id);
+                    if (user && user.name !== playerName) {
+                        results.push(user);
+                    }
+                }
+                
+                // Search by name
+                for (var i = 0; i < registeredUsers.length; i++) {
+                    var user = registeredUsers[i];
+                    if (user.name.toLowerCase().indexOf(query) !== -1 && user.name !== playerName) {
+                        // Avoid duplicates
+                        var alreadyAdded = false;
+                        for (var j = 0; j < results.length; j++) {
+                            if (results[j].id === user.id) {
+                                alreadyAdded = true;
+                                break;
+                            }
+                        }
+                        if (!alreadyAdded) {
+                            results.push(user);
+                        }
+                    }
+                }
+                
+                if (results.length === 0) {
+                    resultsContainer.innerHTML = '<p style="color:var(--text-muted);padding:10px;">لا توجد نتائج</p>';
+                    return;
+                }
+                
+                var html = '';
+                for (var k = 0; k < results.length; k++) {
+                    var u = results[k];
+                    html += '<div class="user-row" style="cursor:pointer;margin:4px 0;" onclick="selectSearchResult(' + u.id + ')">';
+                    html += '<span>👤 ' + u.name + ' <span style="color:var(--primary);">#' + u.id + '</span></span>';
+                    html += '<button class="btn btn-primary btn-sm">💬 مراسلة</button>';
+                    html += '</div>';
+                }
+                
+                resultsContainer.innerHTML = html;
+            });
+        }
+    });
+
+    function selectSearchResult(userId) {
+        var user = getUserById(userId);
+        if (!user) return;
+        
+        closeSearchPlayerModal();
+        startPrivateChat(user);
+    }
+
+    // ==================== VOICE CHAT ====================
+    function renderVoiceRooms() {
+        var grid = document.getElementById('voiceRoomsGrid');
+        if (!grid) return;
+        
+        var html = '';
+        for (var i = 0; i < voiceRooms.length; i++) {
+            var room = voiceRooms[i];
+            html += '<div class="voice-room-card"><div class="voice-room-icon">' + room.icon + '</div><h3>' + room.name + '</h3><p class="room-info">' + room.description + '</p><button class="btn btn-success" onclick="joinVoiceRoom(\'' + room.id + '\',\'' + room.name + '\')"><i class="fas fa-phone"></i> انضمام</button></div>';
+        }
         grid.innerHTML = html;
     }
 
     function joinVoiceRoom(roomId, roomName) {
         currentVoiceRoom = { id: roomId, name: roomName };
-        
         document.getElementById('activeVoiceRoom').classList.remove('hidden');
         document.getElementById('activeRoomName').textContent = roomName;
-        
         var jitsiContainer = document.getElementById('jitsiContainer');
         jitsiContainer.innerHTML = '';
-        
-        var jitsiUrl = 'https://meet.jit.si/' + roomId;
-        jitsiUrl += '#userInfo.displayName=' + encodeURIComponent(playerName || 'زائر');
-        jitsiUrl += '&config.startWithAudioMuted=false';
-        jitsiUrl += '&config.startWithVideoMuted=true';
-        jitsiUrl += '&config.prejoinPageEnabled=false';
-        
         var iframe = document.createElement('iframe');
-        iframe.src = jitsiUrl;
-        iframe.allow = 'camera; microphone; fullscreen; display-capture; autoplay';
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.border = 'none';
+        iframe.src = 'https://meet.jit.si/' + roomId + '#config.startWithAudioMuted=false&config.startWithVideoMuted=true&config.prejoinPageEnabled=false';
+        iframe.allow = 'camera;microphone;fullscreen';
+        iframe.style.width = '100%'; iframe.style.height = '100%'; iframe.style.border = 'none';
         jitsiContainer.appendChild(iframe);
-        
-        toast('🎤 تم الانضمام إلى ' + roomName);
+        toast('🎤 انضممت إلى ' + roomName);
     }
 
     function leaveVoiceRoom() {
         currentVoiceRoom = null;
         document.getElementById('activeVoiceRoom').classList.add('hidden');
         document.getElementById('jitsiContainer').innerHTML = '';
-        toast('👋 تم مغادرة الغرفة الصوتية');
+        toast('👋 مغادرة');
     }
 
     function switchToVoiceChat() {
         chatMode = 'voice';
         localStorage.setItem('ga_chat_mode', 'voice');
-        
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
         document.getElementById('voiceChatSection').classList.remove('hidden');
-        
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('voiceChatMenuBtn').style.color = 'var(--primary)';
         document.getElementById('textChatMenuBtn').style.color = '';
-        
         renderVoiceRooms();
         closeAllSidebars();
     }
 
     function switchToTextChat() {
-        if (currentVoiceRoom) {
-            leaveVoiceRoom();
-        }
-        
+        if (currentVoiceRoom) leaveVoiceRoom();
         chatMode = 'text';
         localStorage.setItem('ga_chat_mode', 'text');
-        
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
         document.getElementById('textChatSection').classList.remove('hidden');
-        
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('textChatMenuBtn').style.color = 'var(--primary)';
         document.getElementById('voiceChatMenuBtn').style.color = '';
-        
         closeAllSidebars();
     }
 
-    // ==================== DATA LOADING FUNCTIONS ====================
+    // ==================== TOURNAMENTS ====================
     async function loadData() {
         try {
             var tRes = await fetch(TOURNAMENTS_API, { cache: 'no-cache' });
             var mRes = await fetch(MAPS_API, { cache: 'no-cache' });
             var gRes = await fetch(GAMEFILES_API, { cache: 'no-cache' });
             
-            if (tRes.ok) {
-                var tData = await tRes.json();
-                tournaments = Array.isArray(tData) ? tData : [];
-            } else {
-                tournaments = JSON.parse(localStorage.getItem('ga_tournaments') || '[]');
-            }
+            if (tRes.ok) { var tData = await tRes.json(); tournaments = Array.isArray(tData) ? tData : []; }
+            else tournaments = JSON.parse(localStorage.getItem('ga_tournaments') || '[]');
             
-            if (mRes.ok) {
-                var mData = await mRes.json();
-                maps = Array.isArray(mData) ? mData : [];
-            } else {
-                maps = JSON.parse(localStorage.getItem('ga_maps') || '[]');
-            }
+            if (mRes.ok) { var mData = await mRes.json(); maps = Array.isArray(mData) ? mData : []; }
+            else maps = JSON.parse(localStorage.getItem('ga_maps') || '[]');
             
-            if (gRes.ok) {
-                var gData = await gRes.json();
-                gameFiles = Array.isArray(gData) ? gData : [];
-            } else {
-                gameFiles = JSON.parse(localStorage.getItem('ga_gameFiles') || '[]');
-            }
-        } catch (error) {
+            if (gRes.ok) { var gData = await gRes.json(); gameFiles = Array.isArray(gData) ? gData : []; }
+            else gameFiles = JSON.parse(localStorage.getItem('ga_gameFiles') || '[]');
+        } catch (e) {
             tournaments = JSON.parse(localStorage.getItem('ga_tournaments') || '[]');
             maps = JSON.parse(localStorage.getItem('ga_maps') || '[]');
             gameFiles = JSON.parse(localStorage.getItem('ga_gameFiles') || '[]');
@@ -1274,88 +1253,33 @@
         localStorage.setItem('ga_tournaments', JSON.stringify(tournaments));
         localStorage.setItem('ga_maps', JSON.stringify(maps));
         localStorage.setItem('ga_gameFiles', JSON.stringify(gameFiles));
-        
         renderAll();
     }
 
     async function saveTournaments() {
         localStorage.setItem('ga_tournaments', JSON.stringify(tournaments));
-        try {
-            await fetch(TOURNAMENTS_API, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(tournaments)
-            });
-        } catch (error) {
-            console.log('حفظ محلي فقط');
-        }
+        try { await fetch(TOURNAMENTS_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(tournaments) }); } catch (e) {}
         renderAll();
     }
 
     async function saveMaps() {
         localStorage.setItem('ga_maps', JSON.stringify(maps));
-        try {
-            await fetch(MAPS_API, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(maps)
-            });
-        } catch (error) {
-            console.log('حفظ محلي فقط');
-        }
+        try { await fetch(MAPS_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(maps) }); } catch (e) {}
         renderAll();
     }
 
     async function saveGameFiles() {
         localStorage.setItem('ga_gameFiles', JSON.stringify(gameFiles));
-        try {
-            await fetch(GAMEFILES_API, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(gameFiles)
-            });
-        } catch (error) {
-            console.log('حفظ محلي فقط');
-        }
+        try { await fetch(GAMEFILES_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(gameFiles) }); } catch (e) {}
         renderAll();
     }
 
     function getAllPlayerNames() {
         var names = [];
-        
-        for (var i = 0; i < tournaments.length; i++) {
-            var t = tournaments[i];
-            if (t.playersList) {
-                for (var j = 0; j < t.playersList.length; j++) {
-                    names.push(t.playersList[j]);
-                }
-            }
+        for (var i = 0; i < registeredUsers.length; i++) {
+            names.push(registeredUsers[i].name);
         }
-        
-        for (var i = 0; i < maps.length; i++) {
-            if (maps[i].author) {
-                names.push(maps[i].author);
-            }
-        }
-        
-        for (var i = 0; i < gameFiles.length; i++) {
-            if (gameFiles[i].author) {
-                names.push(gameFiles[i].author);
-            }
-        }
-        
-        if (playerName) {
-            names.push(playerName);
-        }
-        
-        var uniqueNames = [];
-        for (var i = 0; i < names.length; i++) {
-            if (uniqueNames.indexOf(names[i]) === -1) {
-                uniqueNames.push(names[i]);
-            }
-        }
-        
-        return uniqueNames;
+        return names;
     }
 
     function renderAll() {
@@ -1368,433 +1292,219 @@
         renderAdminMapsList();
         renderAdminGameFilesList();
         renderUsersList();
+        renderPrivateChatsList();
     }
 
-    // ==================== RENDER FUNCTIONS ====================
     function renderTournamentGrid() {
         var grid = document.getElementById('tournamentGridFull');
-        if (!grid) {
-            return;
-        }
-        
+        if (!grid) return;
         if (tournaments.length === 0) {
-            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد بطولات حالياً</p>';
+            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد بطولات</p>';
             return;
         }
-        
         var html = '';
         for (var i = 0; i < tournaments.length; i++) {
             var t = tournaments[i];
-            html += '<div class="card">';
-            html += '<h3>🏆 ' + t.name + '</h3>';
+            html += '<div class="card"><h3>🏆 ' + t.name + '</h3>';
             html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">';
-            
-            if (t.streamLink) {
-                html += '<span class="badge badge-danger">🔴 بث مباشر</span>';
-            }
-            
-            var statusClass = t.status === 'جارية' ? 'badge-success' : 'badge-danger';
-            var statusText = t.status === 'جارية' ? '🟢 جارية' : '🔴 منتهية';
-            html += '<span class="badge ' + statusClass + '">' + statusText + '</span>';
-            html += '<span class="badge badge-warning">👥 ' + (t.players || 0) + '/' + t.size + '</span>';
-            html += '</div>';
-            
-            html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">';
+            if (t.streamLink) html += '<span class="badge badge-danger">🔴 بث</span>';
+            html += '<span class="badge ' + (t.status === 'جارية' ? 'badge-success' : 'badge-danger') + '">' + (t.status === 'جارية' ? '🟢' : '🔴') + '</span>';
+            html += '<span class="badge badge-warning">👥 ' + (t.players || 0) + '/' + t.size + '</span></div>';
+            html += '<div style="display:flex;gap:6px;margin-bottom:14px;">';
             html += '<span class="badge badge-info">📅 ' + t.date + '</span>';
-            html += '<span class="badge badge-warning">💰 ' + t.prize + '</span>';
+            html += '<span class="badge badge-warning">💰 ' + t.prize + '</span></div>';
+            html += '<button class="btn btn-primary btn-sm" onclick="viewDetail(' + i + ')">📋 تفاصيل</button>';
+            if (t.status === 'جارية' && t.type === 'open') html += '<button class="btn btn-outline btn-sm" onclick="joinTournament(' + i + ')">✍️ تسجيل</button>';
             html += '</div>';
-            
-            html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
-            html += '<button class="btn btn-primary btn-sm" onclick="viewDetail(' + i + ')"><i class="fas fa-eye"></i> تفاصيل</button>';
-            
-            if (t.status === 'جارية' && t.type === 'open') {
-                html += '<button class="btn btn-outline btn-sm" onclick="joinTournament(' + i + ')"><i class="fas fa-sign-in-alt"></i> تسجيل</button>';
-            }
-            
-            html += '</div></div>';
         }
-        
         grid.innerHTML = html;
     }
 
     function renderMapsGrid() {
         var grid = document.getElementById('mapsGrid');
-        if (!grid) {
-            return;
-        }
-        
+        if (!grid) return;
         if (maps.length === 0) {
-            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد خرائط بعد</p>';
+            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد خرائط</p>';
             return;
         }
-        
         var html = '';
         for (var i = 0; i < maps.length; i++) {
             var m = maps[i];
-            html += '<div class="card">';
-            html += '<h3>🗺️ ' + m.name + '</h3>';
-            html += '<p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">بواسطة: <strong>' + m.author + '</strong> | 📅 ' + m.date + '</p>';
-            html += '<a href="' + m.link + '" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>';
-            html += '</div>';
+            html += '<div class="card"><h3>🗺️ ' + m.name + '</h3><p style="font-size:0.8rem;color:var(--text-muted);">' + m.author + ' | ' + m.date + '</p><a href="' + m.link + '" target="_blank" class="btn btn-primary btn-sm">📥 تحميل</a></div>';
         }
-        
         grid.innerHTML = html;
     }
 
     function renderGameFilesGrid() {
         var grid = document.getElementById('gameFilesGrid');
-        if (!grid) {
-            return;
-        }
-        
+        if (!grid) return;
         if (gameFiles.length === 0) {
-            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد ملفات لعبة بعد</p>';
+            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد ملفات</p>';
             return;
         }
-        
-        var typeLabels = { patch: '🔧 باتش', fix: '🛠️ إصلاح', mod: '🎨 مود', tool: '🔧 أداة', other: '📄 آخر' };
-        
+        var tl = { patch: '🔧 باتش', fix: '🛠️ إصلاح', mod: '🎨 مود', tool: '🔧 أداة', other: '📄 آخر' };
         var html = '';
         for (var i = 0; i < gameFiles.length; i++) {
             var g = gameFiles[i];
-            html += '<div class="card">';
-            html += '<h3>📦 ' + g.name + '</h3>';
-            html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">';
-            html += '<span class="badge">' + (typeLabels[g.type] || g.type) + '</span>';
-            html += '</div>';
-            html += '<p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">بواسطة: <strong>' + g.author + '</strong> | 📅 ' + g.date + '</p>';
-            html += '<a href="' + g.link + '" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>';
-            html += '</div>';
+            html += '<div class="card"><h3>📦 ' + g.name + '</h3><span class="badge">' + (tl[g.type] || g.type) + '</span><p style="font-size:0.8rem;color:var(--text-muted);">' + g.author + ' | ' + g.date + '</p><a href="' + g.link + '" target="_blank" class="btn btn-primary btn-sm">📥 تحميل</a></div>';
         }
-        
         grid.innerHTML = html;
     }
 
     function renderLiveStreamContent() {
-        var container = document.getElementById('liveStreamContent');
-        if (!container) {
-            return;
-        }
-        
+        var c = document.getElementById('liveStreamContent');
+        if (!c) return;
         if (!liveStream || !liveStream.url) {
-            container.innerHTML = '' +
-                '<div class="card" style="text-align:center;padding:60px 20px;">' +
-                    '<div style="font-size:3rem;margin-bottom:16px;">📡</div>' +
-                    '<p style="color:var(--text-muted);font-size:1.1rem;">لا يوجد بث مباشر حالياً</p>' +
-                    '<p style="color:var(--text-muted);font-size:0.8rem;margin-top:8px;">سيظهر البث هنا عند إضافته من قبل المدير</p>' +
-                '</div>';
+            c.innerHTML = '<div class="card" style="text-align:center;padding:60px;"><p style="color:var(--text-muted);">لا يوجد بث</p></div>';
             return;
         }
-        
-        var videoId = extractYouTubeID(liveStream.url);
-        if (!videoId) {
-            container.innerHTML = '<p style="color:var(--danger);text-align:center;">رابط البث غير صالح</p>';
-            return;
-        }
-        
-        var title = liveStream.title ? ' - ' + liveStream.title : '';
-        container.innerHTML = '' +
-            '<div style="margin-bottom:16px;">' +
-                '<span class="live-badge">🔴 بث مباشر الآن' + title + '</span>' +
-            '</div>' +
-            '<div class="stream-container">' +
-                '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>' +
-            '</div>';
+        var v = extractYouTubeID(liveStream.url);
+        if (!v) { c.innerHTML = '<p style="color:var(--danger);">رابط غير صالح</p>'; return; }
+        c.innerHTML = '<div style="margin-bottom:16px;"><span class="live-badge">🔴 مباشر' + (liveStream.title ? ' - ' + liveStream.title : '') + '</span></div><div class="stream-container"><iframe src="https://www.youtube.com/embed/' + v + '?autoplay=1" allowfullscreen></iframe></div>';
     }
 
     function setLiveStream() {
-        if (!isAdmin) {
-            toast('🔒 للمدير فقط', true);
-            return;
-        }
-        
-        var url = document.getElementById('liveStreamUrlInput').value.trim();
-        var title = document.getElementById('liveStreamTitleInput').value.trim();
-        
-        if (!url) {
-            toast('⚠️ أدخل رابط البث', true);
-            return;
-        }
-        
-        var videoId = extractYouTubeID(url);
-        if (!videoId) {
-            toast('⚠️ رابط يوتيوب غير صالح', true);
-            return;
-        }
-        
-        liveStream = {
-            url: url,
-            title: title,
-            videoId: videoId,
-            setAt: new Date().toISOString()
-        };
-        
+        if (!isAdmin) return;
+        var u = document.getElementById('liveStreamUrlInput').value.trim();
+        var t = document.getElementById('liveStreamTitleInput').value.trim();
+        if (!u) { toast('⚠️ رابط', true); return; }
+        liveStream = { url: u, title: t };
         localStorage.setItem('ga_live_stream', JSON.stringify(liveStream));
-        document.getElementById('liveStreamUrlInput').value = '';
-        document.getElementById('liveStreamTitleInput').value = '';
         renderLiveStreamContent();
-        toast('✅ تم حفظ البث المباشر');
+        toast('✅ تم');
     }
 
     function removeLiveStream() {
-        if (!isAdmin) {
-            toast('🔒 للمدير فقط', true);
-            return;
-        }
-        
-        if (!confirm('⚠️ إزالة البث المباشر؟')) {
-            return;
-        }
-        
+        if (!isAdmin) return;
         liveStream = null;
         localStorage.removeItem('ga_live_stream');
         renderLiveStreamContent();
-        toast('🗑️ تم إزالة البث');
+        toast('🗑️ تم');
     }
 
     function showLiveStream() {
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('liveStreamSection').classList.remove('hidden');
         renderLiveStreamContent();
         closeAllSidebars();
     }
 
     function joinTournament(idx) {
-        if (!playerName) {
-            toast('⚠️ أدخل اسمك أولاً', true);
-            document.getElementById('nameModal').style.display = 'flex';
-            return;
-        }
-        
+        if (!playerName) { toast('⚠️ اسمك', true); document.getElementById('nameModal').style.display = 'flex'; return; }
         var t = tournaments[idx];
-        
-        if (t.players >= t.size) {
-            toast('⚠️ البطولة مكتملة', true);
-            return;
-        }
-        
-        if (!t.playersList) {
-            t.playersList = [];
-        }
-        
-        if (t.playersList.indexOf(playerName) !== -1) {
-            toast('⚠️ مسجل بالفعل', true);
-            return;
-        }
-        
+        if (t.players >= t.size) { toast('⚠️ مكتملة', true); return; }
+        if (!t.playersList) t.playersList = [];
+        if (t.playersList.indexOf(playerName) !== -1) { toast('⚠️ مسجل', true); return; }
         t.playersList.push(playerName);
         t.players = t.playersList.length;
         saveTournaments();
-        toast('✅ تم تسجيل "' + playerName + '"');
+        toast('✅ ' + playerName);
     }
 
     function viewDetail(idx) {
         var t = tournaments[idx];
-        
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('detailSection').classList.remove('hidden');
-        
-        var html = '';
-        html += '<h2 style="font-size:1.5rem;font-weight:900;margin-bottom:12px;">🏆 ' + t.name + '</h2>';
-        html += '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">';
-        html += '<span class="badge badge-info">👥 ' + (t.players || 0) + '/' + t.size + '</span>';
-        html += '<span class="badge badge-warning">📅 ' + t.date + '</span>';
-        html += '<span class="badge badge-warning">💰 ' + t.prize + '</span>';
-        
-        var statusClass = t.status === 'جارية' ? 'badge-success' : 'badge-danger';
-        var statusText = t.status === 'جارية' ? '🟢 جارية' : '🔴 منتهية';
-        html += '<span class="badge ' + statusClass + '">' + statusText + '</span>';
-        html += '</div>';
-        
-        if (t.rules) {
-            html += '<div class="card" style="margin-bottom:16px;">';
-            html += '<h4 style="margin-bottom:8px;">📋 الشروط</h4>';
-            html += '<p style="color:var(--text-secondary);">' + t.rules + '</p>';
-            html += '</div>';
-        }
-        
+        var html = '<h2>🏆 ' + t.name + '</h2><p>👥 ' + (t.players || 0) + '/' + t.size + ' | 📅 ' + t.date + ' | 💰 ' + t.prize + '</p><p>' + (t.rules || '') + '</p>';
         if (t.streamLink) {
-            var videoId = extractYouTubeID(t.streamLink);
-            if (videoId) {
-                html += '<h4 style="margin:16px 0 8px;">🔴 البث المباشر</h4>';
-                html += '<div class="stream-container"><iframe src="https://www.youtube.com/embed/' + videoId + '" allowfullscreen></iframe></div>';
-            }
+            var v = extractYouTubeID(t.streamLink);
+            if (v) html += '<div class="stream-container"><iframe src="https://www.youtube.com/embed/' + v + '" allowfullscreen></iframe></div>';
         }
-        
         document.getElementById('detailContent').innerHTML = html;
     }
 
     function showProfile() {
-        if (!playerName) {
-            toast('⚠️ أدخل اسمك أولاً', true);
-            document.getElementById('nameModal').style.display = 'flex';
-            return;
-        }
-        
+        if (!playerName) { toast('⚠️ اسمك', true); document.getElementById('nameModal').style.display = 'flex'; return; }
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('profileSection').classList.remove('hidden');
         closeAllSidebars();
         
-        var myTournaments = [];
-        for (var i = 0; i < tournaments.length; i++) {
-            var t = tournaments[i];
-            if (t.playersList && t.playersList.indexOf(playerName) !== -1) {
-                myTournaments.push(t);
-            }
-        }
+        var user = getUserByName(playerName);
+        var userId = user ? user.id : playerId;
         
-        var myMaps = [];
-        for (var i = 0; i < maps.length; i++) {
-            if (maps[i].author === playerName) {
-                myMaps.push(maps[i]);
-            }
-        }
-        
-        var myGameFiles = [];
-        for (var i = 0; i < gameFiles.length; i++) {
-            if (gameFiles[i].author === playerName) {
-                myGameFiles.push(gameFiles[i]);
-            }
-        }
-        
-        var html = '';
-        html += '<div class="profile-card">';
-        html += '<div class="profile-avatar">👤</div>';
-        html += '<h2 style="font-size:1.4rem;font-weight:900;margin-bottom:20px;">' + playerName + '</h2>';
-        html += '<div class="profile-stat"><span>🏆 البطولات المشارك فيها</span><span style="font-weight:800;color:var(--primary);">' + myTournaments.length + '</span></div>';
-        html += '<div class="profile-stat"><span>🗺️ الخرائط المرفوعة</span><span style="font-weight:800;color:var(--primary);">' + myMaps.length + '</span></div>';
-        html += '<div class="profile-stat"><span>📦 ملفات اللعبة المرفوعة</span><span style="font-weight:800;color:var(--primary);">' + myGameFiles.length + '</span></div>';
+        var html = '<div class="profile-card"><div class="profile-avatar">👤</div>';
+        html += '<h2>' + playerName + ' <span style="color:var(--primary);font-size:1rem;">#' + userId + '</span></h2>';
+        html += '<p style="color:var(--text-muted);">🎫 ID: ' + userId + '</p>';
         html += '</div>';
-        
         document.getElementById('profileContent').innerHTML = html;
     }
 
-    // ==================== MODAL FUNCTIONS ====================
-    function openMapModal() {
-        document.getElementById('mapModal').classList.remove('hidden');
-        closeAllSidebars();
-    }
-    
-    function closeMapModal() {
-        document.getElementById('mapModal').classList.add('hidden');
-    }
-    
+    function openMapModal() { document.getElementById('mapModal').classList.remove('hidden'); closeAllSidebars(); }
+    function closeMapModal() { document.getElementById('mapModal').classList.add('hidden'); }
     function shareMap() {
-        var name = document.getElementById('mapNameInput').value.trim();
-        var link = document.getElementById('mapLinkInput').value.trim();
-        
-        if (!name || !link) {
-            toast('⚠️ أدخل الاسم والرابط', true);
-            return;
-        }
-        
-        maps.push({
-            name: name,
-            link: link,
-            author: playerName || 'زائر',
-            date: new Date().toLocaleDateString('ar')
-        });
-        
-        saveMaps();
-        closeMapModal();
+        var n = document.getElementById('mapNameInput').value.trim();
+        var l = document.getElementById('mapLinkInput').value.trim();
+        if (!n || !l) { toast('⚠️ أكمل', true); return; }
+        maps.push({ name: n, link: l, author: playerName || 'زائر', date: new Date().toLocaleDateString('ar') });
+        saveMaps(); closeMapModal();
         document.getElementById('mapNameInput').value = '';
         document.getElementById('mapLinkInput').value = '';
-        toast('✅ تمت مشاركة الخريطة');
+        toast('✅ تم');
     }
 
-    function openGameFileModal() {
-        document.getElementById('gameFileModal').classList.remove('hidden');
-        closeAllSidebars();
-    }
-    
-    function closeGameFileModal() {
-        document.getElementById('gameFileModal').classList.add('hidden');
-    }
-    
+    function openGameFileModal() { document.getElementById('gameFileModal').classList.remove('hidden'); closeAllSidebars(); }
+    function closeGameFileModal() { document.getElementById('gameFileModal').classList.add('hidden'); }
     function shareGameFile() {
-        var name = document.getElementById('gameFileNameInput').value.trim();
-        var link = document.getElementById('gameFileLinkInput').value.trim();
-        var type = document.getElementById('gameFileTypeInput').value;
-        
-        if (!name || !link) {
-            toast('⚠️ أدخل الاسم والرابط', true);
-            return;
-        }
-        
-        gameFiles.push({
-            name: name,
-            link: link,
-            type: type,
-            author: playerName || 'زائر',
-            date: new Date().toLocaleDateString('ar')
-        });
-        
-        saveGameFiles();
-        closeGameFileModal();
+        var n = document.getElementById('gameFileNameInput').value.trim();
+        var l = document.getElementById('gameFileLinkInput').value.trim();
+        var t = document.getElementById('gameFileTypeInput').value;
+        if (!n || !l) { toast('⚠️ أكمل', true); return; }
+        gameFiles.push({ name: n, link: l, type: t, author: playerName || 'زائر', date: new Date().toLocaleDateString('ar') });
+        saveGameFiles(); closeGameFileModal();
         document.getElementById('gameFileNameInput').value = '';
         document.getElementById('gameFileLinkInput').value = '';
-        toast('✅ تمت مشاركة ملف اللعبة');
+        toast('✅ تم');
     }
 
-    // ==================== NAVIGATION FUNCTIONS ====================
     function showTournaments() {
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('tournamentsSection').classList.remove('hidden');
         closeAllSidebars();
     }
-    
+
     function showMaps() {
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('mapsSection').classList.remove('hidden');
         closeAllSidebars();
     }
-    
+
     function showGameFiles() {
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('gameFilesSection').classList.remove('hidden');
         closeAllSidebars();
     }
-    
+
     function showWheel() {
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('wheelSection').classList.remove('hidden');
         closeAllSidebars();
         loadWheelNames();
         drawWheel();
     }
-    
+
     function showAdmin() {
         var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
+        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
         document.getElementById('adminSection').classList.remove('hidden');
         closeAllSidebars();
         checkAdminStatus();
     }
 
-    // ==================== ADMIN FUNCTIONS ====================
     function checkAdminStatus() {
         if (isAdmin) {
             document.getElementById('adminLoginForm').classList.add('hidden');
@@ -1805,419 +1515,278 @@
             document.getElementById('adminDashboard').classList.add('hidden');
         }
     }
-    
+
     function adminLogin() {
-        var passwordInput = document.getElementById('adminPasswordInput');
-        
-        if (passwordInput.value === ADMIN_PASS) {
+        if (document.getElementById('adminPasswordInput').value === ADMIN_PASS) {
             isAdmin = true;
             localStorage.setItem('ga_is_admin', 'true');
             document.getElementById('adminLoginForm').classList.add('hidden');
             document.getElementById('adminDashboard').classList.remove('hidden');
-            passwordInput.value = '';
             renderAll();
-            toast('🔓 مرحباً Sahel TV!');
+            toast('🔓 مرحباً!');
         } else {
-            toast('❌ كلمة مرور خاطئة', true);
+            toast('❌ خطأ', true);
         }
     }
-    
+
     function logoutAdmin() {
         isAdmin = false;
         localStorage.removeItem('ga_is_admin');
         document.getElementById('adminLoginForm').classList.remove('hidden');
         document.getElementById('adminDashboard').classList.add('hidden');
-        toast('👋 تم تسجيل الخروج');
+        toast('👋 تم');
     }
-    
+
     function addTournament() {
-        if (!isAdmin) {
-            toast('🔒 للمدير فقط', true);
-            return;
-        }
-        
-        var name = document.getElementById('newName').value;
-        var date = document.getElementById('newDate').value;
-        var prize = document.getElementById('newPrize').value;
-        
-        if (!name || !date || !prize) {
-            toast('⚠️ أكمل الحقول', true);
-            return;
-        }
-        
-        var size = parseInt(document.getElementById('newSize').value);
-        var type = document.getElementById('newType').value;
-        
+        if (!isAdmin) return;
+        var n = document.getElementById('newName').value;
+        var d = document.getElementById('newDate').value;
+        var p = document.getElementById('newPrize').value;
+        if (!n || !d || !p) { toast('⚠️ أكمل', true); return; }
         tournaments.push({
-            name: name,
-            date: date,
-            prize: prize,
-            size: size,
-            type: type,
-            players: 0,
-            playersList: [],
-            bracket: [],
+            name: n, date: d, prize: p,
+            size: parseInt(document.getElementById('newSize').value),
+            type: document.getElementById('newType').value,
+            players: 0, playersList: [],
             rules: document.getElementById('newRules').value,
-            donateLink: document.getElementById('newDonateLink').value,
             streamLink: document.getElementById('newStreamLink').value,
-            status: 'جارية',
-            createdAt: new Date().toISOString()
+            status: 'جارية'
         });
-        
-        document.getElementById('newName').value = '';
-        document.getElementById('newDate').value = '';
-        document.getElementById('newPrize').value = '';
-        document.getElementById('newRules').value = '';
-        document.getElementById('newDonateLink').value = '';
-        document.getElementById('newStreamLink').value = '';
-        
         saveTournaments();
-        toast('📢 تم الإعلان عن البطولة');
+        toast('📢 تم');
     }
-    
-    function deleteTournament(idx) {
-        if (!isAdmin) {
-            toast('🔒 للمدير فقط', true);
-            return;
-        }
-        
-        if (confirm('⚠️ حذف البطولة؟')) {
-            tournaments.splice(idx, 1);
-            saveTournaments();
-            toast('🗑️ تم الحذف');
-        }
-    }
-    
-    function deleteMap(idx) {
-        if (!isAdmin) {
-            toast('🔒 للمدير فقط', true);
-            return;
-        }
-        
-        if (confirm('⚠️ حذف الخريطة؟')) {
-            maps.splice(idx, 1);
-            saveMaps();
-            toast('🗑️ تم الحذف');
-        }
-    }
-    
-    function deleteGameFile(idx) {
-        if (!isAdmin) {
-            toast('🔒 للمدير فقط', true);
-            return;
-        }
-        
-        if (confirm('⚠️ حذف ملف اللعبة؟')) {
-            gameFiles.splice(idx, 1);
-            saveGameFiles();
-            toast('🗑️ تم الحذف');
-        }
-    }
-    
+
+    function deleteTournament(idx) { if (!isAdmin) return; if (confirm('حذف؟')) { tournaments.splice(idx, 1); saveTournaments(); toast('🗑️ تم'); } }
+    function deleteMap(idx) { if (!isAdmin) return; if (confirm('حذف؟')) { maps.splice(idx, 1); saveMaps(); toast('🗑️ تم'); } }
+    function deleteGameFile(idx) { if (!isAdmin) return; if (confirm('حذف؟')) { gameFiles.splice(idx, 1); saveGameFiles(); toast('🗑️ تم'); } }
     function deleteUser(userName) {
-        if (!isAdmin) {
-            toast('🔒 للمدير فقط', true);
-            return;
-        }
-        
-        if (confirm('⚠️ حذف "' + userName + '"؟')) {
-            for (var i = 0; i < tournaments.length; i++) {
-                var t = tournaments[i];
-                if (t.playersList) {
-                    t.playersList = t.playersList.filter(function(p) {
-                        return p !== userName;
-                    });
-                    t.players = t.playersList.length;
+        if (!isAdmin) return;
+        if (confirm('حذف ' + userName + '؟')) {
+            for (var i = 0; i < registeredUsers.length; i++) {
+                if (registeredUsers[i].name === userName) {
+                    registeredUsers.splice(i, 1);
+                    break;
                 }
             }
-            
-            maps = maps.filter(function(m) {
-                return m.author !== userName;
-            });
-            
-            gameFiles = gameFiles.filter(function(g) {
-                return g.author !== userName;
-            });
-            
-            saveTournaments();
-            saveMaps();
-            saveGameFiles();
-            toast('🗑️ تم حذف "' + userName + '"');
+            saveRegisteredUsers();
+            toast('🗑️ تم حذف ' + userName);
         }
     }
-    
+
     function switchAdminTab(tab) {
         var tabs = document.querySelectorAll('.admin-tab');
-        for (var i = 0; i < tabs.length; i++) {
-            tabs[i].classList.remove('active');
-        }
+        for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
         event.target.classList.add('active');
-        
         document.getElementById('adminTabTournaments').classList.toggle('hidden', tab !== 'tournaments');
         document.getElementById('adminTabMaps').classList.toggle('hidden', tab !== 'maps');
         document.getElementById('adminTabGameFiles').classList.toggle('hidden', tab !== 'gameFiles');
         document.getElementById('adminTabStream').classList.toggle('hidden', tab !== 'stream');
         document.getElementById('adminTabUsers').classList.toggle('hidden', tab !== 'users');
-        
-        if (tab === 'maps') renderAdminMapsList();
-        if (tab === 'gameFiles') renderAdminGameFilesList();
-        if (tab === 'users') renderUsersList();
     }
 
     function renderAdminList() {
-        var list = document.getElementById('adminList');
-        
-        if (tournaments.length === 0) {
-            list.innerHTML = '<p style="color:var(--text-muted);">لا توجد بطولات.</p>';
-            return;
-        }
-        
+        var l = document.getElementById('adminList');
+        if (!tournaments.length) { l.innerHTML = '<p>لا يوجد</p>'; return; }
         var html = '';
         for (var i = 0; i < tournaments.length; i++) {
-            var t = tournaments[i];
-            html += '<div style="background:var(--bg-input);border-radius:8px;padding:8px;margin:4px 0;">';
-            html += '<span>🏆 ' + t.name + ' | 👥 ' + t.players + '/' + t.size + '</span>';
-            html += '<button class="btn btn-danger btn-sm" onclick="deleteTournament(' + i + ')">🗑️</button>';
-            html += '</div>';
+            html += '<div class="user-row"><span>🏆 ' + tournaments[i].name + '</span><button class="btn btn-danger btn-sm" onclick="deleteTournament(' + i + ')">🗑️</button></div>';
         }
-        
-        list.innerHTML = html;
+        l.innerHTML = html;
     }
 
     function renderAdminMapsList() {
-        var list = document.getElementById('adminMapsList');
-        
-        if (maps.length === 0) {
-            list.innerHTML = '<p style="color:var(--text-muted);">لا توجد خرائط.</p>';
-            return;
-        }
-        
+        var l = document.getElementById('adminMapsList');
+        if (!maps.length) { l.innerHTML = '<p>لا يوجد</p>'; return; }
         var html = '';
         for (var i = 0; i < maps.length; i++) {
-            var m = maps[i];
-            html += '<div class="user-row">';
-            html += '<span>🗺️ ' + m.name + ' - ' + m.author + '</span>';
-            html += '<button class="btn btn-danger btn-sm" onclick="deleteMap(' + i + ')">🗑️</button>';
-            html += '</div>';
+            html += '<div class="user-row"><span>🗺️ ' + maps[i].name + '</span><button class="btn btn-danger btn-sm" onclick="deleteMap(' + i + ')">🗑️</button></div>';
         }
-        
-        list.innerHTML = html;
+        l.innerHTML = html;
     }
 
     function renderAdminGameFilesList() {
-        var list = document.getElementById('adminGameFilesList');
-        
-        if (gameFiles.length === 0) {
-            list.innerHTML = '<p style="color:var(--text-muted);">لا توجد ملفات لعبة.</p>';
-            return;
-        }
-        
-        var typeLabels = { patch: '🔧 باتش', fix: '🛠️ إصلاح', mod: '🎨 مود', tool: '🔧 أداة', other: '📄 آخر' };
-        
+        var l = document.getElementById('adminGameFilesList');
+        if (!gameFiles.length) { l.innerHTML = '<p>لا يوجد</p>'; return; }
         var html = '';
         for (var i = 0; i < gameFiles.length; i++) {
-            var g = gameFiles[i];
-            html += '<div class="user-row">';
-            html += '<span>📦 ' + g.name + ' (' + (typeLabels[g.type] || g.type) + ') - ' + g.author + '</span>';
-            html += '<button class="btn btn-danger btn-sm" onclick="deleteGameFile(' + i + ')">🗑️</button>';
-            html += '</div>';
+            html += '<div class="user-row"><span>📦 ' + gameFiles[i].name + '</span><button class="btn btn-danger btn-sm" onclick="deleteGameFile(' + i + ')">🗑️</button></div>';
         }
-        
-        list.innerHTML = html;
+        l.innerHTML = html;
     }
 
     function renderUsersList() {
-        var list = document.getElementById('usersList');
-        var allNames = getAllPlayerNames();
-        var searchTerm = (document.getElementById('userSearchInput')?.value || '').toLowerCase().trim();
-        
-        var filtered;
-        if (searchTerm) {
-            filtered = [];
-            for (var i = 0; i < allNames.length; i++) {
-                if (allNames[i].toLowerCase().indexOf(searchTerm) !== -1) {
-                    filtered.push(allNames[i]);
-                }
+        var l = document.getElementById('usersList');
+        var searchTerm = (document.getElementById('userSearchInput')?.value || '').toLowerCase();
+        var filtered = [];
+        for (var i = 0; i < registeredUsers.length; i++) {
+            var u = registeredUsers[i];
+            if (!searchTerm || u.name.toLowerCase().indexOf(searchTerm) !== -1 || String(u.id).indexOf(searchTerm) !== -1) {
+                filtered.push(u);
             }
-        } else {
-            filtered = allNames;
         }
-        
-        if (filtered.length === 0) {
-            list.innerHTML = '<p style="color:var(--text-muted);font-size:0.8rem;">لا يوجد مستخدمون.</p>';
-            return;
-        }
-        
+        if (!filtered.length) { l.innerHTML = '<p>لا يوجد</p>'; return; }
         var html = '';
         for (var i = 0; i < filtered.length; i++) {
-            var name = filtered[i];
-            html += '<div class="user-row">';
-            html += '<span>👤 ' + name + '</span>';
-            html += '<button class="btn btn-danger btn-sm" onclick="deleteUser(\'' + name + '\')">🗑️</button>';
-            html += '</div>';
+            html += '<div class="user-row"><span>👤 ' + filtered[i].name + ' <span style="color:var(--primary);">#' + filtered[i].id + '</span></span><button class="btn btn-danger btn-sm" onclick="deleteUser(\'' + filtered[i].name + '\')">🗑️</button></div>';
         }
-        
-        list.innerHTML = html;
+        l.innerHTML = html;
     }
 
-    // ==================== WHEEL FUNCTIONS ====================
-    function loadWheelNames() {
-        var textarea = document.getElementById('wheelNames');
-        if (textarea) {
-            textarea.value = wheelNames.join('\n');
-        }
-    }
-    
+    // ==================== WHEEL ====================
+    function loadWheelNames() { var t = document.getElementById('wheelNames'); if (t) t.value = wheelNames.join('\n'); }
     function saveWheelNames() {
-        var textarea = document.getElementById('wheelNames');
-        if (textarea) {
-            wheelNames = textarea.value.split('\n').filter(function(n) {
-                return n.trim();
-            });
+        var t = document.getElementById('wheelNames');
+        if (t) {
+            wheelNames = t.value.split('\n').filter(function(n) { return n.trim(); });
             localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames));
         }
         drawWheel();
     }
-    
+
     function drawWheel() {
         var canvas = document.getElementById('wheelCanvas');
-        if (!canvas) {
-            return;
-        }
-        
+        if (!canvas) return;
         var ctx = canvas.getContext('2d');
-        var w = canvas.width;
-        var h = canvas.height;
-        var cx = w / 2;
-        var cy = h / 2;
-        var r = Math.min(cx, cy) - 10;
-        
+        var w = canvas.width, h = canvas.height, cx = w / 2, cy = h / 2, r = Math.min(cx, cy) - 25;
         ctx.clearRect(0, 0, w, h);
         
         if (wheelNames.length === 0) {
             ctx.fillStyle = 'var(--text-muted)';
             ctx.font = '16px Tajawal';
             ctx.textAlign = 'center';
-            ctx.fillText('أدخل أسماء لبدء القرعة', cx, cy);
+            ctx.fillText('أدخل أسماء', cx, cy);
             return;
         }
         
-        var colors = ['#f0b90b', '#f6465d', '#0ecb81', '#3b82f6', '#8b5cf6', '#ec4899', '#06b6d4', '#f97316', '#6366f1', '#14b8a6', '#e11d48', '#a855f7'];
+        var colors = ['#f0b90b', '#f6465d', '#0ecb81', '#3b82f6', '#8b5cf6', '#ec4899', '#06b6d4', '#f97316'];
         var slice = 2 * Math.PI / wheelNames.length;
         
         for (var i = 0; i < wheelNames.length; i++) {
-            var name = wheelNames[i];
-            
             ctx.beginPath();
             ctx.moveTo(cx, cy);
             ctx.arc(cx, cy, r, slice * i + wheelAngle, slice * (i + 1) + wheelAngle);
-            ctx.closePath();
-            
             ctx.fillStyle = colors[i % colors.length];
             ctx.fill();
             ctx.strokeStyle = 'var(--bg-primary)';
             ctx.lineWidth = 3;
             ctx.stroke();
-            
             ctx.save();
             ctx.translate(cx, cy);
             ctx.rotate(slice * i + slice / 2 + wheelAngle);
             ctx.textAlign = 'center';
             ctx.fillStyle = 'white';
-            ctx.font = 'bold 15px Tajawal';
-            ctx.fillText(name, r * 0.65, 5);
+            ctx.font = 'bold 14px Tajawal';
+            ctx.fillText(wheelNames[i], r * 0.65, 5);
             ctx.restore();
         }
+        
+        // Draw center circle
+        ctx.beginPath();
+        ctx.arc(cx, cy, 15, 0, 2 * Math.PI);
+        ctx.fillStyle = 'var(--bg-secondary)';
+        ctx.fill();
+        ctx.strokeStyle = 'var(--primary)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
     }
-    
+
     function spinWheel() {
-        var textarea = document.getElementById('wheelNames');
-        if (textarea) {
-            wheelNames = textarea.value.split('\n').filter(function(n) {
-                return n.trim();
-            });
+        var t = document.getElementById('wheelNames');
+        if (t) {
+            wheelNames = t.value.split('\n').filter(function(n) { return n.trim(); });
             localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames));
         }
-        
-        if (wheelNames.length === 0) {
-            toast('⚠️ أدخل أسماء أولاً', true);
-            return;
-        }
-        
-        if (wheelSpinning) {
-            return;
-        }
-        
+        if (!wheelNames.length) { toast('⚠️ أسماء', true); return; }
+        if (wheelSpinning) return;
         wheelSpinning = true;
-        var result = document.getElementById('wheelResult');
-        result.textContent = '🎲 جاري الدوران...';
+        
+        var res = document.getElementById('wheelResult');
+        res.textContent = '🎲 جاري الدوران...';
         
         var spins = 5 + Math.random() * 5;
-        var duration = 3000;
+        var dur = 3000;
         var start = wheelAngle;
         var target = start + spins * 2 * Math.PI;
-        var startTime = performance.now();
+        var st = performance.now();
         
-        function animate(now) {
-            var elapsed = now - startTime;
-            var progress = Math.min(elapsed / duration, 1);
-            var ease = 1 - Math.pow(1 - progress, 3);
-            
+        function anim(now) {
+            var el = now - st;
+            var prog = Math.min(el / dur, 1);
+            var ease = 1 - Math.pow(1 - prog, 3);
             wheelAngle = start + (target - start) * ease;
             drawWheel();
-            
-            if (progress < 1) {
-                requestAnimationFrame(animate);
+            if (prog < 1) {
+                requestAnimationFrame(anim);
             } else {
                 wheelAngle = target % (2 * Math.PI);
                 var slice = 2 * Math.PI / wheelNames.length;
-                var pointerAngle = (2 * Math.PI - wheelAngle) % (2 * Math.PI);
-                var winnerIndex = Math.floor(pointerAngle / slice) % wheelNames.length;
-                
-                result.textContent = '🏆 الفائز: ' + wheelNames[winnerIndex] + ' 🏆';
+                var pa = (2 * Math.PI - wheelAngle) % (2 * Math.PI);
+                var wi = Math.floor(pa / slice) % wheelNames.length;
+                res.textContent = '🏆 الفائز: ' + wheelNames[wi] + ' 🏆';
                 wheelSpinning = false;
             }
         }
-        
-        requestAnimationFrame(animate);
+        requestAnimationFrame(anim);
     }
-    
+
     function clearWheel() {
         wheelNames = [];
         localStorage.setItem('ga_wheel_names', '[]');
         document.getElementById('wheelNames').value = '';
         document.getElementById('wheelResult').textContent = '';
         drawWheel();
-        toast('🗑️ تم مسح القرعة');
+        toast('🗑️ تم');
     }
-    
     document.getElementById('wheelNames')?.addEventListener('input', saveWheelNames);
 
     // ==================== PLAYER NAME ====================
     function savePlayerName() {
         var name = document.getElementById('playerNameInput').value.trim();
+        if (!name) return;
         
-        if (!name) {
+        // Check if name already registered
+        var existing = getUserByName(name);
+        if (existing && existing.name !== playerName) {
+            toast('⚠️ هذا الاسم مستخدم بالفعل', true);
             return;
         }
         
-        var allNames = getAllPlayerNames();
-        if (allNames.indexOf(name) !== -1) {
-            toast('⚠️ هذا الاسم مستخدم بالفعل', true);
-            return;
+        var user;
+        if (playerId && playerName) {
+            // Update existing user
+            user = getUserById(parseInt(playerId));
+            if (user) {
+                user.name = name;
+                saveRegisteredUsers();
+            }
+        } else {
+            // Register new user
+            user = registerPlayer(name);
+            playerId = String(user.id);
+            localStorage.setItem('ga_player_id', playerId);
         }
         
         playerName = name;
         localStorage.setItem('ga_player_name', name);
         document.getElementById('nameModal').style.display = 'none';
         document.getElementById('profileMenuBtn').style.display = 'flex';
-        toast('✅ أهلاً ' + name + '!');
+        toast('✅ أهلاً ' + name + '! 🎫 ID: #' + playerId);
     }
-    
+
     function initPlayerName() {
         if (playerName) {
             document.getElementById('nameModal').style.display = 'none';
             document.getElementById('profileMenuBtn').style.display = 'flex';
+            // Ensure user is registered
+            var user = getUserByName(playerName);
+            if (!user) {
+                user = registerPlayer(playerName);
+                playerId = String(user.id);
+                localStorage.setItem('ga_player_id', playerId);
+            } else if (!playerId) {
+                playerId = String(user.id);
+                localStorage.setItem('ga_player_id', playerId);
+            }
         } else {
             document.getElementById('nameModal').style.display = 'flex';
             document.getElementById('profileMenuBtn').style.display = 'none';
@@ -2227,93 +1796,78 @@
     // ==================== THEME ====================
     function setTheme(th) {
         document.body.classList.remove('light-mode', 'gold-mode');
-        
-        if (th === 'light') {
-            document.body.classList.add('light-mode');
-        }
-        if (th === 'gold') {
-            document.body.classList.add('gold-mode');
-        }
-        
+        if (th === 'light') document.body.classList.add('light-mode');
+        if (th === 'gold') document.body.classList.add('gold-mode');
         currentTheme = th;
         localStorage.setItem('ga_theme', th);
         updateThemeIcon();
     }
-    
+
     function updateThemeIcon() {
         var icon = document.querySelector('#themeToggleBtn i');
-        
-        if (currentTheme === 'dark') {
-            icon.className = 'fas fa-moon';
-        } else if (currentTheme === 'light') {
-            icon.className = 'fas fa-sun';
-        } else {
-            icon.className = 'fas fa-crown';
-        }
+        if (currentTheme === 'dark') icon.className = 'fas fa-moon';
+        else if (currentTheme === 'light') icon.className = 'fas fa-sun';
+        else icon.className = 'fas fa-crown';
     }
-    
+
     document.getElementById('themeToggleBtn').addEventListener('click', function() {
-        var nextTheme;
-        if (currentTheme === 'dark') {
-            nextTheme = 'light';
-        } else if (currentTheme === 'light') {
-            nextTheme = 'gold';
-        } else {
-            nextTheme = 'dark';
-        }
-        setTheme(nextTheme);
+        var next = currentTheme === 'dark' ? 'light' : currentTheme === 'light' ? 'gold' : 'dark';
+        setTheme(next);
     });
 
     // ==================== SIDEBAR ====================
     function openSidebar(side) {
         closeAllSidebars();
-        
-        if (side === 'right') {
-            document.getElementById('sidebarRight').classList.add('open');
-        } else {
-            document.getElementById('sidebarLeft').classList.add('open');
-        }
-        
+        if (side === 'right') document.getElementById('sidebarRight').classList.add('open');
+        else document.getElementById('sidebarLeft').classList.add('open');
         document.getElementById('overlay').classList.add('active');
     }
-    
+
     function closeAllSidebars() {
         document.getElementById('sidebarRight').classList.remove('open');
         document.getElementById('sidebarLeft').classList.remove('open');
         document.getElementById('overlay').classList.remove('active');
     }
 
-    document.getElementById('rightMenuBtn').addEventListener('click', function() {
-        openSidebar('right');
-    });
-    
-    document.getElementById('leftMenuBtn').addEventListener('click', function() {
-        openSidebar('left');
-    });
-    
+    document.getElementById('rightMenuBtn').addEventListener('click', function() { openSidebar('right'); });
+    document.getElementById('leftMenuBtn').addEventListener('click', function() { openSidebar('left'); });
     document.getElementById('overlay').addEventListener('click', closeAllSidebars);
 
-    // ==================== INITIALIZATION ====================
+    // ==================== INIT ====================
     document.addEventListener('DOMContentLoaded', function() {
         setTheme(currentTheme);
         updateThemeIcon();
-        loadData();
-        initPlayerName();
-        loadWheelNames();
-        drawWheel();
-        checkAdminStatus();
-        renderLiveStreamContent();
-        renderVoiceRooms();
-        listenForMessages();
         
-        if (chatMode === 'voice') {
-            switchToVoiceChat();
-        } else {
-            switchToTextChat();
-        }
-        
-        console.log('✅ GeneralsArena جاهز!');
-        console.log('✅ Firebase شغال');
-        console.log('✅ المحادثة في الوقت الحقيقي');
+        // Load data
+        loadRegisteredUsers().then(function() {
+            loadData();
+            initPlayerName();
+            
+            // Set player ID if exists
+            if (playerName && !playerId) {
+                var user = getUserByName(playerName);
+                if (user) {
+                    playerId = String(user.id);
+                    localStorage.setItem('ga_player_id', playerId);
+                }
+            }
+            
+            loadWheelNames();
+            drawWheel();
+            checkAdminStatus();
+            renderLiveStreamContent();
+            renderVoiceRooms();
+            listenForMessages();
+            
+            if (chatMode === 'voice') {
+                switchToVoiceChat();
+            } else {
+                switchToTextChat();
+            }
+            
+            console.log('✅ GeneralsArena جاهز! 🎫 نظام ID شغال');
+        });
     });
 </script>
+</body>
+</html>
