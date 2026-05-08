@@ -304,21 +304,87 @@
             margin: 0 12px;
         }
 
-        #tawktoContainer {
+        /* Chat Styles */
+        .chat-messages-container {
             flex: 1;
-            width: 100%;
-            min-height: 0;
-            border-radius: var(--radius-md);
-            overflow: hidden;
+            overflow-y: auto;
+            padding: 16px;
+            background: var(--bg-card);
             margin: 8px 12px;
-            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
+            backdrop-filter: var(--backdrop-blur);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        #tawktoContainer iframe {
-            width: 100% !important;
-            height: 100% !important;
-            border: none !important;
+        .message-bubble {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .message-bubble.mine {
+            align-self: flex-end;
+            background: var(--gradient-1);
+            color: #000;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-bubble.other {
+            align-self: flex-start;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-bottom-right-radius: 5px;
+        }
+
+        .message-bubble .msg-name {
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            opacity: 0.8;
+        }
+
+        .message-bubble .msg-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .message-bubble .msg-time {
+            font-size: 0.65rem;
+            opacity: 0.6;
+            margin-top: 4px;
+            text-align: left;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            margin: 0 12px 8px;
+            border-radius: var(--radius-md);
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .chat-input-area input:focus {
+            border-color: var(--primary);
         }
 
         .grid {
@@ -760,7 +826,6 @@
             box-shadow: var(--shadow-xl);
         }
 
-        /* Voice Rooms Styles */
         .voice-rooms-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -808,13 +873,32 @@
             border: 1px solid var(--border-color);
         }
 
+        .online-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.7rem;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr; gap: 12px; }
             .voice-rooms-grid { grid-template-columns: 1fr; gap: 12px; }
             .sidebar-right, .sidebar-left { width: 280px; }
             .card { padding: 18px; }
             .chat-header-bar { margin: 0 4px; padding: 12px 16px; font-size: 0.85rem; }
-            #tawktoContainer { margin: 4px; }
+            .chat-messages-container { margin: 4px; }
+            .chat-input-area { margin: 0 4px 4px; }
+            .message-bubble { max-width: 85%; }
         }
     </style>
 </head>
@@ -825,7 +909,6 @@
 
 <div class="sidebar-right" id="sidebarRight">
     <h4>القائمة الرئيسية</h4>
-    <a onclick="goHome()" class="menu-item"><i class="fas fa-home"></i> الرئيسية</a>
     <a onclick="switchToTextChat()" class="menu-item" id="textChatMenuBtn"><i class="fas fa-comments"></i> 💬 المحادثة الكتابية</a>
     <a onclick="switchToVoiceChat()" class="menu-item" id="voiceChatMenuBtn"><i class="fas fa-microphone"></i> 🎤 المحادثة الصوتية</a>
     <a onclick="showTournaments()" class="menu-item"><i class="fas fa-trophy"></i> البطولات</a>
@@ -906,7 +989,7 @@
         <button class="icon-btn" id="leftMenuBtn"><i class="fas fa-link"></i></button>
     </div>
     
-    <a href="#" onclick="goHome()" class="logo">
+    <a href="#" onclick="switchToTextChat()" class="logo">
         <div class="logo-icon">
             <i class="fas fa-chess-king"></i>
         </div>
@@ -928,8 +1011,23 @@
         <div class="chat-header-bar">
             <i class="fas fa-comments" style="color:var(--primary);"></i>
             المحادثة الكتابية - General Sahel TV Community
+            <span class="online-indicator" style="margin-right:auto;">
+                <span class="online-dot"></span> مباشر
+            </span>
         </div>
-        <div id="tawktoContainer"></div>
+        <div class="chat-messages-container" id="chatMessagesContainer">
+            <div style="text-align:center;color:var(--text-muted);padding:40px;">
+                <div style="font-size:3rem;margin-bottom:10px;">💬</div>
+                <p>لا توجد رسائل بعد</p>
+                <p style="font-size:0.8rem;">كن أول من يتحدث!</p>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="اكتب رسالتك هنا..." onkeypress="if(event.key==='Enter')sendChatMessage()">
+            <button class="btn btn-primary" onclick="sendChatMessage()" style="border-radius:50%;width:45px;height:45px;padding:0;">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
     </section>
 
     <!-- المحادثة الصوتية -->
@@ -937,9 +1035,7 @@
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-microphone"></i> الغرف الصوتية</div>
         <p style="color:var(--text-muted);margin-bottom:15px;">اختر غرفة وانضم للمحادثة الصوتية مع اللاعبين الآخرين 🎮</p>
-        
         <div class="voice-rooms-grid" id="voiceRoomsGrid"></div>
-        
         <div id="activeVoiceRoom" class="hidden" style="margin-top:20px;">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:10px;">
                 <span style="color:var(--success);font-weight:700;">🟢 متصل الآن: <span id="activeRoomName"></span></span>
@@ -953,14 +1049,15 @@
         </div>
     </section>
 
+    <!-- باقي الأقسام -->
     <section id="liveStreamSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="goHome()">⬅️</button>
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-broadcast-tower"></i> البث المباشر</div>
         <div id="liveStreamContent"></div>
     </section>
 
     <section id="adminSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:900px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="goHome()">⬅️</button>
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="card">
             <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
                 <div style="font-size:2rem;">👑</div>
@@ -1026,25 +1123,25 @@
     </section>
 
     <section id="tournamentsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="goHome()">⬅️</button>
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-trophy"></i> جميع البطولات</div>
         <div class="grid" id="tournamentGridFull"></div>
     </section>
 
     <section id="mapsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="goHome()">⬅️</button>
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-map"></i> جميع الخرائط</div>
         <div class="grid" id="mapsGrid"></div>
     </section>
 
     <section id="gameFilesSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="goHome()">⬅️</button>
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-box"></i> جميع ملفات اللعبة</div>
         <div class="grid" id="gameFilesGrid"></div>
     </section>
 
     <section id="wheelSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="goHome()">⬅️</button>
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-dharmachakra"></i> القرعة الدائرية</div>
         <div class="card wheel-container">
             <textarea id="wheelNames" placeholder="أدخل الأسماء (كل اسم في سطر)" rows="4" style="width:100%;margin-bottom:12px;"></textarea>
@@ -1058,7 +1155,7 @@
     </section>
 
     <section id="profileSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
-        <button class="back-btn" onclick="goHome()">⬅️</button>
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div id="profileContent"></div>
     </section>
 
@@ -1067,21 +1164,22 @@
         <div id="detailContent"></div>
     </section>
 </div>
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}; Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true; s1.src='https://embed.tawk.to/69fb6672ad369b1c32e90424/1jnv0gdr6';
-s1.charset='UTF-8'; s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-
 <script>
+    // ==================== CONFIGURATION ====================
     const ADMIN_PASS = "0937318709Aa@";
     const TOURNAMENTS_API = "https://api.npoint.io/9442d028609e0e81ecf8";
     const MAPS_API = "https://api.npoint.io/c3cd5edb0be62c9b9d8a";
     const GAMEFILES_API = "https://api.npoint.io/1234567890abcdef";
+    
+    // نظام الحاويات المتعددة للمحادثة
+    const CHAT_CONTAINERS = [
+        "https://api.npoint.io/27bf06704cf94063837e",  // الحاوية 1
+        "https://api.npoint.io/029627d542b5814d9476",  // الحاوية 2
+        "https://api.npoint.io/0c2770e7d123f96a48ad"   // الحاوية 3
+    ];
+    const MAX_TOTAL_MESSAGES = 500;
+    
+    // ==================== STATE ====================
     let tournaments = [], maps = [], gameFiles = [];
     let playerName = localStorage.getItem('ga_player_name') || '';
     let currentTheme = localStorage.getItem('ga_theme') || 'dark';
@@ -1090,6 +1188,7 @@ s0.parentNode.insertBefore(s1,s0);
     let chatMode = localStorage.getItem('ga_chat_mode') || 'text';
     let isAdmin = localStorage.getItem('ga_is_admin') === 'true';
     let liveStream = JSON.parse(localStorage.getItem('ga_live_stream') || 'null');
+    let chatMessages = [];
     
     // Voice Rooms
     let voiceRooms = JSON.parse(localStorage.getItem('ga_voice_rooms') || JSON.stringify([
@@ -1100,6 +1199,7 @@ s0.parentNode.insertBefore(s1,s0);
     ]));
     let currentVoiceRoom = null;
 
+    // ==================== UTILS ====================
     function toast(msg, err=false) { 
         const t=document.getElementById('toast'); 
         t.textContent=msg; 
@@ -1128,7 +1228,122 @@ s0.parentNode.insertBefore(s1,s0);
         return null;
     }
 
-    // ==================== Voice Chat Functions ====================
+    // ==================== CHAT SYSTEM ====================
+    async function loadAllChatMessages() {
+        chatMessages = [];
+        
+        for (const container of CHAT_CONTAINERS) {
+            try {
+                const response = await fetch(container + '?t=' + Date.now());
+                if (response.ok) {
+                    const data = await response.json();
+                    if (Array.isArray(data)) {
+                        chatMessages = chatMessages.concat(data);
+                    }
+                }
+            } catch (e) {
+                console.log('فشل تحميل حاوية');
+            }
+        }
+        
+        // ترتيب حسب الوقت
+        chatMessages.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+        
+        // إزالة التكرار
+        chatMessages = chatMessages.filter((msg, i, arr) => 
+            i === arr.findIndex(m => m.timestamp === msg.timestamp && m.name === msg.name)
+        );
+        
+        // نحتفظ بآخر 500 رسالة
+        if (chatMessages.length > MAX_TOTAL_MESSAGES) {
+            chatMessages = chatMessages.slice(-MAX_TOTAL_MESSAGES);
+        }
+        
+        displayChatMessages();
+    }
+
+    async function saveChatMessagesToContainers() {
+        if (chatMessages.length > MAX_TOTAL_MESSAGES) {
+            chatMessages = chatMessages.slice(-MAX_TOTAL_MESSAGES);
+        }
+        
+        const messagesPerContainer = Math.ceil(chatMessages.length / CHAT_CONTAINERS.length);
+        
+        for (let i = 0; i < CHAT_CONTAINERS.length; i++) {
+            const start = i * messagesPerContainer;
+            const end = start + messagesPerContainer;
+            const containerMessages = chatMessages.slice(start, end);
+            
+            try {
+                await fetch(CHAT_CONTAINERS[i], {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(containerMessages)
+                });
+            } catch (e) {
+                console.log('فشل حفظ في الحاوية ' + (i + 1));
+            }
+        }
+        
+        localStorage.setItem('ga_chat_backup', JSON.stringify(chatMessages.slice(-100)));
+    }
+
+    function displayChatMessages() {
+        const container = document.getElementById('chatMessagesContainer');
+        if (!container) return;
+
+        if (chatMessages.length === 0) {
+            container.innerHTML = `
+                <div style="text-align:center;color:var(--text-muted);padding:40px;">
+                    <div style="font-size:3rem;margin-bottom:10px;">💬</div>
+                    <p>لا توجد رسائل بعد</p>
+                    <p style="font-size:0.8rem;">كن أول من يتحدث!</p>
+                </div>`;
+            return;
+        }
+
+        container.innerHTML = chatMessages.map(msg => {
+            const isMine = msg.name === playerName;
+            return `
+                <div class="message-bubble ${isMine ? 'mine' : 'other'}">
+                    ${!isMine ? `<div class="msg-name">👤 ${msg.name}</div>` : ''}
+                    <div class="msg-text">${msg.text}</div>
+                    <div class="msg-time">${msg.time || ''}</div>
+                </div>
+            `;
+        }).join('');
+
+        container.scrollTop = container.scrollHeight;
+    }
+
+    async function sendChatMessage() {
+        const input = document.getElementById('chatInput');
+        const text = input.value.trim();
+        
+        if (!text) return;
+        
+        if (!playerName) {
+            document.getElementById('nameModal').style.display = 'flex';
+            toast('⚠️ أدخل اسمك أولاً', true);
+            return;
+        }
+
+        const newMessage = {
+            name: playerName,
+            text: text,
+            time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
+            timestamp: Date.now()
+        };
+
+        chatMessages.push(newMessage);
+        
+        await saveChatMessagesToContainers();
+        
+        input.value = '';
+        displayChatMessages();
+    }
+
+    // ==================== VOICE CHAT ====================
     function renderVoiceRooms() {
         const grid = document.getElementById('voiceRoomsGrid');
         if (!grid) return;
@@ -1153,8 +1368,7 @@ s0.parentNode.insertBefore(s1,s0);
         const jitsiContainer = document.getElementById('jitsiContainer');
         jitsiContainer.innerHTML = '';
         
-        // رابط Jitsi مع إعدادات مبسطة - بدون واجهة معقدة
-        const jitsiUrl = `https://meet.jit.si/${roomId}#userInfo.displayName=${encodeURIComponent(playerName || 'زائر')}&config.startWithAudioMuted=false&config.startWithVideoMuted=true&config.disableDeepLinking=true&config.prejoinPageEnabled=false&config.hideConferenceSubject=true&config.hideConferenceTimer=true&config.hideParticipantsStats=true&interfaceConfig.TOOLBAR_BUTTONS=['microphone','camera','hangup','chat','tileview','select-background','settings']&interfaceConfig.SHOW_JITSI_WATERMARK=false&interfaceConfig.SHOW_BRAND_WATERMARK=false&interfaceConfig.SHOW_POWERED_BY=false&interfaceConfig.DISABLE_JOIN_LEAVE_NOTIFICATIONS=true`;
+        const jitsiUrl = `https://meet.jit.si/${roomId}#userInfo.displayName=${encodeURIComponent(playerName || 'زائر')}&config.startWithAudioMuted=false&config.startWithVideoMuted=true&config.prejoinPageEnabled=false`;
         
         const iframe = document.createElement('iframe');
         iframe.src = jitsiUrl;
@@ -1162,7 +1376,6 @@ s0.parentNode.insertBefore(s1,s0);
         iframe.style.width = '100%';
         iframe.style.height = '100%';
         iframe.style.border = 'none';
-        iframe.setAttribute('allowfullscreen', 'true');
         jitsiContainer.appendChild(iframe);
         
         toast(`🎤 تم الانضمام إلى ${roomName}`);
@@ -1201,10 +1414,11 @@ s0.parentNode.insertBefore(s1,s0);
         document.getElementById('textChatMenuBtn').style.color = 'var(--primary)';
         document.getElementById('voiceChatMenuBtn').style.color = '';
         
+        loadAllChatMessages();
         closeAllSidebars();
     }
 
-    // ==================== Data Functions ====================
+    // ==================== TOURNAMENTS ====================
     async function loadData() {
         try {
             const [tRes, mRes, gRes] = await Promise.all([
@@ -1512,15 +1726,6 @@ s0.parentNode.insertBefore(s1,s0);
         toast('✅ تمت مشاركة ملف اللعبة');
     }
 
-    function goHome() { 
-        if (chatMode === 'voice') {
-            switchToVoiceChat();
-        } else {
-            switchToTextChat();
-        }
-        closeAllSidebars(); 
-    }
-    
     function showTournaments() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('tournamentsSection').classList.remove('hidden'); closeAllSidebars(); }
     function showMaps() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('mapsSection').classList.remove('hidden'); closeAllSidebars(); }
     function showGameFiles() { document.querySelectorAll('.main-content>section').forEach(s=>s.classList.add('hidden')); document.getElementById('gameFilesSection').classList.remove('hidden'); closeAllSidebars(); }
@@ -1759,6 +1964,7 @@ s0.parentNode.insertBefore(s1,s0);
     document.getElementById('leftMenuBtn').addEventListener('click',()=>{ openSidebar('left'); });
     document.getElementById('overlay').addEventListener('click',closeAllSidebars);
 
+    // ==================== INIT ====================
     document.addEventListener('DOMContentLoaded',()=>{
         setTheme(currentTheme);
         updateThemeIcon();
@@ -1770,11 +1976,15 @@ s0.parentNode.insertBefore(s1,s0);
         renderLiveStreamContent();
         renderVoiceRooms();
         
-        // تحديد وضع المحادثة
         if (chatMode === 'voice') {
             switchToVoiceChat();
         } else {
             switchToTextChat();
         }
+        
+        loadAllChatMessages();
+        setInterval(loadAllChatMessages, 3000);
     });
 </script>
+</body>
+</html>
