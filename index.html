@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="theme-color" content="#0a0f1a">
     <title>GeneralsArena | منصة البطولات - General Sahel TV</title>
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <script>
@@ -21,13 +26,15 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        console.log('✅ Firebase تم الاتصال بنجاح!');
     </script>
     
     <style>
+        /* ==================== CSS VARIABLES ==================== */
         :root {
             --bg-primary: #0a0f1a;
             --bg-secondary: #111827;
-            --bg-card: rgba(17, 24, 39, 0.85);
+            --bg-card: rgba(17, 24, 39, 0.88);
             --bg-input: #1a2332;
             --text-primary: #e2e8f0;
             --text-secondary: #b0bec5;
@@ -67,6 +74,7 @@
             --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
             --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
             --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
+            --gradient-2: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
         }
 
         body.gold-mode {
@@ -81,9 +89,16 @@
             --primary: #ffd700;
             --primary-dark: #cca800;
             --primary-light: #ffe44d;
+            --gradient-1: linear-gradient(135deg, #ffd700 0%, #cca800 100%);
+            --gradient-2: linear-gradient(135deg, #1a1400 0%, #2d2400 100%);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ==================== GLOBAL RESET ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Tajawal', 'Cairo', sans-serif;
@@ -98,11 +113,25 @@
             line-height: 1.6;
         }
 
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+        /* ==================== SCROLLBAR ==================== */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
 
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* ==================== HEADER ==================== */
         header {
             flex-shrink: 0;
             z-index: 100;
@@ -118,343 +147,1011 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
-        .logo-icon {
-            width: 44px; height: 44px; border-radius: var(--radius-sm);
-            background: var(--gradient-1); display: flex; align-items: center; justify-content: center;
-            font-size: 22px; color: #000; box-shadow: 0 4px 15px rgba(240, 185, 11, 0.35);
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            cursor: pointer;
         }
-        .logo-text h1 { font-size: 1.15rem; font-weight: 900; color: var(--primary); line-height: 1.2; }
-        .logo-text span { font-size: 0.65rem; color: var(--text-muted); font-weight: 500; letter-spacing: 0.08em; }
 
-        .nav-actions { display: flex; gap: 8px; align-items: center; }
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #000;
+            box-shadow: 0 4px 12px rgba(240, 185, 11, 0.3);
+        }
+
+        .logo-text h1 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
 
         .icon-btn {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            width: 40px; height: 40px; border-radius: var(--radius-sm);
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: var(--transition); color: var(--text-secondary);
-            font-size: 1rem; text-decoration: none; backdrop-filter: var(--backdrop-blur);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-decoration: none;
+            position: relative;
+            backdrop-filter: var(--backdrop-blur);
         }
-        .icon-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(240, 185, 11, 0.3); }
 
-        .sidebar-right, .sidebar-left {
-            position: fixed; top: 0; width: 320px; height: 100vh;
-            background: var(--bg-card); z-index: 200; padding: 90px 20px 30px;
+        .icon-btn:hover {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(240, 185, 11, 0.3);
+        }
+
+        .icon-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ==================== SIDEBARS ==================== */
+        .sidebar-right,
+        .sidebar-left {
+            position: fixed;
+            top: 0;
+            width: 320px;
+            height: 100vh;
+            background: var(--bg-card);
+            z-index: 200;
+            padding: 90px 20px 30px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--shadow-xl); backdrop-filter: var(--backdrop-blur);
-            overflow-y: auto; border: 1px solid var(--border-color);
-        }
-        .sidebar-right { right: -340px; border-left: 1px solid var(--border-color); border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
-        .sidebar-right.open { right: 0; }
-        .sidebar-left { left: -340px; border-right: 1px solid var(--border-color); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
-        .sidebar-left.open { left: 0; }
-
-        .sidebar-right h4, .sidebar-left h4 {
-            color: var(--primary); font-size: 0.7rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.12em; margin: 20px 0 10px;
-            padding: 0 12px; opacity: 0.85;
-        }
-        .sidebar-right a, .sidebar-right .menu-item, .sidebar-left a, .sidebar-left .menu-item {
-            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
-            border-radius: var(--radius-sm); text-decoration: none; color: var(--text-secondary);
-            font-size: 0.9rem; font-weight: 500; transition: var(--transition); cursor: pointer; margin-bottom: 4px;
-        }
-        .sidebar-right a:hover, .sidebar-right .menu-item:hover, .sidebar-left a:hover, .sidebar-left .menu-item:hover {
-            background: rgba(240, 185, 11, 0.12); color: var(--primary); padding-right: 24px;
+            box-shadow: var(--shadow-xl);
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
         }
 
-        .overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); z-index: 150; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; backdrop-filter: blur(4px); }
-        .overlay.active { opacity: 1; pointer-events: auto; }
+        .sidebar-right {
+            right: -340px;
+            border-left: 1px solid var(--border-color);
+            border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+        }
 
-        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-primary); }
+        .sidebar-right.open {
+            right: 0;
+        }
 
-        .chat-section { flex: 1; display: flex; flex-direction: column; width: 100%; max-width: 1400px; margin: 0 auto; }
+        .sidebar-left {
+            left: -340px;
+            border-right: 1px solid var(--border-color);
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+        }
+
+        .sidebar-left.open {
+            left: 0;
+        }
+
+        .sidebar-right h4,
+        .sidebar-left h4 {
+            color: var(--primary);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin: 20px 0 10px;
+            padding: 0 12px;
+            opacity: 0.85;
+        }
+
+        .sidebar-right a,
+        .sidebar-right .menu-item,
+        .sidebar-left a,
+        .sidebar-left .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+            margin-bottom: 4px;
+            position: relative;
+        }
+
+        .sidebar-right a:hover,
+        .sidebar-right .menu-item:hover,
+        .sidebar-left a:hover,
+        .sidebar-left .menu-item:hover {
+            background: rgba(240, 185, 11, 0.1);
+            color: var(--primary);
+            padding-right: 24px;
+        }
+
+        .sidebar-right a i,
+        .sidebar-right .menu-item i,
+        .sidebar-left a i,
+        .sidebar-left .menu-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ==================== OVERLAY ==================== */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: var(--bg-primary);
+        }
+
+        /* ==================== CHAT SECTION ==================== */
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
         .chat-header-bar {
-            background: var(--gradient-2); padding: 14px 24px; font-weight: 700;
-            display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem; flex-shrink: 0; box-shadow: var(--shadow-sm);
-            border-radius: 0 0 var(--radius-md) var(--radius-md); margin: 0 12px;
+            background: var(--gradient-2);
+            padding: 14px 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            margin: 0 12px;
         }
 
         .chat-messages-container {
-            flex: 1; overflow-y: auto; padding: 16px; background: var(--bg-card);
-            margin: 8px 12px; border-radius: var(--radius-md); border: 1px solid var(--border-color);
-            backdrop-filter: var(--backdrop-blur); display: flex; flex-direction: column; gap: 10px;
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            background: var(--bg-card);
+            margin: 8px 12px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            backdrop-filter: var(--backdrop-blur);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .message-bubble { max-width: 75%; padding: 12px 16px; border-radius: 18px; position: relative; word-wrap: break-word; }
-        .message-bubble.mine { align-self: flex-end; background: var(--gradient-1); color: #000; border-bottom-left-radius: 5px; }
-        .message-bubble.other { align-self: flex-start; background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-primary); border-bottom-right-radius: 5px; }
-        .message-bubble .msg-name { font-size: 0.7rem; font-weight: 700; margin-bottom: 4px; opacity: 0.85; cursor: pointer; color: var(--primary); }
-        .message-bubble .msg-name:hover { opacity: 1; text-decoration: underline; }
-        .message-bubble .msg-text { font-size: 0.9rem; line-height: 1.5; }
-        .message-bubble .msg-time { font-size: 0.65rem; opacity: 0.6; margin-top: 4px; text-align: left; }
+        .message-bubble {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            word-wrap: break-word;
+        }
 
-        .user-actions-popup {
-            position: fixed; background: var(--bg-card); border: 1px solid var(--primary);
-            border-radius: var(--radius-sm); padding: 8px; z-index: 3000;
-            box-shadow: var(--shadow-xl); backdrop-filter: blur(20px); display: none; min-width: 150px;
+        .message-bubble.mine {
+            align-self: flex-end;
+            background: var(--gradient-1);
+            color: #000;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-bubble.other {
+            align-self: flex-start;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-bottom-right-radius: 5px;
+        }
+
+        .message-bubble .msg-name {
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            opacity: 0.85;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        .message-bubble .msg-name:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .message-bubble .msg-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .message-bubble .msg-time {
+            font-size: 0.65rem;
+            opacity: 0.6;
+            margin-top: 4px;
+            text-align: left;
         }
 
         .chat-input-area {
-            display: flex; gap: 10px; padding: 12px; background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color); margin: 0 12px 8px; border-radius: var(--radius-md);
+            display: flex;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            margin: 0 12px 8px;
+            border-radius: var(--radius-md);
         }
+
         .chat-input-area input {
-            flex: 1; padding: 12px 18px; border-radius: 25px; border: 1px solid var(--border-color);
-            background: var(--bg-input); color: var(--text-primary);
-            font-family: 'Tajawal', 'Cairo', sans-serif; outline: none; font-size: 0.9rem;
-        }
-        .chat-input-area input:focus { border-color: var(--primary); }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; padding: 8px 0; }
-
-        .card {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-md); padding: 24px; transition: var(--transition);
-            backdrop-filter: var(--backdrop-blur); box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
-        }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-1); opacity: 0; transition: var(--transition); }
-        .card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-        .card:hover::before { opacity: 1; }
-        .card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 12px; color: var(--primary); }
-
-        .section-title { font-size: 1.4rem; font-weight: 900; margin: 20px 0 16px; display: flex; align-items: center; gap: 10px; }
-        .section-title i { color: var(--primary); font-size: 1.3rem; }
-
-        .badge {
-            display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
-            border-radius: 50px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em;
-        }
-        .badge-success { background: rgba(14, 203, 129, 0.12); color: var(--success); border: 1px solid rgba(14, 203, 129, 0.25); }
-        .badge-warning { background: rgba(240, 185, 11, 0.12); color: var(--warning); border: 1px solid rgba(240, 185, 11, 0.25); }
-        .badge-danger { background: rgba(246, 70, 93, 0.12); color: var(--danger); border: 1px solid rgba(246, 70, 93, 0.25); }
-        .badge-info { background: rgba(59, 130, 246, 0.12); color: var(--info); border: 1px solid rgba(59, 130, 246, 0.25); }
-
-        .live-badge {
-            display: inline-flex; align-items: center; gap: 6px; background: var(--danger);
-            color: white; padding: 8px 18px; border-radius: 50px; font-size: 0.8rem;
-            font-weight: 700; animation: pulse 2s infinite; box-shadow: 0 4px 15px rgba(246, 70, 93, 0.4);
-        }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.02); } }
-
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 10px 22px; border-radius: 50px; font-weight: 700;
-            font-family: 'Tajawal', 'Cairo', sans-serif; cursor: pointer; transition: var(--transition);
-            border: none; font-size: 0.85rem; text-decoration: none; letter-spacing: 0.02em; white-space: nowrap;
-        }
-        .btn-primary { background: var(--gradient-1); color: #000; box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(240, 185, 11, 0.4); }
-        .btn-outline { background: transparent; border: 2px solid var(--border-color); color: var(--text-secondary); }
-        .btn-outline:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
-        .btn-sm { padding: 6px 14px; font-size: 0.75rem; border-radius: 30px; }
-        .btn-danger { background: var(--danger); color: white; box-shadow: 0 4px 15px rgba(246, 70, 93, 0.3); }
-        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(246, 70, 93, 0.4); }
-        .btn-success { background: var(--success); color: white; box-shadow: 0 4px 15px rgba(14, 203, 129, 0.3); }
-        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(14, 203, 129, 0.4); }
-        .btn-info { background: var(--info); color: white; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
-        .btn-info:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4); }
-
-        .back-btn {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
-            font-weight: 600; display: inline-flex; align-items: center; justify-content: center;
-            color: var(--text-primary); transition: var(--transition); margin-bottom: 20px;
-            font-size: 1.3rem; backdrop-filter: var(--backdrop-blur); box-shadow: var(--shadow-sm);
-        }
-        .back-btn:hover { background: var(--primary); color: #000; transform: translateX(-4px); box-shadow: var(--shadow-md); }
-
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); z-index: 2000;
-            display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(8px);
-        }
-        .modal {
-            background: var(--bg-card); border-radius: var(--radius-lg); padding: 32px;
-            max-width: min(480px, 95vw); width: 100%; max-height: 85vh; overflow-y: auto;
-            border: 1px solid var(--border-color); text-align: center; box-shadow: var(--shadow-xl); backdrop-filter: var(--backdrop-blur);
-        }
-        .modal h3 { margin-bottom: 16px; color: var(--primary); font-size: 1.2rem; font-weight: 800; }
-        .modal input, .modal textarea, .modal select {
-            width: 100%; padding: 12px 16px; border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color); background: var(--bg-input);
-            color: var(--text-primary); font-family: 'Tajawal', 'Cairo', sans-serif;
-            margin-bottom: 12px; outline: none; font-size: 0.9rem; transition: var(--transition);
-        }
-        .modal input:focus, .modal textarea:focus, .modal select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1); }
-
-        .stream-container {
-            position: relative; width: 100%; padding-top: 56.25%; border-radius: var(--radius-md);
-            overflow: hidden; background: #000; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color);
-        }
-        .stream-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        .toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
-            background: var(--success); color: white; padding: 12px 28px; border-radius: 50px;
-            font-weight: 700; z-index: 10000; opacity: 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none; font-size: 0.85rem; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.error { background: var(--danger); }
-
-        .hidden { display: none !important; }
-
-        /* Admin Panel Styles */
-        .admin-container { max-width: 1000px; margin: 0 auto; }
-        .admin-header {
-            display: flex; align-items: center; gap: 15px; margin-bottom: 20px;
-            padding: 20px; background: var(--bg-card); border-radius: var(--radius-md);
-            border: 1px solid var(--border-color); backdrop-filter: var(--backdrop-blur);
-        }
-        .admin-avatar {
-            width: 60px; height: 60px; border-radius: 50%; background: var(--gradient-1);
-            display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #000;
-        }
-        .admin-stats {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px;
-        }
-        .stat-card {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-md); padding: 20px; text-align: center;
-            backdrop-filter: var(--backdrop-blur); transition: var(--transition);
-        }
-        .stat-card:hover { border-color: var(--primary); transform: translateY(-2px); }
-        .stat-card .stat-icon { font-size: 2rem; margin-bottom: 8px; }
-        .stat-card .stat-value { font-size: 1.5rem; font-weight: 900; color: var(--primary); }
-        .stat-card .stat-label { font-size: 0.75rem; color: var(--text-muted); }
-
-        .admin-tabs {
-            display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
-            background: var(--bg-card); padding: 8px; border-radius: var(--radius-md);
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 25px;
             border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            outline: none;
+            font-size: 0.9rem;
         }
-        .admin-tab {
-            padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600;
-            font-size: 0.8rem; background: transparent; border: none;
-            color: var(--text-secondary); transition: var(--transition); white-space: nowrap;
-        }
-        .admin-tab:hover { background: rgba(240, 185, 11, 0.1); color: var(--primary); }
-        .admin-tab.active { background: var(--gradient-1); color: #000; font-weight: 700; }
 
-        .admin-panel {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-md); padding: 24px; backdrop-filter: var(--backdrop-blur);
-        }
-        .admin-panel h4 { color: var(--primary); margin-bottom: 15px; font-size: 1rem; }
-        .admin-panel input, .admin-panel textarea, .admin-panel select {
-            width: 100%; padding: 10px 14px; border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color); background: var(--bg-input);
-            color: var(--text-primary); font-family: 'Tajawal', 'Cairo', sans-serif;
-            margin-bottom: 10px; outline: none; font-size: 0.85rem;
-        }
-        .admin-panel input:focus, .admin-panel textarea:focus, .admin-panel select:focus {
+        .chat-input-area input:focus {
             border-color: var(--primary);
         }
 
-        .user-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 12px 16px; background: var(--bg-input); border-radius: var(--radius-sm);
-            margin: 6px 0; font-size: 0.85rem; border: 1px solid transparent; transition: var(--transition);
+        /* ==================== GRID & CARDS ==================== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 8px 0;
         }
-        .user-row:hover { border-color: var(--border-color); background: var(--bg-card); }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            transition: var(--transition);
+            backdrop-filter: var(--backdrop-blur);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin: 20px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        /* ==================== BADGES ==================== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-success {
+            background: rgba(14, 203, 129, 0.12);
+            color: var(--success);
+            border: 1px solid rgba(14, 203, 129, 0.25);
+        }
+
+        .badge-warning {
+            background: rgba(240, 185, 11, 0.12);
+            color: var(--warning);
+            border: 1px solid rgba(240, 185, 11, 0.25);
+        }
+
+        .badge-danger {
+            background: rgba(246, 70, 93, 0.12);
+            color: var(--danger);
+            border: 1px solid rgba(246, 70, 93, 0.25);
+        }
+
+        .badge-info {
+            background: rgba(59, 130, 246, 0.12);
+            color: var(--info);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--danger);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 15px rgba(246, 70, 93, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.85;
+                transform: scale(1.02);
+            }
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.85rem;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(240, 185, 11, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            border-radius: 30px;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+            box-shadow: 0 4px 15px rgba(246, 70, 93, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(246, 70, 93, 0.4);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+            box-shadow: 0 4px 15px rgba(14, 203, 129, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 203, 129, 0.4);
+        }
+
+        .back-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: var(--transition);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            backdrop-filter: var(--backdrop-blur);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: #000;
+            transform: translateX(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ==================== MODALS ==================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            max-width: min(480px, 95vw);
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            backdrop-filter: var(--backdrop-blur);
+        }
+
+        .modal h3 {
+            margin-bottom: 16px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .modal input,
+        .modal textarea,
+        .modal select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            margin-bottom: 12px;
+            outline: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .modal input:focus,
+        .modal textarea:focus,
+        .modal select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1);
+        }
+
+        /* ==================== STREAM ==================== */
+        .stream-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .stream-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ==================== NOTIFICATION ==================== */
+        .notification-popup {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-30px);
+            background: var(--gradient-1);
+            color: #000;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            z-index: 5000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            font-size: 0.9rem;
+            box-shadow: 0 12px 35px rgba(240, 185, 11, 0.5);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .notification-popup.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            animation: notifIn 0.5s ease;
+        }
+
+        @keyframes notifIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* ==================== TOAST ==================== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--success);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            z-index: 10000;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            font-size: 0.85rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.error {
+            background: var(--danger);
+        }
+
+        /* ==================== HIDDEN ==================== */
+        .hidden {
+            display: none !important;
+        }
+
+        /* ==================== ADMIN PANEL ==================== */
+        .admin-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            background: var(--bg-input);
+            padding: 8px;
+            border-radius: var(--radius-md);
+        }
+
+        .admin-tab {
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .admin-tab:hover {
+            background: rgba(240, 185, 11, 0.1);
+            color: var(--primary);
+        }
+
+        .admin-tab.active {
+            background: var(--gradient-1);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .user-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+            margin: 6px 0;
+            font-size: 0.85rem;
+            border: 1px solid transparent;
+            transition: var(--transition);
+        }
+
+        .user-row:hover {
+            border-color: var(--border-color);
+        }
 
         .search-input {
-            width: 100%; padding: 12px 18px; border-radius: 50px; border: 1px solid var(--border-color);
-            background: var(--bg-input); color: var(--text-primary);
-            font-family: 'Tajawal', 'Cairo', sans-serif; margin-bottom: 15px; outline: none;
-            font-size: 0.9rem; transition: var(--transition);
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            margin-bottom: 15px;
+            outline: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
         }
-        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1); }
 
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.1);
+        }
+
+        /* ==================== LEADERBOARD ==================== */
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 14px 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .leaderboard-table th {
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .leaderboard-table td {
+            font-size: 0.85rem;
+        }
+
+        .leaderboard-table tr:hover {
+            background: rgba(240, 185, 11, 0.06);
+        }
+
+        .rank-1 {
+            color: #ffd700;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .rank-2 {
+            color: #c0c0c0;
+            font-weight: 900;
+        }
+
+        .rank-3 {
+            color: #cd7f32;
+            font-weight: 900;
+        }
+
+        /* ==================== PROFILE ==================== */
         .profile-card {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg); padding: 32px; text-align: center;
-            backdrop-filter: var(--backdrop-blur); box-shadow: var(--shadow-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            text-align: center;
+            backdrop-filter: var(--backdrop-blur);
+            box-shadow: var(--shadow-md);
         }
+
         .profile-avatar {
-            width: 80px; height: 80px; border-radius: 50%; background: var(--gradient-1);
-            display: flex; align-items: center; justify-content: center; font-size: 2rem;
-            color: #000; margin: 0 auto 16px; box-shadow: 0 8px 25px rgba(240, 185, 11, 0.3);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 25px rgba(240, 185, 11, 0.3);
         }
+
         .profile-stat {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 14px 18px; background: var(--bg-input); border-radius: var(--radius-sm);
-            margin: 6px 0; font-size: 0.9rem; font-weight: 500; border: 1px solid var(--border-color); transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: var(--bg-input);
+            border-radius: var(--radius-sm);
+            margin: 6px 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
         }
-        .profile-stat:hover { border-color: var(--primary); }
 
-        .wheel-container { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative; }
-        .wheel-container canvas { max-width: 100%; height: auto; border-radius: 50%; box-shadow: var(--shadow-xl); }
+        .profile-stat:hover {
+            border-color: var(--primary);
+        }
+
+        /* ==================== WHEEL ==================== */
+        .wheel-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+        }
+
+        .wheel-container canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: var(--shadow-xl);
+        }
+
         .wheel-pointer {
-            position: absolute; top: 2px; left: 50%; transform: translateX(-50%);
-            font-size: 2.5rem; z-index: 10; filter: drop-shadow(0 0 10px rgba(246,70,93,0.8));
-            animation: pointerBounce 1.5s infinite;
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            z-index: 10;
+            color: var(--danger);
+            filter: drop-shadow(0 0 8px rgba(246, 70, 93, 0.7));
         }
-        @keyframes pointerBounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(4px)} }
 
-        .voice-rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+        /* ==================== VOICE ROOMS ==================== */
+        .voice-rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
         .voice-room-card {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 25px; text-align: center; transition: 0.3s; backdrop-filter: blur(20px);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            transition: 0.3s;
+            backdrop-filter: blur(20px);
         }
-        .voice-room-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
-        .voice-room-icon { font-size: 3rem; margin-bottom: 12px; }
-        .voice-room-card h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 8px; }
-        .room-info { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 16px; line-height: 1.5; }
 
-        #jitsiWrapper { border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--border-color); }
+        .voice-room-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
 
-        .online-indicator { display: flex; align-items: center; gap: 5px; font-size: 0.7rem; color: var(--success); }
-        .online-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); animation: pulse 2s infinite; }
+        .voice-room-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
 
+        .voice-room-card h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .room-info {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        /* ==================== PRIVATE CHAT LIST ==================== */
         .private-chat-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 14px 16px; background: var(--bg-input); border-radius: 12px;
-            margin: 6px 0; cursor: pointer; border: 1px solid transparent; transition: 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background: var(--bg-input);
+            border-radius: 12px;
+            margin: 6px 0;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.2s;
         }
-        .private-chat-row:hover { border-color: var(--primary); background: rgba(240,185,11,0.08); }
-        .private-chat-row .last-message { font-size: 0.75rem; color: var(--text-muted); margin-top: 3px; }
 
+        .private-chat-row:hover {
+            border-color: var(--primary);
+            background: rgba(240, 185, 11, 0.08);
+        }
+
+        .private-chat-row .last-message {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        /* ==================== ONLINE INDICATOR ==================== */
+        .online-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.7rem;
+            color: var(--success);
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
         @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; gap: 12px; }
-            .admin-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .voice-rooms-grid { grid-template-columns: 1fr; gap: 12px; }
-            .sidebar-right, .sidebar-left { width: 280px; }
-            .card { padding: 18px; }
-            .chat-header-bar { margin: 0 4px; padding: 12px 16px; font-size: 0.85rem; }
-            .chat-messages-container { margin: 4px; }
-            .chat-input-area { margin: 0 4px 4px; }
-            .message-bubble { max-width: 85%; }
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .voice-rooms-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .sidebar-right,
+            .sidebar-left {
+                width: 280px;
+            }
+            .card {
+                padding: 18px;
+            }
+            .chat-header-bar {
+                margin: 0 4px;
+                padding: 12px 16px;
+                font-size: 0.85rem;
+            }
+            .chat-messages-container {
+                margin: 4px;
+            }
+            .chat-input-area {
+                margin: 0 4px 4px;
+            }
+            .message-bubble {
+                max-width: 85%;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="toast" id="toast"></div>
-<div class="overlay" id="overlay" onclick="closeAllSidebars()"></div>
-<div class="user-actions-popup" id="userActionsPopup"></div>
+<!-- المؤثرات الصوتية -->
+<audio id="soundMessageSent" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACAf39/f4B/f3+AgH9/f3+Af39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f3+AgH9/f3+Af39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIA=" type="audio/wav">
+</audio>
 
-<!-- القائمة الجانبية اليمنى -->
+<audio id="soundNotification" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACAf39/f4B/f3+AgH9/f3+Af39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIB/f3+AgH9/f3+Af39/gIB/f39/gIA=" type="audio/wav">
+</audio>
+
+<!-- التنبيهات -->
+<div class="toast" id="toast"></div>
+<div class="notification-popup" id="notificationPopup"></div>
+<div class="overlay" id="overlay" onclick="closeAllSidebars()"></div>
+
+<!-- ==================== القائمة الجانبية اليمنى ==================== -->
 <div class="sidebar-right" id="sidebarRight">
     <h4>📋 القائمة الرئيسية</h4>
-    <a onclick="switchToTextChat()" class="menu-item" id="textChatMenuBtn"><i class="fas fa-comments"></i>  المحادثة العامة</a>
-    <a onclick="showPrivateChatsList()" class="menu-item"><i class="fas fa-envelope"></i>  محادثاتي</a>
-    <a onclick="switchToVoiceChat()" class="menu-item" id="voiceChatMenuBtn"><i class="fas fa-microphone"></i>  المحادثة الصوتية</a>
-    <a onclick="showTournaments()" class="menu-item"><i class="fas fa-trophy"></i>  البطولات</a>
-    <a onclick="showMaps()" class="menu-item"><i class="fas fa-map"></i>  الخرائط</a>
-    <a onclick="showWheel()" class="menu-item"><i class="fas fa-dharmachakra"></i>  القرعة</a>
-    <a onclick="showGameFiles()" class="menu-item"><i class="fas fa-box"></i>  ملفات اللعبة</a>
+    <a onclick="switchToTextChat()" class="menu-item" id="textChatMenuBtn"><i class="fas fa-comments"></i> 💬 المحادثة العامة</a>
+    <a onclick="showPrivateChatsList()" class="menu-item"><i class="fas fa-envelope"></i> 📩 محادثاتي</a>
+    <a onclick="switchToVoiceChat()" class="menu-item" id="voiceChatMenuBtn"><i class="fas fa-microphone"></i> 🎤 المحادثة الصوتية</a>
+    <a onclick="showLeaderboard()" class="menu-item"><i class="fas fa-medal"></i> 🥇 لوحة الصدارة</a>
+    <a onclick="showTournaments()" class="menu-item"><i class="fas fa-trophy"></i> 🏆 البطولات</a>
+    <a onclick="showMaps()" class="menu-item"><i class="fas fa-map"></i> 🗺️ الخرائط</a>
+    <a onclick="showWheel()" class="menu-item"><i class="fas fa-dharmachakra"></i> 🎡 القرعة</a>
+    <a onclick="showGameFiles()" class="menu-item"><i class="fas fa-box"></i> 📦 ملفات اللعبة</a>
     
-    <h4> إدارة المنصة</h4>
+    <h4>👑 إدارة المنصة</h4>
     <a onclick="showAdmin()" class="menu-item"><i class="fas fa-crown"></i> لوحة التحكم</a>
-    <a onclick="showLiveStream()" class="menu-item"><i class="fas fa-broadcast-tower"></i>  البث المباشر</a>
-    <a onclick="showProfile()" class="menu-item" id="profileMenuBtn"><i class="fas fa-user"></i>  ملفي الشخصي</a>
+    <a onclick="showLiveStream()" class="menu-item"><i class="fas fa-broadcast-tower"></i> 🔴 البث المباشر</a>
+    <a onclick="showProfile()" class="menu-item" id="profileMenuBtn"><i class="fas fa-user"></i> 👤 ملفي الشخصي</a>
 </div>
 
-<!-- القائمة الجانبية اليسرى -->
+<!-- ==================== القائمة الجانبية اليسرى ==================== -->
 <div class="sidebar-left" id="sidebarLeft">
     <h4>🌐 مواقعنا</h4>
     <a href="https://ahmdhlaq031-design.github.io/Developer-Hub/" target="_blank"><i class="fas fa-code"></i> Developer Hub</a>
@@ -470,7 +1167,7 @@
     <a href="https://streamelements.com/sahel1/tip" target="_blank"><i class="fas fa-heart"></i> دعم Sahel TV</a>
 </div>
 
-<!-- نافذة اسم المستخدم -->
+<!-- ==================== نافذة اسم المستخدم ==================== -->
 <div class="modal-overlay" id="nameModal">
     <div class="modal">
         <div style="font-size:3rem;margin-bottom:10px;">🎮</div>
@@ -483,7 +1180,7 @@
     </div>
 </div>
 
-<!-- نافذة البحث عن لاعب -->
+<!-- ==================== نافذة البحث عن لاعب ==================== -->
 <div class="modal-overlay hidden" id="searchPlayerModal">
     <div class="modal">
         <div style="font-size:2.5rem;margin-bottom:10px;">🔍</div>
@@ -495,14 +1192,14 @@
     </div>
 </div>
 
-<!-- نافذة المحادثة الخاصة -->
+<!-- ==================== نافذة المحادثة الخاصة ==================== -->
 <div class="modal-overlay hidden" id="privateChatModal">
     <div class="modal" style="max-width:600px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
             <h3 style="margin:0;">💬 محادثة مع <span id="privateChatTargetName"></span></h3>
             <button class="btn btn-outline btn-sm" onclick="closePrivateChat()">✕</button>
         </div>
-        <div class="chat-messages-container" id="privateChatMessagesContainer" style="max-height:300px;min-height:200px;margin:0 0 10px 0;">
+        <div class="chat-messages-container" id="privateChatMessages" style="max-height:300px;min-height:200px;margin:0 0 10px 0;">
             <p style="text-align:center;color:var(--text-muted);">لا توجد رسائل</p>
         </div>
         <div class="chat-input-area" style="margin:0;">
@@ -514,31 +1211,81 @@
     </div>
 </div>
 
+<!-- ==================== نافذة الخريطة ==================== -->
+<div class="modal-overlay hidden" id="mapModal">
+    <div class="modal">
+        <div style="font-size:2.5rem;margin-bottom:10px;">🗺️</div>
+        <h3>مشاركة خريطة جديدة</h3>
+        <input type="text" id="mapNameInput" placeholder="اسم الخريطة">
+        <input type="text" id="mapLinkInput" placeholder="رابط Google Drive">
+        <div style="font-size:0.75rem;color:var(--text-muted);text-align:right;margin:8px 0;background:var(--bg-input);padding:12px;border-radius:var(--radius-sm);line-height:1.8;">
+            📖 ارفع ملف الخريطة إلى Google Drive ← مشاركة ← "أي شخص لديه الرابط" ← انسخ الرابط وألصقه هنا
+        </div>
+        <button class="btn btn-primary" onclick="shareMap()" style="width:100%;">مشاركة</button>
+        <button class="btn btn-outline btn-sm" onclick="closeMapModal()" style="width:100%;margin-top:8px;">إلغاء</button>
+    </div>
+</div>
+
+<!-- ==================== نافذة ملف اللعبة ==================== -->
+<div class="modal-overlay hidden" id="gameFileModal">
+    <div class="modal">
+        <div style="font-size:2.5rem;margin-bottom:10px;">📦</div>
+        <h3>مشاركة ملف لعبة جديد</h3>
+        <input type="text" id="gameFileNameInput" placeholder="اسم الملف">
+        <input type="text" id="gameFileLinkInput" placeholder="رابط الملف">
+        <select id="gameFileTypeInput">
+            <option value="patch">🔧 باتش</option>
+            <option value="fix">🛠️ ملف إصلاح</option>
+            <option value="mod">🎨 مود</option>
+            <option value="tool">🔧 أداة</option>
+            <option value="other">📄 آخر</option>
+        </select>
+        <div style="font-size:0.75rem;color:var(--text-muted);text-align:right;margin:8px 0;background:var(--bg-input);padding:12px;border-radius:var(--radius-sm);line-height:1.8;">
+            📖 ارفع الملف إلى Google Drive ← مشاركة ← "أي شخص لديه الرابط" ← انسخ الرابط وألصقه هنا
+        </div>
+        <button class="btn btn-primary" onclick="shareGameFile()" style="width:100%;">مشاركة</button>
+        <button class="btn btn-outline btn-sm" onclick="closeGameFileModal()" style="width:100%;margin-top:8px;">إلغاء</button>
+    </div>
+</div>
+
+<!-- ==================== HEADER ==================== -->
 <header>
     <div style="display:flex;align-items:center;gap:10px;">
         <button class="icon-btn" id="leftMenuBtn"><i class="fas fa-link"></i></button>
     </div>
+    
     <a href="#" onclick="switchToTextChat()" class="logo">
-        <div class="logo-icon"><i class="fas fa-chess-king"></i></div>
-        <div class="logo-text"><h1>GeneralsArena</h1><span>GENERAL SAHEL TV</span></div>
+        <div class="logo-icon">
+            <i class="fas fa-chess-king"></i>
+        </div>
+        <div class="logo-text">
+            <h1>GeneralsArena</h1>
+            <span>GENERAL SAHEL TV</span>
+        </div>
     </a>
+    
     <div class="nav-actions">
         <button class="icon-btn" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
         <button class="icon-btn" id="rightMenuBtn"><i class="fas fa-bars"></i></button>
     </div>
 </header>
 
+<!-- ==================== MAIN CONTENT ==================== -->
 <div class="main-content">
+
     <!-- المحادثة العامة -->
     <section id="textChatSection" class="chat-section">
         <div class="chat-header-bar">
             <i class="fas fa-comments" style="color:var(--primary);"></i>
             المحادثة العامة - GeneralsArena
-            <span class="online-indicator" style="margin-right:auto;"><span class="online-dot"></span> مباشر</span>
+            <span class="online-indicator" style="margin-right:auto;">
+                <span class="online-dot"></span> مباشر
+            </span>
         </div>
         <div class="chat-messages-container" id="chatMessagesContainer">
             <div style="text-align:center;color:var(--text-muted);padding:40px;">
-                <div style="font-size:3rem;">💬</div><p>جارٍ تحميل المحادثة...</p>
+                <div style="font-size:3rem;">💬</div>
+                <p>جارٍ تحميل المحادثة...</p>
             </div>
         </div>
         <div class="chat-input-area">
@@ -559,6 +1306,28 @@
         <div id="privateChatsList"></div>
     </section>
 
+    <!-- لوحة الصدارة -->
+    <section id="leaderboardSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:900px;margin:0 auto;width:100%;">
+        <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
+        <div class="section-title"><i class="fas fa-medal"></i> لوحة الصدارة</div>
+        <div class="card">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>المركز</th>
+                        <th>اللاعب</th>
+                        <th>النقاط</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <tr>
+                        <td colspan="3">لا يوجد لاعبين بعد</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
     <!-- المحادثة الصوتية -->
     <section id="voiceChatSection" class="hidden" style="padding:15px;overflow-y:auto;height:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
@@ -570,7 +1339,7 @@
                 <span style="color:var(--success);font-weight:700;">🟢 متصل الآن: <span id="activeRoomName"></span></span>
                 <button class="btn btn-danger btn-sm" onclick="leaveVoiceRoom()"><i class="fas fa-phone-slash"></i> مغادرة</button>
             </div>
-            <div id="jitsiWrapper"><div id="jitsiContainer" style="width:100%;height:60vh;min-height:400px;background:#000;border-radius:16px;"></div></div>
+            <div id="jitsiContainer" style="width:100%;height:60vh;min-height:400px;background:#000;border-radius:16px;"></div>
         </div>
     </section>
 
@@ -581,53 +1350,50 @@
         <div id="liveStreamContent"></div>
     </section>
 
-    <!-- لوحة تحكم المدير -->
+    <!-- ==================== لوحة تحكم المدير ==================== -->
     <section id="adminSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1000px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         
-        <div class="admin-container">
+        <div class="card" style="text-align:center;">
+            <div style="font-size:3rem;margin-bottom:12px;">👑</div>
+            <h2 style="color:var(--primary);margin-bottom:6px;">لوحة تحكم المدير</h2>
+            <p style="color:var(--text-muted);margin-bottom:20px;">إدارة كاملة للمنصة</p>
+            
             <!-- نموذج تسجيل الدخول -->
-            <div id="adminLoginForm" class="card" style="text-align:center;">
-                <div style="font-size:3rem;margin-bottom:10px;">👑</div>
-                <h3>لوحة تحكم المدير</h3>
-                <p style="color:var(--text-muted);margin-bottom:15px;">أدخل كلمة المرور للمتابعة</p>
-                <input type="password" id="adminPasswordInput" placeholder="كلمة المرور" style="max-width:300px;margin:0 auto 12px;">
-                <button class="btn btn-primary" onclick="adminLogin()" style="width:100%;max-width:300px;">🔓 دخول</button>
+            <div id="adminLoginForm">
+                <input type="password" id="adminPasswordInput" placeholder="كلمة المرور" style="max-width:350px;margin:0 auto 12px;">
+                <br>
+                <button class="btn btn-primary" onclick="adminLogin()" style="min-width:200px;">🔓 دخول</button>
             </div>
             
             <!-- لوحة التحكم -->
             <div id="adminDashboard" class="hidden">
-                <!-- رأس لوحة التحكم -->
-                <div class="admin-header">
-                    <div class="admin-avatar">👑</div>
-                    <div>
-                        <h2 style="color:var(--primary);margin:0;">مرحباً Sahel TV!</h2>
-                        <p style="color:var(--text-muted);font-size:0.85rem;">المدير العام للمنصة</p>
-                    </div>
-                    <button class="btn btn-outline btn-sm" onclick="logoutAdmin()" style="margin-right:auto;">🚪 تسجيل خروج</button>
+                <div style="background:var(--bg-input);padding:12px;border-radius:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+                    <span style="color:var(--success);font-weight:700;">✅ مرحباً Sahel TV! المدير العام</span>
+                    <button class="btn btn-outline btn-sm" onclick="logoutAdmin()">🚪 تسجيل خروج</button>
                 </div>
                 
                 <!-- بطاقات الإحصائيات -->
-                <div class="admin-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">👥</div>
-                        <div class="stat-value" id="statUsers">0</div>
-                        <div class="stat-label">مستخدم مسجل</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px;">
+                    <div class="card" style="text-align:center;padding:16px;">
+                        <div style="font-size:2rem;">👥</div>
+                        <div style="font-size:1.5rem;font-weight:900;color:var(--primary);" id="statUsers">0</div>
+                        <div style="font-size:0.75rem;color:var(--text-muted);">مستخدم</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🏆</div>
-                        <div class="stat-value" id="statTournaments">0</div>
-                        <div class="stat-label">بطولة</div>
+                    <div class="card" style="text-align:center;padding:16px;">
+                        <div style="font-size:2rem;">🏆</div>
+                        <div style="font-size:1.5rem;font-weight:900;color:var(--primary);" id="statTournaments">0</div>
+                        <div style="font-size:0.75rem;color:var(--text-muted);">بطولة</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🗺️</div>
-                        <div class="stat-value" id="statMaps">0</div>
-                        <div class="stat-label">خريطة</div>
+                    <div class="card" style="text-align:center;padding:16px;">
+                        <div style="font-size:2rem;">🗺️</div>
+                        <div style="font-size:1.5rem;font-weight:900;color:var(--primary);" id="statMaps">0</div>
+                        <div style="font-size:0.75rem;color:var(--text-muted);">خريطة</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📦</div>
-                        <div class="stat-value" id="statFiles">0</div>
-                        <div class="stat-label">ملف لعبة</div>
+                    <div class="card" style="text-align:center;padding:16px;">
+                        <div style="font-size:2rem;">📦</div>
+                        <div style="font-size:1.5rem;font-weight:900;color:var(--primary);" id="statFiles">0</div>
+                        <div style="font-size:0.75rem;color:var(--text-muted);">ملف</div>
                     </div>
                 </div>
                 
@@ -640,81 +1406,87 @@
                     <button class="admin-tab" onclick="switchAdminTab('users')"><i class="fas fa-users"></i> المستخدمين</button>
                 </div>
                 
-                <!-- محتوى التبويبات -->
-                <div class="admin-panel">
-                    <!-- تبويب البطولات -->
-                    <div id="adminTabTournaments">
-                        <h4>➕ إنشاء بطولة جديدة</h4>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                            <input type="text" id="newName" placeholder="اسم البطولة">
-                            <input type="text" id="newPrize" placeholder="الجائزة">
-                            <input type="date" id="newDate">
-                            <select id="newSize">
-                                <option value="4">4 لاعبين</option>
-                                <option value="8" selected>8 لاعبين</option>
-                                <option value="16">16 لاعب</option>
-                                <option value="32">32 لاعب</option>
-                                <option value="64">64 لاعب</option>
-                            </select>
-                        </div>
-                        <select id="newType" style="margin-top:10px;">
-                            <option value="open">🔓 مفتوحة - أي لاعب يقدر يسجل</option>
-                            <option value="closed">🔒 مغلقة - بدعوة فقط</option>
+                <!-- تبويب البطولات -->
+                <div id="adminTabTournaments" style="text-align:right;">
+                    <h4 style="color:var(--primary);margin-bottom:12px;">➕ إنشاء بطولة جديدة</h4>
+                    <input type="text" id="newName" placeholder="اسم البطولة"><br>
+                    <div style="display:flex;gap:8px;">
+                        <input type="date" id="newDate" style="flex:1;">
+                        <input type="text" id="newPrize" placeholder="الجائزة" style="flex:1;">
+                    </div>
+                    <div style="display:flex;gap:8px;">
+                        <select id="newSize" style="flex:1;">
+                            <option value="4">4 لاعبين</option>
+                            <option value="8" selected>8 لاعبين</option>
+                            <option value="16">16 لاعب</option>
+                            <option value="32">32 لاعب</option>
+                            <option value="64">64 لاعب</option>
                         </select>
-                        <textarea id="newRules" placeholder="شروط وأحكام البطولة..." rows="3" style="margin-top:10px;"></textarea>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
-                            <input type="url" id="newDonateLink" placeholder="رابط الدعم (اختياري)">
-                            <input type="url" id="newStreamLink" placeholder="🔴 رابط البث المباشر (اختياري)">
-                        </div>
-                        <button class="btn btn-primary" onclick="addTournament()" style="width:100%;margin-top:10px;">
-                            <i class="fas fa-bullhorn"></i> إعلان عن البطولة
-                        </button>
-                        
-                        <h4 style="margin-top:20px;">📋 البطولات الحالية</h4>
-                        <div id="adminList"></div>
+                        <select id="newType" style="flex:1;">
+                            <option value="open">🔓 مفتوحة</option>
+                            <option value="closed">🔒 مغلقة</option>
+                        </select>
                     </div>
+                    <textarea id="newRules" placeholder="شروط البطولة..." rows="2"></textarea>
+                    <div style="display:flex;gap:8px;">
+                        <input type="url" id="newDonateLink" placeholder="رابط الدعم (اختياري)" style="flex:1;">
+                        <input type="url" id="newStreamLink" placeholder="🔴 رابط البث (اختياري)" style="flex:1;">
+                    </div>
+                    <button class="btn btn-primary" onclick="addTournament()" style="width:100%;margin-top:8px;">
+                        <i class="fas fa-bullhorn"></i> 📢 نشر البطولة
+                    </button>
                     
-                    <!-- تبويب الخرائط -->
-                    <div id="adminTabMaps" class="hidden">
-                        <h4>🗺️ جميع الخرائط</h4>
-                        <div id="adminMapsList"></div>
+                    <h4 style="color:var(--primary);margin-top:20px;margin-bottom:8px;">📋 البطولات الحالية</h4>
+                    <div id="adminList"></div>
+                </div>
+                
+                <!-- تبويب الخرائط -->
+                <div id="adminTabMaps" class="hidden" style="text-align:right;">
+                    <h4 style="color:var(--primary);margin-bottom:8px;">🗺️ جميع الخرائط</h4>
+                    <div id="adminMapsList"></div>
+                </div>
+                
+                <!-- تبويب ملفات اللعبة -->
+                <div id="adminTabGameFiles" class="hidden" style="text-align:right;">
+                    <h4 style="color:var(--primary);margin-bottom:8px;">📦 جميع ملفات اللعبة</h4>
+                    <div id="adminGameFilesList"></div>
+                </div>
+                
+                <!-- تبويب البث المباشر -->
+                <div id="adminTabStream" class="hidden" style="text-align:right;">
+                    <h4 style="color:var(--primary);margin-bottom:8px;">🔴 إدارة البث المباشر</h4>
+                    <input type="url" id="liveStreamUrlInput" placeholder="رابط البث المباشر (يوتيوب)">
+                    <input type="text" id="liveStreamTitleInput" placeholder="عنوان البث">
+                    <div style="display:flex;gap:8px;margin-top:8px;">
+                        <button class="btn btn-primary" onclick="setLiveStream()" style="flex:1;">💾 بدء البث</button>
+                        <button class="btn btn-danger" onclick="removeLiveStream()" style="flex:1;">🗑️ إزالة</button>
                     </div>
+                </div>
+                
+                <!-- تبويب المستخدمين -->
+                <div id="adminTabUsers" class="hidden" style="text-align:right;">
+                    <h4 style="color:var(--primary);margin-bottom:8px;">👥 جميع المستخدمين</h4>
+                    <input type="text" class="search-input" id="userSearchInput" placeholder="🔍 بحث بالاسم أو ID..." oninput="renderUsersList()">
                     
-                    <!-- تبويب ملفات اللعبة -->
-                    <div id="adminTabGameFiles" class="hidden">
-                        <h4>📦 جميع ملفات اللعبة</h4>
-                        <div id="adminGameFilesList"></div>
-                    </div>
+                    <!-- زر حذف جميع البيانات -->
+                    <button class="btn btn-danger" onclick="deleteAllData()" style="width:100%;margin-bottom:12px;padding:12px;">
+                        <i class="fas fa-skull"></i> ⚠️ حذف جميع بيانات الموقع
+                    </button>
                     
-                    <!-- تبويب البث المباشر -->
-                    <div id="adminTabStream" class="hidden">
-                        <h4>🔴 إدارة البث المباشر</h4>
-                        <input type="url" id="liveStreamUrlInput" placeholder="رابط البث المباشر (يوتيوب)">
-                        <input type="text" id="liveStreamTitleInput" placeholder="عنوان البث">
-                        <div style="display:flex;gap:10px;margin-top:10px;">
-                            <button class="btn btn-primary" onclick="setLiveStream()" style="flex:1;">💾 حفظ البث</button>
-                            <button class="btn btn-danger" onclick="removeLiveStream()" style="flex:1;">🗑️ إزالة البث</button>
-                        </div>
-                    </div>
-                    
-                    <!-- تبويب المستخدمين -->
-                    <div id="adminTabUsers" class="hidden">
-                        <h4>👥 جميع المستخدمين</h4>
-                        <input type="text" class="search-input" id="userSearchInput" placeholder="🔍 بحث عن مستخدم بالاسم أو ID..." oninput="renderUsersList()">
-                        <div id="usersList"></div>
-                    </div>
+                    <div id="usersList"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- باقي الأقسام -->
+    <!-- البطولات -->
     <section id="tournamentsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
-        <div class="section-title"><i class="fas fa-trophy"></i> جميع البطولات</div>
+        <div class="section-title"><i class="fas fa-trophy"></i> البطولات</div>
         <div class="grid" id="tournamentGridFull"></div>
     </section>
 
+    <!-- الخرائط -->
     <section id="mapsSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-map"></i> الخرائط</div>
@@ -722,6 +1494,7 @@
         <div class="grid" id="mapsGrid"></div>
     </section>
 
+    <!-- ملفات اللعبة -->
     <section id="gameFilesSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-box"></i> ملفات اللعبة</div>
@@ -729,6 +1502,7 @@
         <div class="grid" id="gameFilesGrid"></div>
     </section>
 
+    <!-- القرعة -->
     <section id="wheelSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div class="section-title"><i class="fas fa-dharmachakra"></i> القرعة الدائرية</div>
@@ -744,64 +1518,118 @@
         </div>
     </section>
 
+    <!-- الملف الشخصي -->
     <section id="profileSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:800px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="switchToTextChat()">⬅️</button>
         <div id="profileContent"></div>
     </section>
 
+    <!-- تفاصيل البطولة -->
     <section id="detailSection" class="hidden" style="padding:20px;overflow-y:auto;max-width:1200px;margin:0 auto;width:100%;">
         <button class="back-btn" onclick="showTournaments()">⬅️</button>
         <div id="detailContent"></div>
     </section>
+    
 </div>
 <script>
     // ==================== CONFIGURATION ====================
     const ADMIN_PASS = "0937318709Aa@";
-    const TOURNAMENTS_API = "https://api.npoint.io/9442d028609e0e81ecf8";
-    const MAPS_API = "https://api.npoint.io/c3cd5edb0be62c9b9d8a";
-    const GAMEFILES_API = "https://api.npoint.io/1234567890abcdef";
     
     // ==================== STATE VARIABLES ====================
-    let tournaments = [];
-    let maps = [];
-    let gameFiles = [];
     let playerName = localStorage.getItem('ga_player_name') || '';
     let playerId = parseInt(localStorage.getItem('ga_player_id')) || 0;
     let currentTheme = localStorage.getItem('ga_theme') || 'dark';
-    let wheelNames = JSON.parse(localStorage.getItem('ga_wheel_names') || '[]');
-    let wheelAngle = 0;
-    let wheelSpinning = false;
     let chatMode = localStorage.getItem('ga_chat_mode') || 'text';
     let isAdmin = localStorage.getItem('ga_is_admin') === 'true';
     let liveStream = JSON.parse(localStorage.getItem('ga_live_stream') || 'null');
-    let chatMessages = [];
     let registeredUsers = [];
     let nextId = parseInt(localStorage.getItem('ga_next_id')) || 10000;
-    
-    // Private Chat
+    let tournaments = JSON.parse(localStorage.getItem('ga_tournaments') || '[]');
+    let maps = JSON.parse(localStorage.getItem('ga_maps') || '[]');
+    let gameFiles = JSON.parse(localStorage.getItem('ga_gameFiles') || '[]');
     let privateChats = JSON.parse(localStorage.getItem('ga_private_chats') || '{}');
     let activePrivateChat = null;
-    let privateMessages = {};
-    
-    // Voice Rooms
-    let voiceRooms = [
-        { id: 'GeneralsArena-Main', name: 'الغرفة الرئيسية', description: 'الغرفة الصوتية الرئيسية - تواصل مع كل اللاعبين', icon: '🎤' },
-        { id: 'GeneralsArena-Gaming', name: 'غرفة الألعاب', description: 'نقاشات الألعاب والاستراتيجيات', icon: '🎮' },
-        { id: 'GeneralsArena-Social', name: 'الغرفة الاجتماعية', description: 'تعارف ودردشة حرة بين اللاعبين', icon: '💬' },
-        { id: 'GeneralsArena-Tournaments', name: 'غرفة البطولات', description: 'تنسيق وإدارة البطولات مباشرة', icon: '🏆' }
-    ];
+    let wheelNames = [];
+    let wheelAngle = 0;
+    let wheelSpinning = false;
     let currentVoiceRoom = null;
+    
+    // Voice Rooms Data
+    let voiceRooms = [
+        { 
+            id: 'GeneralsArena-Main', 
+            name: 'الغرفة الرئيسية', 
+            description: 'الغرفة الصوتية الرئيسية - تواصل مع كل اللاعبين', 
+            icon: '🎤' 
+        },
+        { 
+            id: 'GeneralsArena-Gaming', 
+            name: 'غرفة الألعاب', 
+            description: 'نقاشات الألعاب والاستراتيجيات', 
+            icon: '🎮' 
+        },
+        { 
+            id: 'GeneralsArena-Social', 
+            name: 'الغرفة الاجتماعية', 
+            description: 'تعارف ودردشة حرة بين اللاعبين', 
+            icon: '💬' 
+        },
+        { 
+            id: 'GeneralsArena-Tournaments', 
+            name: 'غرفة البطولات', 
+            description: 'تنسيق وإدارة البطولات مباشرة', 
+            icon: '🏆' 
+        }
+    ];
 
-    // ==================== UTILITY FUNCTIONS ====================
+    // ==================== SOUND EFFECTS ====================
+    function playSound(type) {
+        try {
+            var sound;
+            if (type === 'message') {
+                sound = document.getElementById('soundMessageSent');
+            } else if (type === 'notification') {
+                sound = document.getElementById('soundNotification');
+            }
+            if (sound) {
+                sound.currentTime = 0;
+                sound.volume = 0.3;
+                sound.play().catch(function() {
+                    // المتصفح يمنع التشغيل التلقائي
+                });
+            }
+        } catch(e) {
+            // تجاهل الأخطاء
+        }
+    }
+
+    function showNotification(message) {
+        var popup = document.getElementById('notificationPopup');
+        if (!popup) {
+            return;
+        }
+        popup.textContent = message;
+        popup.classList.add('show');
+        playSound('notification');
+        setTimeout(function() {
+            popup.classList.remove('show');
+        }, 3500);
+    }
+
+    // ==================== TOAST ====================
     function toast(msg, err) {
-        if (err === undefined) err = false;
-        const t = document.getElementById('toast');
+        if (err === undefined) {
+            err = false;
+        }
+        var t = document.getElementById('toast');
         t.textContent = msg;
         t.classList.toggle('error', err);
         t.classList.add('show');
-        setTimeout(function() { t.classList.remove('show'); }, 2000);
+        setTimeout(function() {
+            t.classList.remove('show');
+        }, 2000);
     }
-    
+
     function copyToClipboard(text, name) {
         navigator.clipboard.writeText(text).then(function() {
             toast('✅ تم نسخ ' + name);
@@ -809,7 +1637,9 @@
     }
 
     function extractYouTubeID(url) {
-        if (!url) return null;
+        if (!url) {
+            return null;
+        }
         var patterns = [
             /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)/,
             /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^?]+)/,
@@ -818,13 +1648,17 @@
         ];
         for (var i = 0; i < patterns.length; i++) {
             var match = url.match(patterns[i]);
-            if (match) return match[1];
+            if (match) {
+                return match[1];
+            }
         }
-        if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
+        if (/^[a-zA-Z0-9_-]{11}$/.test(url)) {
+            return url;
+        }
         return null;
     }
 
-    // ==================== USER REGISTRATION WITH UNIQUE ID ====================
+    // ==================== USER SYSTEM ====================
     function loadRegisteredUsers() {
         var stored = localStorage.getItem('ga_registered_users');
         if (stored) {
@@ -846,21 +1680,13 @@
         }
         
         localStorage.setItem('ga_next_id', String(nextId));
+        console.log('📋 تم تحميل ' + registeredUsers.length + ' مستخدم. Next ID: ' + nextId);
     }
 
     function saveRegisteredUsers() {
         localStorage.setItem('ga_registered_users', JSON.stringify(registeredUsers));
         localStorage.setItem('ga_next_id', String(nextId));
-    }
-
-    function getUserById(id) {
-        var numId = parseInt(id);
-        for (var i = 0; i < registeredUsers.length; i++) {
-            if (registeredUsers[i].id === numId) {
-                return registeredUsers[i];
-            }
-        }
-        return null;
+        console.log('💾 تم حفظ ' + registeredUsers.length + ' مستخدم');
     }
 
     function getUserByName(name) {
@@ -873,986 +1699,72 @@
         return null;
     }
 
+    function getUserById(id) {
+        var numId = parseInt(id);
+        for (var i = 0; i < registeredUsers.length; i++) {
+            if (registeredUsers[i].id === numId) {
+                return registeredUsers[i];
+            }
+        }
+        return null;
+    }
+
     function isNameTakenByOther(name) {
         var lowerName = name.toLowerCase().trim();
         for (var i = 0; i < registeredUsers.length; i++) {
             if (registeredUsers[i].name.toLowerCase().trim() === lowerName) {
                 // إذا كان اللاعب الحالي هو نفسه صاحب الاسم
                 if (playerId && registeredUsers[i].id === playerId) {
-                    return null; // هذا نفسه
+                    return null;
                 }
-                return registeredUsers[i]; // لاعب آخر
+                // الاسم مستخدم من لاعب آخر
+                return registeredUsers[i];
             }
         }
         return null;
     }
 
     function registerPlayer(name) {
+        // التحقق من أن الاسم غير مستخدم
         var existing = isNameTakenByOther(name);
         if (existing) {
-            return null; // الاسم مستخدم
+            return null;
         }
         
         var newId = nextId;
         var newUser = {
             id: newId,
             name: name.trim(),
+            points: 0,
             registeredAt: new Date().toISOString()
         };
         
         registeredUsers.push(newUser);
         nextId = newId + 1;
         saveRegisteredUsers();
+        
+        // حفظ في Firebase
+        try {
+            db.collection("users").doc(String(newId)).set({
+                id: newId,
+                name: name.trim(),
+                points: 0,
+                lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+        } catch(e) {
+            console.log('حفظ محلي فقط');
+        }
+        
+        console.log('🆕 لاعب جديد: ' + name + ' ID: ' + newId);
         return newUser;
     }
 
-    // ==================== FIREBASE CHAT SYSTEM ====================
-    var messagesRef = db.collection("messages");
-    var privateMessagesRef = db.collection("private_messages");
-    
-    function listenForMessages() {
-        messagesRef
-            .orderBy("timestamp", "desc")
-            .limit(500)
-            .onSnapshot(function(snapshot) {
-                chatMessages = [];
-                snapshot.forEach(function(doc) {
-                    var data = doc.data();
-                    data._id = doc.id;
-                    chatMessages.push(data);
-                });
-                chatMessages.reverse();
-                displayChatMessages();
-            });
-    }
-
-    function displayChatMessages() {
-        var container = document.getElementById('chatMessagesContainer');
-        if (!container) return;
-
-        if (chatMessages.length === 0) {
-            container.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:40px;"><div style="font-size:3rem;">💬</div><p>لا توجد رسائل</p></div>';
-            return;
-        }
-
-        var html = '';
-        for (var i = 0; i < chatMessages.length; i++) {
-            var msg = chatMessages[i];
-            var isMine = (msg.userId === String(playerId)) || (msg.name === playerName);
-            var user = getUserByName(msg.name);
-            var displayName = msg.name || 'زائر';
-            var displayId = '';
-            
-            if (user) {
-                displayId = ' #' + user.id;
-            } else if (msg.userId) {
-                displayId = ' #' + msg.userId;
-            }
-            
-            if (isMine) {
-                html += '<div class="message-bubble mine"><div class="msg-text">' + msg.text + '</div><div class="msg-time">' + (msg.time || '') + '</div></div>';
-            } else {
-                html += '<div class="message-bubble other">';
-                html += '<div class="msg-name" onclick="showUserActions(\'' + displayName + '\', \'' + displayId.replace(' #', '') + '\', event)">👤 ' + displayName + '<span style="color:var(--primary);font-size:0.65rem;">' + displayId + '</span></div>';
-                html += '<div class="msg-text">' + msg.text + '</div>';
-                html += '<div class="msg-time">' + (msg.time || '') + '</div>';
-                html += '</div>';
-            }
-        }
-        
-        container.innerHTML = html;
-        container.scrollTop = container.scrollHeight;
-    }
-
-    function showUserActions(targetName, targetId, event) {
-        event.stopPropagation();
-        var actualName = targetName.trim();
-        if (actualName === playerName) return;
-        
-        var popup = document.getElementById('userActionsPopup');
-        popup.innerHTML = '' +
-            '<button class="btn btn-primary btn-sm" onclick="startPrivateChatByName(\'' + actualName.replace(/'/g, "\\'") + '\', \'' + targetId + '\')"><i class="fas fa-comment"></i> مراسلة</button>' +
-            '<button class="btn btn-outline btn-sm" onclick="closeUserActions()">إلغاء</button>';
-        
-        popup.style.display = 'block';
-        popup.style.left = Math.min(event.clientX - 100, window.innerWidth - 250) + 'px';
-        popup.style.top = Math.min(event.clientY - 50, window.innerHeight - 150) + 'px';
-        
-        setTimeout(function() {
-            document.addEventListener('click', closeUserActions, { once: true });
-        }, 100);
-    }
-
-    function closeUserActions() {
-        document.getElementById('userActionsPopup').style.display = 'none';
-    }
-
-    async function sendChatMessage() {
-        var input = document.getElementById('chatInput');
-        var text = input.value.trim();
-        if (!text) return;
-        if (!playerName) {
-            document.getElementById('nameModal').style.display = 'flex';
-            toast('⚠️ أدخل اسمك أولاً', true);
-            return;
-        }
-
-        try {
-            await messagesRef.add({
-                name: playerName,
-                userId: String(playerId),
-                text: text,
-                time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        } catch (error) {
-            toast('❌ فشل الإرسال', true);
-        }
-        input.value = '';
-    }
-
-    // ==================== PRIVATE CHAT SYSTEM ====================
-    function startPrivateChatByName(targetName, targetId) {
-        closeUserActions();
-        if (!playerName) {
-            document.getElementById('nameModal').style.display = 'flex';
-            return;
-        }
-        if (targetName === playerName) {
-            toast('⚠️ لا يمكنك مراسلة نفسك', true);
-            return;
-        }
-        
-        var targetUser;
-        if (targetId) {
-            targetUser = getUserById(targetId);
-        }
-        if (!targetUser) {
-            targetUser = getUserByName(targetName);
-        }
-        if (!targetUser) {
-            toast('⚠️ المستخدم غير موجود', true);
-            return;
-        }
-        
-        startPrivateChat(targetUser);
-    }
-
-    function startPrivateChat(targetUser) {
-        var myId = String(playerId);
-        var theirId = String(targetUser.id);
-        var chatId = [myId, theirId].sort().join('_');
-        
-        activePrivateChat = {
-            chatId: chatId,
-            targetId: targetUser.id,
-            targetName: targetUser.name
-        };
-        
-        document.getElementById('privateChatTargetName').textContent = targetUser.name + ' #' + targetUser.id;
-        document.getElementById('privateChatModal').classList.remove('hidden');
-        
-        if (!privateChats[chatId]) {
-            privateChats[chatId] = {
-                targetName: targetUser.name,
-                targetId: targetUser.id,
-                lastMessage: '',
-                timestamp: Date.now()
-            };
-            localStorage.setItem('ga_private_chats', JSON.stringify(privateChats));
-        }
-        
-        listenForPrivateMessages(chatId);
-    }
-
-    function listenForPrivateMessages(chatId) {
-        privateMessagesRef
-            .where('chatId', '==', chatId)
-            .orderBy('timestamp', 'asc')
-            .onSnapshot(function(snapshot) {
-                var msgs = [];
-                snapshot.forEach(function(doc) {
-                    msgs.push(doc.data());
-                });
-                privateMessages[chatId] = msgs;
-                displayPrivateMessages();
-            });
-    }
-
-    function displayPrivateMessages() {
-        var container = document.getElementById('privateChatMessagesContainer');
-        if (!container || !activePrivateChat) return;
-        
-        var msgs = privateMessages[activePrivateChat.chatId] || [];
-        
-        if (msgs.length === 0) {
-            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:30px;">لا توجد رسائل. ابدأ المحادثة!</p>';
-            return;
-        }
-        
-        var html = '';
-        for (var i = 0; i < msgs.length; i++) {
-            var msg = msgs[i];
-            var isMine = (String(msg.fromId) === String(playerId));
-            
-            if (isMine) {
-                html += '<div class="message-bubble mine"><div class="msg-text">' + msg.text + '</div><div class="msg-time">' + (msg.time || '') + '</div></div>';
-            } else {
-                html += '<div class="message-bubble other"><div class="msg-name">👤 ' + msg.fromName + '</div><div class="msg-text">' + msg.text + '</div><div class="msg-time">' + (msg.time || '') + '</div></div>';
-            }
-        }
-        
-        container.innerHTML = html;
-        container.scrollTop = container.scrollHeight;
-    }
-
-    async function sendPrivateMessage() {
-        if (!activePrivateChat) return;
-        
-        var input = document.getElementById('privateChatInput');
-        var text = input.value.trim();
-        if (!text) return;
-        
-        try {
-            await privateMessagesRef.add({
-                chatId: activePrivateChat.chatId,
-                fromId: String(playerId),
-                fromName: playerName,
-                toId: String(activePrivateChat.targetId),
-                toName: activePrivateChat.targetName,
-                text: text,
-                time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            
-            var chatId = activePrivateChat.chatId;
-            if (privateChats[chatId]) {
-                privateChats[chatId].lastMessage = text;
-                privateChats[chatId].timestamp = Date.now();
-                localStorage.setItem('ga_private_chats', JSON.stringify(privateChats));
-            }
-        } catch (error) {
-            toast('❌ فشل الإرسال', true);
-        }
-        
-        input.value = '';
-    }
-
-    function closePrivateChat() {
-        activePrivateChat = null;
-        document.getElementById('privateChatModal').classList.add('hidden');
-    }
-
-    function showPrivateChatsList() {
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.add('hidden');
-        }
-        document.getElementById('privateChatsListSection').classList.remove('hidden');
-        renderPrivateChatsList();
-        closeAllSidebars();
-    }
-
-    function renderPrivateChatsList() {
-        var container = document.getElementById('privateChatsList');
-        if (!container) return;
-        
-        var chatIds = Object.keys(privateChats);
-        
-        if (chatIds.length === 0) {
-            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px;">لا توجد محادثات خاصة</p>';
-            return;
-        }
-        
-        chatIds.sort(function(a, b) {
-            return (privateChats[b].timestamp || 0) - (privateChats[a].timestamp || 0);
-        });
-        
-        var html = '';
-        for (var i = 0; i < chatIds.length; i++) {
-            var chatId = chatIds[i];
-            var chat = privateChats[chatId];
-            html += '<div class="private-chat-row" onclick="openExistingPrivateChat(\'' + chatId + '\', ' + chat.targetId + ', \'' + chat.targetName.replace(/'/g, "\\'") + '\')">' +
-                '<div><strong>' + chat.targetName + ' #' + chat.targetId + '</strong><div class="last-message">' + (chat.lastMessage || 'اضغط للدردشة') + '</div></div>' +
-                '<i class="fas fa-chevron-left"></i></div>';
-        }
-        
-        container.innerHTML = html;
-    }
-
-    function openExistingPrivateChat(chatId, targetId, targetName) {
-        activePrivateChat = { chatId: chatId, targetId: targetId, targetName: targetName };
-        document.getElementById('privateChatTargetName').textContent = targetName + ' #' + targetId;
-        document.getElementById('privateChatModal').classList.remove('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        listenForPrivateMessages(chatId);
-    }
-
-    // ==================== SEARCH PLAYER ====================
-    function openSearchPlayerModal() {
-        document.getElementById('searchPlayerModal').classList.remove('hidden');
-        document.getElementById('searchPlayerInput').value = '';
-        document.getElementById('searchResults').innerHTML = '';
-        document.getElementById('searchPlayerInput').focus();
-    }
-
-    function closeSearchPlayerModal() {
-        document.getElementById('searchPlayerModal').classList.add('hidden');
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var searchInput = document.getElementById('searchPlayerInput');
-        if (searchInput) {
-            searchInput.addEventListener('input', function() {
-                var query = this.value.trim().toLowerCase();
-                var resultsContainer = document.getElementById('searchResults');
-                
-                if (!query) { resultsContainer.innerHTML = ''; return; }
-                
-                var results = [];
-                
-                if (!isNaN(query)) {
-                    var user = getUserById(parseInt(query));
-                    if (user && user.name !== playerName) results.push(user);
-                }
-                
-                for (var i = 0; i < registeredUsers.length; i++) {
-                    var user = registeredUsers[i];
-                    if (user.name.toLowerCase().indexOf(query) !== -1 && user.name !== playerName) {
-                        var found = false;
-                        for (var j = 0; j < results.length; j++) {
-                            if (results[j].id === user.id) { found = true; break; }
-                        }
-                        if (!found) results.push(user);
-                    }
-                }
-                
-                results = results.slice(0, 20);
-                
-                if (results.length === 0) {
-                    resultsContainer.innerHTML = '<p style="color:var(--text-muted);padding:10px;">لا توجد نتائج</p>';
-                    return;
-                }
-                
-                var html = '';
-                for (var k = 0; k < results.length; k++) {
-                    var u = results[k];
-                    html += '<div class="user-row" style="cursor:pointer;margin:4px 0;" onclick="selectSearchResult(' + u.id + ')">' +
-                        '<span>👤 ' + u.name + ' <span style="color:var(--primary);">#' + u.id + '</span></span>' +
-                        '<button class="btn btn-primary btn-sm">💬 مراسلة</button></div>';
-                }
-                resultsContainer.innerHTML = html;
-            });
-        }
-    });
-
-    function selectSearchResult(userId) {
-        var user = getUserById(userId);
-        if (!user) return;
-        closeSearchPlayerModal();
-        startPrivateChat(user);
-    }
-
-    // ==================== VOICE CHAT ====================
-    function renderVoiceRooms() {
-        var grid = document.getElementById('voiceRoomsGrid');
-        if (!grid) return;
-        var html = '';
-        for (var i = 0; i < voiceRooms.length; i++) {
-            var room = voiceRooms[i];
-            html += '<div class="voice-room-card"><div class="voice-room-icon">' + room.icon + '</div><h3>' + room.name + '</h3><p class="room-info">' + room.description + '</p><button class="btn btn-success" onclick="joinVoiceRoom(\'' + room.id + '\',\'' + room.name + '\')"><i class="fas fa-phone"></i> انضمام</button></div>';
-        }
-        grid.innerHTML = html;
-    }
-
-    function joinVoiceRoom(roomId, roomName) {
-        currentVoiceRoom = { id: roomId, name: roomName };
-        document.getElementById('activeVoiceRoom').classList.remove('hidden');
-        document.getElementById('activeRoomName').textContent = roomName;
-        var c = document.getElementById('jitsiContainer');
-        c.innerHTML = '';
-        var ifr = document.createElement('iframe');
-        ifr.src = 'https://meet.jit.si/' + roomId + '#config.startWithAudioMuted=false&config.startWithVideoMuted=true&config.prejoinPageEnabled=false';
-        ifr.allow = 'camera;microphone;fullscreen';
-        ifr.style.width = '100%'; ifr.style.height = '100%'; ifr.style.border = 'none';
-        c.appendChild(ifr);
-        toast('🎤 انضممت إلى ' + roomName);
-    }
-
-    function leaveVoiceRoom() {
-        currentVoiceRoom = null;
-        document.getElementById('activeVoiceRoom').classList.add('hidden');
-        document.getElementById('jitsiContainer').innerHTML = '';
-        toast('👋 مغادرة');
-    }
-
-    function switchToVoiceChat() {
-        chatMode = 'voice';
-        localStorage.setItem('ga_chat_mode', 'voice');
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('voiceChatSection').classList.remove('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('voiceChatMenuBtn').style.color = 'var(--primary)';
-        document.getElementById('textChatMenuBtn').style.color = '';
-        renderVoiceRooms();
-        closeAllSidebars();
-    }
-
-    function switchToTextChat() {
-        if (currentVoiceRoom) leaveVoiceRoom();
-        chatMode = 'text';
-        localStorage.setItem('ga_chat_mode', 'text');
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('textChatSection').classList.remove('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('textChatMenuBtn').style.color = 'var(--primary)';
-        document.getElementById('voiceChatMenuBtn').style.color = '';
-        closeAllSidebars();
-    }
-
-    // ==================== TOURNAMENTS DATA ====================
-    async function loadData() {
-        try {
-            var tRes = await fetch(TOURNAMENTS_API, { cache: 'no-cache' });
-            var mRes = await fetch(MAPS_API, { cache: 'no-cache' });
-            var gRes = await fetch(GAMEFILES_API, { cache: 'no-cache' });
-            
-            if (tRes.ok) { var tData = await tRes.json(); tournaments = Array.isArray(tData) ? tData : []; }
-            else tournaments = JSON.parse(localStorage.getItem('ga_tournaments') || '[]');
-            
-            if (mRes.ok) { var mData = await mRes.json(); maps = Array.isArray(mData) ? mData : []; }
-            else maps = JSON.parse(localStorage.getItem('ga_maps') || '[]');
-            
-            if (gRes.ok) { var gData = await gRes.json(); gameFiles = Array.isArray(gData) ? gData : []; }
-            else gameFiles = JSON.parse(localStorage.getItem('ga_gameFiles') || '[]');
-        } catch (e) {
-            tournaments = JSON.parse(localStorage.getItem('ga_tournaments') || '[]');
-            maps = JSON.parse(localStorage.getItem('ga_maps') || '[]');
-            gameFiles = JSON.parse(localStorage.getItem('ga_gameFiles') || '[]');
-        }
-        
-        localStorage.setItem('ga_tournaments', JSON.stringify(tournaments));
-        localStorage.setItem('ga_maps', JSON.stringify(maps));
-        localStorage.setItem('ga_gameFiles', JSON.stringify(gameFiles));
-        renderAll();
-    }
-
-    async function saveTournaments() {
-        localStorage.setItem('ga_tournaments', JSON.stringify(tournaments));
-        try { await fetch(TOURNAMENTS_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(tournaments) }); } catch (e) {}
-        renderAll();
-    }
-
-    async function saveMaps() {
-        localStorage.setItem('ga_maps', JSON.stringify(maps));
-        try { await fetch(MAPS_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(maps) }); } catch (e) {}
-        renderAll();
-    }
-
-    async function saveGameFiles() {
-        localStorage.setItem('ga_gameFiles', JSON.stringify(gameFiles));
-        try { await fetch(GAMEFILES_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(gameFiles) }); } catch (e) {}
-        renderAll();
-    }
-
-    function renderAll() {
-        renderTournamentGrid();
-        renderMapsGrid();
-        renderGameFilesGrid();
-        renderLiveStreamContent();
-        renderVoiceRooms();
-        renderAdminList();
-        renderAdminMapsList();
-        renderAdminGameFilesList();
-        renderUsersList();
-        renderPrivateChatsList();
-        updateAdminStats();
-    }
-
-    function updateAdminStats() {
-        var statUsers = document.getElementById('statUsers');
-        var statTournaments = document.getElementById('statTournaments');
-        var statMaps = document.getElementById('statMaps');
-        var statFiles = document.getElementById('statFiles');
-        
-        if (statUsers) statUsers.textContent = registeredUsers.length;
-        if (statTournaments) statTournaments.textContent = tournaments.length;
-        if (statMaps) statMaps.textContent = maps.length;
-        if (statFiles) statFiles.textContent = gameFiles.length;
-    }
-
-    function renderTournamentGrid() {
-        var grid = document.getElementById('tournamentGridFull');
-        if (!grid) return;
-        if (tournaments.length === 0) {
-            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد بطولات</p>';
-            return;
-        }
-        var html = '';
-        for (var i = 0; i < tournaments.length; i++) {
-            var t = tournaments[i];
-            html += '<div class="card"><h3>🏆 ' + t.name + '</h3>';
-            html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">';
-            if (t.streamLink) html += '<span class="badge badge-danger">🔴 بث</span>';
-            html += '<span class="badge ' + (t.status === 'جارية' ? 'badge-success' : 'badge-danger') + '">' + (t.status === 'جارية' ? '🟢' : '🔴') + '</span>';
-            html += '<span class="badge badge-warning">👥 ' + (t.players || 0) + '/' + t.size + '</span></div>';
-            html += '<div style="display:flex;gap:6px;margin-bottom:14px;">';
-            html += '<span class="badge badge-info">📅 ' + t.date + '</span>';
-            html += '<span class="badge badge-warning">💰 ' + t.prize + '</span></div>';
-            html += '<button class="btn btn-primary btn-sm" onclick="viewDetail(' + i + ')">📋 تفاصيل</button>';
-            if (t.status === 'جارية' && t.type === 'open') html += '<button class="btn btn-outline btn-sm" onclick="joinTournament(' + i + ')">✍️ تسجيل</button>';
-            html += '</div>';
-        }
-        grid.innerHTML = html;
-    }
-
-    function renderMapsGrid() {
-        var grid = document.getElementById('mapsGrid');
-        if (!grid) return;
-        if (maps.length === 0) {
-            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد خرائط</p>';
-            return;
-        }
-        var html = '';
-        for (var i = 0; i < maps.length; i++) {
-            var m = maps[i];
-            html += '<div class="card"><h3>🗺️ ' + m.name + '</h3><p style="font-size:0.8rem;color:var(--text-muted);">' + m.author + ' | ' + m.date + '</p><a href="' + m.link + '" target="_blank" class="btn btn-primary btn-sm">📥 تحميل</a></div>';
-        }
-        grid.innerHTML = html;
-    }
-
-    function renderGameFilesGrid() {
-        var grid = document.getElementById('gameFilesGrid');
-        if (!grid) return;
-        if (gameFiles.length === 0) {
-            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد ملفات</p>';
-            return;
-        }
-        var tl = { patch: '🔧 باتش', fix: '🛠️ إصلاح', mod: '🎨 مود', tool: '🔧 أداة', other: '📄 آخر' };
-        var html = '';
-        for (var i = 0; i < gameFiles.length; i++) {
-            var g = gameFiles[i];
-            html += '<div class="card"><h3>📦 ' + g.name + '</h3><span class="badge">' + (tl[g.type] || g.type) + '</span><p style="font-size:0.8rem;">' + g.author + ' | ' + g.date + '</p><a href="' + g.link + '" target="_blank" class="btn btn-primary btn-sm">📥 تحميل</a></div>';
-        }
-        grid.innerHTML = html;
-    }
-
-    function renderLiveStreamContent() {
-        var c = document.getElementById('liveStreamContent');
-        if (!c) return;
-        if (!liveStream || !liveStream.url) {
-            c.innerHTML = '<div class="card" style="text-align:center;padding:60px;"><p style="color:var(--text-muted);">لا يوجد بث</p></div>';
-            return;
-        }
-        var v = extractYouTubeID(liveStream.url);
-        if (!v) { c.innerHTML = '<p style="color:var(--danger);">رابط غير صالح</p>'; return; }
-        c.innerHTML = '<div style="margin-bottom:16px;"><span class="live-badge">🔴 مباشر' + (liveStream.title ? ' - ' + liveStream.title : '') + '</span></div><div class="stream-container"><iframe src="https://www.youtube.com/embed/' + v + '?autoplay=1" allowfullscreen></iframe></div>';
-    }
-
-    function setLiveStream() {
-        if (!isAdmin) return;
-        var u = document.getElementById('liveStreamUrlInput').value.trim();
-        var t = document.getElementById('liveStreamTitleInput').value.trim();
-        if (!u) { toast('⚠️ أدخل رابط البث', true); return; }
-        liveStream = { url: u, title: t };
-        localStorage.setItem('ga_live_stream', JSON.stringify(liveStream));
-        renderLiveStreamContent();
-        toast('✅ تم حفظ البث');
-    }
-
-    function removeLiveStream() {
-        if (!isAdmin) return;
-        liveStream = null;
-        localStorage.removeItem('ga_live_stream');
-        renderLiveStreamContent();
-        toast('🗑️ تم إزالة البث');
-    }
-
-    function showLiveStream() {
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('liveStreamSection').classList.remove('hidden');
-        renderLiveStreamContent();
-        closeAllSidebars();
-    }
-
-    function joinTournament(idx) {
-        if (!playerName) { toast('⚠️ أدخل اسمك', true); document.getElementById('nameModal').style.display = 'flex'; return; }
-        var t = tournaments[idx];
-        if (t.players >= t.size) { toast('⚠️ البطولة مكتملة', true); return; }
-        if (!t.playersList) t.playersList = [];
-        if (t.playersList.indexOf(playerName) !== -1) { toast('⚠️ مسجل بالفعل', true); return; }
-        t.playersList.push(playerName);
-        t.players = t.playersList.length;
-        saveTournaments();
-        toast('✅ تم تسجيل ' + playerName);
-    }
-
-    function viewDetail(idx) {
-        var t = tournaments[idx];
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('detailSection').classList.remove('hidden');
-        var html = '<h2>🏆 ' + t.name + '</h2><p>👥 ' + (t.players || 0) + '/' + t.size + ' | 📅 ' + t.date + ' | 💰 ' + t.prize + '</p><p>' + (t.rules || '') + '</p>';
-        if (t.streamLink) {
-            var v = extractYouTubeID(t.streamLink);
-            if (v) html += '<div class="stream-container"><iframe src="https://www.youtube.com/embed/' + v + '" allowfullscreen></iframe></div>';
-        }
-        document.getElementById('detailContent').innerHTML = html;
-    }
-
-    function showProfile() {
-        if (!playerName) { toast('⚠️ أدخل اسمك', true); document.getElementById('nameModal').style.display = 'flex'; return; }
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('profileSection').classList.remove('hidden');
-        closeAllSidebars();
-        
-        var user = getUserByName(playerName);
-        var userId = user ? user.id : playerId;
-        
-        var html = '<div class="profile-card"><div class="profile-avatar">👤</div>';
-        html += '<h2>' + playerName + ' <span style="color:var(--primary);font-size:1rem;">#' + userId + '</span></h2>';
-        html += '<p style="color:var(--text-muted);font-size:1.2rem;">🎫 ID: <strong style="color:var(--primary);">' + userId + '</strong></p>';
-        html += '</div>';
-        document.getElementById('profileContent').innerHTML = html;
-    }
-
-    function openMapModal() { document.getElementById('mapModal').classList.remove('hidden'); closeAllSidebars(); }
-    function closeMapModal() { document.getElementById('mapModal').classList.add('hidden'); }
-    function shareMap() {
-        var n = document.getElementById('mapNameInput').value.trim();
-        var l = document.getElementById('mapLinkInput').value.trim();
-        if (!n || !l) { toast('⚠️ أكمل الحقول', true); return; }
-        maps.push({ name: n, link: l, author: playerName || 'زائر', date: new Date().toLocaleDateString('ar') });
-        saveMaps(); closeMapModal();
-        document.getElementById('mapNameInput').value = '';
-        document.getElementById('mapLinkInput').value = '';
-        toast('✅ تمت المشاركة');
-    }
-
-    function openGameFileModal() { document.getElementById('gameFileModal').classList.remove('hidden'); closeAllSidebars(); }
-    function closeGameFileModal() { document.getElementById('gameFileModal').classList.add('hidden'); }
-    function shareGameFile() {
-        var n = document.getElementById('gameFileNameInput').value.trim();
-        var l = document.getElementById('gameFileLinkInput').value.trim();
-        var t = document.getElementById('gameFileTypeInput').value;
-        if (!n || !l) { toast('⚠️ أكمل الحقول', true); return; }
-        gameFiles.push({ name: n, link: l, type: t, author: playerName || 'زائر', date: new Date().toLocaleDateString('ar') });
-        saveGameFiles(); closeGameFileModal();
-        document.getElementById('gameFileNameInput').value = '';
-        document.getElementById('gameFileLinkInput').value = '';
-        toast('✅ تمت المشاركة');
-    }
-
-    function showTournaments() {
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('tournamentsSection').classList.remove('hidden');
-        closeAllSidebars();
-    }
-
-    function showMaps() {
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('mapsSection').classList.remove('hidden');
-        closeAllSidebars();
-    }
-
-    function showGameFiles() {
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('gameFilesSection').classList.remove('hidden');
-        closeAllSidebars();
-    }
-
-    function showWheel() {
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('wheelSection').classList.remove('hidden');
-        closeAllSidebars();
-        loadWheelNames();
-        drawWheel();
-    }
-
-    function showAdmin() {
-        var sections = document.querySelectorAll('.main-content>section');
-        for (var i = 0; i < sections.length; i++) sections[i].classList.add('hidden');
-        document.getElementById('privateChatsListSection').classList.add('hidden');
-        document.getElementById('adminSection').classList.remove('hidden');
-        closeAllSidebars();
-        checkAdminStatus();
-    }
-
-    function checkAdminStatus() {
-        if (isAdmin) {
-            document.getElementById('adminLoginForm').classList.add('hidden');
-            document.getElementById('adminDashboard').classList.remove('hidden');
-            renderAll();
-        } else {
-            document.getElementById('adminLoginForm').classList.remove('hidden');
-            document.getElementById('adminDashboard').classList.add('hidden');
-        }
-    }
-
-    function adminLogin() {
-        if (document.getElementById('adminPasswordInput').value === ADMIN_PASS) {
-            isAdmin = true;
-            localStorage.setItem('ga_is_admin', 'true');
-            document.getElementById('adminLoginForm').classList.add('hidden');
-            document.getElementById('adminDashboard').classList.remove('hidden');
-            renderAll();
-            toast('🔓 مرحباً Sahel TV!');
-        } else {
-            toast('❌ كلمة مرور خاطئة', true);
-        }
-    }
-
-    function logoutAdmin() {
-        isAdmin = false;
-        localStorage.removeItem('ga_is_admin');
-        document.getElementById('adminLoginForm').classList.remove('hidden');
-        document.getElementById('adminDashboard').classList.add('hidden');
-        toast('👋 تم تسجيل الخروج');
-    }
-
-    function addTournament() {
-        if (!isAdmin) return;
-        var n = document.getElementById('newName').value;
-        var d = document.getElementById('newDate').value;
-        var p = document.getElementById('newPrize').value;
-        if (!n || !d || !p) { toast('⚠️ أكمل الحقول', true); return; }
-        tournaments.push({
-            name: n, date: d, prize: p,
-            size: parseInt(document.getElementById('newSize').value),
-            type: document.getElementById('newType').value,
-            players: 0, playersList: [],
-            rules: document.getElementById('newRules').value,
-            donateLink: document.getElementById('newDonateLink').value,
-            streamLink: document.getElementById('newStreamLink').value,
-            status: 'جارية'
-        });
-        document.getElementById('newName').value = '';
-        document.getElementById('newDate').value = '';
-        document.getElementById('newPrize').value = '';
-        document.getElementById('newRules').value = '';
-        document.getElementById('newDonateLink').value = '';
-        document.getElementById('newStreamLink').value = '';
-        saveTournaments();
-        toast('📢 تم الإعلان عن البطولة');
-    }
-
-    function deleteTournament(idx) { if (!isAdmin) return; if (confirm('حذف البطولة؟')) { tournaments.splice(idx, 1); saveTournaments(); toast('🗑️ تم'); } }
-    function deleteMap(idx) { if (!isAdmin) return; if (confirm('حذف الخريطة؟')) { maps.splice(idx, 1); saveMaps(); toast('🗑️ تم'); } }
-    function deleteGameFile(idx) { if (!isAdmin) return; if (confirm('حذف الملف؟')) { gameFiles.splice(idx, 1); saveGameFiles(); toast('🗑️ تم'); } }
-    function deleteUser(userName) {
-        if (!isAdmin) return;
-        if (confirm('حذف المستخدم ' + userName + '؟')) {
-            for (var i = 0; i < registeredUsers.length; i++) {
-                if (registeredUsers[i].name === userName) { registeredUsers.splice(i, 1); break; }
-            }
-            saveRegisteredUsers();
-            renderAll();
-            toast('🗑️ تم حذف ' + userName);
-        }
-    }
-
-    function switchAdminTab(tab) {
-        var tabs = document.querySelectorAll('.admin-tab');
-        for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
-        event.target.classList.add('active');
-        document.getElementById('adminTabTournaments').classList.toggle('hidden', tab !== 'tournaments');
-        document.getElementById('adminTabMaps').classList.toggle('hidden', tab !== 'maps');
-        document.getElementById('adminTabGameFiles').classList.toggle('hidden', tab !== 'gameFiles');
-        document.getElementById('adminTabStream').classList.toggle('hidden', tab !== 'stream');
-        document.getElementById('adminTabUsers').classList.toggle('hidden', tab !== 'users');
-        if (tab === 'maps') renderAdminMapsList();
-        if (tab === 'gameFiles') renderAdminGameFilesList();
-        if (tab === 'users') renderUsersList();
-    }
-
-    function renderAdminList() {
-        var l = document.getElementById('adminList');
-        if (!tournaments.length) { l.innerHTML = '<p style="color:var(--text-muted);">لا توجد بطولات</p>'; return; }
-        var html = '';
-        for (var i = 0; i < tournaments.length; i++) {
-            html += '<div class="user-row"><span>🏆 ' + tournaments[i].name + ' | 👥 ' + (tournaments[i].players || 0) + '/' + tournaments[i].size + '</span><button class="btn btn-danger btn-sm" onclick="deleteTournament(' + i + ')">🗑️</button></div>';
-        }
-        l.innerHTML = html;
-    }
-
-    function renderAdminMapsList() {
-        var l = document.getElementById('adminMapsList');
-        if (!maps.length) { l.innerHTML = '<p style="color:var(--text-muted);">لا توجد خرائط</p>'; return; }
-        var html = '';
-        for (var i = 0; i < maps.length; i++) {
-            html += '<div class="user-row"><span>🗺️ ' + maps[i].name + ' - ' + maps[i].author + '</span><button class="btn btn-danger btn-sm" onclick="deleteMap(' + i + ')">🗑️</button></div>';
-        }
-        l.innerHTML = html;
-    }
-
-    function renderAdminGameFilesList() {
-        var l = document.getElementById('adminGameFilesList');
-        if (!gameFiles.length) { l.innerHTML = '<p style="color:var(--text-muted);">لا توجد ملفات</p>'; return; }
-        var tl = { patch: '🔧 باتش', fix: '🛠️ إصلاح', mod: '🎨 مود', tool: '🔧 أداة', other: '📄 آخر' };
-        var html = '';
-        for (var i = 0; i < gameFiles.length; i++) {
-            html += '<div class="user-row"><span>📦 ' + gameFiles[i].name + ' (' + (tl[gameFiles[i].type] || gameFiles[i].type) + ') - ' + gameFiles[i].author + '</span><button class="btn btn-danger btn-sm" onclick="deleteGameFile(' + i + ')">🗑️</button></div>';
-        }
-        l.innerHTML = html;
-    }
-
-    function renderUsersList() {
-        var l = document.getElementById('usersList');
-        var searchTerm = (document.getElementById('userSearchInput')?.value || '').toLowerCase();
-        var filtered = [];
-        for (var i = 0; i < registeredUsers.length; i++) {
-            var u = registeredUsers[i];
-            if (!searchTerm || u.name.toLowerCase().indexOf(searchTerm) !== -1 || String(u.id).indexOf(searchTerm) !== -1) {
-                filtered.push(u);
-            }
-        }
-        if (!filtered.length) { l.innerHTML = '<p style="color:var(--text-muted);">لا يوجد مستخدمون</p>'; return; }
-        var html = '';
-        for (var i = 0; i < filtered.length; i++) {
-            html += '<div class="user-row"><span>👤 ' + filtered[i].name + ' <span style="color:var(--primary);">#' + filtered[i].id + '</span></span><button class="btn btn-danger btn-sm" onclick="deleteUser(\'' + filtered[i].name.replace(/'/g, "\\'") + '\')">🗑️</button></div>';
-        }
-        l.innerHTML = html;
-    }
-
-    // ==================== WHEEL ====================
-    function loadWheelNames() { var t = document.getElementById('wheelNames'); if (t) t.value = wheelNames.join('\n'); }
-    function saveWheelNames() {
-        var t = document.getElementById('wheelNames');
-        if (t) { wheelNames = t.value.split('\n').filter(function(n) { return n.trim(); }); localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames)); }
-        drawWheel();
-    }
-
-    function drawWheel() {
-        var canvas = document.getElementById('wheelCanvas');
-        if (!canvas) return;
-        var ctx = canvas.getContext('2d');
-        var w = canvas.width, h = canvas.height, cx = w / 2, cy = h / 2, r = Math.min(cx, cy) - 30;
-        ctx.clearRect(0, 0, w, h);
-        
-        if (wheelNames.length === 0) {
-            ctx.fillStyle = 'var(--text-muted)';
-            ctx.font = '16px Tajawal';
-            ctx.textAlign = 'center';
-            ctx.fillText('أدخل أسماء', cx, cy);
-            return;
-        }
-        
-        var colors = ['#f0b90b', '#f6465d', '#0ecb81', '#3b82f6', '#8b5cf6', '#ec4899', '#06b6d4', '#f97316'];
-        var slice = 2 * Math.PI / wheelNames.length;
-        
-        for (var i = 0; i < wheelNames.length; i++) {
-            ctx.beginPath();
-            ctx.moveTo(cx, cy);
-            ctx.arc(cx, cy, r, slice * i + wheelAngle, slice * (i + 1) + wheelAngle);
-            ctx.fillStyle = colors[i % colors.length];
-            ctx.fill();
-            ctx.strokeStyle = 'var(--bg-secondary)';
-            ctx.lineWidth = 3;
-            ctx.stroke();
-            ctx.save();
-            ctx.translate(cx, cy);
-            ctx.rotate(slice * i + slice / 2 + wheelAngle);
-            ctx.textAlign = 'center';
-            ctx.fillStyle = '#000';
-            ctx.font = 'bold 14px Tajawal';
-            ctx.fillText(wheelNames[i], r * 0.65, 5);
-            ctx.restore();
-        }
-        
-        ctx.beginPath();
-        ctx.arc(cx, cy, 18, 0, 2 * Math.PI);
-        ctx.fillStyle = 'var(--bg-card)';
-        ctx.fill();
-        ctx.strokeStyle = 'var(--primary)';
-        ctx.lineWidth = 3;
-        ctx.stroke();
-        
-        ctx.beginPath();
-        ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
-        ctx.fillStyle = 'var(--primary)';
-        ctx.fill();
-    }
-
-    function spinWheel() {
-        var t = document.getElementById('wheelNames');
-        if (t) { wheelNames = t.value.split('\n').filter(function(n) { return n.trim(); }); localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames)); }
-        if (!wheelNames.length) { toast('⚠️ أدخل أسماء', true); return; }
-        if (wheelSpinning) return;
-        wheelSpinning = true;
-        
-        var res = document.getElementById('wheelResult');
-        res.textContent = '🎲 جاري الدوران...';
-        
-        var extraSpins = 3 + Math.floor(Math.random() * 4);
-        var randomSlice = Math.floor(Math.random() * wheelNames.length);
-        var sliceAngle = 2 * Math.PI / wheelNames.length;
-        var targetAngle = 2 * Math.PI * extraSpins + (wheelNames.length - randomSlice) * sliceAngle + sliceAngle / 2;
-        
-        var duration = 4000;
-        var startAngle = wheelAngle;
-        var startTime = null;
-        
-        function animate(timestamp) {
-            if (!startTime) startTime = timestamp;
-            var elapsed = timestamp - startTime;
-            var progress = Math.min(elapsed / duration, 1);
-            var easeOut = 1 - Math.pow(1 - progress, 3);
-            
-            wheelAngle = startAngle + targetAngle * easeOut;
-            drawWheel();
-            
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            } else {
-                wheelAngle = wheelAngle % (2 * Math.PI);
-                var pointerAngle = (2 * Math.PI - (wheelAngle % (2 * Math.PI))) % (2 * Math.PI);
-                var winnerIndex = Math.floor(pointerAngle / sliceAngle) % wheelNames.length;
-                res.textContent = '🏆 الفائز: ' + wheelNames[winnerIndex] + ' 🏆';
-                wheelSpinning = false;
-                toast('🎉 الفائز: ' + wheelNames[winnerIndex] + '!');
-            }
-        }
-        
-        requestAnimationFrame(animate);
-    }
-
-    function clearWheel() {
-        wheelNames = [];
-        localStorage.setItem('ga_wheel_names', '[]');
-        document.getElementById('wheelNames').value = '';
-        document.getElementById('wheelResult').textContent = '';
-        drawWheel();
-        toast('🗑️ تم مسح القرعة');
-    }
-    document.getElementById('wheelNames')?.addEventListener('input', saveWheelNames);
-
-    // ==================== PLAYER NAME ====================
     function savePlayerName() {
         var name = document.getElementById('playerNameInput').value.trim();
         var errorEl = document.getElementById('nameError');
         
-        if (!name) {
-            errorEl.textContent = '⚠️ الرجاء إدخال اسم';
-            errorEl.style.display = 'block';
-            return;
-        }
-        
-        if (name.length < 2) {
+        // التحقق من صحة الاسم
+        if (!name || name.length < 2) {
             errorEl.textContent = '⚠️ الاسم يجب أن يكون حرفين على الأقل';
             errorEl.style.display = 'block';
             return;
@@ -1871,7 +1783,6 @@
         var takenByOther = isNameTakenByOther(name);
         
         if (takenByOther) {
-            // الاسم مستخدم من لاعب آخر
             errorEl.textContent = '❌ هذا الاسم مستخدم بالفعل من لاعب آخر! الرجاء اختيار اسم مختلف';
             errorEl.style.display = 'block';
             document.getElementById('playerNameInput').value = '';
@@ -1880,11 +1791,10 @@
             return;
         }
         
-        // إذا كان اللاعب الحالي له اسم سابق
+        // إذا كان اللاعب الحالي له اسم سابق - تحديثه
         if (playerName && playerId) {
             var currentUser = getUserById(playerId);
             if (currentUser && currentUser.name === playerName) {
-                // تحديث الاسم
                 currentUser.name = name;
                 saveRegisteredUsers();
             }
@@ -1893,7 +1803,7 @@
         // تسجيل لاعب جديد
         var user = registerPlayer(name);
         if (!user) {
-            errorEl.textContent = '❌ فشل التسجيل. جرب مرة أخرى';
+            errorEl.textContent = '❌ فشل التسجيل. حاول مرة أخرى';
             errorEl.style.display = 'block';
             return;
         }
@@ -1921,77 +1831,1508 @@
                 // اللاعب معروف وصحيح
                 document.getElementById('nameModal').style.display = 'none';
                 document.getElementById('profileMenuBtn').style.display = 'flex';
+                
+                // تحديث آخر ظهور في Firebase
+                try {
+                    db.collection("users").doc(String(playerId)).set({
+                        lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+                    }, { merge: true });
+                } catch(e) {}
+                
+                console.log('👋 عودة لاعب: ' + playerName + ' #' + playerId);
             } else if (user && user.name !== playerName) {
-                // تم تغيير الاسم
+                // تم تغيير الاسم - استخدام اسم القاعدة
                 playerName = user.name;
                 localStorage.setItem('ga_player_name', playerName);
                 document.getElementById('nameModal').style.display = 'none';
                 document.getElementById('profileMenuBtn').style.display = 'flex';
             } else {
-                // ID غير موجود - إعادة تسجيل
+                // المستخدم غير موجود في القاعدة
                 document.getElementById('nameModal').style.display = 'flex';
                 document.getElementById('profileMenuBtn').style.display = 'none';
             }
         } else {
+            // لا يوجد اسم محفوظ
             document.getElementById('nameModal').style.display = 'flex';
             document.getElementById('profileMenuBtn').style.display = 'none';
         }
     }
 
+    // ==================== FIREBASE CHAT SYSTEM ====================
+    function listenForMessages() {
+        db.collection("messages")
+            .orderBy("timestamp", "desc")
+            .limit(200)
+            .onSnapshot(function(snapshot) {
+                var msgs = [];
+                snapshot.forEach(function(doc) {
+                    var data = doc.data();
+                    data._id = doc.id;
+                    msgs.push(data);
+                });
+                msgs.reverse();
+                displayChatMessages(msgs);
+            }, function(error) {
+                console.error("خطأ في تحميل المحادثة:", error);
+            });
+    }
+
+    function displayChatMessages(msgs) {
+        var container = document.getElementById('chatMessagesContainer');
+        if (!container) {
+            return;
+        }
+
+        if (!msgs || msgs.length === 0) {
+            container.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:40px;"><div style="font-size:3rem;">💬</div><p>لا توجد رسائل بعد</p><p style="font-size:0.8rem;">كن أول من يتحدث!</p></div>';
+            return;
+        }
+
+        var html = '';
+        for (var i = 0; i < msgs.length; i++) {
+            var msg = msgs[i];
+            var isMine = (String(msg.userId) === String(playerId));
+            
+            if (isMine) {
+                html += '<div class="message-bubble mine">';
+                html += '<div class="msg-text">' + msg.text + '</div>';
+                html += '<div class="msg-time">' + (msg.time || '') + '</div>';
+                html += '</div>';
+            } else {
+                var escapedName = (msg.name || 'زائر').replace(/'/g, "\\'");
+                html += '<div class="message-bubble other">';
+                html += '<div class="msg-name" onclick="startPrivateChatByName(\'' + escapedName + '\', \'' + (msg.userId || '') + '\')">👤 ' + (msg.name || 'زائر') + '</div>';
+                html += '<div class="msg-text">' + msg.text + '</div>';
+                html += '<div class="msg-time">' + (msg.time || '') + '</div>';
+                html += '</div>';
+            }
+        }
+        
+        container.innerHTML = html;
+        container.scrollTop = container.scrollHeight;
+    }
+
+    async function sendChatMessage() {
+        var input = document.getElementById('chatInput');
+        var text = input.value.trim();
+        
+        if (!text) {
+            return;
+        }
+        
+        if (!playerName) {
+            document.getElementById('nameModal').style.display = 'flex';
+            toast('⚠️ أدخل اسمك أولاً', true);
+            return;
+        }
+
+        // التأكد من تسجيل المستخدم في قاعدة البيانات
+        var user = getUserByName(playerName);
+        if (!user) {
+            var newUser = registerPlayer(playerName);
+            if (newUser) {
+                playerId = newUser.id;
+                localStorage.setItem('ga_player_id', String(playerId));
+            }
+        }
+
+        try {
+            await db.collection("messages").add({
+                name: playerName,
+                userId: String(playerId),
+                text: text,
+                time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            playSound('message');
+            input.value = '';
+            console.log('✅ رسالة مرسلة من: ' + playerName);
+        } catch (error) {
+            console.error('❌ فشل الإرسال:', error);
+            toast('❌ فشل إرسال الرسالة', true);
+        }
+    }
+
+    // ==================== PRIVATE CHAT SYSTEM ====================
+    function startPrivateChatByName(targetName, targetId) {
+        if (!playerName) {
+            document.getElementById('nameModal').style.display = 'flex';
+            return;
+        }
+        
+        if (targetName === playerName) {
+            toast('⚠️ لا يمكنك مراسلة نفسك', true);
+            return;
+        }
+        
+        var user = getUserById(targetId);
+        if (!user) {
+            user = getUserByName(targetName);
+        }
+        
+        if (!user) {
+            toast('⚠️ المستخدم غير موجود في قاعدة البيانات', true);
+            return;
+        }
+        
+        var chatId = [String(playerId), String(user.id)].sort().join('_');
+        
+        activePrivateChat = {
+            chatId: chatId,
+            targetId: user.id,
+            targetName: user.name
+        };
+        
+        document.getElementById('privateChatTargetName').textContent = user.name + ' #' + user.id;
+        document.getElementById('privateChatModal').classList.remove('hidden');
+        
+        if (!privateChats[chatId]) {
+            privateChats[chatId] = {
+                targetName: user.name,
+                targetId: user.id,
+                lastMessage: '',
+                timestamp: Date.now()
+            };
+            localStorage.setItem('ga_private_chats', JSON.stringify(privateChats));
+        }
+        
+        listenForPrivateMessages(chatId);
+        console.log('💬 فتح محادثة خاصة مع: ' + user.name);
+    }
+
+    function listenForPrivateMessages(chatId) {
+        db.collection("private_messages")
+            .where('chatId', '==', chatId)
+            .orderBy('timestamp', 'asc')
+            .onSnapshot(function(snapshot) {
+                var msgs = [];
+                snapshot.forEach(function(doc) {
+                    msgs.push(doc.data());
+                });
+                displayPrivateMessages(msgs);
+            }, function(error) {
+                console.error("خطأ في تحميل المحادثة الخاصة:", error);
+            });
+    }
+
+    function displayPrivateMessages(msgs) {
+        var container = document.getElementById('privateChatMessages');
+        if (!container) {
+            return;
+        }
+        
+        if (!msgs || msgs.length === 0) {
+            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:30px;">لا توجد رسائل. ابدأ المحادثة!</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < msgs.length; i++) {
+            var msg = msgs[i];
+            var isMine = (String(msg.fromId) === String(playerId));
+            
+            if (isMine) {
+                html += '<div class="message-bubble mine">';
+                html += '<div class="msg-text">' + msg.text + '</div>';
+                html += '</div>';
+            } else {
+                html += '<div class="message-bubble other">';
+                html += '<div class="msg-name">👤 ' + msg.fromName + '</div>';
+                html += '<div class="msg-text">' + msg.text + '</div>';
+                html += '</div>';
+            }
+        }
+        
+        container.innerHTML = html;
+        container.scrollTop = container.scrollHeight;
+    }
+
+    async function sendPrivateMessage() {
+        if (!activePrivateChat) {
+            return;
+        }
+        
+        var input = document.getElementById('privateChatInput');
+        var text = input.value.trim();
+        
+        if (!text) {
+            return;
+        }
+        
+        try {
+            await db.collection("private_messages").add({
+                chatId: activePrivateChat.chatId,
+                fromId: String(playerId),
+                fromName: playerName,
+                toId: String(activePrivateChat.targetId),
+                text: text,
+                time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            // تحديث آخر رسالة
+            var chatId = activePrivateChat.chatId;
+            if (privateChats[chatId]) {
+                privateChats[chatId].lastMessage = text;
+                privateChats[chatId].timestamp = Date.now();
+                localStorage.setItem('ga_private_chats', JSON.stringify(privateChats));
+            }
+            
+            playSound('message');
+            input.value = '';
+        } catch (error) {
+            console.error('❌ فشل:', error);
+            toast('❌ فشل الإرسال', true);
+        }
+    }
+
+    function closePrivateChat() {
+        activePrivateChat = null;
+        document.getElementById('privateChatModal').classList.add('hidden');
+    }
+
+    function showPrivateChatsList() {
+        hideAllSections();
+        document.getElementById('privateChatsListSection').classList.remove('hidden');
+        renderPrivateChatsList();
+        closeAllSidebars();
+    }
+
+    function renderPrivateChatsList() {
+        var container = document.getElementById('privateChatsList');
+        if (!container) {
+            return;
+        }
+        
+        var chatIds = Object.keys(privateChats);
+        
+        if (chatIds.length === 0) {
+            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:40px;">لا توجد محادثات خاصة. ابحث عن لاعب لبدء محادثة!</p>';
+            return;
+        }
+        
+        // ترتيب حسب الوقت
+        chatIds.sort(function(a, b) {
+            return (privateChats[b].timestamp || 0) - (privateChats[a].timestamp || 0);
+        });
+        
+        var html = '';
+        for (var i = 0; i < chatIds.length; i++) {
+            var chatId = chatIds[i];
+            var chat = privateChats[chatId];
+            var escapedName = chat.targetName.replace(/'/g, "\\'");
+            
+            html += '<div class="private-chat-row" onclick="openExistingPrivateChat(\'' + chatId + '\', ' + chat.targetId + ', \'' + escapedName + '\')">';
+            html += '<div>';
+            html += '<strong>' + chat.targetName + ' #' + chat.targetId + '</strong>';
+            html += '<div class="last-message">' + (chat.lastMessage || 'اضغط للدردشة') + '</div>';
+            html += '</div>';
+            html += '<i class="fas fa-chevron-left"></i>';
+            html += '</div>';
+        }
+        
+        container.innerHTML = html;
+    }
+
+    function openExistingPrivateChat(chatId, targetId, targetName) {
+        activePrivateChat = {
+            chatId: chatId,
+            targetId: targetId,
+            targetName: targetName
+        };
+        
+        document.getElementById('privateChatTargetName').textContent = targetName + ' #' + targetId;
+        document.getElementById('privateChatModal').classList.remove('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
+        
+        listenForPrivateMessages(chatId);
+    }
+
+    // ==================== SEARCH PLAYER ====================
+    function openSearchPlayerModal() {
+        document.getElementById('searchPlayerModal').classList.remove('hidden');
+        document.getElementById('searchPlayerInput').value = '';
+        document.getElementById('searchResults').innerHTML = '';
+        setTimeout(function() {
+            document.getElementById('searchPlayerInput').focus();
+        }, 200);
+    }
+
+    function closeSearchPlayerModal() {
+        document.getElementById('searchPlayerModal').classList.add('hidden');
+    }
+
+    function selectSearchResult(userId) {
+        var user = getUserById(userId);
+        if (!user) {
+            return;
+        }
+        closeSearchPlayerModal();
+        startPrivateChatByName(user.name, String(user.id));
+    }
+
+    // ==================== VOICE CHAT ====================
+    function renderVoiceRooms() {
+        var grid = document.getElementById('voiceRoomsGrid');
+        if (!grid) {
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < voiceRooms.length; i++) {
+            var room = voiceRooms[i];
+            html += '<div class="voice-room-card">';
+            html += '<div class="voice-room-icon">' + room.icon + '</div>';
+            html += '<h3>' + room.name + '</h3>';
+            html += '<p style="color:var(--text-muted);font-size:0.8rem;margin-bottom:12px;">' + room.description + '</p>';
+            html += '<button class="btn btn-success" onclick="joinVoiceRoom(\'' + room.id + '\',\'' + room.name + '\')"><i class="fas fa-phone"></i> انضمام</button>';
+            html += '</div>';
+        }
+        grid.innerHTML = html;
+    }
+
+    function joinVoiceRoom(roomId, roomName) {
+        currentVoiceRoom = { id: roomId, name: roomName };
+        document.getElementById('activeVoiceRoom').classList.remove('hidden');
+        document.getElementById('activeRoomName').textContent = roomName;
+        
+        var container = document.getElementById('jitsiContainer');
+        container.innerHTML = '';
+        
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://meet.jit.si/' + roomId + '#config.startWithAudioMuted=false&config.startWithVideoMuted=true&config.prejoinPageEnabled=false';
+        iframe.allow = 'camera; microphone; fullscreen; display-capture; autoplay';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.border = 'none';
+        container.appendChild(iframe);
+        
+        toast('🎤 تم الانضمام إلى ' + roomName);
+    }
+
+    function leaveVoiceRoom() {
+        currentVoiceRoom = null;
+        document.getElementById('activeVoiceRoom').classList.add('hidden');
+        document.getElementById('jitsiContainer').innerHTML = '';
+        toast('👋 تم مغادرة الغرفة الصوتية');
+    }
+
+    function switchToVoiceChat() {
+        if (currentVoiceRoom) {
+            leaveVoiceRoom();
+        }
+        chatMode = 'voice';
+        localStorage.setItem('ga_chat_mode', 'voice');
+        hideAllSections();
+        document.getElementById('voiceChatSection').classList.remove('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
+        document.getElementById('voiceChatMenuBtn').style.color = 'var(--primary)';
+        document.getElementById('textChatMenuBtn').style.color = '';
+        renderVoiceRooms();
+        closeAllSidebars();
+    }
+    // ==================== TOURNAMENTS ====================
+    function saveTournamentsToStorage() {
+        localStorage.setItem('ga_tournaments', JSON.stringify(tournaments));
+        renderTournamentGrid();
+        renderAdminList();
+        updateAdminStats();
+    }
+    
+    function addTournament() {
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        var name = document.getElementById('newName').value.trim();
+        var date = document.getElementById('newDate').value;
+        var prize = document.getElementById('newPrize').value.trim();
+        
+        if (!name || !date || !prize) {
+            toast('⚠️ أكمل جميع الحقول المطلوبة', true);
+            return;
+        }
+        
+        var newTournament = {
+            name: name,
+            date: date,
+            prize: prize,
+            size: parseInt(document.getElementById('newSize').value),
+            type: document.getElementById('newType').value,
+            players: 0,
+            playersList: [],
+            rules: document.getElementById('newRules').value || '',
+            donateLink: document.getElementById('newDonateLink').value || '',
+            streamLink: document.getElementById('newStreamLink').value || '',
+            status: 'جارية',
+            createdAt: new Date().toISOString()
+        };
+        
+        tournaments.push(newTournament);
+        
+        // مسح الحقول
+        document.getElementById('newName').value = '';
+        document.getElementById('newDate').value = '';
+        document.getElementById('newPrize').value = '';
+        document.getElementById('newRules').value = '';
+        document.getElementById('newDonateLink').value = '';
+        document.getElementById('newStreamLink').value = '';
+        
+        saveTournamentsToStorage();
+        showNotification('📢 تم نشر بطولة جديدة: ' + name);
+        toast('📢 تم نشر البطولة بنجاح!');
+        console.log('🏆 بطولة جديدة: ' + name);
+    }
+    
+    function renderTournamentGrid() {
+        var grid = document.getElementById('tournamentGridFull');
+        if (!grid) {
+            return;
+        }
+        
+        if (tournaments.length === 0) {
+            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد بطولات حالياً</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < tournaments.length; i++) {
+            var t = tournaments[i];
+            html += '<div class="card">';
+            html += '<h3>🏆 ' + t.name + '</h3>';
+            html += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">';
+            if (t.streamLink) {
+                html += '<span class="badge badge-danger">🔴 بث مباشر</span>';
+            }
+            var statusClass = t.status === 'جارية' ? 'badge-success' : 'badge-danger';
+            var statusText = t.status === 'جارية' ? '🟢 جارية' : '🔴 منتهية';
+            html += '<span class="badge ' + statusClass + '">' + statusText + '</span>';
+            html += '<span class="badge badge-warning">👥 ' + (t.players || 0) + '/' + t.size + '</span>';
+            html += '</div>';
+            html += '<div style="display:flex;gap:6px;margin-bottom:14px;">';
+            html += '<span class="badge badge-info">📅 ' + t.date + '</span>';
+            html += '<span class="badge badge-warning">💰 ' + t.prize + '</span>';
+            html += '</div>';
+            if (t.status === 'جارية' && t.type === 'open') {
+                html += '<button class="btn btn-outline btn-sm" onclick="joinTournament(' + i + ')">✍️ تسجيل</button>';
+            }
+            html += '</div>';
+        }
+        grid.innerHTML = html;
+    }
+    
+    function joinTournament(idx) {
+        if (!playerName) {
+            toast('⚠️ أدخل اسمك أولاً', true);
+            document.getElementById('nameModal').style.display = 'flex';
+            return;
+        }
+        
+        var t = tournaments[idx];
+        
+        if (t.players >= t.size) {
+            toast('⚠️ البطولة مكتملة', true);
+            return;
+        }
+        
+        if (!t.playersList) {
+            t.playersList = [];
+        }
+        
+        if (t.playersList.indexOf(playerName) !== -1) {
+            toast('⚠️ أنت مسجل بالفعل', true);
+            return;
+        }
+        
+        t.playersList.push(playerName);
+        t.players = t.playersList.length;
+        saveTournamentsToStorage();
+        toast('✅ تم تسجيل ' + playerName + ' في البطولة');
+    }
+    
+    // ==================== MAPS ====================
+    function saveMapsToStorage() {
+        localStorage.setItem('ga_maps', JSON.stringify(maps));
+        renderMapsGrid();
+        renderAdminMapsList();
+        updateAdminStats();
+    }
+    
+    function openMapModal() {
+        document.getElementById('mapModal').classList.remove('hidden');
+        closeAllSidebars();
+    }
+    
+    function closeMapModal() {
+        document.getElementById('mapModal').classList.add('hidden');
+    }
+    
+    function shareMap() {
+        var name = document.getElementById('mapNameInput').value.trim();
+        var link = document.getElementById('mapLinkInput').value.trim();
+        
+        if (!name || !link) {
+            toast('⚠️ أدخل اسم الخريطة والرابط', true);
+            return;
+        }
+        
+        maps.push({
+            name: name,
+            link: link,
+            author: playerName || 'زائر',
+            date: new Date().toLocaleDateString('ar')
+        });
+        
+        saveMapsToStorage();
+        closeMapModal();
+        document.getElementById('mapNameInput').value = '';
+        document.getElementById('mapLinkInput').value = '';
+        toast('✅ تمت مشاركة الخريطة بنجاح');
+    }
+    
+    function renderMapsGrid() {
+        var grid = document.getElementById('mapsGrid');
+        if (!grid) {
+            return;
+        }
+        
+        if (maps.length === 0) {
+            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد خرائط بعد</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < maps.length; i++) {
+            var m = maps[i];
+            html += '<div class="card">';
+            html += '<h3>🗺️ ' + m.name + '</h3>';
+            html += '<p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">بواسطة: <strong>' + m.author + '</strong> | 📅 ' + m.date + '</p>';
+            html += '<a href="' + m.link + '" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>';
+            html += '</div>';
+        }
+        grid.innerHTML = html;
+    }
+    
+    function deleteMap(idx) {
+        if (!isAdmin) {
+            return;
+        }
+        if (confirm('⚠️ هل أنت متأكد من حذف هذه الخريطة؟')) {
+            maps.splice(idx, 1);
+            saveMapsToStorage();
+            toast('🗑️ تم حذف الخريطة');
+        }
+    }
+    
+    // ==================== GAME FILES ====================
+    function saveGameFilesToStorage() {
+        localStorage.setItem('ga_gameFiles', JSON.stringify(gameFiles));
+        renderGameFilesGrid();
+        renderAdminGameFilesList();
+        updateAdminStats();
+    }
+    
+    function openGameFileModal() {
+        document.getElementById('gameFileModal').classList.remove('hidden');
+        closeAllSidebars();
+    }
+    
+    function closeGameFileModal() {
+        document.getElementById('gameFileModal').classList.add('hidden');
+    }
+    
+    function shareGameFile() {
+        var name = document.getElementById('gameFileNameInput').value.trim();
+        var link = document.getElementById('gameFileLinkInput').value.trim();
+        var type = document.getElementById('gameFileTypeInput').value;
+        
+        if (!name || !link) {
+            toast('⚠️ أدخل اسم الملف والرابط', true);
+            return;
+        }
+        
+        gameFiles.push({
+            name: name,
+            link: link,
+            type: type,
+            author: playerName || 'زائر',
+            date: new Date().toLocaleDateString('ar')
+        });
+        
+        saveGameFilesToStorage();
+        closeGameFileModal();
+        document.getElementById('gameFileNameInput').value = '';
+        document.getElementById('gameFileLinkInput').value = '';
+        toast('✅ تمت مشاركة الملف بنجاح');
+    }
+    
+    function renderGameFilesGrid() {
+        var grid = document.getElementById('gameFilesGrid');
+        if (!grid) {
+            return;
+        }
+        
+        if (gameFiles.length === 0) {
+            grid.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">لا توجد ملفات لعبة بعد</p>';
+            return;
+        }
+        
+        var typeLabels = {
+            patch: '🔧 باتش',
+            fix: '🛠️ ملف إصلاح',
+            mod: '🎨 مود',
+            tool: '🔧 أداة',
+            other: '📄 آخر'
+        };
+        
+        var html = '';
+        for (var i = 0; i < gameFiles.length; i++) {
+            var g = gameFiles[i];
+            html += '<div class="card">';
+            html += '<h3>📦 ' + g.name + '</h3>';
+            html += '<span class="badge badge-info" style="margin-bottom:8px;">' + (typeLabels[g.type] || g.type) + '</span>';
+            html += '<p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:12px;">بواسطة: <strong>' + g.author + '</strong> | 📅 ' + g.date + '</p>';
+            html += '<a href="' + g.link + '" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> تحميل</a>';
+            html += '</div>';
+        }
+        grid.innerHTML = html;
+    }
+    
+    function deleteGameFile(idx) {
+        if (!isAdmin) {
+            return;
+        }
+        if (confirm('⚠️ هل أنت متأكد من حذف هذا الملف؟')) {
+            gameFiles.splice(idx, 1);
+            saveGameFilesToStorage();
+            toast('🗑️ تم حذف الملف');
+        }
+    }
+    
+    // ==================== LIVE STREAM ====================
+    function setLiveStream() {
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        var url = document.getElementById('liveStreamUrlInput').value.trim();
+        var title = document.getElementById('liveStreamTitleInput').value.trim();
+        
+        if (!url) {
+            toast('⚠️ أدخل رابط البث المباشر', true);
+            return;
+        }
+        
+        liveStream = {
+            url: url,
+            title: title,
+            setAt: new Date().toISOString()
+        };
+        
+        localStorage.setItem('ga_live_stream', JSON.stringify(liveStream));
+        renderLiveStreamContent();
+        document.getElementById('liveStreamUrlInput').value = '';
+        document.getElementById('liveStreamTitleInput').value = '';
+        showNotification('🔴 بدأ البث المباشر! ' + (title || ''));
+        toast('🔴 تم بدء البث المباشر!');
+    }
+    
+    function removeLiveStream() {
+        if (!isAdmin) {
+            return;
+        }
+        
+        if (confirm('⚠️ هل أنت متأكد من إزالة البث المباشر؟')) {
+            liveStream = null;
+            localStorage.removeItem('ga_live_stream');
+            renderLiveStreamContent();
+            toast('🗑️ تم إزالة البث المباشر');
+        }
+    }
+    
+    function renderLiveStreamContent() {
+        var container = document.getElementById('liveStreamContent');
+        if (!container) {
+            return;
+        }
+        
+        if (!liveStream || !liveStream.url) {
+            container.innerHTML = '<div class="card" style="text-align:center;padding:60px 20px;"><div style="font-size:3rem;margin-bottom:16px;">📡</div><p style="color:var(--text-muted);font-size:1.1rem;">لا يوجد بث مباشر حالياً</p><p style="color:var(--text-muted);font-size:0.8rem;margin-top:8px;">سيظهر البث هنا عند إضافته من قبل المدير</p></div>';
+            return;
+        }
+        
+        var videoId = extractYouTubeID(liveStream.url);
+        
+        if (videoId) {
+            container.innerHTML = '<div style="margin-bottom:16px;"><span class="live-badge">🔴 بث مباشر الآن' + (liveStream.title ? ' - ' + liveStream.title : '') + '</span></div><div class="stream-container"><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe></div>';
+        } else {
+            container.innerHTML = '<p style="color:var(--danger);text-align:center;">⚠️ رابط البث غير صالح</p>';
+        }
+    }
+    
+    function showLiveStream() {
+        hideAllSections();
+        document.getElementById('liveStreamSection').classList.remove('hidden');
+        renderLiveStreamContent();
+        closeAllSidebars();
+    }
+    
+    // ==================== LEADERBOARD ====================
+    function showLeaderboard() {
+        hideAllSections();
+        document.getElementById('leaderboardSection').classList.remove('hidden');
+        renderLeaderboard();
+        closeAllSidebars();
+    }
+    
+    function renderLeaderboard() {
+        // ترتيب المستخدمين حسب النقاط
+        var sorted = registeredUsers.slice().sort(function(a, b) {
+            return (b.points || 0) - (a.points || 0);
+        });
+        
+        var html = '';
+        for (var i = 0; i < Math.min(sorted.length, 50); i++) {
+            var user = sorted[i];
+            var rankClass = '';
+            var rankDisplay = String(i + 1);
+            
+            if (i === 0) {
+                rankClass = 'rank-1';
+                rankDisplay = '🥇 1';
+            } else if (i === 1) {
+                rankClass = 'rank-2';
+                rankDisplay = '🥈 2';
+            } else if (i === 2) {
+                rankClass = 'rank-3';
+                rankDisplay = '🥉 3';
+            }
+            
+            html += '<tr>';
+            html += '<td class="' + rankClass + '">' + rankDisplay + '</td>';
+            html += '<td>' + user.name + ' <span style="color:var(--primary);font-size:0.75rem;">#' + user.id + '</span></td>';
+            html += '<td>' + (user.points || 0) + '</td>';
+            html += '</tr>';
+        }
+        
+        if (!html) {
+            html = '<tr><td colspan="3">لا يوجد لاعبين بعد</td></tr>';
+        }
+        
+        document.getElementById('leaderboardBody').innerHTML = html;
+    }
+    
+    // ==================== WHEEL ====================
+    function loadWheelNames() {
+        var stored = localStorage.getItem('ga_wheel_names');
+        if (stored) {
+            wheelNames = JSON.parse(stored);
+            document.getElementById('wheelNames').value = wheelNames.join('\n');
+        }
+    }
+    
+    function saveWheelNames() {
+        var textarea = document.getElementById('wheelNames');
+        if (textarea) {
+            wheelNames = textarea.value.split('\n').filter(function(n) {
+                return n.trim();
+            });
+            localStorage.setItem('ga_wheel_names', JSON.stringify(wheelNames));
+        }
+        drawWheel();
+    }
+    
+    function drawWheel() {
+        var canvas = document.getElementById('wheelCanvas');
+        if (!canvas) {
+            return;
+        }
+        
+        var ctx = canvas.getContext('2d');
+        var w = canvas.width;
+        var h = canvas.height;
+        var cx = w / 2;
+        var cy = h / 2;
+        var r = Math.min(cx, cy) - 30;
+        
+        ctx.clearRect(0, 0, w, h);
+        
+        if (wheelNames.length === 0) {
+            ctx.fillStyle = 'var(--text-muted)';
+            ctx.font = '16px Tajawal';
+            ctx.textAlign = 'center';
+            ctx.fillText('أدخل أسماء لبدء القرعة', cx, cy);
+            return;
+        }
+        
+        var colors = ['#f0b90b', '#f6465d', '#0ecb81', '#3b82f6', '#8b5cf6', '#ec4899', '#06b6d4', '#f97316', '#6366f1', '#14b8a6', '#e11d48', '#a855f7'];
+        var slice = 2 * Math.PI / wheelNames.length;
+        
+        for (var i = 0; i < wheelNames.length; i++) {
+            var name = wheelNames[i];
+            var startAngle = slice * i + wheelAngle;
+            var endAngle = slice * (i + 1) + wheelAngle;
+            
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, r, startAngle, endAngle);
+            ctx.fillStyle = colors[i % colors.length];
+            ctx.fill();
+            ctx.strokeStyle = 'var(--bg-secondary)';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(startAngle + slice / 2);
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 14px Tajawal';
+            ctx.fillText(name, r * 0.65, 5);
+            ctx.restore();
+        }
+        
+        // رسم الدائرة المركزية
+        ctx.beginPath();
+        ctx.arc(cx, cy, 18, 0, 2 * Math.PI);
+        ctx.fillStyle = 'var(--bg-card)';
+        ctx.fill();
+        ctx.strokeStyle = 'var(--primary)';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        
+        // رسم النقطة المركزية
+        ctx.beginPath();
+        ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
+        ctx.fillStyle = 'var(--primary)';
+        ctx.fill();
+    }
+    
+    function spinWheel() {
+        var textarea = document.getElementById('wheelNames');
+        if (textarea) {
+            saveWheelNames();
+        }
+        
+        if (wheelNames.length === 0) {
+            toast('⚠️ أدخل أسماء أولاً', true);
+            return;
+        }
+        
+        if (wheelSpinning) {
+            return;
+        }
+        
+        wheelSpinning = true;
+        var resultDiv = document.getElementById('wheelResult');
+        resultDiv.textContent = '🎲 جاري الدوران...';
+        
+        var extraSpins = 3 + Math.floor(Math.random() * 4);
+        var randomSlice = Math.floor(Math.random() * wheelNames.length);
+        var sliceAngle = 2 * Math.PI / wheelNames.length;
+        var targetAngle = 2 * Math.PI * extraSpins + (wheelNames.length - randomSlice) * sliceAngle + sliceAngle / 2;
+        
+        var duration = 4000;
+        var startAngle = wheelAngle;
+        var startTime = null;
+        
+        function animate(timestamp) {
+            if (!startTime) {
+                startTime = timestamp;
+            }
+            var elapsed = timestamp - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            var easeOut = 1 - Math.pow(1 - progress, 3);
+            
+            wheelAngle = startAngle + targetAngle * easeOut;
+            drawWheel();
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                wheelAngle = wheelAngle % (2 * Math.PI);
+                var pointerAngle = (2 * Math.PI - (wheelAngle % (2 * Math.PI))) % (2 * Math.PI);
+                var winnerIndex = Math.floor(pointerAngle / sliceAngle) % wheelNames.length;
+                
+                resultDiv.textContent = '🏆 الفائز: ' + wheelNames[winnerIndex] + ' 🏆';
+                wheelSpinning = false;
+                toast('🎉 الفائز: ' + wheelNames[winnerIndex] + '!');
+            }
+        }
+        
+        requestAnimationFrame(animate);
+    }
+    
+    function clearWheel() {
+        wheelNames = [];
+        localStorage.setItem('ga_wheel_names', '[]');
+        document.getElementById('wheelNames').value = '';
+        document.getElementById('wheelResult').textContent = '';
+        drawWheel();
+        toast('🗑️ تم مسح القرعة');
+    }
+    
+    // ==================== ADMIN PANEL ====================
+    function checkAdminStatus() {
+        if (isAdmin) {
+            document.getElementById('adminLoginForm').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            renderAdminList();
+            renderAdminMapsList();
+            renderAdminGameFilesList();
+            renderUsersList();
+            updateAdminStats();
+        } else {
+            document.getElementById('adminLoginForm').classList.remove('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+    }
+    
+    function adminLogin() {
+        var passwordInput = document.getElementById('adminPasswordInput');
+        
+        if (passwordInput.value === ADMIN_PASS) {
+            isAdmin = true;
+            localStorage.setItem('ga_is_admin', 'true');
+            document.getElementById('adminPasswordInput').value = '';
+            checkAdminStatus();
+            toast('🔓 مرحباً Sahel TV!');
+            console.log('👑 المدير سجل الدخول');
+        } else {
+            toast('❌ كلمة مرور خاطئة', true);
+        }
+    }
+    
+    function logoutAdmin() {
+        isAdmin = false;
+        localStorage.removeItem('ga_is_admin');
+        checkAdminStatus();
+        toast('👋 تم تسجيل الخروج');
+    }
+    
+    function updateAdminStats() {
+        var statUsers = document.getElementById('statUsers');
+        var statTournaments = document.getElementById('statTournaments');
+        var statMaps = document.getElementById('statMaps');
+        var statFiles = document.getElementById('statFiles');
+        
+        if (statUsers) statUsers.textContent = registeredUsers.length;
+        if (statTournaments) statTournaments.textContent = tournaments.length;
+        if (statMaps) statMaps.textContent = maps.length;
+        if (statFiles) statFiles.textContent = gameFiles.length;
+    }
+    
+    function switchAdminTab(tab) {
+        var tabs = document.querySelectorAll('.admin-tab');
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove('active');
+        }
+        event.target.classList.add('active');
+        
+        document.getElementById('adminTabTournaments').classList.add('hidden');
+        document.getElementById('adminTabMaps').classList.add('hidden');
+        document.getElementById('adminTabGameFiles').classList.add('hidden');
+        document.getElementById('adminTabStream').classList.add('hidden');
+        document.getElementById('adminTabUsers').classList.add('hidden');
+        
+        if (tab === 'tournaments') {
+            document.getElementById('adminTabTournaments').classList.remove('hidden');
+        } else if (tab === 'maps') {
+            document.getElementById('adminTabMaps').classList.remove('hidden');
+            renderAdminMapsList();
+        } else if (tab === 'gameFiles') {
+            document.getElementById('adminTabGameFiles').classList.remove('hidden');
+            renderAdminGameFilesList();
+        } else if (tab === 'stream') {
+            document.getElementById('adminTabStream').classList.remove('hidden');
+        } else if (tab === 'users') {
+            document.getElementById('adminTabUsers').classList.remove('hidden');
+            renderUsersList();
+        }
+    }
+    
+    function renderAdminList() {
+        var list = document.getElementById('adminList');
+        if (!list) {
+            return;
+        }
+        
+        if (tournaments.length === 0) {
+            list.innerHTML = '<p style="color:var(--text-muted);">لا توجد بطولات</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < tournaments.length; i++) {
+            var t = tournaments[i];
+            html += '<div class="user-row">';
+            html += '<span>🏆 ' + t.name + ' | 👥 ' + (t.players || 0) + '/' + t.size + ' | ' + (t.status === 'جارية' ? '🟢' : '🔴') + '</span>';
+            html += '<button class="btn btn-danger btn-sm" onclick="deleteTournament(' + i + ')">🗑️</button>';
+            html += '</div>';
+        }
+        
+        list.innerHTML = html;
+    }
+    
+    function deleteTournament(idx) {
+        if (!isAdmin) {
+            return;
+        }
+        if (confirm('⚠️ هل أنت متأكد من حذف هذه البطولة؟')) {
+            tournaments.splice(idx, 1);
+            saveTournamentsToStorage();
+            toast('🗑️ تم حذف البطولة');
+        }
+    }
+    
+    function renderAdminMapsList() {
+        var list = document.getElementById('adminMapsList');
+        if (!list) {
+            return;
+        }
+        
+        if (maps.length === 0) {
+            list.innerHTML = '<p style="color:var(--text-muted);">لا توجد خرائط</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < maps.length; i++) {
+            html += '<div class="user-row">';
+            html += '<span>🗺️ ' + maps[i].name + ' - ' + maps[i].author + '</span>';
+            html += '<button class="btn btn-danger btn-sm" onclick="deleteMap(' + i + ')">🗑️</button>';
+            html += '</div>';
+        }
+        
+        list.innerHTML = html;
+    }
+    
+    function renderAdminGameFilesList() {
+        var list = document.getElementById('adminGameFilesList');
+        if (!list) {
+            return;
+        }
+        
+        if (gameFiles.length === 0) {
+            list.innerHTML = '<p style="color:var(--text-muted);">لا توجد ملفات</p>';
+            return;
+        }
+        
+        var typeLabels = {
+            patch: '🔧 باتش',
+            fix: '🛠️ إصلاح',
+            mod: '🎨 مود',
+            tool: '🔧 أداة',
+            other: '📄 آخر'
+        };
+        
+        var html = '';
+        for (var i = 0; i < gameFiles.length; i++) {
+            html += '<div class="user-row">';
+            html += '<span>📦 ' + gameFiles[i].name + ' (' + (typeLabels[gameFiles[i].type] || gameFiles[i].type) + ') - ' + gameFiles[i].author + '</span>';
+            html += '<button class="btn btn-danger btn-sm" onclick="deleteGameFile(' + i + ')">🗑️</button>';
+            html += '</div>';
+        }
+        
+        list.innerHTML = html;
+    }
+    
+    function renderUsersList() {
+        var list = document.getElementById('usersList');
+        if (!list) {
+            return;
+        }
+        
+        var searchTerm = (document.getElementById('userSearchInput')?.value || '').toLowerCase().trim();
+        var filtered = [];
+        
+        for (var i = 0; i < registeredUsers.length; i++) {
+            var user = registeredUsers[i];
+            if (!searchTerm || user.name.toLowerCase().indexOf(searchTerm) !== -1 || String(user.id).indexOf(searchTerm) !== -1) {
+                filtered.push(user);
+            }
+        }
+        
+        if (filtered.length === 0) {
+            list.innerHTML = '<p style="color:var(--text-muted);">لا يوجد مستخدمون</p>';
+            return;
+        }
+        
+        var html = '';
+        for (var i = 0; i < filtered.length; i++) {
+            var user = filtered[i];
+            var escapedName = user.name.replace(/'/g, "\\'");
+            html += '<div class="user-row">';
+            html += '<span>👤 ' + user.name + ' <span style="color:var(--primary);">#' + user.id + '</span></span>';
+            html += '<button class="btn btn-danger btn-sm" onclick="deleteUser(\'' + escapedName + '\')">🗑️</button>';
+            html += '</div>';
+        }
+        
+        list.innerHTML = html;
+    }
+    
+    function deleteUser(userName) {
+        if (!isAdmin) {
+            return;
+        }
+        
+        if (confirm('⚠️ هل أنت متأكد من حذف المستخدم "' + userName + '"؟')) {
+            for (var i = 0; i < registeredUsers.length; i++) {
+                if (registeredUsers[i].name === userName) {
+                    registeredUsers.splice(i, 1);
+                    break;
+                }
+            }
+            saveRegisteredUsers();
+            renderUsersList();
+            updateAdminStats();
+            toast('🗑️ تم حذف المستخدم ' + userName);
+        }
+    }
+    
+    // ==================== DELETE ALL DATA ====================
+    async function deleteAllData() {
+        if (!isAdmin) {
+            toast('🔒 للمدير فقط', true);
+            return;
+        }
+        
+        if (!confirm('⚠️ تحذير نهائي! سيتم حذف جميع بيانات الموقع بالكامل:\n\n• جميع المستخدمين\n• جميع المحادثات العامة\n• جميع المحادثات الخاصة\n• جميع البطولات\n• جميع الخرائط\n• جميع ملفات اللعبة\n\nهل أنت متأكد تماماً؟')) {
+            return;
+        }
+        
+        if (!confirm('❌ آخر تأكيد! لا يمكن التراجع عن هذا الإجراء أبداً. هل تريد المتابعة؟')) {
+            return;
+        }
+        
+        try {
+            // حذف مجموعة الرسائل العامة من Firebase
+            var messagesSnapshot = await db.collection("messages").get();
+            var batch1 = db.batch();
+            messagesSnapshot.forEach(function(doc) {
+                batch1.delete(doc.ref);
+            });
+            await batch1.commit();
+            console.log('✅ تم حذف جميع الرسائل العامة');
+            
+            // حذف مجموعة الرسائل الخاصة من Firebase
+            var privateMessagesSnapshot = await db.collection("private_messages").get();
+            var batch2 = db.batch();
+            privateMessagesSnapshot.forEach(function(doc) {
+                batch2.delete(doc.ref);
+            });
+            await batch2.commit();
+            console.log('✅ تم حذف جميع الرسائل الخاصة');
+            
+            // حذف مجموعة المستخدمين من Firebase
+            var usersSnapshot = await db.collection("users").get();
+            var batch3 = db.batch();
+            usersSnapshot.forEach(function(doc) {
+                batch3.delete(doc.ref);
+            });
+            await batch3.commit();
+            console.log('✅ تم حذف جميع المستخدمين من Firebase');
+            
+        } catch (error) {
+            console.error('❌ خطأ في حذف بيانات Firebase:', error);
+        }
+        
+        // حذف جميع بيانات localStorage
+        localStorage.clear();
+        
+        // إعادة تعيين جميع المتغيرات
+        registeredUsers = [];
+        tournaments = [];
+        maps = [];
+        gameFiles = [];
+        privateChats = {};
+        nextId = 10000;
+        playerName = '';
+        playerId = 0;
+        isAdmin = false;
+        
+        // إعادة حفظ الحالة الفارغة
+        saveRegisteredUsers();
+        saveTournamentsToStorage();
+        saveMapsToStorage();
+        saveGameFilesToStorage();
+        
+        // تحديث الواجهة
+        renderAll();
+        checkAdminStatus();
+        
+        toast('🗑️ تم حذف جميع البيانات بنجاح! سيتم إعادة تحميل الصفحة...');
+        
+        // إعادة تحميل الصفحة بعد 2 ثانية
+        setTimeout(function() {
+            location.reload();
+        }, 2000);
+    }
+    
+    // ==================== PROFILE ====================
+    function showProfile() {
+        if (!playerName) {
+            document.getElementById('nameModal').style.display = 'flex';
+            return;
+        }
+        
+        hideAllSections();
+        document.getElementById('profileSection').classList.remove('hidden');
+        closeAllSidebars();
+        
+        var user = getUserByName(playerName);
+        var userId = user ? user.id : playerId;
+        var userPoints = user ? (user.points || 0) : 0;
+        
+        var html = '';
+        html += '<div class="profile-card">';
+        html += '<div class="profile-avatar">👤</div>';
+        html += '<h2 style="font-size:1.5rem;font-weight:900;margin-bottom:8px;">' + playerName + '</h2>';
+        html += '<p style="color:var(--primary);font-size:1.2rem;font-weight:700;margin-bottom:16px;">🎫 ID: #' + userId + '</p>';
+        html += '<div class="profile-stat">';
+        html += '<span>⭐ النقاط</span>';
+        html += '<span style="color:var(--primary);font-weight:800;">' + userPoints + '</span>';
+        html += '</div>';
+        html += '<div class="profile-stat">';
+        html += '<span>📅 تاريخ التسجيل</span>';
+        html += '<span>' + (user ? new Date(user.registeredAt).toLocaleDateString('ar') : 'غير معروف') + '</span>';
+        html += '</div>';
+        html += '</div>';
+        
+        document.getElementById('profileContent').innerHTML = html;
+    }
+    
+    // ==================== RENDER ALL ====================
+    function renderAll() {
+        renderTournamentGrid();
+        renderMapsGrid();
+        renderGameFilesGrid();
+        renderLiveStreamContent();
+        renderVoiceRooms();
+        renderAdminList();
+        renderAdminMapsList();
+        renderAdminGameFilesList();
+        renderUsersList();
+        renderPrivateChatsList();
+        updateAdminStats();
+    }
+    
+    // ==================== NAVIGATION ====================
+    function hideAllSections() {
+        var sections = document.querySelectorAll('.main-content>section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.add('hidden');
+        }
+        document.getElementById('privateChatsListSection').classList.add('hidden');
+    }
+    
+    function switchToTextChat() {
+        if (currentVoiceRoom) {
+            leaveVoiceRoom();
+        }
+        chatMode = 'text';
+        localStorage.setItem('ga_chat_mode', 'text');
+        hideAllSections();
+        document.getElementById('textChatSection').classList.remove('hidden');
+        document.getElementById('privateChatsListSection').classList.add('hidden');
+        document.getElementById('textChatMenuBtn').style.color = 'var(--primary)';
+        document.getElementById('voiceChatMenuBtn').style.color = '';
+        closeAllSidebars();
+    }
+    
+    function showTournaments() {
+        hideAllSections();
+        document.getElementById('tournamentsSection').classList.remove('hidden');
+        closeAllSidebars();
+    }
+    
+    function showMaps() {
+        hideAllSections();
+        document.getElementById('mapsSection').classList.remove('hidden');
+        renderMapsGrid();
+        closeAllSidebars();
+    }
+    
+    function showGameFiles() {
+        hideAllSections();
+        document.getElementById('gameFilesSection').classList.remove('hidden');
+        renderGameFilesGrid();
+        closeAllSidebars();
+    }
+    
+    function showWheel() {
+        hideAllSections();
+        document.getElementById('wheelSection').classList.remove('hidden');
+        closeAllSidebars();
+        loadWheelNames();
+        drawWheel();
+    }
+    
+    function showAdmin() {
+        hideAllSections();
+        document.getElementById('adminSection').classList.remove('hidden');
+        closeAllSidebars();
+        checkAdminStatus();
+    }
+    
     // ==================== THEME ====================
     function setTheme(th) {
         document.body.classList.remove('light-mode', 'gold-mode');
-        if (th === 'light') document.body.classList.add('light-mode');
-        if (th === 'gold') document.body.classList.add('gold-mode');
+        if (th === 'light') {
+            document.body.classList.add('light-mode');
+        }
+        if (th === 'gold') {
+            document.body.classList.add('gold-mode');
+        }
         currentTheme = th;
         localStorage.setItem('ga_theme', th);
         updateThemeIcon();
     }
-
+    
     function updateThemeIcon() {
         var icon = document.querySelector('#themeToggleBtn i');
-        if (currentTheme === 'dark') icon.className = 'fas fa-moon';
-        else if (currentTheme === 'light') icon.className = 'fas fa-sun';
-        else icon.className = 'fas fa-crown';
+        if (currentTheme === 'dark') {
+            icon.className = 'fas fa-moon';
+        } else if (currentTheme === 'light') {
+            icon.className = 'fas fa-sun';
+        } else {
+            icon.className = 'fas fa-crown';
+        }
     }
-
+    
     document.getElementById('themeToggleBtn').addEventListener('click', function() {
-        var next = currentTheme === 'dark' ? 'light' : currentTheme === 'light' ? 'gold' : 'dark';
-        setTheme(next);
+        var nextTheme;
+        if (currentTheme === 'dark') {
+            nextTheme = 'light';
+        } else if (currentTheme === 'light') {
+            nextTheme = 'gold';
+        } else {
+            nextTheme = 'dark';
+        }
+        setTheme(nextTheme);
     });
-
+    
     // ==================== SIDEBAR ====================
     function openSidebar(side) {
         closeAllSidebars();
-        if (side === 'right') document.getElementById('sidebarRight').classList.add('open');
-        else document.getElementById('sidebarLeft').classList.add('open');
+        if (side === 'right') {
+            document.getElementById('sidebarRight').classList.add('open');
+        } else {
+            document.getElementById('sidebarLeft').classList.add('open');
+        }
         document.getElementById('overlay').classList.add('active');
     }
-
+    
     function closeAllSidebars() {
         document.getElementById('sidebarRight').classList.remove('open');
         document.getElementById('sidebarLeft').classList.remove('open');
         document.getElementById('overlay').classList.remove('active');
     }
-
-    document.getElementById('rightMenuBtn').addEventListener('click', function() { openSidebar('right'); });
-    document.getElementById('leftMenuBtn').addEventListener('click', function() { openSidebar('left'); });
+    
+    document.getElementById('rightMenuBtn').addEventListener('click', function() {
+        openSidebar('right');
+    });
+    
+    document.getElementById('leftMenuBtn').addEventListener('click', function() {
+        openSidebar('left');
+    });
+    
     document.getElementById('overlay').addEventListener('click', closeAllSidebars);
-
-    // ==================== INIT ====================
+    
+    // ==================== EVENT LISTENERS ====================
+    document.getElementById('wheelNames')?.addEventListener('input', saveWheelNames);
+    
+    // مستمع بحث اللاعبين
     document.addEventListener('DOMContentLoaded', function() {
+        var searchInput = document.getElementById('searchPlayerInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                var query = this.value.trim().toLowerCase();
+                var resultsContainer = document.getElementById('searchResults');
+                
+                if (!query) {
+                    resultsContainer.innerHTML = '';
+                    return;
+                }
+                
+                var results = [];
+                
+                // البحث بـ ID
+                if (!isNaN(query)) {
+                    var user = getUserById(parseInt(query));
+                    if (user && user.name !== playerName) {
+                        results.push(user);
+                    }
+                }
+                
+                // البحث بالاسم
+                for (var i = 0; i < registeredUsers.length; i++) {
+                    var user = registeredUsers[i];
+                    if (user.name.toLowerCase().indexOf(query) !== -1 && user.name !== playerName) {
+                        var alreadyAdded = false;
+                        for (var j = 0; j < results.length; j++) {
+                            if (results[j].id === user.id) {
+                                alreadyAdded = true;
+                                break;
+                            }
+                        }
+                        if (!alreadyAdded) {
+                            results.push(user);
+                        }
+                    }
+                }
+                
+                // تحديد عدد النتائج
+                results = results.slice(0, 20);
+                
+                if (results.length === 0) {
+                    resultsContainer.innerHTML = '<p style="color:var(--text-muted);padding:10px;">لا توجد نتائج</p>';
+                    return;
+                }
+                
+                var html = '';
+                for (var k = 0; k < results.length; k++) {
+                    var u = results[k];
+                    html += '<div class="user-row" style="cursor:pointer;margin:4px 0;" onclick="selectSearchResult(' + u.id + ')">';
+                    html += '<span>👤 ' + u.name + ' <span style="color:var(--primary);">#' + u.id + '</span></span>';
+                    html += '<button class="btn btn-primary btn-sm">💬 مراسلة</button>';
+                    html += '</div>';
+                }
+                
+                resultsContainer.innerHTML = html;
+            });
+        }
+    });
+    
+    // ==================== INITIALIZATION ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 GeneralsArena يبدأ التحميل...');
+        
+        // تهيئة المظهر
         setTheme(currentTheme);
         updateThemeIcon();
+        
+        // تحميل البيانات
         loadRegisteredUsers();
         initPlayerName();
-        loadData();
         loadWheelNames();
         drawWheel();
-        checkAdminStatus();
-        renderLiveStreamContent();
-        renderVoiceRooms();
+        
+        // تشغيل المستمعات
         listenForMessages();
         
+        // عرض البيانات
+        renderTournamentGrid();
+        renderMapsGrid();
+        renderGameFilesGrid();
+        renderLiveStreamContent();
+        renderVoiceRooms();
+        checkAdminStatus();
+        
+        // تحديد وضع المحادثة
         if (chatMode === 'voice') {
             switchToVoiceChat();
         } else {
@@ -2000,9 +3341,12 @@
         
         console.log('✅ GeneralsArena جاهز!');
         console.log('👤 اللاعب: ' + (playerName || 'غير مسجل') + ' #' + playerId);
-        console.log('📋 المستخدمين: ' + registeredUsers.length);
+        console.log('📋 عدد المستخدمين: ' + registeredUsers.length);
         console.log('🆔 Next ID: ' + nextId);
+        console.log('🏆 البطولات: ' + tournaments.length);
+        console.log('🗺️ الخرائط: ' + maps.length);
+        console.log('📦 الملفات: ' + gameFiles.length);
     });
-</script>
-</body>
-</html>
+    </script>
+    </body>
+    </html>
