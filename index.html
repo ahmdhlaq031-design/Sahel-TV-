@@ -1198,149 +1198,150 @@
         { id: 'GeneralsArena-Tournaments', name: 'غرفة البطولات', description: 'تنسيق وإدارة البطولات مباشرة', icon: '🏆' }
     ]));
     let currentVoiceRoom = null;
-
-    // ==================== UTILS ====================
-    function toast(msg, err=false) { 
-        const t=document.getElementById('toast'); 
-        t.textContent=msg; 
-        t.classList.toggle('error',err); 
-        t.classList.add('show'); 
-        setTimeout(()=>t.classList.remove('show'),2000); 
+    // ==================== CHAT SYSTEM (معدل) ====================
+    
+    // تحميل كل الرسائل
+    async function loadAllChatMessages() {
+    chatMessages = [];
+    
+    for (const container of CHAT_CONTAINERS) {
+    try {
+    const response = await fetch(container + '?t=' + Date.now());
+    if (response.ok) {
+    const data = await response.json();
+    if (Array.isArray(data)) {
+    chatMessages = chatMessages.concat(data);
+    }
+    }
+    } catch (e) {
+    console.log('فشل تحميل حاوية');
+    }
     }
     
-    function copyToClipboard(text,name) { 
-        navigator.clipboard.writeText(text).then(()=>toast(`✅ تم نسخ ${name}`)); 
+    // ترتيب حسب الوقت
+    chatMessages.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+    
+    // إزالة التكرار
+    chatMessages = chatMessages.filter((msg, i, arr) => 
+    i === arr.findIndex(m => m.timestamp === msg.timestamp && m.name === msg.name)
+    );
+    
+    // نحتفظ بآخر 500 رسالة
+    if (chatMessages.length > MAX_TOTAL_MESSAGES) {
+    chatMessages = chatMessages.slice(-MAX_TOTAL_MESSAGES);
     }
-
-    function extractYouTubeID(url) {
-        if (!url) return null;
-        const patterns = [
-            /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)/,
-            /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^?]+)/,
-            /(?:https?:\/\/)?(?:www\.)?youtube\.com\/live\/([^?]+)/,
-            /(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([^?]+)/
-        ];
-        for (const pattern of patterns) {
-            const match = url.match(pattern);
-            if (match) return match[1];
-        }
-        if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
-        return null;
+    
+    displayChatMessages();
     }
-
-    // ==================== CHAT SYSTEM ====================
-    async function loadAllChatMessages() {
-        chatMessages = [];
-        
-        for (const container of CHAT_CONTAINERS) {
-            try {
-                const response = await fetch(container + '?t=' + Date.now());
-                if (response.ok) {
-                    const data = await response.json();
-                    if (Array.isArray(data)) {
-                        chatMessages = chatMessages.concat(data);
-                    }
-                }
-            } catch (e) {
-                console.log('فشل تحميل حاوية');
-            }
-        }
-        
-        // ترتيب حسب الوقت
-        chatMessages.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
-        
-        // إزالة التكرار
-        chatMessages = chatMessages.filter((msg, i, arr) => 
-            i === arr.findIndex(m => m.timestamp === msg.timestamp && m.name === msg.name)
-        );
-        
-        // نحتفظ بآخر 500 رسالة
-        if (chatMessages.length > MAX_TOTAL_MESSAGES) {
-            chatMessages = chatMessages.slice(-MAX_TOTAL_MESSAGES);
-        }
-        
-        displayChatMessages();
-    }
-
-    async function saveChatMessagesToContainers() {
-        if (chatMessages.length > MAX_TOTAL_MESSAGES) {
-            chatMessages = chatMessages.slice(-MAX_TOTAL_MESSAGES);
-        }
-        
-        const messagesPerContainer = Math.ceil(chatMessages.length / CHAT_CONTAINERS.length);
-        
-        for (let i = 0; i < CHAT_CONTAINERS.length; i++) {
-            const start = i * messagesPerContainer;
-            const end = start + messagesPerContainer;
-            const containerMessages = chatMessages.slice(start, end);
-            
-            try {
-                await fetch(CHAT_CONTAINERS[i], {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(containerMessages)
-                });
-            } catch (e) {
-                console.log('فشل حفظ في الحاوية ' + (i + 1));
-            }
-        }
-        
-        localStorage.setItem('ga_chat_backup', JSON.stringify(chatMessages.slice(-100)));
-    }
-
+    
+    // عرض الرسائل في الواجهة
     function displayChatMessages() {
-        const container = document.getElementById('chatMessagesContainer');
-        if (!container) return;
-
-        if (chatMessages.length === 0) {
-            container.innerHTML = `
-                <div style="text-align:center;color:var(--text-muted);padding:40px;">
-                    <div style="font-size:3rem;margin-bottom:10px;">💬</div>
-                    <p>لا توجد رسائل بعد</p>
-                    <p style="font-size:0.8rem;">كن أول من يتحدث!</p>
-                </div>`;
-            return;
-        }
-
-        container.innerHTML = chatMessages.map(msg => {
-            const isMine = msg.name === playerName;
-            return `
-                <div class="message-bubble ${isMine ? 'mine' : 'other'}">
-                    ${!isMine ? `<div class="msg-name">👤 ${msg.name}</div>` : ''}
-                    <div class="msg-text">${msg.text}</div>
-                    <div class="msg-time">${msg.time || ''}</div>
-                </div>
-            `;
-        }).join('');
-
-        container.scrollTop = container.scrollHeight;
+    const container = document.getElementById('chatMessagesContainer');
+    if (!container) return;
+    
+    if (chatMessages.length === 0) {
+    container.innerHTML = `
+    <div style="text-align:center;color:var(--text-muted);padding:40px;">
+    <div style="font-size:3rem;margin-bottom:10px;">💬</div>
+    <p>لا توجد رسائل بعد</p>
+    <p style="font-size:0.8rem;">كن أول من يتحدث!</p>
+    </div>`;
+    return;
     }
-
+    
+    container.innerHTML = chatMessages.map(msg => {
+    const isMine = msg.name === playerName;
+    return `
+    <div class="message-bubble ${isMine ? 'mine' : 'other'}">
+    <div class="msg-name">👤 ${msg.name || 'زائر'}</div>
+    <div class="msg-text">${msg.text}</div>
+    <div class="msg-time">${msg.time || ''}</div>
+    </div>
+    `;
+    }).join('');
+    
+    container.scrollTop = container.scrollHeight;
+    }
+    
+    // إرسال رسالة جديدة
     async function sendChatMessage() {
-        const input = document.getElementById('chatInput');
-        const text = input.value.trim();
-        
-        if (!text) return;
-        
-        if (!playerName) {
-            document.getElementById('nameModal').style.display = 'flex';
-            toast('⚠️ أدخل اسمك أولاً', true);
-            return;
-        }
-
-        const newMessage = {
-            name: playerName,
-            text: text,
-            time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
-            timestamp: Date.now()
-        };
-
-        chatMessages.push(newMessage);
-        
-        await saveChatMessagesToContainers();
-        
-        input.value = '';
-        displayChatMessages();
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    
+    if (!text) return;
+    
+    // إذا ماكان عنده اسم، يطلعه نافذة تسجيل الاسم
+    if (!playerName) {
+    document.getElementById('nameModal').style.display = 'flex';
+    toast('⚠️ أدخل اسمك أولاً', true);
+    return;
+    }
+    
+    const newMessage = {
+    name: playerName,  // استخدم الاسم المخزن
+    text: text,
+    time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
+    timestamp: Date.now()
+    };
+    
+    // أضف الرسالة للقائمة
+    chatMessages.push(newMessage);
+    
+    // حفظ في الحاويات
+    await saveChatMessagesToContainers();
+    
+    // مسح حقل الإدخال
+    input.value = '';
+    
+    // عرض فوري للرسالة
+    displayChatMessages();
+    }
+    
+    // حفظ موزع على الحاويات
+    async function saveChatMessagesToContainers() {
+    if (chatMessages.length > MAX_TOTAL_MESSAGES) {
+    chatMessages = chatMessages.slice(-MAX_TOTAL_MESSAGES);
+    }
+    
+    const totalContainers = CHAT_CONTAINERS.length;
+    const messagesPerContainer = Math.ceil(chatMessages.length / totalContainers);
+    
+    for (let i = 0; i < totalContainers; i++) {
+    const start = i * messagesPerContainer;
+    const end = Math.min(start + messagesPerContainer, chatMessages.length);
+    const containerMessages = chatMessages.slice(start, end);
+    
+    if (containerMessages.length > 0) {
+    try {
+    await fetch(CHAT_CONTAINERS[i], {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(containerMessages)
+    });
+    console.log(`✅ تم حفظ ${containerMessages.length} رسالة في الحاوية ${i + 1}`);
+    } catch (e) {
+    console.log(`❌ فشل حفظ في الحاوية ${i + 1}`);
+    }
+    }
+    }
+    
+    // حفظ احتياطي محلي
+    localStorage.setItem('ga_chat_backup', JSON.stringify(chatMessages.slice(-100)));
+    console.log(`📦 المجموع: ${chatMessages.length} رسالة`);
+    }
+    
+    // عرض اسم المستخدم في شريط الترحيب (اختياري)
+    function updateChatHeader() {
+    const header = document.querySelector('.chat-header-bar');
+    if (header && playerName) {
+    header.innerHTML = `
+    <i class="fas fa-comments" style="color:var(--primary);"></i>
+    المحادثة الكتابية - أهلاً ${playerName} 👋
+    <span class="online-indicator" style="margin-right:auto;">
+    <span class="online-dot"></span> مباشر
+    </span>
+    `;
+    }
     }
 
     // ==================== VOICE CHAT ====================
